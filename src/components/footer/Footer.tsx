@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <>
       {/* Footer para móvil */}
-      <footer className="sm:hidden fixed bottom-0 min-w-sm h-20 bg-[#8F108D] z-50">
+      <footer className="sm:hidden fixed bottom-0 w-full h-20 bg-[#8F108D] z-50">
   <ul className="grid grid-cols-3 h-full m-0 p-2 gap-10">
     <li className="flex flex-col items-center justify-center">
       <a href="/" className="flex flex-col items-center justify-center h-full" title="Inicio">
@@ -29,10 +29,9 @@ export default function Footer() {
       </footer>
 
       {/* Footer para escritorio */}
-      <footer className="hidden md:flex flex-col items-center mt-10">
+      <footer className="hidden md:flex flex-col items-center mt-10  bg-[#8F108D]">
         <img
-          src="../../assets/icons/patitaGatoPerroLogo 2.svg"
-          alt="patitas"
+          src="../../assets/icons/logoVet.png" alt="patitas"
         />
         <ul className="flex gap-4 mt-4">
           <li>Inicio</li>
