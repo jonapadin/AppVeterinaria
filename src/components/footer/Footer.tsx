@@ -29,10 +29,9 @@ export default function Footer() {
       </footer>
 
       {/* Footer para escritorio */}
-      <footer className="hidden md:flex flex-col items-center mt-10">
+      <footer className="hidden md:flex flex-col items-center mt-10  bg-[#8F108D]">
         <img
-          src="../../assets/icons/patitaGatoPerroLogo 2.svg"
-          alt="patitas"
+          src="../../assets/icons/logoVet.png" alt="patitas"
         />
         <ul className="flex gap-4 mt-4">
           <li>Inicio</li>
