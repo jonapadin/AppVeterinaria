@@ -14,28 +14,28 @@ function NavBar() {
 
         <header>
             <nav className="flex justify-around p-4 bg-[#8F108D] text-white items-center">
-                <button onClick={abrirMenu} className="block md:hidden p-2 bg-[#8F108D]"> <FiAlignJustify className=" w-12 h-8"/></button>
+                <button onClick={abrirMenu} className="block md:hidden p-2 bg-[#8F108D]"> <FiAlignJustify className=" w-16 h-12" /></button>
                 {/* Logo */}
-                <img src="../../assets/icons/patitaGatoPerroLogo 2.svg" alt="patitas" />
+                <img src="../../assets/icons/logoVet.png" alt="Logo Veterinaria" className="w-40 h-20 hidden md:flex cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer" />
 
                 {/* Input buscador (desktop) */}
-                <div className="flex-1 justify-center px-4">
+                <div className=" justify-center px-4">
                     <div className="flex items-center border rounded overflow-hidden bg-white">
                         <input
-                            className="flex-1 px-2 py-1 outline-none text-black w-[70px] md:w-[400px]"
+                            className="flex-1 px-2 py-1 outline-none text-black w-[200px] md:w-[400px]"
                             type="search"
                             placeholder="Buscar"
                         />
-                        <button className="p-2 bg-white border-l border-gray-600">
+                        <button className="p-2 bg-white border-l border-gray-600 hover:cursor-pointer hover:bg-gray-200">
                             <FaSearch className="text-gray-600 " />
                         </button>
                     </div>
                 </div>
                 {/* Menú */}
-                <ul className="hidden md:flex ">
-                    <li>INICIO</li>
-                    <li>PRODUCTOS</li>
-                    <li>SERVICIOS</li>
+                <ul className="hidden md:flex space-x-8  text-lg font-lato font-bold  ">
+                    <li className='cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer'>INICIO</li>
+                    <li className='cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer'>PRODUCTOS</li>
+                    <li className='cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer'>SERVICIOS</li>
                 </ul>
                 {mostrarMenu && <MenuMob onClose={abrirMenu} />}
             </nav>
