@@ -10,16 +10,17 @@ export default function MenuMob({ onClose }: MenuMob) {
       {/* Menú lateral derecho */}
       <div className="bg-[#8F108D] text-white w-64 h-full p-6 shadow-lg">
         {/* Botón de cerrar */}
-        <button onClick={onClose} className="mb-6 flex justify-end w-full">
+        <button onClick={onClose} className=" flex justify-end w-full">
           <GoX className="w-6 h-6" />
         </button>
+         <img src="../../assets/icons/logoVet.png" alt="Logo Veterinaria" className="w-40 h-20 mb-6 pl-3" />
 
         {/* Links */}
         <ul className="flex flex-col space-y-6 text-lg font-semibold">
           {["INICIO", "PRODUCTOS", "SERVICIOS", "CONTACTO"].map((item) => (
             <li
               key={item}
-              className="hover:text-gray-200 cursor-pointer"
+              className="cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105"
               onClick={onClose} 
             >
               {item}
