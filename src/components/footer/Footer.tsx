@@ -30,43 +30,52 @@ export default function Footer() {
         </ul>
       </footer>
 
-      {/* Footer para escritorio */}
-      <footer className="hidden sm:flex fixed bottom-0 left-0 w-full h-45 bg-[#8F108D] text-white">
-        <div className="flex items-centerl ">
-          <img src="../../assets/icons/logoVet.png" alt="Logo Veterinaria" className="w-60 h-30 mt-4" />
-        </div>
+     {/* Footer para escritorio */}
+<footer className="hidden sm:flex fixed bottom-0 left-0 w-full h-45 bg-[#8F108D] text-white items-center md:px-[60px] lg:px-[150px]">
 
-        <ul className="flex flex-col items-center ml-auto pt-4 gap-1 text-lg font-lato font-bold">
-          <li><a href="/">Inicio</a></li>
-          <li><a href="/servicios">Servicio</a></li>
-          <li><a href="/productos">Producto</a></li>
-          <li><a href="/carrito">Carrito</a></li>
-          <li><a href="/login">Ingresar</a></li>
-        </ul>
 
-        <div className="flex flex-col items-center ml-auto -mt-12 p-15 text-lg  font-lato font-bold">
-          <span>Veterinaria</span>
-          <span>veterinaria@gmail.com</span>
-          <div className="flex gap-4 mt-2">
-            <a href=" https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
-              <AiFillFacebook className="w-8 h-8 text-shadow-cyan-400" />
-            </a>
+  <div className="flex items-center ">
+    <img src="../../assets/icons/logoVet.png" alt="Logo Veterinaria" className="w-60 h-30 mt-4" />
+  </div>
 
-            <a href="mailto:veterinaria@gmail.com">
-              <BiLogoGmail className="w-8 h-8 text-white" />
-            </a>
 
-            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-              <BiLogoInstagramAlt className="w-8 h-8 text-shadow-fuchsia-500" />
-            </a></div>
+  <div className="flex flex-col items-center mx-auto pt-4 gap-1 text-lg font-lato font-bold text-center">
+    <span>
+      Copyright © | 2025 | VETERINARIA<br/>
+      Todos los Derechos Reservados<br/>
+      Diseño y Desarrollo por<br/>
+      Celeste Ruspil · Jonathan Padin · Nicolas Dume · Marina Briceño
+    </span>
+  </div>
 
-          <div className="flex items-center gap-2 mt-1">
-            <a href="https://wa.me/2284557768" target="_blank" rel="noopener noreferrer">
-              <BsWhatsapp className="w-8 h-8 text-green-500" /></a>
-              <span>2284557768</span>
-             </div>
-        </div>
-      </footer>
-    </>
+
+  <div className="flex flex-col items-start gap-2 pt-4 font-lato font-bold">
+
+    <div className="flex items-center gap-3">
+      <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+        <BiLogoInstagramAlt className="w-8 h-8" />
+      </a>
+      <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+        <AiFillFacebook className="w-8 h-8" />
+      </a>
+      <span>Veterinaria</span>
+    </div>
+
+    <div className="flex items-center gap-3">
+      <BiLogoGmail className="w-8 h-8" />
+      <span>veterinaria@gmail.com</span>
+    </div>
+
+    <div className="flex items-center gap-3">
+      <a href="https://wa.me/2284557768" target="_blank" rel="noopener noreferrer">
+        <BsWhatsapp className="w-8 h-8 text-green-500" />
+      </a>
+      <span>2284557768</span>
+    </div>
+
+  </div>
+
+</footer>
+</>
   );
 }
