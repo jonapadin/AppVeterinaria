@@ -1,16 +1,15 @@
-import Footer from "../components/footer/Footer"
-import NavBar from "../components/navbar/NavBar"
+import Footer from "../components/footer/Footer";
+import NavBar from "../components/navbar/NavBar";
 
 function Home() {
   return (
-
     <>
-    <NavBar />
+      <NavBar />
 
-    <Footer />
-     </>
-     
-  )
+      <Footer />
+    </>
+  );
 }
 
-export default Home
+export default Home;
+
