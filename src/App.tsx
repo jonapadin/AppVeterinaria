@@ -1,12 +1,12 @@
-import Home from './pages/Home'
+import Turns from "./pages/private/Turns"
+
+
 function App() {
 
 
   return (
     <>
-      <Home />
-
-
+      <Turns/>
     </>
   )
 }
