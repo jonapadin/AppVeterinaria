@@ -30,7 +30,7 @@ export default function Footer() {
         </ul>
       </footer>
 
-<footer className="hidden sm:flex bottom-0 left-0 w-full h-44 bg-[#8F108D] text-white items-center md:px-[60px] lg:px-[150px]">
+<footer className="hidden sm:flex w-full h-44 bg-[#8F108D] text-white items-center md:px-[60px] lg:px-[150px]">
 
 
   {/* Logo fijo */}
@@ -48,26 +48,30 @@ export default function Footer() {
                 text-sm md:text-base lg:text-sm xl:text-lg
                 font-lato font-bold text-center mx-auto">
 
-      <span>
-        Copyright © | 2025 | VETERINARIA<br/>
-        Todos los Derechos Reservados<br/>
-        Diseño y Desarrollo por<br/>
-        Celeste Ruspil · Jonathan Padin <br/>
-        · Nicolas Dume · Marina Briceño
-      </span>
+      <div className="text-center">
+  <p>Copyright © | 2025 | VETERINARIA</p>
+  <p>Todos los Derechos Reservados</p>
+  <p>Diseño y Desarrollo por</p>
+  <p>Celeste Ruspil - Jonathan Padin</p>
+  <p>Nicolas Dume - Marina Briceño</p>
+</div>
     </div>
 
    <div className="flex flex-col items-start gap-1 text-sm md:text-base lg:text-sm xl:text-lg
 font-lato font-bold ">
-
+      
       <div className="flex items-center gap-2">
         <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
           <BiLogoInstagramAlt className="w-8 h-8" />
         </a>
+             <span>Veterinari.Ig  </span>
+             </div>
+          <div className="flex items-center gap-2">        
+
         <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
           <AiFillFacebook className="w-8 h-8" />
         </a>
-        <span>Veterinaria</span>
+        <span>Veterinaria.FB   </span>
       </div>
 
       <div className="flex items-center gap-2">

@@ -1,4 +1,5 @@
-import Turns from "./pages/private/Turns"
+ {/* import Turns from "./pages/private/Turns" */}
+import Home from "./pages/public/Home"
 
 
 function App() {
@@ -6,7 +7,8 @@ function App() {
 
   return (
     <>
-      <Turns/>
+    <Home/>
+    {/*  <Turns/> */}
     </>
   )
 }
