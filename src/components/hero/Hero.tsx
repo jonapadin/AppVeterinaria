@@ -64,7 +64,7 @@ function Hero() {
                 className="w-12 h-12 mx-auto"
               />
             </div>
-            <p className="text-black text-lg font-semibold">
+            <p className="text-black sm:text-sm lg:text-lg font-semibold">
               Gestión de Pacientes  y Hospitalización.
             </p>
           </div>
@@ -78,7 +78,7 @@ function Hero() {
                 className="w-12 h-12 mx-auto"
               />
             </div>
-            <p className="text-black text-lg  font-semibold">
+            <p className="text-black lg:text-lg  sm:text-sm  font-semibold">
               Administración de Turnos y Consultas.
             </p>
           </div>
@@ -92,7 +92,7 @@ function Hero() {
                 className="w-12 h-12 mx-auto"
               />
             </div>
-            <p className="text-black text-lg font-semibold">
+            <p className="text-black lg:text-lg  sm:text-sm  font-semibold">
               Control de Medicación y Tratamientos.</p>
           </div>
 
@@ -105,7 +105,7 @@ function Hero() {
                 className="w-12 h-12 mx-auto"
               />
             </div>
-            <p className="text-black text-lg  font-semibold">
+            <p className="text-black lg:text-lg  sm:text-sm  font-semibold">
               Balanceados Contamos con varias marcas y variantes
             </p>
           </div>
