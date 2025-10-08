@@ -111,8 +111,80 @@ function Hero() {
           </div>
         </div>
       </section>
+
+      {/* --- TESTIMONIOS --- */}
+<div className="max-w-4xl mx-auto grid grid-cols-1 gap-10 px-4">
+  {/* Testimonio 1 */}
+  <article className="relative bg-white rounded-xl shadow-lg overflow-hidden h-64">
+    <img
+      src="../../assets/img/testimonio1.webp"
+      alt="Dueño feliz"
+      className="absolute top-0 w-[60%] h-full object-cover z-0 right-0"
+    />
+    <img
+      src="../../assets/img/backgroudtestimonios.webp"
+      alt="Foto mascota"
+      className="absolute inset-0 w-full h-full object-cover z-0"
+    />
+    {/* Texto centrado sobre la imagen */}
+    <div className="absolute inset-0 flex items-center justify-center z-10">
+      <p className="text-white font-lato text-center text-lg md:text-xl px-4">
+       Llevé a mi perrita Luna por una revisión y quedé encantada.
+        El trato fue súper humano, se nota que aman a los animales.
+         Ahora no la llevo a otro lugar. ¡Gracias por cuidarla tanto!
+          — María G., dueña de Luna
+      </p>
+    </div>
+  </article>
+
+  {/* Testimonio 2 */}
+  <article className="relative bg-white rounded-xl overflow-hidden h-64">
+    <img
+      src="../../assets/img/testimonio2.webp"
+      alt="Dueño feliz"
+      className="absolute top-0 w-[60%] h-full object-cover z-0 right-0"
+    />
+    <img
+      src="../../assets/img/backgroudtestimonios.webp"
+      alt="Foto mascota"
+      className="absolute inset-0 w-full h-full object-cover z-0"
+    />
+    <div className="absolute inset-0 flex items-center justify-center z-10">
+      <p className="text-white font-lato text-center text-lg md:text-xl px-4">
+        Mi conejito se llama Copito. Estaba triste y no comía,
+         pero en la veterinaria lo cuidaron mucho. Ahora está feliz otra vez. 
+         ¡Gracias por ayudar a Copito!"— Santi, 8 años
+      </p>
+    </div>
+  </article>
+
+  {/* Testimonio 3 */}
+  <article className="relative bg-white rounded-xl shadow-lg overflow-hidden h-64">
+    <img
+      src="../../assets/img/testimonio33.webp"
+      alt="Dueño feliz"
+      className="absolute top-0 w-[50%] h-full object-cover z-0 right-0"
+    />
+    <img
+      src="../../assets/img/backgroudtestimonios.webp"
+      alt="Foto mascota"
+      className="absolute inset-0 w-full h-full object-cover z-0"
+    />
+    <div className="absolute inset-0 flex items-center justify-center z-10">
+      <p className="text-white font-lato text-center text-lg md:text-xl px-4">
+      Mi perro Max odia ir al veterinario,  pero aca entro 
+      moviendo la cola. El  esquipo fue super paciente y
+      profecional. lo revisaron sin estres y hasta le 
+      dieron una galletita¡mil gracias!
+     -Lucia M, mama de max
+      </p>
+    </div>
+  </article>
+</div>
+
     </>
   );
 }
+
 
 export default Hero;
