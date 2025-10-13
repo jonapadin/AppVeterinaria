@@ -1,5 +1,5 @@
  {/* import Turns from "./pages/private/Turns" */}
-import Home from "./pages/public/Home"
+import Notificaciones from "./pages/private/Notifications";
 
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-    <Home/>
+    <Notificaciones />
     {/*  <Turns/> */}
     </>
   )

@@ -1,6 +1,14 @@
+import Footer from "../../components/footer/Footer";
+import Formulario from "../../components/Forms/FormProfile";
+import NavBar from "../../components/navbar/NavBar";
+
 function Profile(){
     return (
-        <h1></h1>
+        <>
+        <NavBar />
+        <Formulario/>
+        <Footer />
+        </>
     )
 }
 
