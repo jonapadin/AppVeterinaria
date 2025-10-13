@@ -5,7 +5,6 @@ interface Service {
  
 }
 
-
 function ServiceList({ servicios }: { servicios: Service[] }) {
   return (
     <section className="relative z-10 max-w-6xl mx-auto px-4 py-20">

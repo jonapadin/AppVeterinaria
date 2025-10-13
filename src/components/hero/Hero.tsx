@@ -83,7 +83,7 @@ function Hero() {
     <img
       src="../../assets/img/testimonio1.webp"
       alt="Dueño feliz"
-      className="absolute top-0 w-[60%] h-full object-cover z-0 right-0"
+      className="absolute top-0 w-[50%] h-full object-cover z-0 right-0"
     />
     <img
       src="../../assets/img/backgroudtestimonios.webp"
@@ -91,8 +91,8 @@ function Hero() {
       className="absolute inset-0 w-full h-full object-cover z-0"
     />
     {/* Texto centrado sobre la imagen */}
-    <div className="absolute inset-0 flex items-center justify-center z-10">
-      <p className="text-white font-lato text-right text-lg md:text-xl px-4">
+    <div className="inset-0 flex  z-10">
+      <p className="w-[50%] text-white absolute font-lato  text-lg md:text-xl pl-4 pt-10">
        Llevé a mi perrita Luna por una revisión y quedé encantada.
         El trato fue súper humano, se nota que aman a los animales.
          Ahora no la llevo a otro lugar. ¡Gracias por cuidarla tanto!
@@ -106,15 +106,15 @@ function Hero() {
     <img
       src="../../assets/img/testimonio2.webp"
       alt="Dueño feliz"
-      className="absolute top-0 w-[60%] h-full object-cover z-0 right-0"
+      className="absolute top-0 w-[50%] h-full object-cover z-0 right-0 "
     />
     <img
       src="../../assets/img/backgroudtestimonios.webp"
       alt="Foto mascota"
       className="absolute inset-0 w-full h-full object-cover z-0"
     />
-    <div className="absolute inset-0 flex items-center justify-center z-10">
-      <p className="text-white font-lato text-right text-lg md:text-xl px-4">
+    <div className="inset-0 flex  z-10">
+      <p className="w-[50%] text-white absolute font-lato text-lg md:text-xl pl-4 pt-10">
         Mi conejito se llama Copito. Estaba triste y no comía,
          pero en la veterinaria lo cuidaron mucho. Ahora está feliz otra vez. 
          ¡Gracias por ayudar a Copito!"— Santi, 8 años
@@ -134,8 +134,8 @@ function Hero() {
       alt="Foto mascota"
       className="absolute inset-0 w-full h-full object-cover z-0"
     />
-    <div className="absolute inset-0 flex items-center justify-center z-10">
-      <p className="text-white font-lato text-right text-lg md:text-xl px-4">
+    <div className="inset-0 flex z-10">
+      <p className="w-[50%] text-white absolute font-lato text-lg md:text-xl pl-4 pt-10">
       Mi perro Max odia ir al veterinario,  pero aca entro 
       moviendo la cola. El  esquipo fue super paciente y
       profecional. lo revisaron sin estres y hasta le 
