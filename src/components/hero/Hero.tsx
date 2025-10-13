@@ -1,4 +1,5 @@
 import React from "react";
+import ServiceList from "./Servicios";
 
 function Hero() {
   return (
@@ -49,72 +50,35 @@ function Hero() {
         </div>
       </section>
 
-      {/* Sección de Servicios (fuera del Hero) */}
-      <section className="relative z-10 max-w-6xl mx-auto px-4 py-20">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-12">
-          SERVICIOS
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          {/* Servicio 1 */}
-          <div className="flex flex-col items-center">
-            <div className="bg-[#D9D9D9] p-6 rounded-full mb-4">
-              <img
-                src="../../assets/icons/maki_doctor (1).svg"
-                alt="icon-doctor"
-                className="w-12 h-12 mx-auto"
-              />
-            </div>
-            <p className="text-black sm:text-sm lg:text-lg font-semibold">
-              Gestión de Pacientes  y Hospitalización.
-            </p>
-          </div>
+           {/* --- SERVICIOS --- */}
+<ServiceList
+  servicios={[
+    {
+      imagen: "../../assets/icons/maki_doctor (1).svg",
+      titulo: "Gestión de Pacientes y Hospitalización",
 
-          {/* Servicio 2 */}
-          <div className="flex flex-col items-center">
-            <div className="bg-[#D9D9D9] p-6 rounded-full mb-4">
-              <img
-                src="../../assets/icons/fluent_shifts-activity-24-filled.svg"
-                alt="icon-doctor"
-                className="w-12 h-12 mx-auto"
-              />
-            </div>
-            <p className="text-black lg:text-lg  sm:text-sm  font-semibold">
-              Administración de Turnos y Consultas.
-            </p>
-          </div>
-
-          {/* Servicio 3 */}
-          <div className="flex flex-col items-center">
-            <div className="bg-[#D9D9D9] p-6 rounded-full mb-4">
-              <img
-                src="../../assets/icons/hugeicons_treatment.svg"
-                alt="icon-doctor"
-                className="w-12 h-12 mx-auto"
-              />
-            </div>
-            <p className="text-black lg:text-lg  sm:text-sm  font-semibold">
-              Control de Medicación y Tratamientos.</p>
-          </div>
-
-          {/* Servicio 4 */}
-          <div className="flex flex-col items-center">
-            <div className="bg-[#D9D9D9] p-6 rounded-full mb-4">
-              <img
-                src="../../assets/icons/stash_shop.svg"
-                alt="icon-doctor"
-                className="w-12 h-12 mx-auto"
-              />
-            </div>
-            <p className="text-black lg:text-lg  sm:text-sm  font-semibold">
-              Balanceados Contamos con varias marcas y variantes
-            </p>
-          </div>
-        </div>
-      </section>
+    },
+    {
+      imagen: "../../assets/icons/fluent_shifts-activity-24-filled.svg",
+      titulo: "Administración de Turnos y Consultas",
+     
+    },
+    {
+      imagen: "../../assets/icons/hugeicons_treatment.svg",
+      titulo: "Control de Medicación y Tratamientos",
+   
+    },
+    {
+      imagen: "../../assets/icons/stash_shop.svg",
+      titulo: "Balanceados Varias marcas y variantes",
+    
+    }
+  ]}
+/>
 
       {/* --- TESTIMONIOS --- */}
 <div className="max-w-4xl mx-auto grid grid-cols-1 gap-10 px-4">
-  {/* Testimonio 1 */}
+
   <article className="relative bg-white rounded-xl shadow-lg overflow-hidden h-64">
     <img
       src="../../assets/img/testimonio1.webp"
@@ -128,7 +92,7 @@ function Hero() {
     />
     {/* Texto centrado sobre la imagen */}
     <div className="absolute inset-0 flex items-center justify-center z-10">
-      <p className="text-white font-lato text-center text-lg md:text-xl px-4">
+      <p className="text-white font-lato text-right text-lg md:text-xl px-4">
        Llevé a mi perrita Luna por una revisión y quedé encantada.
         El trato fue súper humano, se nota que aman a los animales.
          Ahora no la llevo a otro lugar. ¡Gracias por cuidarla tanto!
@@ -150,7 +114,7 @@ function Hero() {
       className="absolute inset-0 w-full h-full object-cover z-0"
     />
     <div className="absolute inset-0 flex items-center justify-center z-10">
-      <p className="text-white font-lato text-center text-lg md:text-xl px-4">
+      <p className="text-white font-lato text-right text-lg md:text-xl px-4">
         Mi conejito se llama Copito. Estaba triste y no comía,
          pero en la veterinaria lo cuidaron mucho. Ahora está feliz otra vez. 
          ¡Gracias por ayudar a Copito!"— Santi, 8 años
@@ -171,7 +135,7 @@ function Hero() {
       className="absolute inset-0 w-full h-full object-cover z-0"
     />
     <div className="absolute inset-0 flex items-center justify-center z-10">
-      <p className="text-white font-lato text-center text-lg md:text-xl px-4">
+      <p className="text-white font-lato text-right text-lg md:text-xl px-4">
       Mi perro Max odia ir al veterinario,  pero aca entro 
       moviendo la cola. El  esquipo fue super paciente y
       profecional. lo revisaron sin estres y hasta le 
