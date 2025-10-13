@@ -34,11 +34,11 @@ export default function Footer() {
 
 
   {/* Logo fijo */}
-  <div className="absolute left-4 md:left-8 lg:left-14">
+  <div className="absolute  md:left-8 lg:left-14 pl-20 ">
     <img 
       src="../../assets/icons/logoVet.png" 
       alt="Logo Veterinaria" 
-      className="w-40 h-22 md:w-60 md:h-30 lg:w-72 lg:h-36" 
+      className="w-30 h-15 md:w-60 md:h-30 lg:w-50 lg:h-30" 
     />
   </div>
 
@@ -52,7 +52,7 @@ export default function Footer() {
   <p>Copyright © | 2025 | VETERINARIA</p>
   <p>Todos los Derechos Reservados</p>
   <p>Diseño y Desarrollo por</p>
-  <p>Celeste Ruspil - Jonathan Padin</p>
+  <p>Jonathan Padin -Celeste Ruspil</p>
   <p>Nicolas Dume - Marina Briceño</p>
 </div>
     </div>
