@@ -12,14 +12,14 @@ function Notificaciones() {
   const [notifications, setNotifications] = useState(initialNotifications);
 
   // Función para marcar como leída o no leída
-  const toggleRead = (id) => {
+  const toggleRead = (id: string) => {
     setNotifications(notifications.map((n) =>
       n.id === id ? { ...n, leida: !n.leida } : n
     ));
   };
 
   // Función para eliminar una notificación
-  const deleteNotification = (id) => {
+  const deleteNotification = (id: string) => {
     setNotifications(notifications.filter((n) => n.id !== id));
   };
 
@@ -27,7 +27,7 @@ function Notificaciones() {
   const unreadCount = notifications.filter((n) => !n.leida).length;
 
   // Función para obtener el ícono correspondiente al tipo de notificación
-  const getIconByTipo = (tipo) => {
+  const getIconByTipo = (tipo: string) => {
     switch (tipo) {
       case "turno":
         return <FaCalendarAlt className="text-blue-500 w-5 h-5" />;
