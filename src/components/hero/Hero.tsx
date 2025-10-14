@@ -1,11 +1,10 @@
-import React from "react";
 import ServiceList from "./Servicios";
 
 function Hero() {
   return (
     <>
       {/* Hero con imagen de fondo */}
-      <section className="relative min-h-screen h-screen w-full overflow-hidden">
+      <section className="relative min-h-screen h-screen w-full overflow-hidden pt-20 lg:pt-0">
         <img
           src="../../assets/img/banner-inicio.webp"
           alt="banner-inicio"

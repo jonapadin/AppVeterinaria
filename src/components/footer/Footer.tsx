@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <>
       {/* Footer para móvil */}
-      <footer className="sm:hidden fixed md:static bottom-0 w-full h-20 bg-[#8F108D] z-50">
+      <footer className="sm:hidden fixed md:static bottom-0 w-full h-20 bg-[#8F108D] z-40">
         <ul className="grid grid-cols-3 h-full m-0 p-2 gap-10">
           <li className="flex flex-col items-center justify-center">
             <a href="/" className="flex flex-col items-center justify-center h-full" title="Inicio">
