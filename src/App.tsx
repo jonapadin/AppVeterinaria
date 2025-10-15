@@ -1,5 +1,8 @@
  {/* import Turns from "./pages/private/Turns" */}
-import Notificaciones from "./pages/private/Notifications";
+import Footer from "./components/footer/Footer";
+import NavBar from "./components/navbar/NavBar";
+import Services from "./components/servicios/ServiciosCard";
+// import Notificaciones from "./pages/private/Notifications";
 
 
 function App() {
@@ -7,7 +10,10 @@ function App() {
 
   return (
     <>
-    <Notificaciones />
+    <NavBar/>
+    <Services/>
+    <Footer/>
+    {/* <Notificaciones /> */}
     {/*  <Turns/> */}
     </>
   )
