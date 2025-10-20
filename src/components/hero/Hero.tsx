@@ -108,12 +108,12 @@ function Hero() {
   <img
     src="../../assets/img/backgroudtestimonios.webp"
     alt="Foto mascota"
-    className="absolute inset-0 w-full h-full object-cover z-0"
+    className="absolute inset-0 w-full h-full object-cover z-10"
   />
-  <div className="inset-0 flex z-10">
-    <p className="font-lato text-white 
-      sm:relative sm:w-full sm:text-xs sm:pl-2 sm:pt-2   
-      md:absolute md:w-[60%] md:text-xs md:pl-2 md:pt-6 
+  <div className="absolute inset-0 flex z-20">
+    <p className="font-lato text-white
+      sm:relative sm:w-full sm:text-xs sm:pl-2 sm:pt-2
+      md:absolute md:w-[60%] md:text-xs md:pl-2 md:pt-6
       lg:absolute lg:w-[60%] lg:text-xs lg:pl-2 lg:pt-6">
       Llevé a mi perrita Luna por una revisión y quedé encantada.
       El trato fue súper humano, se nota que aman a los animales.
@@ -138,9 +138,9 @@ function Hero() {
       <img
         src="../../assets/img/backgroudtestimonios.webp"
         alt="Foto mascota"
-        className="absolute inset-0 w-full h-full object-cover z-0"
+        className="absolute inset-0 w-full h-full object-cover z-10"
       />
-      <div className="inset-0 flex z-10">
+      <div className="absolute inset-0 flex z-20">
         <p className="font-lato text-white 
       sm:relative sm:w-full sm:text-xs sm:pl-2 sm:pt-2  
       md:absolute md:w-[40%] md:text-xs md:pl-2 md:pt-6 
@@ -168,9 +168,9 @@ function Hero() {
       <img
         src="../../assets/img/backgroudtestimonios.webp"
         alt="Foto mascota"
-        className="absolute inset-0 w-full h-full object-cover z-0"
+        className="absolute inset-0 w-full h-full object-cover z-10"
       />
-      <div className="inset-0 flex z-10">
+      <div className="absolute inset-0 flex z-20">
         <p className="font-lato text-white 
       sm:relative sm:w-full sm:text-xs sm:pl-2 sm:pt-2   
       md:absolute md:w-[60%] md:text-xs md:pl-2 md:pt-6 
@@ -185,8 +185,8 @@ function Hero() {
 
   </div>
 </div>
-
-    </>
+</>
+  
   );
 }
 
