@@ -108,12 +108,12 @@ function Hero() {
   <img
     src="../../assets/img/backgroudtestimonios.webp"
     alt="Foto mascota"
-    className="absolute inset-0 w-full h-full object-cover z-10"
+    className="absolute inset-0 w-full h-full object-cover z-0"
   />
-  <div className="absolute inset-0 flex z-20">
-    <p className="font-lato text-white
-      sm:relative sm:w-full sm:text-xs sm:pl-2 sm:pt-2
-      md:absolute md:w-[60%] md:text-xs md:pl-2 md:pt-6
+  <div className="inset-0 flex z-10">
+    <p className="font-lato text-white 
+      sm:relative sm:w-full sm:text-xs sm:pl-2 sm:pt-2   
+      md:absolute md:w-[60%] md:text-xs md:pl-2 md:pt-6 
       lg:absolute lg:w-[60%] lg:text-xs lg:pl-2 lg:pt-6">
       Llevé a mi perrita Luna por una revisión y quedé encantada.
       El trato fue súper humano, se nota que aman a los animales.
@@ -131,23 +131,23 @@ function Hero() {
   xl:h-[200px] xl:w-[3000px]
    ">
       <img
-        src="../../assets/img/testimonio2.webp"
+        src="../../assets/img/testimonio44.jpg"
         alt="Dueño feliz"
-        className="absolute top-6 w-[50%] h-[80%] object-cover z-0 right-0"
+        className="absolute top-6 w-[50%] h-[100%] object-cover z-0 right-0"
       />
       <img
         src="../../assets/img/backgroudtestimonios.webp"
         alt="Foto mascota"
-        className="absolute inset-0 w-full h-full object-cover z-10"
+        className="absolute inset-0 w-full h-full object-cover z-0"
       />
-      <div className="absolute inset-0 flex z-20">
+      <div className="inset-0 flex z-10">
         <p className="font-lato text-white 
       sm:relative sm:w-full sm:text-xs sm:pl-2 sm:pt-2  
       md:absolute md:w-[40%] md:text-xs md:pl-2 md:pt-6 
       lg:absolute lg:w-[50%] lg:text-xs lg:pl-2 lg:pt-6">
-          Mi conejito se llama Copito. Estaba triste y no comía,
+          Mi perrito se llama Tom. Estaba triste y no comía,
           pero en la veterinaria lo cuidaron mucho. Ahora está feliz otra vez. 
-          ¡Gracias por ayudar a Copito! — Santi, 8 años
+          ¡Gracias por ayudar a Tom! — Santi, 8 años
         </p>
       </div>
     </article>
@@ -161,16 +161,16 @@ function Hero() {
 
    ">
       <img
-        src="../../assets/img/testimonio33.webp"
+        src="../../assets/img/testimonio3.webp"
         alt="Dueño feliz"
         className="absolute top-0 w-[50%] h-[75%] object-cover z-0 right-0"
       />
       <img
         src="../../assets/img/backgroudtestimonios.webp"
         alt="Foto mascota"
-        className="absolute inset-0 w-full h-full object-cover z-10"
+        className="absolute inset-0 w-full h-full object-cover z-0"
       />
-      <div className="absolute inset-0 flex z-20">
+      <div className="inset-0 flex z-10">
         <p className="font-lato text-white 
       sm:relative sm:w-full sm:text-xs sm:pl-2 sm:pt-2   
       md:absolute md:w-[60%] md:text-xs md:pl-2 md:pt-6 
@@ -185,8 +185,8 @@ function Hero() {
 
   </div>
 </div>
-</>
-  
+
+    </>
   );
 }
 
