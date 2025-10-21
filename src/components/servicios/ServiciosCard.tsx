@@ -44,13 +44,13 @@ const servicesData: Service[] = [
 
 // Componente reutilizable
 const ServiceCard: React.FC<Service> = ({ title, description, imgVet, imgDec, altVet, altDec }) => (
-  <article className="card mb-4 shadow-sm bg-white rounded-xl overflow-hidden">
-    <div className="relative">
-      <img className="absolute top-0 left-0 w-full h-full " src={imgDec} alt={altDec} />
-      <h2 className="sub-titulo-servicio relative text-xl font-semibold text-center mt-4 ">{title}</h2>
-      <img className="mx-auto mt-4 w-24 h-24 object-contain" src={imgVet} alt={altVet} />
+  <article className=" h-[420px]  md:w-[60%] lg:h-[480px] lg:w-full mb-4 bg-white rounded-xl overflow-hidden relative shadow-lg shadow-gray-600/80">
+    <div className="">
+      <img className="relative top-0 left-0 h-full w-full lg:-top-4 z-20 " src={imgDec} alt={altDec} />
+      <h2 className="sub-titulo-servicio relative text-xl font-semibold text-center mt-2 underline ">{title}</h2>
+      <img className=" absolute top-6 left-[50%] -translate-x-1/2 mt-4 object-contain w-[200px] lg:w-[70%] lg:h-[60%] lg:-top-6 " src={imgVet} alt={altVet} />
     </div>
-    <div className="p-4 bg-[#8f108d]">
+    <div className="p-4 lg:py-6 absolute -bottom-3 bg-[#8f108d] z-40">
       <p className="text-white">{description}</p>
     </div>
   </article>
@@ -59,9 +59,9 @@ const ServiceCard: React.FC<Service> = ({ title, description, imgVet, imgDec, al
 // Componente principal
 const Services: React.FC = () => (
   <main> 
-    <section className="contenedor-servicios py-[120px] px-4 mt-16 ">
+    <section className="contenedor-servicios py-[120px] px-4 mt-16 lg:w-[80%] lg:mx-auto">
       <h2 className="titulo-servicios text-center text-3xl font-bold mb-8">SERVICIOS</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6 md:items-center justify-items-center ">
         {servicesData.map((service, index) => (
           <ServiceCard key={index} {...service} />
         ))}
