@@ -1,5 +1,6 @@
  {/* import Turns from "./pages/private/Turns" */}
 import Footer from "./components/footer/Footer";
+import Hero from "./components/hero/Hero";
 import NavBar from "./components/navbar/NavBar";
 import Services from "./components/servicios/ServiciosCard";
 import Home from "./pages/public/Home";
@@ -12,11 +13,13 @@ function App() {
   return (
     <>
       { <NavBar/>}
-       {<Services/>}
+     { <Hero />} 
        {<Footer/>}
     {/* <Notificaciones /> */}
     {/*  <Turns/> */}
     {/* <Home /> */}
+    
+     {/*   {<Services/>} */}
     </>
   )
 }

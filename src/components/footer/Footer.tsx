@@ -30,67 +30,93 @@ export default function Footer() {
         </ul>
       </footer>
 
-<footer className="hidden sm:flex w-full h-44 bg-[#8F108D] text-white items-center md:px-[60px] lg:px-[150px]">
 
-
+ <footer
+  className="relative hidden sm:flex w-full h-44 bg-[#8F108D] text-white items-center 
+  md:px-[60px] lg:px-[150px] py-6"
+>
   {/* Logo fijo */}
-  <div className="absolute  md:left-8 lg:left-14 pl-20 ">
-    <img 
-      src="../../assets/icons/logoVet.png" 
-      alt="Logo Veterinaria" 
-      className="w-30 h-15 md:w-60 md:h-30 lg:w-50 lg:h-30" 
+  <div
+    className="
+      absolute left-4 top-1/2 -translate-y-1/2
+      
+    "
+  >
+    <img
+      src="../../assets/icons/logoVet.png"
+      alt="Logo Veterinaria"
+      className="
+        w-20 h-auto
+        md:w-36
+        lg:w-40
+        xl:w-48
+      "
     />
   </div>
 
- 
-  <div className="flex w-full justify-between items-center pl-[150px] md:pl-[200px] lg:pl-[260px]">
-<div className="flex flex-col items-center pt-4 gap-1
-                text-sm md:text-base lg:text-sm xl:text-lg
-                font-lato font-bold text-center mx-auto">
-
+  {/* Contenido del footer */}
+  <div className="flex w-full justify-evenly items-center pl-[150px] md:pl-[200px] lg:pl-[260px] lg:gap-6">
+    <div
+      className="flex flex-col items-center 
+      md:text-xs lg:text-sm xl:text-lg
+      font-lato font-bold text-center mx-auto"
+    >
       <div className="text-center">
-  <p>Copyright © | 2025 | VETERINARIA</p>
-  <p>Todos los Derechos Reservados</p>
-  <p>Diseño y Desarrollo por</p>
-  <p>Jonathan Padin -Celeste Ruspil</p>
-  <p>Nicolas Dume - Marina Briceño</p>
-</div>
+        <p>Copyright © | 2025 | VETERINARIA</p>
+        <p>Todos los Derechos Reservados</p>
+        <p>Diseño y Desarrollo por</p>
+        <p>Jonathan Padin - Celeste Ruspil</p>
+        <p>Nicolas Dume - Marina Briceño</p>
+      </div>
     </div>
 
-   <div className="flex flex-col items-start gap-1 text-sm md:text-base lg:text-sm xl:text-lg
-font-lato font-bold ">
-      
+    <div
+      className="flex flex-col items-start gap-1 
+      text-sm md:text-base lg:text-sm xl:text-lg
+      font-lato font-bold lg:pl-10  xl:pl-20 md:pl-15"
+    >
       <div className="flex items-center gap-2">
-        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-          <BiLogoInstagramAlt className="w-8 h-8" />
+        <a
+          href="https://www.instagram.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <BiLogoInstagramAlt className=" md:w-5 md:h-5 lg:w-7 lg:h-7 xl:w-8x l:h-8" />
         </a>
-             <span>Veterinari.Ig  </span>
-             </div>
-          <div className="flex items-center gap-2">        
-
-        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
-          <AiFillFacebook className="w-8 h-8" />
-        </a>
-        <span>Veterinaria.FB   </span>
+        <span>Veterinari.Ig</span>
       </div>
 
       <div className="flex items-center gap-2">
-        <BiLogoGmail className="w-8 h-8" />
+        <a
+          href="https://www.facebook.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <AiFillFacebook className="md:w-5 md:h-5 lg:w-7 lg:h-7 xl:w-8x l:h-8" />
+        </a>
+        <span>Veterinaria.FB</span>
+      </div>
+
+      <div className="flex items-center gap-2">
+        <BiLogoGmail className="md:w-5 md:h-5 lg:w-7 lg:h-7 xl:w-8x l:h-8" />
         <span>veterinaria@gmail.com</span>
       </div>
 
       <div className="flex items-center gap-2">
-        <a href="https://wa.me/2284557768" target="_blank" rel="noopener noreferrer">
-          <BsWhatsapp className="w-8 h-8 text-green-500" />
+        <a
+          href="https://wa.me/2284557768"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <BsWhatsapp className="md:w-5 md:h-5 lg:w-7 lg:h-7 xl:w-8x l:h-8 text-green-500" />
         </a>
         <span>2284557768</span>
       </div>
-
     </div>
-
   </div>
-
 </footer>
+
+
 </>
 );
 }
