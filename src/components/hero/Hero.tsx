@@ -1,5 +1,6 @@
 import React from "react";
 import ServiceList from "./Servicios";
+import TestimonioLista from "./Testimonios";
 
 function Hero() {
   return (
@@ -83,108 +84,32 @@ function Hero() {
     }
   ]}
 />
-
-      {/* --- TESTIMONIOS --- */}
-
-   <div className="max-w-4xl mx-auto px-10">
-  <h2 className="text-2xl sm:text-3xl font-bold text-center mb-12">
-    TESTIMONIOS
-  </h2>
-
-  <div className=" flex flex-col md:flex-row md:justify-between md:gap-5 lg:flex-row lg:justify-between lg:gap-10 ">
-    
-    {/* Testimonio 1 */}
-   <article className="relative bg-white rounded-xl shadow-lg overflow-hidden
- sm:w-full sm:min-h-[160px] 
-  md:h-[200px] md:w-[400px]   
-  lg:h-[200px] lg:w-[400px]
-  xl:h-[200px] xl:w-[3000px]
-  ">
-  <img
-    src="../../assets/img/testimonio1.webp"
-    alt="Dueño feliz"
-    className="absolute top-0 w-[50%] h-[90%] object-cover z-0 right-0"
-  />
-  <img
-    src="../../assets/img/backgroudtestimonios.webp"
-    alt="Foto mascota"
-    className="absolute inset-0 w-full h-full object-cover z-0"
-  />
-  <div className="inset-0 flex z-10">
-    <p className="font-lato text-white 
-      sm:relative sm:w-full sm:text-xs sm:pl-2 sm:pt-2   
-      md:absolute md:w-[60%] md:text-xs md:pl-2 md:pt-6 
-      lg:absolute lg:w-[60%] lg:text-xs lg:pl-2 lg:pt-6">
-      Llevé a mi perrita Luna por una revisión y quedé encantada.
-      El trato fue súper humano, se nota que aman a los animales.
-      Ahora no la llevo a otro lugar. ¡Gracias por cuidarla tanto!
-      — María G., dueña de Luna
-    </p>
-  </div>
-</article>
-
-    {/* Testimonio 2 */}
-    <article className="relative bg-white rounded-xl shadow-lg overflow-hidden
- sm:w-full sm:min-h-[160px] 
-  md:h-[200px] md:w-[400px]   
-  lg:h-[200px] lg:w-[400px]
-  xl:h-[200px] xl:w-[3000px]
-   ">
-      <img
-        src="../../assets/img/testimonio44.jpg"
-        alt="Dueño feliz"
-        className="absolute top-6 w-[50%] h-[100%] object-cover z-0 right-0"
-      />
-      <img
-        src="../../assets/img/backgroudtestimonios.webp"
-        alt="Foto mascota"
-        className="absolute inset-0 w-full h-full object-cover z-0"
-      />
-      <div className="inset-0 flex z-10">
-        <p className="font-lato text-white 
-      sm:relative sm:w-full sm:text-xs sm:pl-2 sm:pt-2  
-      md:absolute md:w-[40%] md:text-xs md:pl-2 md:pt-6 
-      lg:absolute lg:w-[50%] lg:text-xs lg:pl-2 lg:pt-6">
-          Mi perrito se llama Tom. Estaba triste y no comía,
-          pero en la veterinaria lo cuidaron mucho. Ahora está feliz otra vez. 
-          ¡Gracias por ayudar a Tom! — Santi, 8 años
-        </p>
-      </div>
-    </article>
-    
-    {/* Testimonio 3 */}
-    <article className="relative bg-white rounded-xl shadow-lg overflow-hidden
-    sm:w-full sm:min-h-[160px] 
-  md:h-[200px] md:w-[400px]   
-  lg:h-[200px] lg:w-[400px]
-  xl:h-[200px] xl:w-[3000px]
-
-   ">
-      <img
-        src="../../assets/img/testimonio3.webp"
-        alt="Dueño feliz"
-        className="absolute top-0 w-[50%] h-[75%] object-cover z-0 right-0"
-      />
-      <img
-        src="../../assets/img/backgroudtestimonios.webp"
-        alt="Foto mascota"
-        className="absolute inset-0 w-full h-full object-cover z-0"
-      />
-      <div className="inset-0 flex z-10">
-        <p className="font-lato text-white 
-      sm:relative sm:w-full sm:text-xs sm:pl-2 sm:pt-2   
-      md:absolute md:w-[60%] md:text-xs md:pl-2 md:pt-6 
-      lg:absolute lg:w-[60%] lg:text-xs lg:pl-2 lg:pt-6">
-          Mi perro Max odia ir al veterinario, pero acá entró 
-          moviendo la cola. El equipo fue súper paciente y
-          profesional. Lo revisaron sin estrés y hasta le 
-          dieron una galletita. ¡Mil gracias! — Lucía M., mamá de Max
-        </p>
-      </div>
-    </article>
-
-  </div>
-</div>
+ <TestimonioLista
+  testimonios={[
+    {
+      imagenbackgroud: "../../assets/img/backgroudtestimonios.webp",
+      imagen: "../../assets/img/testimonio1.webp",
+      parrafo: `Llevé a mi perrita Luna por una revisión y quedé encantada.
+        El trato fue súper humano, se nota que aman a los animales.
+        Ahora no la llevo a otro lugar. ¡Gracias por cuidarla tanto!
+        — María G., dueña de Luna.`,
+    },
+    {
+      imagenbackgroud: "../../assets/img/backgroudtestimonios.webp",
+      imagen: "../../assets/img/testimonio44.jpg",
+      parrafo: `Mi perrito se llama Tom. Estaba triste y no comía,
+        pero en la veterinaria lo cuidaron mucho. Ahora está feliz otra vez. 
+        ¡Gracias por ayudar a Tom! — Santi, 8 años`,
+    },
+    {
+      imagenbackgroud: "../../assets/img/backgroudtestimonios.webp",
+      imagen: "../../assets/img/testimonio3.webp",
+      parrafo: `Mi perro Max odia ir al veterinario, pero acá entró moviendo la cola.
+        El equipo fue súper paciente y profesional. Lo revisaron sin estrés y hasta le dieron una galletita.
+        ¡Mil gracias! — Lucas M., papá de Max`,
+    },
+  ]}
+/>
 
     </>
   );
