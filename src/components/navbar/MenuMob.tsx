@@ -6,7 +6,7 @@ type MenuMob = {
 
 export default function MenuMob({ onClose }: MenuMob) {
   return (
-    <div className="fixed inset-0 bg-black/50 z-50  flex justify-start md:hidden">
+    <div className="fixed inset-0 bg-black/50 z-50  flex justify-start lg:hidden">
       {/* Menú lateral derecho */}
       <div className="bg-[#8F108D] text-white w-64 h-full p-6 shadow-lg z-[9999] ">
         <button onClick={onClose} className="flex justify-end w-full">
