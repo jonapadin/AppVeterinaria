@@ -1,4 +1,3 @@
-
 export interface Testimonio {
   imagenbackgroud: string;
   imagen: string;
@@ -7,36 +6,52 @@ export interface Testimonio {
 
 function TestimonioLista({ testimonios }: { testimonios: Testimonio[] }) {
   return (
-    <section className="py-24 ">
-      <h3 className="text-center text-2xl md:text-3xl font-bold mb-10">
+    <section className="py-15">
+      <h3 className="text-center text-2xl md:text-3xl font-bold mb-8 uppercase">
         Testimonios
       </h3>
 
-      <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3 px-4 lg:max-w-7xl  mx-auto text-xs
-    
-      ">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3
+       :grid-cols-3  gap-6 px-4 lg:max-w-7xl mx-auto">
         {testimonios.map((testimonio, index) => (
-          <article
-            key={index}
-            className="relative rounded-lg overflow-hidden max-w-md  w-full "
-          >
-            <div className="relative h-56">
-              <div className="relative lg:w-full lg:h-[80%]  mb-4 z-10">
+          <article key={index} className="relative rounded-lg ">
+            {/* contenedor-superpuesto */}
+            <div className="relative w-full h-80 md:h-72 sm:h-50 lg:h-70 xl:h-80">
+              {/* Imagen de fondo */}
               <img
                 src={testimonio.imagenbackgroud}
-                alt={`img brackground `}
-              />
-            </div>
-              <img
-                src={testimonio.imagen}
-                alt={`Foto del testimonio `}
-                className="absolute right-0 top-0 lg:h-[80%] sm:h[20%]
-                lg:w-1/2  rounded-lg z-0
-                "
+                alt="Fondo"
+                className="absolute inset-0
+                 lg:w-full sm:w-[30%] sm:h-[30%]
+                 md:h-[70%] md:w-full
+                 lg:h-[70%] 
+                 xl:h-[80%] object-cover z-0"
               />
 
-             
-              <p className="absolute top-3 text-white left-2 z-20 p-2 w-1/2 font-bold">
+              {/* Imagen de testimonio, atrás de todo */}
+             <img
+             src={testimonio.imagen}
+             alt="Testimonio"
+             className="absolute top-0  z-[-1]
+             sm:w-1/3 sm:h-1/3
+              left-[50%] md:w-1/2  md:h-[60%]
+               lg:w-1/2 lg:h-[65%] 
+               xl:w-1/2 xl:h-[75%]  
+               "
+/>
+
+            
+
+              {/* Texto */}
+              <p className="absolute text-white font-bold text-center z-20  w-1/2
+               sm:top-1 sm-left.2 sm:text-xs
+               md:top-1  md:left-2 md:text-xs 
+               lg:top-6 lg:left-2 lg:text-sm
+               xl:top-4 xl:left-4 xl:text-base
+
+  
+              
+              ">
                 {testimonio.parrafo}
               </p>
             </div>
@@ -46,4 +61,5 @@ function TestimonioLista({ testimonios }: { testimonios: Testimonio[] }) {
     </section>
   );
 }
+
 export default TestimonioLista;
