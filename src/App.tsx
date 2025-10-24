@@ -1,10 +1,7 @@
- {/* import Turns from "./pages/private/Turns" */}
 import Footer from "./components/footer/Footer";
-import Hero from "./components/hero/Hero";
 import NavBar from "./components/navbar/NavBar";
-import Services from "./components/servicios/ServiciosCard";
-import Home from "./pages/public/Home";
-// import Notificaciones from "./pages/private/Notifications";
+import RecuperarEmail from "./pages/public/RecuperarEmail";
+
 
 
 function App() {
@@ -12,14 +9,13 @@ function App() {
 
   return (
     <>
-      { <NavBar/>}
-     {/* { <Hero />}  */}
-     { <Services/> }
-       {<Footer/>}
-    {/* <Notificaciones /> */}
-    {/*  <Turns/> */}
-    {/* <Home /> */}
-    
+      {<NavBar />}
+
+      <RecuperarEmail />
+
+      <Footer />
+
+
     </>
   )
 }
