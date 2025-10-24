@@ -13,13 +13,13 @@ function App() {
   return (
     <>
       { <NavBar/>}
-     { <Hero />} 
+     {/* { <Hero />}  */}
+     { <Services/> }
        {<Footer/>}
     {/* <Notificaciones /> */}
     {/*  <Turns/> */}
     {/* <Home /> */}
     
-     {/*   {<Services/>} */}
     </>
   )
 }
