@@ -1,0 +1,7 @@
+@media (min-width: 400px) {
+ .img-400 {
+    width: 60% !important;  /* ejemplo: más ancha desde 400px */
+    height: 80% !important;
+    left: 45% !important;   /* ejemplo: la corrés un poco */
+  }
+}

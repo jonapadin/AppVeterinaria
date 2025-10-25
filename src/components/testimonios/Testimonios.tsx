@@ -1,3 +1,5 @@
+import './testimonios.css'
+
 export interface Testimonio {
   imagenbackgroud: string;
   imagen: string;
@@ -32,16 +34,14 @@ function TestimonioLista({ testimonios }: { testimonios: Testimonio[] }) {
              <img
              src={testimonio.imagen}
              alt="Testimonio"
-             className="  absolute top-0 left-1/2 z-[-1] 
-              w-[50%] h-[55%]            /* 👈 tamaño base: móvil (grande) */
+             className=" absolute top-0 left-1/2 z-[-1] 
+              w-[50%] h-[55%]          
               sm:w-[50%] sm:h-[100%]   
               md:w-1/2  md:h-[60%]
                lg:w-1/2 lg:h-[65%] 
                xl:w-1/2 xl:h-[75%]  
                "
 />
-
-            
 
               {/* Texto */}
               <p className="absolute text-white font-bold text-center z-20  w-1/2

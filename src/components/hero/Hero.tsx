@@ -1,6 +1,6 @@
 import React from "react";
-import ServiceList from "./Servicios";
-import TestimonioLista from "./Testimonios";
+import ServiceList from "../servicioHero/Servicios";
+import TestimonioLista from "../testimonios/Testimonios";
 
 function Hero() {
   return (

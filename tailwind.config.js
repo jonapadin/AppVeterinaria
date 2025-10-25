@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      screen:{
+        'mob':'400px'
+      },
       fontFamily: {
         lato: ['Lato', 'sans-serif'],
         opensans: ['"Open Sans"', 'sans-serif'],
