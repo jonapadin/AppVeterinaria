@@ -21,7 +21,7 @@ function Hero() {
       lg:flex lg:items-center lg:justify-center lg:text-left
     "
   >
-    <div className="relative z-10 p-4 sm:p-8 md:p-10 flex flex-col justify-start mt-20 sm:mt-24 md:mt-20 lg:mt-0">
+    <div className="relative z-10 p-4 sm:p-8 md:p-10 flex flex-col justify-start mt-20 sm:mt-24 md:mt-20 lg:mt-10 xl:mt-10">
       
       <p
         className="
@@ -29,7 +29,7 @@ function Hero() {
             sm:text-sm
              md:text-base
              lg:text-xl
-             xl:text-3xl
+             xl:text-2xl
           font-sans font-semibold leading-relaxed mb-6
           drop-shadow-md
         "
@@ -39,16 +39,21 @@ function Hero() {
         de tu familia.
       </p>
 
-      <div className="flex justify-start lg:justify-center sm:mt-2 md:mt-4 lg:mt-6 xl:mt-8">
+      <div className="flex justify-start md:justify-center sm:mt-2 md:mt-4 lg:mt-6 xl:mt-6">
         <button
           className="
-            bg-white border-2 border-[#8F108D] text-[#8F108D] font-sans font-semibold 
+           flex items-center justify-center bg-white border-2 border-[#8F108D] text-[#8F108D] font-sans font-semibold 
             px-4 py-2 rounded-lg
             hover:bg-[#8F108D] hover:text-white transition
             sm:px-6 sm:py-1 sm:text-sm
             md:px-8 md:py-2 md:text-base
             lg:px-6 lg:py-3 lg:text-lg
-            xl:px-8 xl:py-4 xl:text-3xl
+            xl:px-6 xl:py-4 xl:text-2xl
+             w-30 h-10         
+             sm:w-32 sm:h-8   
+             md:w-36 md:h-10    
+             lg:w-40 lg:h-12 
+             xl:w-42 xl:h-14
           "
         >
           Registrarse
