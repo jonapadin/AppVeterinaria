@@ -2,6 +2,11 @@
 import type { RouteObject } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import Home from "../pages/public/Home";
+import Categoria from "../pages/public/Categoria";
+import Login from "../pages/public/Login";
+import Register from "../pages/public/Register";
+import ResetPassPage from "../pages/public/ResetPassPage";
+import ServicePage from "../pages/public/ServicePage";
 
 export const publicRoutes: RouteObject[] = [
   {
@@ -15,65 +20,27 @@ export const publicRoutes: RouteObject[] = [
       },
       {
         path: "login",
-        lazy: async () => {
-          const { default: Login } = await import("../pages/public/Login");
-          return {
-            element: <Login />,
-          };
-        },
+        element: <Login />,
       },
       {
         path: "products",
-        lazy: async () => {
-          const { default: Categoria } = await import(
-            "../pages/public/Categoria"
-          );
-          return {
-            element: <Categoria />,
-          };
-        },
+        element: <Categoria />,
       },
       {
         path: "services",
-        lazy: async () => {
-          const { default: Service } = await import("../pages/public/Service");
-          return {
-            element: <Service />,
-          };
-        },
+
+        element: <ServicePage />,
       },
       {
         path: "register",
-        lazy: async () => {
-          const { default: Register } = await import(
-            "../pages/public/Register"
-          );
-          return {
-            element: <Register />,
-          };
-        },
+
+        element: <Register />,
       },
       {
         path: "recover-pass",
-        lazy: async () => {
-          const { default: ResetPassPage } = await import(
-            "../pages/public/ResetPassPage"
-          );
-          return {
-            element: <ResetPassPage />,
-          };
-        },
+
+        element: <ResetPassPage />,
       },
-      // Puedes agregar aquí una ruta 404 (Not Found)
-      /*
-      {
-        path: "*",
-        lazy: async () => {
-          const { default: NotFound } = await import("../pages/public/NotFound");
-          return { element: <NotFound /> };
-        },
-      },
-      */
     ],
   },
 ];

@@ -1,10 +1,10 @@
-import { useRoutes } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { publicRoutes } from "./routes/publicRoutes";
-import { Suspense } from "react";
+
+const router = createBrowserRouter(publicRoutes);
 
 function App() {
-  const element = useRoutes(publicRoutes);
-  return <Suspense fallback={<div>Cargando...</div>}>{element}</Suspense>;
+  return <RouterProvider router={router} />;
 }
 
 export default App;
