@@ -7,6 +7,10 @@ import Login from "../pages/public/Login";
 import Register from "../pages/public/Register";
 import ResetPassPage from "../pages/public/ResetPassPage";
 import ServicePage from "../pages/public/ServicePage";
+import ProductDogPage from "../pages/public/ProductDogPage";
+import ProductCatPage from "../pages/public/productCatPage";
+import ProductBirdsPage from "../pages/public/ProductBirdsPage";
+import ProductExoticPage from "../pages/public/ProductExotic";
 
 export const publicRoutes: RouteObject[] = [
   {
@@ -26,6 +30,24 @@ export const publicRoutes: RouteObject[] = [
         path: "products",
         element: <Categoria />,
       },
+       {
+        path: "productosPerro",
+        element: <ProductDogPage/>,
+      },
+       {
+        path: "productosGato",
+        element: <ProductCatPage/>,
+      },
+       {
+        path: "productosAve",
+        element: <ProductBirdsPage/>,
+      },
+       {
+        path: "productosExotico",
+        element: <ProductExoticPage/>,
+      },
+      
+
       {
         path: "services",
 
