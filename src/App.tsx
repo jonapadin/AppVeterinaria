@@ -1,8 +1,11 @@
+
 import Footer from "./components/footer/Footer";
-import ResetEmail from "./components/login/ResetEmail";
-import NavBar from "./components/navbar/NavBar";
-import Categoria from "./pages/public/Categoria";
-import Registro from "./pages/public/Registro";
+
+import NavBar from "./components/navbar/NavBar"
+
+ {/* import Turns from "./pages/private/Turns" */}
+import AdminPanel from "./pages/private/AdminPanel";
+
 
 
 
@@ -13,11 +16,9 @@ function App() {
     <>
       <NavBar />
 
-      <ResetEmail/>
-
       <Footer />
 
-
+    <AdminPanel />
     </>
   )
 }
