@@ -45,9 +45,10 @@ function TestimonioLista({ testimonios }: { testimonios: Testimonio[] }) {
 
               {/* Texto */}
               <p className="absolute text-white font-bold text-center z-20  w-1/2
+              text-[10px]
                sm:top-1 sm-left-2 sm:text-[8px]
-               md:top-1  md:left-2 md:text-xs 
-               lg:top-6 lg:left-2 lg:text-sm
+               md:top-4  md:left-2 md:text-[10px]
+               lg:top-4 lg:left-2 lg:text-sm
                xl:top-8 xl:left-2 xl:text-sm
 
   
