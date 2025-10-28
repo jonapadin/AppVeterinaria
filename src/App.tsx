@@ -1,26 +1,10 @@
-
-import Footer from "./components/footer/Footer";
-
-import NavBar from "./components/navbar/NavBar"
-
- {/* import Turns from "./pages/private/Turns" */}
-import AdminPanel from "./pages/private/AdminPanel";
-
-
-
+import { useRoutes } from "react-router-dom";
+import { publicRoutes } from "./routes/publicRoutes";
+import { Suspense } from "react";
 
 function App() {
-
-
-  return (
-    <>
-      <NavBar />
-
-      <Footer />
-
-    <AdminPanel />
-    </>
-  )
+  const element = useRoutes(publicRoutes);
+  return <Suspense fallback={<div>Cargando...</div>}>{element}</Suspense>;
 }
 
-export default App
+export default App;

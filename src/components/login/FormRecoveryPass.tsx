@@ -1,12 +1,13 @@
 // Importa los iconos de lucide-react que usaremos
-import { ArrowLeft, Lock, Mail } from 'lucide-react';
+import { ArrowLeft, Lock, Mail } from "lucide-react";
 
-export default function ResetEmail() {
+export default function FormRecoveryPass() {
   return (
     // Contenedor principal con el fondo degradado coherente
-    <div className="relative flex min-h-screen w-full items-center justify-center 
-                    bg-gradient-to-br from-purple-100 via-white to-purple-50 p-4">
-      
+    <div
+      className="relative flex min-h-screen w-full items-center justify-center 
+                    bg-gradient-to-br from-purple-100 via-white to-purple-50 p-4"
+    >
       {/* Botón de volver */}
       <button className="absolute top-8 left-8 text-purple-600 hover:text-purple-800 transition-colors">
         <ArrowLeft size={24} />
@@ -14,7 +15,6 @@ export default function ResetEmail() {
 
       {/* Tarjeta de Recuperación de Contraseña */}
       <div className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-2xl md:p-10 text-center">
-        
         {/* Icono Principal de Candado */}
         <div className="mb-6 flex justify-center">
           <Lock size={60} className="text-fuchsia-700" />
@@ -22,15 +22,16 @@ export default function ResetEmail() {
 
         {/* Encabezado */}
         <div className="mb-6">
-          <h1 className="text-3xl font-bold text-gray-800">Recuperar Contraseña</h1>
+          <h1 className="text-3xl font-bold text-gray-800">
+            Recuperar Contraseña
+          </h1>
           <p className="mt-2 text-gray-500">
             Ingresa el correo asociado a tu cuenta.
           </p>
         </div>
 
         {/* Formulario */}
-        <form className="space-y-6"> 
-          
+        <form className="space-y-6">
           {/* Campo Correo Electrónico */}
           <div className="relative">
             <span className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-400">
@@ -57,13 +58,13 @@ export default function ResetEmail() {
 
         {/* Enlace para volver al login */}
         <p className="mt-6 text-sm text-gray-500">
-          ¿Ya recordaste?{' '}
+          ¿Ya recordaste?{" "}
           <a href="#" className="text-purple-600 hover:underline font-medium">
             Volver al Login
           </a>
         </p>
-
       </div>
     </div>
   );
 }
+
