@@ -12,8 +12,8 @@ function NavBar() {
     };
     return (
 
-        <header>
-            <nav className="flex justify-around p-4 bg-[#8F108D] text-white items-center">
+        <header className="w-full fixed top-0 z-50">
+            <nav className="flex justify-around p-0, md:p-4, lg:p-4, bg-[#8F108D] text-white items-center">
                 <button onClick={abrirMenu} className="block md:hidden p-2 bg-[#8F108D]"> <FiAlignJustify className=" w-16 h-12" /></button>
                 {/* Logo */}
                 <img src="../../assets/icons/logoVet.png" alt="Logo Veterinaria" className="w-40 h-20 hidden md:flex cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer" />

@@ -1,5 +1,7 @@
  {/* import Turns from "./pages/private/Turns" */}
-import Home from "./pages/public/Home"
+import AdminPanel from "./pages/private/AdminPanel";
+
+
 
 
 function App() {
@@ -7,7 +9,7 @@ function App() {
 
   return (
     <>
-    <Home/>
+    <AdminPanel />
     {/*  <Turns/> */}
     </>
   )
