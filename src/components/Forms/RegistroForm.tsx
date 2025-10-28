@@ -1,5 +1,5 @@
 // Importa los iconos de lucide-react que usaremos
-import { ArrowLeft, User, Mail, Calendar, Lock } from 'lucide-react';
+import { User, Mail, Calendar, Lock } from 'lucide-react';
 
 export default function RegistroForm() {
   return (
@@ -8,9 +8,9 @@ export default function RegistroForm() {
                     bg-gradient-to-br from-purple-100 via-white to-purple-50 p-4">
       
       {/* Botón de volver */}
-      <button className="absolute top-8 left-8 text-purple-600 hover:text-purple-800 transition-colors">
+      {/* <button className="absolute top-8 left-8 text-purple-600 hover:text-purple-800 transition-colors">
         <ArrowLeft size={24} />
-      </button>
+      </button> */}
 
       {/* Tarjeta de Registro */}
       <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl md:p-10">
@@ -24,14 +24,26 @@ export default function RegistroForm() {
         {/* Formulario de Registro */}
         <form className="space-y-4"> {/* Reducido el espacio para más campos */}
           
-          {/* Campo Nombre Completo */}
+          {/* Campo Nombres Completos*/}
           <div className="relative">
             <span className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-400">
               <User size={20} />
             </span>
             <input
               type="text"
-              placeholder="Nombre completo"
+              placeholder="Nombres"
+              className="w-full rounded-lg border border-gray-300 py-3 pl-12 pr-4
+                         focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+          </div>
+            {/* Campo Apellidos*/}
+          <div className="relative">
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-400">
+              <User size={20} />
+            </span>
+            <input
+              type="text"
+              placeholder="Apellidos"
               className="w-full rounded-lg border border-gray-300 py-3 pl-12 pr-4
                          focus:outline-none focus:ring-2 focus:ring-purple-500"
             />
