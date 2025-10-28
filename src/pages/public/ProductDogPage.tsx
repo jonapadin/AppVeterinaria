@@ -1,13 +1,13 @@
-import { useParams } from "react-router-dom";
-import CategoriaNav from "../../components/navbar-categoria/NavbarCtegorias";
+import { useState } from "react";
+import CategoriaNav from "../../components/navbar-categoria/NavbarCategorias";
 
 function ProductDogPage() {
-  const { subcategoria } = useParams<{ subcategoria: string }>();
+  const [subcategoria, setSubcategoria] = useState<string>("");
 
   return (
     <>
       {/* Banner */}
-      <section className="relative w-full h-auto flex justify-center items-center overflow-hidden mt-[60px] md:mt-[95px] lg:mt-[100spx] xl:mt-[110px]">
+      <section className="relative w-full h-auto flex justify-center items-center overflow-hidden mt-[60px] md:mt-[95px] lg:mt-[95px]">
         <img
           src="../../assets/img/productos/productDog/banner-dog.png"
           alt="banner-perro"
@@ -16,14 +16,17 @@ function ProductDogPage() {
       </section>
 
       {/* Navbar de categorías */}
-      <CategoriaNav />  
+      <CategoriaNav onSelectSubcategoria={setSubcategoria} />
 
-      {/* Contenido filtrado según subcategoría */}
+      {/* Contenido filtrado */}
       <section className="py-8 px-4">
         <h2 className="text-2xl font-bold mb-4">
-          {subcategoria ? `Productos de Perro - ${subcategoria}` : ""}
+          {subcategoria
+            ? `Productos de Perro - ${subcategoria}`
+            : "Todos los productos de Perro"}
         </h2>
 
+        {/* Aquí mostrarías los productos filtrados según la subcategoría */}
       </section>
     </>
   );
