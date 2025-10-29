@@ -8,9 +8,11 @@ import Register from "../pages/public/Register";
 import ResetPassPage from "../pages/public/ResetPassPage";
 import ServicePage from "../pages/public/ServicePage";
 import ProductDogPage from "../pages/public/ProductDogPage";
-import ProductCatPage from "../pages/public/productCatPage";
 import ProductBirdsPage from "../pages/public/ProductBirdsPage";
 import ProductExoticPage from "../pages/public/ProductExotic";
+import ProductCatPage from "../pages/public/ProductCatPage";
+import { Unauthorized } from "../pages/public/Unauthorized";
+import { NotFound } from "../pages/public/NotFound";
 
 export const publicRoutes: RouteObject[] = [
   {
@@ -30,23 +32,22 @@ export const publicRoutes: RouteObject[] = [
         path: "products",
         element: <Categoria />,
       },
-       {
+      {
         path: "productosPerro",
-        element: <ProductDogPage/>,
+        element: <ProductDogPage />,
       },
-       {
+      {
         path: "productosGato",
-        element: <ProductCatPage/>,
+        element: <ProductCatPage />,
       },
-       {
+      {
         path: "productosAve",
-        element: <ProductBirdsPage/>,
+        element: <ProductBirdsPage />,
       },
-       {
+      {
         path: "productosExotico",
-        element: <ProductExoticPage/>,
+        element: <ProductExoticPage />,
       },
-      
 
       {
         path: "services",
@@ -64,5 +65,13 @@ export const publicRoutes: RouteObject[] = [
         element: <ResetPassPage />,
       },
     ],
+  },
+  {
+    path: "/unauthorized",
+    element: <Unauthorized />,
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ];

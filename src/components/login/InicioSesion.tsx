@@ -1,14 +1,15 @@
 // Importa los iconos que usaremos
-import { ArrowLeft, Mail, Lock } from 'lucide-react';
-import { FcGoogle } from 'react-icons/fc';
-import { FaFacebook } from 'react-icons/fa';
+import { ArrowLeft, Mail, Lock } from "lucide-react";
+import { FcGoogle } from "react-icons/fc";
+import { FaFacebook } from "react-icons/fa";
 
 export default function InicioSesion() {
   return (
     // Contenedor principal de toda la página
-    <div className="top-16 relative flex min-h-screen w-full items-center justify-center 
-                    bg-gradient-to-br from-purple-100 via-white to-purple-50 p-4">
-      
+    <div
+      className="top-16 relative flex min-h-screen w-full items-center justify-center 
+                    bg-gradient-to-br from-purple-100 via-white to-purple-50 p-4"
+    >
       {/* Botón de volver (opcional) */}
       <button className="absolute top-8 left-8 text-purple-600 hover:text-purple-800 transition-colors">
         <ArrowLeft size={24} />
@@ -16,7 +17,6 @@ export default function InicioSesion() {
 
       {/* Tarjeta de Inicio de Sesión */}
       <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl md:p-10">
-        
         {/* Encabezado */}
         <div className="mb-6 text-center">
           <h1 className="text-3xl font-bold text-gray-800">¡Hola de Neevo!</h1>
@@ -25,7 +25,6 @@ export default function InicioSesion() {
 
         {/* Formulario */}
         <form className="space-y-5">
-          
           {/* Campo de Correo */}
           <div className="relative">
             <span className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-400">
@@ -98,7 +97,7 @@ export default function InicioSesion() {
             <FcGoogle size={22} />
             <span className="font-medium">Ingresar con Google</span>
           </button>
-          
+
           {/* Botón Facebook */}
           <button
             className="flex flex-1 items-center justify-center gap-2 rounded-lg
@@ -109,8 +108,8 @@ export default function InicioSesion() {
             <span className="font-medium">Ingresar con Facebook</span>
           </button>
         </div>
-
       </div>
     </div>
   );
 }
+

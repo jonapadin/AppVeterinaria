@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CategoriaNav from "../../components/navbar-categoria/NavbarCategorias";
 
-function ProductDogPage() {
+function ProductCatPage() {
   const [subcategoria, setSubcategoria] = useState<string>("");
 
   return (
@@ -32,4 +32,4 @@ function ProductDogPage() {
   );
 }
 
-export default ProductDogPage;
+export default ProductCatPage;
