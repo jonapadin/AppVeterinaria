@@ -16,7 +16,7 @@ export const privateRoutes: RouteObject[] = [
   },
   {
     path: "/user",
-    element: <PrivateRoute allowedRoles={["cliente"]} />,
+    element: <PrivateRoute allowedRoles={["user"]} />,
     children: [
       {
         index: true,
