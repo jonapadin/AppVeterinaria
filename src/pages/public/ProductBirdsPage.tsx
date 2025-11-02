@@ -16,14 +16,14 @@ function ProductDogPage() {
       </section>
 
       {/* Navbar de categorías */}
-      <CategoriaNav onSelectSubcategoria={setSubcategoria} />
+      <CategoriaNav onSelectSubcategoria={setSubcategoria} categoriaActual={"Gato"} />
 
       {/* Contenido filtrado */}
       <section className="py-8 px-4">
         <h2 className="text-2xl font-bold mb-4">
           {subcategoria
-            ? `Productos de Perro - ${subcategoria}`
-            : "Todos los productos de Perro"}
+            ? `Productos de Aves - ${subcategoria}`
+            : "Todos los productos de Aves"}
         </h2>
 
         {/* Aquí mostrarías los productos filtrados según la subcategoría */}
