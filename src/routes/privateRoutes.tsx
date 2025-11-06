@@ -6,17 +6,23 @@ import Profile from "../pages/private/UserProfile";
 import Turns from "../pages/private/Turns";
 import MedicalRecord from "../pages/private/MedicalRecord";
 import Notificaciones from "../pages/private/Notifications";
+import Layout from "../components/layout/Layout";
 
 export const privateRoutes: RouteObject[] = [
   {
     path: "/admin",
-    element: <PrivateRoute allowedRoles={["admin"]} />,
+    element: <Layout />,
     children: [
       {
-        index: true,
-        element: <AdminPanel />,
-      },
-    ],
+        element: <PrivateRoute allowedRoles={["admin"]} />,
+        children: [
+          {
+            index: true,
+            element: <AdminPanel />
+          }
+        ]
+      }
+    ]
   },
   {
     path: "/user",
