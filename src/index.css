@@ -1,8 +1,8 @@
   @import "tailwindcss";
   /* En tu archivo CSS principal (ej. index.css o global.css) */
-@import "tailwindcss/preflight";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer components {
   /* Estilos reutilizables para inputs y botones */
