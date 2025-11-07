@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import productosJson from "./producto.json";
 
 interface Producto {
@@ -17,110 +17,173 @@ interface Producto {
   };
 }
 
-interface CategoriaProductos {
-  Alimento?: Producto[];
-  Accesorios?: Producto[];
-  Estética_e_Higiene?: Producto[];
-  Salud?: Producto[];
-  [key: string]: Producto[] | undefined;
-}
+type CategoriasDisponibles = {
+  Perro?: Record<string, Producto[]>;
+  Gato?: Record<string, Producto[]>;
+  Aves?: Record<string, Producto[]>;
+  Exoticos?: Record<string, Producto[]>; 
+};
 
-interface ProductosJsonItem {
-  categoria: {
-    Perro?: CategoriaProductos;
-    Gato?: CategoriaProductos;
-    Aves?: CategoriaProductos;
-    Exóticos?: CategoriaProductos;
-  };
+interface ProductosJSON {
+  categoria: CategoriasDisponibles;
 }
-
-type Categoria = "Perro" | "Gato" | "Aves" | "Exóticos";
 
 interface ProductListProps {
-  categoria: Categoria;
+  categoria: "Perro" | "Gato" | "Aves" | "Exoticos";
   subcategoria: string;
+  filtros: { presentaciones: string[]; marcas: string[] };
+  orden: "mas-vendidos" | "menor-mayor" | "mayor-menor" | "a-z" | "z-a";
+  setOrden: (
+    value: "mas-vendidos" | "menor-mayor" | "mayor-menor" | "a-z" | "z-a"
+  ) => void;
 }
 
-function ProductList({ categoria, subcategoria }: ProductListProps) {
-  const [productos, setProductos] = useState<Producto[]>([]);
-  const productosData = productosJson as ProductosJsonItem[];
+export default function ProductList({
+  categoria,
+  subcategoria,
+  filtros,
+  orden,
+  setOrden,
+}: ProductListProps) {
+  const [productosFiltrados, setProductosFiltrados] = useState<Producto[]>([]);
+  const [showModal, setShowModal] = useState(false);
+  const [ordenSeleccionado, setOrdenSeleccionado] = useState(orden);
+
+  const productosData =
+    (productosJson as unknown as ProductosJSON[])[0].categoria[categoria];
 
   useEffect(() => {
-    if (!subcategoria) return;
-    const data = productosData[0].categoria[categoria];
-    const subData = data?.[subcategoria] || [];
-    setProductos(subData);
-  }, [categoria, subcategoria, productosData]);
+    if (!productosData) return;
 
-  if (!subcategoria) {
-    return (
-      <p className="text-center text-gray-500 mt-6">
-        Seleccioná una subcategoría para ver productos.
-      </p>
-    );
-  }
+    let productos = productosData[subcategoria] || [];
+
+    if (filtros.marcas.length > 0) {
+      productos = productos.filter((p) =>
+        filtros.marcas.includes(p.marca.trim())
+      );
+    }
+
+    if (filtros.presentaciones.length > 0) {
+      productos = productos.filter((p) =>
+        filtros.presentaciones.includes(p.presentacion)
+      );
+    }
+
+    const ordenadores = {
+      "mas-vendidos": () => 0,
+      "menor-mayor": (a: Producto, b: Producto) => a.precio - b.precio,
+      "mayor-menor": (a: Producto, b: Producto) => b.precio - a.precio,
+      "a-z": (a: Producto, b: Producto) =>
+        a.descripcion.localeCompare(b.descripcion),
+      "z-a": (a: Producto, b: Producto) =>
+        b.descripcion.localeCompare(a.descripcion),
+    };
+
+    productos = [...productos].sort(ordenadores[orden]);
+    setProductosFiltrados(productos);
+  }, [categoria, subcategoria, filtros, orden]);
+
+  const labelMap = {
+    "mas-vendidos": "Más vendidos",
+    "menor-mayor": "Precio: menor a mayor",
+    "mayor-menor": "Precio: mayor a menor",
+    "a-z": "A-Z",
+    "z-a": "Z-A",
+  };
 
   return (
-    <section className="py-10 px-6 lg:px-10">
+    <section className="max-w-7xl mx-auto px-4">
+      {/* BOTÓN ORDEN para movil */}
+      <div className="md:hidden flex justify-start mb-4">
+        <button
+          onClick={() => setShowModal(true)}
+          className="px-4 py-2 bg-[#8F108D] text-white font-semibold rounded-lg flex items-center gap-2"
+        >
+          Ordenar por ▼
+        </button>
+      </div>
+
+      {/* MODAL */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black/40 z-50 flex justify-center items-center">
+          <div className="bg-[#8F108D] w-[90%] max-w-xs rounded-xl shadow-lg overflow-hidden">
+            <div className="flex justify-between items-center px-4 py-3 bg-[#740A72]">
+              <img
+                src="public/assets/icons/logoVet.png"
+                alt="Logo"
+                className="h-7 object-contain"
+              />
+              <button
+                onClick={() => setShowModal(false)}
+                className="text-white text-xl font-bold"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="flex flex-col">
+              {Object.keys(labelMap).map((op) => (
+                <button
+                  key={op}
+                  onClick={() => {
+                    setOrdenSeleccionado(op as any);
+                    setOrden(op as any);
+                  }}
+                  className={`w-full text-left px-4 py-3 transition-colors ${
+                    ordenSeleccionado === op
+                      ? "bg-white text-[#8F108D]"
+                      : "text-white hover:bg-white hover:text-[#8F108D]"
+                  }`}
+                >
+                  {labelMap[op as keyof typeof labelMap]}
+                </button>
+              ))}
+            </div>
+
+            <div className="p-4">
+              <button
+                onClick={() => setShowModal(false)}
+                className="w-full py-2 bg-white text-[#8F108D] font-semibold rounded-lg"
+              >
+                Aplicar filtro
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* TÍTULO */}
       <h2 className="text-2xl font-bold mb-6 text-center text-[#8F108D]">
         {subcategoria.replaceAll("_", " ")}
       </h2>
 
-      {productos.length > 0 ? (
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
-          {productos.map((producto) => (
+      {/* Cards PRODUCTOS */}
+      {productosFiltrados.length > 0 ? (
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-fr">
+          {productosFiltrados.map((producto) => (
             <div
               key={producto.id}
               className="rounded-xl p-3 flex flex-col justify-between shadow-md hover:shadow-xl transition-all bg-white scale-95 hover:scale-100"
             >
-              {/* Imagen */}
               <img
                 src={producto.imagen}
                 alt={producto.descripcion}
-                className="h-40 w-auto object-contain mx-auto mb-4"
+                className="h-40 object-contain"
               />
-                {/* Marca */}
-              <p className="text-center font-semibold text-black text-xl mb-1">
+              <p className="text-center font-semibold text-black text-xl">
                 {producto.marca}
               </p>
-
-              {/* Descripción */}
-            <div className="flex items-center justify-center gap-2 mb-1">
-            <p className="font-semibold text-sm text-center">
-            {producto.descripcion}
-          </p>
-           {producto.presentacion && (
-         <span className="text-xs font-semibold text-black">({producto.presentacion})</span>
-        )}
-          </div>
-
-              {/* Forma de pago */}
-              {producto.opciones_pago && (
-                <p className="text-center text-xs text-gray-500 italic mb-1">
-                  {producto.opciones_pago.descripcion}
-                </p>
-              )}
-
-              {/* Stock */}
-              <p
-                className={`text-center text-xs font-semibold mb-2 ${
-                  producto.stock > 0 ? "text-neutral-950" : "text-shadow-gray-600"
-                }`}
-              >
-                {producto.stock > 0
-                  ? `Stock: ${producto.stock} unidades`
-                  : "Sin stock"}
+              <p className="font-semibold text-sm text-center break-words">
+                {producto.descripcion}{" "}
+                {producto.presentacion && `(${producto.presentacion})`}
               </p>
-
-              {/* Precio */}
               <p className="text-center font-bold text-lg text-[#8F108D] mb-4">
                 ${producto.precio.toLocaleString()}
               </p>
 
-              {/* Botón */}
               <button
                 disabled={producto.stock === 0}
-                className={`w-full py-2 text-sm font-semibold border-2 rounded-md transition-colors ${
+                className={`w-full py-2 text-sm font-semibold border-2 rounded-md ${
                   producto.stock === 0
                     ? "border-gray-400 text-gray-400 cursor-not-allowed"
                     : "border-[#8F108D] text-[#8F108D] hover:bg-[#8F108D] hover:text-white"
@@ -132,12 +195,8 @@ function ProductList({ categoria, subcategoria }: ProductListProps) {
           ))}
         </div>
       ) : (
-        <p className="text-center text-gray-500">
-          No hay productos disponibles.
-        </p>
+        <p className="text-center text-gray-500">No hay productos disponibles.</p>
       )}
     </section>
   );
 }
-
-export default ProductList;

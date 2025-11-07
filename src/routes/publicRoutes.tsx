@@ -1,4 +1,4 @@
-// src/routes/publicRoutes.ts
+
 import type { RouteObject } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import Home from "../pages/public/Home";
@@ -40,15 +40,10 @@ export const publicRoutes: RouteObject[] = [
         path: "productosGato",
         element: <ProductCatPage />,
       },
-      {
-        path: "productosAve",
-        element: <ProductBirdsPage />,
-      },
-      {
-        path: "productosExotico",
-        element: <ProductExoticPage />,
-      },
-
+       { path: "productosAves",
+         element: <ProductBirdsPage /> },  
+      { path: "productosExoticos",
+         element: <ProductExoticPage /> },
       {
         path: "services",
 
