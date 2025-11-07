@@ -12,9 +12,9 @@
             "marca": "Pedrigree",
             "imagen": "/assets/img/productos/productDog/pedrigee.webp",
             "opciones_pago": {
-             "cuotas": 3,
-            "monto_por_cuota": 2000,
-            "total": 6000,
+              "cuotas": 3,
+              "monto_por_cuota": 2000,
+              "total": 6000,
               "descripcion": "Pago en 3 cuotas de $2000 sin interés"
             }
           },
@@ -23,7 +23,7 @@
             "precio": 12600,
             "stock": 15,
             "descripcion": "PREMIUM, Cachorros",
-            "presentacion":"5kg",
+            "presentacion": "5kg",
             "marca": "Infinity",
             "imagen": "/assets/img/productos/productDog/infinity.webp",
             "opciones_pago": {
@@ -40,7 +40,7 @@
             "descripcion": "Para perros cachorros ",
             "presentacion": "22kg",
             "marca": "Dog pro",
-            "imagen": "/public/assets/img/productos/productDog/dogpro.webp",
+            "imagen": "/assets/img/productos/productDog/dogpro.webp",
             "opciones_pago": {
               "cuotas": 3,
               "monto_por_cuota": 18000,
@@ -48,7 +48,6 @@
               "descripcion": "Pago en 3 cuotas de 18.000 sin interés"
             }
           },
-          
           {
             "id": 4,
             "precio": 15000,
@@ -63,8 +62,8 @@
               "total": 15000,
               "descripcion": "Pago en 3 cuotas de 5.000 sin interés"
             }
-            },
-            {
+          },
+          {
             "id": 5,
             "precio": 16000,
             "stock": 0,
@@ -78,114 +77,7 @@
               "total": 16000,
               "descripcion": "Pago en 3 cuotas de 5.333 sin interés"
             }
-          },
-          {
-            "id": 6,
-            "precio": 15000,
-            "stock": 50,
-            "descripcion": "Alimento para adultos ",
-            "presentacion": "18kg",
-            "marca": "Caudillo",
-            "imagen": "/assets/img/productos/productDog/caudillo18kg.png",
-            "opciones_pago": {
-              "cuotas": 3,
-              "monto_por_cuota": 5000,
-              "total": 15000,
-              "descripcion": "Pago en 3 cuotas de 5.000 sin interés"
-            }
-          },
-           {
-            "id": 7,
-            "precio": 16500,
-            "stock": 10,
-            "descripcion": "Alimento para adultos ",
-            "presentacion": "25kg",
-            "marca": "Advance Premion",
-            "imagen": "/assets/img/productos/productDog/advancePremion25kg.png",
-            "opciones_pago": {
-              "cuotas": 3,
-              "monto_por_cuota": 5500,
-              "total": 16500,
-              "descripcion": "Pago en 3 cuotas de 5.500 sin interés"
-            }
-          },
-           {
-            "id": 8,
-            "precio": 17500,
-            "stock": 25,
-            "descripcion": "Alimento para adultos",
-            "presentacion": "15kg",
-            "marca": "Dog Chow",
-            "imagen": "/assets/img/productos/productDog/dogChow15Kg.png",
-            "opciones_pago": {
-              "cuotas": 3,
-              "monto_por_cuota": 5833,
-              "total": 17500,
-              "descripcion": "Pago en 3 cuotas de 5.833 sin interés"
-            }
-          },
-           {
-            "id": 9,
-            "precio": 12000,
-            "stock": 20,
-            "descripcion": "Alimento para adultos",
-            "presentacion": "2kg",
-            "marca": "campeon",
-            "imagen": "/assets/img/productos/productDog/campeon2kg.png",
-            "opciones_pago": {
-              "cuotas": 3,
-              "monto_por_cuota": 4000,
-              "total": 12000,
-              "descripcion": "Pago en 3 cuotas de 4.000 sin interés"
-            }
-          },
-           {
-            "id": 10,
-            "precio": 19000,
-            "stock": 30,
-            "descripcion": "Alimento para adultos ",
-            "presentacion": "15kg",
-            "marca": "Dogui",
-            "imagen": "/assets/img/productos/productDog/dogui15kg.png",
-            "opciones_pago": {
-              "cuotas": 3,
-              "monto_por_cuota": 6333,
-              "total": 19000,
-              "descripcion": "Pago en 3 cuotas de 6.333 sin interés"
-            }
-          },
-           {
-            "id": 11,
-            "precio": 16500,
-            "stock": 15,
-            "descripcion": "Alimento para adultos ",
-            "presentacion": "20kg",
-            "marca": "Ganador",
-            "imagen": "/assets/img/productos/productDog/ganador20kg.webp",
-            "opciones_pago": {
-              "cuotas": 3,
-              "monto_por_cuota": 5500,
-              "total": 16500,
-              "descripcion": "Pago en 3 cuotas de 5.500 sin interés"
-            }
-          },
-           {
-            "id": 12,
-            "precio": 18500,
-            "stock": 25,
-            "descripcion": "Alimento para adultos ",
-             "presentacion": "15kg",
-            "marca": "Dog Selection",
-            "imagen": "/assets/img/productos/productDog/dogSelection15kg.webp",
-            "opciones_pago": {
-              "cuotas": 3,
-              "monto_por_cuota": 6166,
-              "total": 18500,
-              "descripcion": "Pago en 3 cuotas de 6.166 sin interés"
-            }
           }
-        
-              
         ],
         "Accesorios": [
           {
@@ -193,59 +85,14 @@
             "precio": 5200,
             "stock": 10,
             "descripcion": "Hueso mordisco",
-             "presentacion": "",
+            "presentacion": "",
             "marca": "CanCat",
-            "imagen": "/assets/img/productos/productDoghuesoFlotante.webp",
+            "imagen": "/assets/img/productos/productDog/huesoFlotante.webp",
             "opciones_pago": {
               "cuotas": 3,
               "monto_por_cuota": 1750,
               "total": 5200,
               "descripcion": "Pago en 3 cuotas de 1.750 sin interés"
-            }
-          },
-          {
-            "id": 2,
-            "precio": 12300,
-            "stock": 10,
-            "descripcion": "Correa",
-            "presentacion": "",
-            "marca": "Animalada",
-            "imagen": "/assets/img/productos/productDog/correaPerro.webp",
-            "opciones_pago": {
-              "cuotas": 3,
-              "monto_por_cuota": 4100,
-              "total": 12300,
-              "descripcion": "Pago en 3 cuotas de 4.100 sin interés"
-            }
-          },
-          {
-            "id": 3,
-            "precio": 30000,
-            "stock": 5,
-            "descripcion": "Cama",
-              "presentacion": "",
-            "marca": "Huella",
-            "imagen": "/assets/img/productos/productDog/camaPerro.webp",
-            "opciones_pago": {
-              "cuotas": 3,
-              "monto_por_cuota": 10000,
-              "total": 30000,
-              "descripcion": "Pago en 3 cuotas de 10.000 sin interés"
-            }
-          },
-          {
-            "id": 4,
-            "precio": 76500,
-            "stock": 10,
-            "descripcion": "Transportadora",
-              "presentacion": "",
-            "marca": "Elite",
-            "imagen": "/assets/img/productos/productDog/transportadoraPerro.webp",
-            "opciones_pago": {
-              "cuotas": 3,
-              "monto_por_cuota": 25500,
-              "total": 76500,
-              "descripcion": "Pago en 3 cuotas de 25.500 sin interés"
             }
           }
         ],
@@ -255,7 +102,7 @@
             "precio": 4500,
             "stock": 10,
             "descripcion": "Cepillo",
-              "presentacion": "",
+            "presentacion": "",
             "marca": "Neat and tidy",
             "imagen": "/assets/img/productos/productDog/cepilloPerro.webp",
             "opciones_pago": {
@@ -263,51 +110,6 @@
               "monto_por_cuota": 1500,
               "total": 4500,
               "descripcion": "Pago en 3 cuotas de 1.500 sin interés"
-            }
-          },
-          {
-            "id": 6,
-            "precio": 16100,
-            "stock": 10,
-            "descripcion": "Shampoo",
-              "presentacion": "",
-            "marca": "Osspret",
-            "imagen": "/assets/img/productos/productDog/shampooPerro.webp",
-            "opciones_pago": {
-              "cuotas": 3,
-              "monto_por_cuota": 4700,
-              "total": 16100,
-              "descripcion": "Pago en 3 cuotas de 4.700 sin interés"
-            }
-          },
-          {
-            "id": 7,
-            "precio": 12000,
-            "stock": 25,
-            "descripcion": "Spray",
-              "presentacion": "",
-            "marca": "Serenex",
-            "imagen": "/assets/img/productos/productDog/sprayPerro.webp",
-            "opciones_pago": {
-              "cuotas": 3,
-              "monto_por_cuota": 4000,
-              "total": 12000,
-              "descripcion": "Pago en 3 cuotas de 4.000 sin interés"
-            }
-          },
-          {
-            "id": 8,
-            "precio": 6600,
-            "stock": 15,
-            "descripcion": "Alicate",
-              "presentacion": "",
-            "marca": "Essentials",
-            "imagen": "/assets/img/productos/productDog/alicate.webp",
-            "opciones_pago": {
-              "cuotas": 3,
-              "monto_por_cuota": 2200,
-              "total": 6600,
-              "descripcion": "Pago en 3 cuotas de 2.200 sin interés"
             }
           }
         ],
@@ -317,7 +119,7 @@
             "precio": 6750,
             "stock": 15,
             "descripcion": "Gotitas",
-              "presentacion": "",
+            "presentacion": "",
             "marca": "Otovier",
             "imagen": "/assets/img/productos/productDog/gotitas.avif",
             "opciones_pago": {
@@ -325,51 +127,6 @@
               "monto_por_cuota": 2250,
               "total": 6750,
               "descripcion": "Pago en 3 cuotas de 2.250 sin interés"
-            }
-          },
-          {
-            "id": 2,
-            "precio": 10590,
-            "stock": 0,
-            "descripcion": "Pipeta",
-              "presentacion": "",
-            "marca": "Power Ultra",
-            "imagen": "/assets/img/productos/productDog/pipetaPerro.webp",
-            "opciones_pago": {
-              "cuotas": 3,
-              "monto_por_cuota": 3530,
-              "total": 10590,
-              "descripcion": "Pago en 3 cuotas de 3.530 sin interés"
-            }
-          },
-          {
-            "id": 3,
-            "precio": 10590,
-            "stock": 0,
-            "descripcion": "Antiflamatorio",
-              "presentacion": "",
-            "marca": "Prednisona",
-            "imagen": "/assets/productPerro/antiflamatorio.webp",
-            "opciones_pago": {
-              "cuotas": 3,
-              "monto_por_cuota": 3530,
-              "total": 10590,
-              "descripcion": "Pago en 3 cuotas de 3.530 sin interés"
-            }
-          },
-          {
-            "id": 4,
-            "precio": 7500,
-            "stock": 4,
-            "descripcion": "Antiparasitario",
-              "presentacion": "",
-            "marca": "Nex Gard",
-            "imagen": "/assets/img/productos/productDog/nexgard.webp",
-            "opciones_pago": {
-              "cuotas": 3,
-              "monto_por_cuota": 2500,
-              "total": 7500,
-              "descripcion": "Pago en 3 cuotas de 2.500 sin interés"
             }
           }
         ]
@@ -391,68 +148,45 @@
               "total": 7200,
               "descripcion": "Pago en 3 cuotas de 2.400 sin interés"
             }
-          },
-          {
-            "id": 2,
-            "precio": 9500,
-            "stock": 15,
-            "descripcion": "Alimento premium gatos esterilizados x 5kg",
-            "presentacion": "5kg",
-            "marca": "Royal Canin",
-            "imagen": "/assets/img/productos/productCat/royalcanin5kg.webp",
-            "opciones_pago": {
-              "cuotas": 3,
-              "monto_por_cuota": 3166,
-              "total": 9500,
-              "descripcion": "Pago en 3 cuotas de 3.166 sin interés"
-            }
           }
-        ],
-        "Accesorios": [
+        ]
+      },
+
+      "Aves": {
+        "Alimento": [
           {
             "id": 1,
-            "precio": 3500,
+            "precio": 4500,
             "stock": 20,
-            "descripcion": "Rascador pequeño con base",
-            "marca": "CatFun",
-            "imagen": "/assets/img/productos/productCat/rascador.webp",
+            "descripcion": "Alimento para aves balanceado x 1kg",
+            "presentacion": "1kg",
+            "marca": "BirdCare",
+            "imagen": "/assets/img/productos/productBird/alimentoAves1kg.webp",
             "opciones_pago": {
               "cuotas": 3,
-              "monto_por_cuota": 1166,
-              "total": 3500,
-              "descripcion": "Pago en 3 cuotas de 1.166 sin interés"
+              "monto_por_cuota": 1500,
+              "total": 4500,
+              "descripcion": "Pago en 3 cuotas de 1.500 sin interés"
             }
           }
-        ],
-        "Estética_e_Higiene": [
+        ]
+      },
+
+      "Exoticos": {
+        "Alimento": [
           {
             "id": 1,
-            "precio": 2800,
-            "stock": 30,
-            "descripcion": "Arena sanitaria aglutinante 5kg",
-            "marca": "PussyCat",
-            "imagen": "/assets/img/productos/productCat/arenaSanitaria.webp",
-            "opciones_pago": {
-              "cuotas": 3,
-              "monto_por_cuota": 933,
-              "total": 2800,
-              "descripcion": "Pago en 3 cuotas de 933 sin interés"
-            }
-          }
-        ],
-        "Salud": [
-          {
-            "id": 1,
-            "precio": 8900,
+            "precio": 8500,
             "stock": 10,
-            "descripcion": "Antipulgas spot-on gatos adultos",
-            "marca": "Frontline",
-            "imagen": "/assets/img/productos/productCat/frontline.webp",
+            "descripcion": "Alimento para reptiles x 800g",
+            "presentacion": "800g",
+            "marca": "ReptiFood",
+            "imagen": "/assets/img/productos/productExotic/alimentoReptiles.webp",
             "opciones_pago": {
               "cuotas": 3,
-              "monto_por_cuota": 2966,
-              "total": 8900,
-              "descripcion": "Pago en 3 cuotas de 2.966 sin interés"
+              "monto_por_cuota": 2833,
+              "total": 8500,
+              "descripcion": "Pago en 3 cuotas de 2.833 sin interés"
             }
           }
         ]

@@ -1,35 +1,60 @@
 import { useState } from "react";
 import CategoriaNav from "../../components/navbar-categoria/NavbarCategorias";
+import FiltroProductos from "../../components/producto/FiltroProducto";
+import OrdenarProductos from "../../components/producto/OrdenarProductos";
+import ProductList from "../../components/producto/ProductoLista";
 
-function ProductDogPage() {
-  const [subcategoria, setSubcategoria] = useState<string>("");
+function ProductExoticPage() {
+  const [subcategoria, setSubcategoria] = useState<string>("Alimento");
+  const [filtros, setFiltros] = useState({
+    presentaciones: [] as string[],
+    marcas: [] as string[],
+  });
+  const [orden, setOrden] = useState<
+    "mas-vendidos" | "menor-mayor" | "mayor-menor" | "a-z" | "z-a"
+  >("mas-vendidos");
 
   return (
     <>
-      {/* Banner */}
-      <section className="relative w-full h-auto flex justify-center items-center overflow-hidden mt-[60px] md:mt-[95px] lg:mt-[95px]">
+      <section className="relative w-full h-auto flex justify-center items-center overflow-hidden mt-[60px] md:mt-[95px]">
         <img
-          src="../../assets/img/productos/productDog/banner-dog.pngp"
-          alt="banner-perro"
-          className="w-full h-auto  object-contain"
+          src="../../assets/img/productos/productDog/banner-dog.png"
+          alt="banner-Exotico"
+          className="w-full h-auto object-contain"
         />
       </section>
 
-      {/* Navbar de categorías */}
-      <CategoriaNav onSelectSubcategoria={setSubcategoria} />
+      <CategoriaNav
+        onSelectSubcategoria={setSubcategoria}
+        categoriaActual="Exoticos"
+      />
 
-      {/* Contenido filtrado */}
-      <section className="py-8 px-4">
-        <h2 className="text-2xl font-bold mb-4">
-          {subcategoria
-            ? `Productos de Exóticos - ${subcategoria}`
-            : "Todos los productos de Exóticos"}
-        </h2>
+      <div className="flex flex-col md:flex-row gap-6 p-6">
+        <div className="w-full md:w-1/4 hidden md:block">
+          <FiltroProductos
+            categoriaActual="Exoticos"
+            subcategoriaActual={subcategoria}
+            onSelectSubcategoria={setSubcategoria}
+            onChange={setFiltros}
+          />
+        </div>
 
-        {/* Aquí mostrarías los productos filtrados según la subcategoría */}
-      </section>
+        <div className="flex-1 flex flex-col gap-4">
+          <div className="hidden md:flex justify-end mb-4">
+            <OrdenarProductos orden={orden} onChange={setOrden} />
+          </div>
+
+          <ProductList
+            categoria="Exoticos"
+            subcategoria={subcategoria}
+            filtros={filtros}
+            orden={orden}
+            setOrden={setOrden}
+          />
+        </div>
+      </div>
     </>
   );
 }
 
-export default ProductDogPage;
+export default ProductExoticPage;
