@@ -7,7 +7,7 @@
 @layer components {
   /* Estilos reutilizables para inputs y botones */
   .input-tailwind {
-    @apply block w-full px-3 py-2 border rounded-md shadow-sm dark:bg-gray-700 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-blue-500 focus:border-blue-500;
+    @apply block w-full px-3 py-2 border rounded-md shadow-sm dark:text-white dark:border-gray-600 bg-white focus:outline-none focus:ring-blue-500 focus:border-blue-500;
   }
   
   .btn-primary {
@@ -20,7 +20,7 @@
 
   /* Estilos para etiquetas de formulario */
   .label-tailwind {
-    @apply block text-sm font-medium text-gray-700 dark:text-gray-300;
+    @apply block text-sm font-medium text-gray-700 dark:text-gray-300 bg-white;
   }
   
   /* Estilos reutilizables para Tablas */
