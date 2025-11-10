@@ -19,14 +19,16 @@ function ProductBirdsPage() {
   return (
     <>
       {/* Banner */}
-      <section className="relative w-full h-auto flex justify-center items-center overflow-hidden mt-[60px] md:mt-[95px]">
-        <img
-          src="../../assets/img/productos/productBird/banner-birds.jpg"
-          alt="banner-perro"
-          className="w-full h-auto object-contain"
-        />
-      </section>
-
+<section className="w-full mt-[60px] md:mt-[95px]">
+  <div className="flex justify-center w-full">
+    <img
+      src="/assets/img/banner-product/banner-brirds.jpg"
+      alt="banner-aves"
+      className="object-contain h-auto w-[900px] max-w-full"
+    />
+  </div>
+</section>
+  
       {/* Categorías */}
       <CategoriaNav
         onSelectSubcategoria={setSubcategoria}

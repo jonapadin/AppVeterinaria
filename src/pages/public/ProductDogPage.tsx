@@ -21,9 +21,9 @@ function ProductDogPage() {
       {/* Banner */}
       <section className="relative w-full h-auto flex justify-center items-center overflow-hidden mt-[60px] md:mt-[95px]">
         <img
-          src="../../assets/img/productos/productDog/banner-dog.png"
+          src="/assets/img/banner-product/banner-dog.png"
           alt="banner-perro"
-          className="w-full h-auto object-contain"
+          className="w-full h-auto object-cover"
         />
       </section>
 

@@ -21,7 +21,7 @@ function ProductCatPage() {
       {/* Banner */}
       <section className="relative w-full h-auto flex justify-center items-center overflow-hidden mt-[60px] md:mt-[95px]">
         <img
-          src="../../assets/img/productos/productGato/banner-gato.png"
+          src="/assets/img/banner-product/banner-gato.avif"
           alt="banner-gatos"
           className="w-full h-auto object-contain"
         />
