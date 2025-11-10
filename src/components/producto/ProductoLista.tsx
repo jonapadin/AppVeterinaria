@@ -10,10 +10,10 @@ interface Producto {
   marca: string;
   imagen: string;
   opciones_pago: {
-    cuotas: number;
-    monto_por_cuota: number;
-    total: number;
-    descripcion: string;
+  cuotas: number;
+  monto_por_cuota: number;
+  total: number;
+ descripcion: string;
   };
 }
 
