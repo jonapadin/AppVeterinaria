@@ -37,7 +37,20 @@ export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
     const response = await fetch(url, config);
 
     if (!response.ok) {
-      const errorData = await response.json();
+      let errorData;
+      try {
+        errorData = await response.json();
+      } catch {
+        errorData = { message: response.statusText };
+      }
+      
+      console.error('❌ Error en la API:', {
+        status: response.status,
+        statusText: response.statusText,
+        message: errorData.message,
+        details: errorData,
+        url: url
+      });
       
       // Si el error es "No token provided" y estamos en el frontend,
       // es una buena práctica redirigir al login.
@@ -47,7 +60,6 @@ export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
          // window.location.href = '/login'; 
       }
       
-      // Esta es la línea 36 que te da el error
       throw new Error(errorData.message || `Error ${response.status}: ${response.statusText}`);
     }
     

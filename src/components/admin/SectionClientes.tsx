@@ -6,26 +6,23 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Plus, Search, Edit, Trash2 } from 'lucide-react';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
-// Importa tu helper de API
 import { fetchApi } from '../../app/api'; 
 
-// 1. Interfaz CLIENTE (basada en tu JSON)
+// 1. Interfaz CLIENTE
 interface Cliente {
-  id: number; // Asumimos que la API devuelve un ID
+  id: number; 
   email: string;
-  // No traemos la contraseña
   foto_perfil: string;
   nombre: string;
   apellido: string;
-  fecha_nacimiento: string; // Usar string, la API lo devuelve en formato ISO
+  fecha_nacimiento: string; 
   dni: number;
   telefono: string;
   ciudad: string;
   direccion: string;
 }
 
-// 2. Tipo para la CREACIÓN (DTO - Data Transfer Object)
-// Incluye la contraseña solo al crear
+// 2. DTO para CREACIÓN
 type CreateClienteDto = Omit<Cliente, 'id'> & { contrasena: string };
 
 const SectionClientes: React.FC = () => {
@@ -41,11 +38,9 @@ const SectionClientes: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      // CORREGIDO: Usa el endpoint '/cliente' (singular)
       const data = await fetchApi('/cliente'); 
       setClientes(data);
     } catch (err) {
-      // El error "No token provided" será capturado aquí
       setError((err as Error).message);
     } finally {
       setLoading(false);
@@ -54,14 +49,15 @@ const SectionClientes: React.FC = () => {
 
   useEffect(() => {
     cargarDatos();
-  }, []); // Se ejecuta solo una vez al montar el componente
+  }, []); 
 
   // --- Filtros ---
   const clientesFiltrados = useMemo(() => {
     return clientes.filter((c) =>
         (c.nombre.toLowerCase() + " " + c.apellido.toLowerCase()).includes(searchTerm.toLowerCase()) ||
         c.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        c.dni.toString().includes(searchTerm)
+        c.dni.toString().includes(searchTerm) ||
+        c.id.toString().includes(searchTerm) // Añadido filtro por ID
     );
   }, [clientes, searchTerm]);
 
@@ -82,34 +78,41 @@ const SectionClientes: React.FC = () => {
   // --- Handlers de CRUD ---
   const handleSave = async (data: CreateClienteDto | Omit<Cliente, 'id'>) => {
     try {
+      console.log('📧 Datos a enviar:', data); // Debug: Ver qué se envía
+      
       if (itemParaEditar) {
-        // Lógica de ACTUALIZAR (PUT)
-        // CORREGIDO: endpoint singular
+        console.log(`✏️ Editando cliente ${itemParaEditar.id}...`);
         await fetchApi(`/cliente/${itemParaEditar.id}`, { 
           method: 'PUT', 
           body: JSON.stringify(data) 
         });
       } else {
-        // Lógica de CREAR (POST)
-        // CORREGIDO: endpoint singular
+        console.log('➕ Creando nuevo cliente...');
         await fetchApi('/cliente', { 
           method: 'POST', 
           body: JSON.stringify(data) 
         });
       }
       handleCloseModal();
-      cargarDatos(); // Recarga los datos después de guardar
+      cargarDatos(); 
     } catch (err) {
-      alert(`Error al guardar: ${(err as Error).message}`);
+      const errorMessage = (err as Error).message;
+      console.error('🚨 Error:', errorMessage);
+      
+      // Mejorar el mensaje de error para el usuario
+      if (errorMessage.includes('mail') || errorMessage.includes('email')) {
+        alert(`❌ Email duplicado: ${errorMessage}`);
+      } else {
+        alert(`❌ Error al guardar: ${errorMessage}`);
+      }
     }
   };
 
   const handleDelete = async (id: number) => {
     if (window.confirm('¿Estás seguro de que deseas eliminar este cliente?')) {
       try {
-        // CORREGIDO: endpoint singular
         await fetchApi(`/cliente/${id}`, { method: 'DELETE' });
-        cargarDatos(); // Recarga los datos después de eliminar
+        cargarDatos(); 
       } catch (err) {
          alert(`Error al eliminar: ${(err as Error).message}`);
       }
@@ -121,7 +124,6 @@ const SectionClientes: React.FC = () => {
     <div className="space-y-6">
       <h1 className="text-3xl font-bold text-gray-800">Gestión de Clientes</h1>
 
-      {/* Tarjeta principal con fondo blanco */}
       <div className="bg-white p-6 rounded-xl shadow-lg">
         
         {/* Barra de Filtros y Acciones */}
@@ -129,10 +131,9 @@ const SectionClientes: React.FC = () => {
           <div className="relative w-full md:w-1/3">
             <input
               type="text"
-              placeholder="Buscar por Nombre, Email, DNI..."
+              placeholder="Buscar por Nombre, Email, DNI o ID..." // Actualizado placeholder
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              // Estilo de input (asume 'input-tailwind' y 'focus:ring-primary' de tu CSS)
               className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
             />
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -140,7 +141,6 @@ const SectionClientes: React.FC = () => {
           
           <button 
             onClick={handleOpenModalNuevo} 
-            // Estilo de botón primario (asume 'btn-primary' de tu CSS)
             className="btn-primary flex items-center justify-center"
           >
             <Plus className="w-5 h-5 mr-2" />
@@ -155,10 +155,8 @@ const SectionClientes: React.FC = () => {
           </div>
         )}
 
-        {/* Tabla de Clientes */}
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
-            {/* Cabecera (asume 'th-cell' de tu CSS) */}
             <thead>
               <tr>
                 <th className="th-cell">Nombre</th>
@@ -166,18 +164,18 @@ const SectionClientes: React.FC = () => {
                 <th className="th-cell">DNI</th>
                 <th className="th-cell">Teléfono</th>
                 <th className="th-cell">Ciudad</th>
+                <th className="th-cell">ID</th>
                 <th className="th-cell text-right">Acciones</th>
               </tr>
             </thead>
-            {/* Cuerpo (asume 'td-cell' de tu CSS) */}
             <tbody className="bg-white divide-y divide-gray-200">
               {loading ? (
                 <tr>
-                  <td colSpan={6} className="td-center">Cargando clientes...</td>
+                  <td colSpan={7} className="td-center">Cargando clientes...</td>
                 </tr>
               ) : clientesFiltrados.length === 0 ? (
                  <tr>
-                  <td colSpan={6} className="td-center">
+                  <td colSpan={7} className="td-center">
                     No se encontraron clientes {searchTerm && `con el término "${searchTerm}"`}.
                   </td>
                 </tr>
@@ -185,10 +183,11 @@ const SectionClientes: React.FC = () => {
                 clientesFiltrados.map((item) => (
                   <tr key={item.id} className="hover:bg-gray-50">
                     <td className="td-cell-main">{item.nombre} {item.apellido}</td>
-                    <td className="td-cell">{item.email}</td>
+                    <td className="td-cell">{item.email}</td> 
                     <td className="td-cell">{item.dni}</td>
                     <td className="td-cell">{item.telefono}</td>
                     <td className="td-cell">{item.ciudad}</td>
+                    <td className="td-cell">{item.id}</td>
                     <td className="td-cell text-right space-x-2">
                       <button 
                         onClick={() => handleOpenModalEditar(item)} 
@@ -215,7 +214,6 @@ const SectionClientes: React.FC = () => {
         </div>
       </div>
 
-      {/* Renderiza el Modal (si está abierto) */}
       {isModalOpen && (
         <ClienteModal
           isOpen={isModalOpen}
@@ -225,7 +223,6 @@ const SectionClientes: React.FC = () => {
         />
       )}
 
-      {/* Componente Tooltip (requerido para los botones) */}
       <Tooltip id="tooltip-main" />
     </div>
   );
@@ -234,20 +231,15 @@ const SectionClientes: React.FC = () => {
 export default SectionClientes;
 
 // --- COMPONENTE MODAL (ClienteModal) ---
-// (Puede ir en un archivo separado, pero lo pongo aquí por simplicidad)
+// (Sin cambios, pero lo incluyo para que el archivo esté completo)
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  // Acepta ambos tipos (Crear o Editar)
   onSave: (data: CreateClienteDto | Omit<Cliente, 'id'>) => void;
   initialData: Cliente | null; 
 }
 
-/**
- * Convierte un string ISO "2024-01-23T10:00:00" a "2024-01-23"
- * para usarlo en un input de tipo 'date'.
- */
 const formatToInputDate = (isoString: string | undefined) => {
   if (!isoString) return '';
   return isoString.split('T')[0];
@@ -255,10 +247,9 @@ const formatToInputDate = (isoString: string | undefined) => {
 
 const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialData }) => {
   
-  // Estado para todos los campos del formulario
   const [formData, setFormData] = useState({
     email: initialData?.email || '',
-    contrasena: '', // Siempre vacía al inicio (solo para crear)
+    contrasena: '', 
     foto_perfil: initialData?.foto_perfil || '',
     nombre: initialData?.nombre || '',
     apellido: initialData?.apellido || '',
@@ -269,49 +260,64 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
     direccion: initialData?.direccion || '',
   });
 
+  const [errorModal, setErrorModal] = useState<string | null>(null);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    setErrorModal(null); // Limpiar error al escribir
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorModal(null);
     
-    // Prepara los datos para enviar
+    // Validar email
+    if (!formData.email || !formData.email.includes('@')) {
+      setErrorModal('Por favor, ingresa un email válido.');
+      return;
+    }
+    
     let dataToSend: any = { ...formData };
-    
-    // Convierte DNI a número
     dataToSend.dni = Number(dataToSend.dni);
-    
-    // Asegura que la fecha tenga el formato ISO con hora (T00:00:00Z)
+    dataToSend.email = formData.email.trim().toLowerCase(); // Normalizar email
     dataToSend.fecha_nacimiento = `${formData.fecha_nacimiento}T00:00:00Z`;
 
     if (initialData) {
-      // Si estamos EDITANDO, no enviamos la contraseña
       delete dataToSend.contrasena;
-      onSave(dataToSend as Omit<Cliente, 'id'>);
+      try {
+        onSave(dataToSend as Omit<Cliente, 'id'>);
+      } catch (err) {
+        setErrorModal((err as Error).message);
+      }
     } else {
-      // Si estamos CREANDO, la contraseña es obligatoria
       if (!formData.contrasena) {
-        alert('La contraseña es requerida para crear un nuevo cliente.');
+        setErrorModal('La contraseña es requerida para crear un nuevo cliente.');
         return;
       }
-      onSave(dataToSend as CreateClienteDto);
+      try {
+        onSave(dataToSend as CreateClienteDto);
+      } catch (err) {
+        setErrorModal((err as Error).message);
+      }
     }
   };
 
   if (!isOpen) return null;
 
   return (
-    // Overlay oscuro
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      {/* Contenido del Modal (fondo blanco) */}
       <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-2xl">
         <h2 className="text-xl font-bold text-gray-800 mb-4">
           {initialData ? 'Editar Cliente' : 'Agregar Cliente'}
         </h2>
         
-        {/* Formulario con scroll si se pasa de alto */}
+        {errorModal && (
+          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4">
+            <strong>Error:</strong> {errorModal}
+          </div>
+        )}
+        
         <form onSubmit={handleSubmit} className="space-y-4 max-h-[70vh] overflow-y-auto pr-2">
           
           {/* Fila 1: Nombre, Apellido, DNI */}
@@ -334,7 +340,15 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="label-tailwind">Email</label>
-              <input type="email" name="email" value={formData.email} onChange={handleChange} className="mt-1 w-full input-tailwind" required />
+              <input 
+                type="email" 
+                name="email" 
+                value={formData.email} 
+                onChange={handleChange} 
+                className="mt-1 w-full input-tailwind" 
+                readOnly={!!initialData}
+                required 
+              />
             </div>
             {!initialData && (
               <div>
