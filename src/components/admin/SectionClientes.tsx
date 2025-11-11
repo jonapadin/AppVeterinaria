@@ -262,6 +262,24 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
 
   const [errorModal, setErrorModal] = useState<string | null>(null);
 
+  // Actualizar el formulario cuando cambien los datos iniciales
+  useEffect(() => {
+    if (initialData) {
+      setFormData({
+        email: initialData.email || '',
+        contrasena: '', 
+        foto_perfil: initialData.foto_perfil || '',
+        nombre: initialData.nombre || '',
+        apellido: initialData.apellido || '',
+        fecha_nacimiento: formatToInputDate(initialData.fecha_nacimiento),
+        dni: initialData.dni || '',
+        telefono: initialData.telefono || '',
+        ciudad: initialData.ciudad || '',
+        direccion: initialData.direccion || '',
+      });
+    }
+  }, [initialData, isOpen]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
