@@ -10,10 +10,10 @@ interface Producto {
   marca: string;
   imagen: string;
   opciones_pago: {
-    cuotas: number;
-    monto_por_cuota: number;
-    total: number;
-    descripcion: string;
+  cuotas: number;
+  monto_por_cuota: number;
+  total: number;
+ descripcion: string;
   };
 }
 
@@ -109,7 +109,7 @@ export default function ProductList({
           <div className="bg-[#8F108D] w-[90%] max-w-xs rounded-xl shadow-lg overflow-hidden">
             <div className="flex justify-between items-center px-4 py-3 bg-[#740A72]">
               <img
-                src="public/assets/icons/logoVet.png"
+                src="/assets/img/banner-product/logoVet.png"
                 alt="Logo"
                 className="h-7 object-contain"
               />
