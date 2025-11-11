@@ -24,7 +24,7 @@ function ProductBirdsPage() {
     <img
       src="/assets/img/banner-product/banner-brirds.jpg"
       alt="banner-aves"
-      className="object-contain h-auto w-[900px] max-w-full"
+      className="object-contain h-auto w-auto max-w-full"
     />
   </div>
 </section>
