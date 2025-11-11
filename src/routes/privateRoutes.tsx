@@ -47,7 +47,8 @@ export const privateRoutes: RouteObject[] = [
       {
         path: "notifications",
         element: <Notificaciones />,
-      }
+      },
+
     ],
   },
 ];

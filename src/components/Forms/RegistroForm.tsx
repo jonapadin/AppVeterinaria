@@ -1,16 +1,11 @@
-// Importa los iconos de lucide-react que usaremos
 import { User, Mail, Calendar, Lock } from 'lucide-react';
 
 export default function RegistroForm() {
   return (
-    // Contenedor principal de toda la página, con el mismo fondo degradado del login
-    <div className="top-16 relative flex min-h-screen w-full items-center justify-center 
+    // Contenedor principal de toda la página
+    <div className="py-38 relative flex min-h-screen w-full items-center justify-center 
                     bg-gradient-to-br from-purple-100 via-white to-purple-50 p-4">
       
-      {/* Botón de volver */}
-      {/* <button className="absolute top-8 left-8 text-purple-600 hover:text-purple-800 transition-colors">
-        <ArrowLeft size={24} />
-      </button> */}
 
       {/* Tarjeta de Registro */}
       <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl md:p-10">
@@ -22,7 +17,7 @@ export default function RegistroForm() {
         </div>
 
         {/* Formulario de Registro */}
-        <form className="space-y-4"> {/* Reducido el espacio para más campos */}
+        <form className="space-y-4"> 
           
           {/* Campo Nombres Completos*/}
           <div className="relative">
@@ -62,19 +57,17 @@ export default function RegistroForm() {
             />
           </div>
 
-          {/* Campo Fecha de Nacimiento (equivalente a Edad, pero más estándar) */}
+          {/* Campo Fecha de Nacimiento  */}
           <div className="relative">
             <span className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-400">
               <Calendar size={20} />
             </span>
             <input
               type="date"
-              placeholder="Fecha de nacimiento" // Puedes cambiar a type="text" y añadir JS para máscara si prefieres "Edad"
+              placeholder="Fecha de nacimiento" 
               className="w-full rounded-lg border border-gray-300 py-3 pl-12 pr-4
                          focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-500"
-              // Para que el placeholder no se oculte completamente al poner el tipo date,
-              // o para tener un placeholder personalizado antes de seleccionar fecha,
-              // podrías usar JavaScript o cambiar a type="text" y manejar la lógica de fecha.
+        
             />
           </div>
 
@@ -104,7 +97,7 @@ export default function RegistroForm() {
             />
           </div>
 
-          {/* Botón de Registrar (Principal) */}
+          {/* Botón de Registrar */}
           <button
             type="submit"
             className="mt-6 w-full rounded-lg bg-[#8F108D] py-3

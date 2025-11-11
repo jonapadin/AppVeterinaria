@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { ArrowLeft, Mail, Lock } from "lucide-react";
+import { Mail, Lock } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
 import { loginSuccess } from "../../features/usuarios/authSlice";
@@ -69,16 +69,14 @@ export default function InicioSesion() {
 
   return (
     <div
-      className="top-16 relative flex min-h-screen w-full items-center justify-center 
+      className="py-38 relative flex min-h-screen w-full items-center justify-center 
                     bg-gradient-to-br from-purple-100 via-white to-purple-50 p-4"
     >
-      <button className="absolute top-8 left-8 text-purple-600 hover:text-purple-800 transition-colors">
-        <ArrowLeft size={24} />
-      </button>
+     
 
       <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl md:p-10">
         <div className="mb-6 text-center">
-          <h1 className="text-3xl font-bold text-gray-800">¡Hola de Neevo!</h1>
+          <h1 className="text-3xl font-bold text-gray-800">¡Hola de Nuevo!</h1>
           <p className="mt-2 text-gray-500">Inicia sesión para continuar</p>
         </div>
 

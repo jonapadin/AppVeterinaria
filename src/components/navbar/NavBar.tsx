@@ -4,6 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import { useState } from "react";
 import { FaRegCircleUser } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
 function NavBar() {
     const [mostrarMenu, setMostrarMenu] = useState(false);
@@ -21,9 +22,9 @@ function NavBar() {
 
                 {/* Menú */}
                 <ul className="hidden lg:flex space-x-14 lg:space-x-8 lg:text-sm xl:text-xl  2xl:space-x-14  font-lato font-bold  ">
-                    <li className='cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer'>INICIO</li>
-                    <li className='cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer'>PRODUCTOS</li>
-                    <li className='cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer'>SERVICIOS</li>
+                   <Link to= {"/"} > <li className='cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer'>INICIO</li></Link>
+                    <Link to= {"categoria"}> <li className='cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer'>PRODUCTOS</li></Link>
+                   <Link to= {"services"}>  <li className='cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer'>SERVICIOS</li></Link>
                 </ul>
                 
                 {/* Input buscador (desktop) */}
@@ -40,8 +41,8 @@ function NavBar() {
                     </div>
                 </div>
                           <ul className="hidden lg:flex space-x-14 lg:space-x-8  lg:text-sm xl:text-xl  2xl:space-x-14  text-lg font-lato font-bold flex-row pr-10">
-                    <li className='cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer flex items-center gap-2.5'><FaCartShopping /><span>CARRITO</span></li>
-                    <li className='cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer flex items-center gap-2.5'><FaRegCircleUser /> <span>INGRESAR</span></li>
+                    <Link to= {""}><li className='cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer flex items-center gap-2.5'><FaCartShopping /><span>CARRITO</span></li></Link>
+                    <Link to= {"login"}><li className='cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer flex items-center gap-2.5'><FaRegCircleUser /> <span>INGRESAR</span></li></Link>
                    
                 </ul>
                 {mostrarMenu && <MenuMob onClose={abrirMenu} />}

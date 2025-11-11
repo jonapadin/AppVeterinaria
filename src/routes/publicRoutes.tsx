@@ -13,6 +13,7 @@ import ProductExoticPage from "../pages/public/ProductExotic";
 import ProductCatPage from "../pages/public/ProductCatPage";
 import { Unauthorized } from "../pages/public/Unauthorized";
 import { NotFound } from "../pages/public/NotFound";
+import FormRecoveryPass from "../components/login/FormRecoveryPass";
 
 export const publicRoutes: RouteObject[] = [
   {
@@ -29,7 +30,7 @@ export const publicRoutes: RouteObject[] = [
         element: <Login />,
       },
       {
-        path: "products",
+        path: "categoria",
         element: <Categoria />,
       },
       {
@@ -40,10 +41,14 @@ export const publicRoutes: RouteObject[] = [
         path: "productosGato",
         element: <ProductCatPage />,
       },
-       { path: "productosAves",
-         element: <ProductBirdsPage /> },  
-      { path: "productosExoticos",
-         element: <ProductExoticPage /> },
+      {
+        path: "productosAves",
+        element: <ProductBirdsPage />
+      },
+      {
+        path: "productosExoticos",
+        element: <ProductExoticPage />
+      },
       {
         path: "services",
 
@@ -58,7 +63,13 @@ export const publicRoutes: RouteObject[] = [
         path: "recover-pass",
 
         element: <ResetPassPage />,
+
       },
+      {
+        path: "reset-pass",
+
+        element: <FormRecoveryPass />,
+      }
     ],
   },
   {
