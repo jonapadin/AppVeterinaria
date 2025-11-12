@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import productosJson from "./producto.json";
+import { ChevronDown } from "lucide-react";
+
 
 interface Producto {
   id: number;
@@ -32,9 +34,9 @@ interface ProductListProps {
   categoria: "Perro" | "Gato" | "Aves" | "Exoticos";
   subcategoria: string;
   filtros: { presentaciones: string[]; marcas: string[] };
-  orden: "mas-vendidos" | "menor-mayor" | "mayor-menor" | "a-z" | "z-a";
+  orden:  "menor-mayor" | "mayor-menor" | "a-z" | "z-a";
   setOrden: (
-    value: "mas-vendidos" | "menor-mayor" | "mayor-menor" | "a-z" | "z-a"
+    value:  "menor-mayor" | "mayor-menor" | "a-z" | "z-a"
   ) => void;
 }
 
@@ -70,7 +72,7 @@ export default function ProductList({
     }
 
     const ordenadores = {
-      "mas-vendidos": () => 0,
+     
       "menor-mayor": (a: Producto, b: Producto) => a.precio - b.precio,
       "mayor-menor": (a: Producto, b: Producto) => b.precio - a.precio,
       "a-z": (a: Producto, b: Producto) =>
@@ -84,9 +86,9 @@ export default function ProductList({
   }, [categoria, subcategoria, filtros, orden]);
 
   const labelMap = {
-    "mas-vendidos": "Más vendidos",
-    "menor-mayor": "Precio: menor a mayor",
-    "mayor-menor": "Precio: mayor a menor",
+
+    "menor-mayor": "menor a mayor",
+    "mayor-menor": "mayor a menor",
     "a-z": "A-Z",
     "z-a": "Z-A",
   };
@@ -94,28 +96,28 @@ export default function ProductList({
   return (
     <section className="max-w-7xl mx-auto px-4">
       {/* BOTÓN ORDEN para movil */}
-      <div className="md:hidden flex justify-start mb-4">
-        <button
-          onClick={() => setShowModal(true)}
-          className="px-4 py-2 bg-[#8F108D] text-white font-semibold rounded-lg flex items-center gap-2"
-        >
-          Ordenar por ▼
-        </button>
-      </div>
-
+    <div className="md:hidden flex justify-end mb-4">
+  <button
+    onClick={() => setShowModal(true)}
+    className="px-4 py-2 bg-[#8F108D] text-white font-semibold rounded-lg flex items-center gap-2"
+  >
+    Ordenar por
+    <ChevronDown size={10} />
+  </button>
+</div>
       {/* MODAL */}
       {showModal && (
         <div className="fixed inset-0 bg-black/40 z-50 flex justify-center items-center">
-          <div className="bg-[#8F108D] w-[90%] max-w-xs rounded-xl shadow-lg overflow-hidden">
-            <div className="flex justify-between items-center px-4 py-3 bg-[#740A72]">
+          <div className="bg-[#8F108D] w-[70%] max-w-xs rounded-xl shadow-lg overflow-hidden">
+            <div className="flex justify-between items-center px-4 py-3 bg-[#8F108D]">
               <img
-                src="/assets/img/banner-product/logoVet.png"
-                alt="Logo"
-                className="h-7 object-contain"
-              />
+               src="/assets/img/banner-product/logoVet.png"
+             alt="Logo"
+            className="h-7 object-contain"
+        />
               <button
                 onClick={() => setShowModal(false)}
-                className="text-white text-xl font-bold"
+                className="text-white text-base font-bold"
               >
                 ✕
               </button>
@@ -157,7 +159,7 @@ export default function ProductList({
         {subcategoria.replaceAll("_", " ")}
       </h2>
 
-      {/* Cards PRODUCTOS */}
+     {/* Cards PRODUCTOS */}
       {productosFiltrados.length > 0 ? (
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-fr">
           {productosFiltrados.map((producto) => (
@@ -170,16 +172,29 @@ export default function ProductList({
                 alt={producto.descripcion}
                 className="h-40 object-contain"
               />
+
               <p className="text-center font-semibold text-black text-xl">
                 {producto.marca}
               </p>
+
               <p className="font-semibold text-sm text-center break-words">
                 {producto.descripcion}{" "}
                 {producto.presentacion && `(${producto.presentacion})`}
               </p>
-              <p className="text-center font-bold text-lg text-[#8F108D] mb-4">
+
+              <p className="text-center font-bold text-lg text-[#8F108D] mb-2">
                 ${producto.precio.toLocaleString()}
               </p>
+
+              {/* 🟣 Opciones de pago */}
+              {producto.opciones_pago && (
+                <div className="text-center text-sm text-gray-600 mb-4">
+                  <p>{producto.opciones_pago.descripcion}</p>
+        
+                 
+                </div>
+              )}
+
 
               <button
                 disabled={producto.stock === 0}
