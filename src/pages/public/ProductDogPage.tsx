@@ -13,15 +13,15 @@ function ProductDogPage() {
     marcas: [] as string[],
   });
   const [orden, setOrden] = useState<
-    "mas-vendidos" | "menor-mayor" | "mayor-menor" | "a-z" | "z-a"
-  >("mas-vendidos");
+     "menor-mayor" | "mayor-menor" | "a-z" | "z-a"
+  >("menor-mayor");
 
   return (
     <>
       {/* Banner */}
       <section className="relative w-full h-auto flex justify-center items-center overflow-hidden mt-[60px] md:mt-[95px]">
         <img
-          src="/assets/img/banner-product/banner-dog.png"
+          src="/assets/img/banner-product/banner-per.png"
           alt="banner-perro"
           className="w-full h-auto object-cover"
         />
