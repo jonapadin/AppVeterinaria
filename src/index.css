@@ -1,19 +1,28 @@
 @import "tailwindcss";
-  /* En tu archivo CSS principal (ej. index.css o global.css) */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
+/*custom tailwindcss*/
+
+@theme {
+  --breakpoint-3xl: 120rem; /* 1920px = 120rem */
+  /*Ultrawide*/
+  --breakpoint-4xl: 160rem; /* 2560px = 160rem */
+}
+
+/* En tu archivo CSS principal (ej. index.css o global.css) */
+/* @tailwind base; */
+/* @tailwind components; */
+/* @tailwind utilities; */
+/**/
 @layer components {
   /* Estilos reutilizables para inputs y botones */
   .input-tailwind {
     @apply block w-full px-3 py-2 border rounded-md shadow-sm dark:text-white dark:border-gray-600 bg-white focus:outline-none focus:ring-blue-500 focus:border-blue-500;
   }
-  
+
   .btn-primary {
     @apply px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold shadow-lg hover:bg-blue-700 transition-colors duration-200;
   }
-  
+
   .btn-secondary {
     @apply px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500;
   }
@@ -22,17 +31,18 @@
   .label-tailwind {
     @apply block text-sm font-medium text-gray-700 dark:text-gray-300 bg-white;
   }
-  
+
   /* Estilos reutilizables para Tablas */
   .th-cell {
     @apply px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider;
   }
-  
+
   .td-cell {
     @apply px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300;
   }
 
   .td-center {
-     @apply px-6 py-6 text-center text-gray-500 dark:text-gray-400;
+    @apply px-6 py-6 text-center text-gray-500 dark:text-gray-400;
   }
 }
+

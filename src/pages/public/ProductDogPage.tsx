@@ -13,7 +13,7 @@ function ProductDogPage() {
     marcas: [] as string[],
   });
   const [orden, setOrden] = useState<
-     "menor-mayor" | "mayor-menor" | "a-z" | "z-a"
+    "menor-mayor" | "mayor-menor" | "a-z" | "z-a"
   >("menor-mayor");
 
   return (
@@ -21,9 +21,9 @@ function ProductDogPage() {
       {/* Banner */}
       <section className="relative w-full h-auto flex justify-center items-center overflow-hidden mt-[60px] md:mt-[95px]">
         <img
-          src="/assets/img/banner-product/banner-per.png"
+          src="../public/assets/img/banner-product/banner-perro.jpg"
           alt="banner-perro"
-          className="w-full h-auto object-cover"
+          className="w-full h-auto object-cover 3xl:h-[76vh] 4xl:h-[85vh] 4xl:object-center"
         />
       </section>
 
@@ -34,7 +34,6 @@ function ProductDogPage() {
       />
 
       <div className="flex flex-col md:flex-row gap-6 p-6">
-
         {/* FILTROS PC */}
         <div className="w-full md:w-1/4 hidden md:block">
           <FiltroProductos
