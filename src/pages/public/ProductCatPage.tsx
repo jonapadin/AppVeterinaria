@@ -13,8 +13,8 @@ function ProductCatPage() {
     marcas: [] as string[],
   });
   const [orden, setOrden] = useState<
-    "mas-vendidos" | "menor-mayor" | "mayor-menor" | "a-z" | "z-a"
-  >("mas-vendidos");
+     "menor-mayor" | "mayor-menor" | "a-z" | "z-a"
+  >("menor-mayor");
 
   return (
     <>
@@ -30,7 +30,7 @@ function ProductCatPage() {
       {/* Categorías */}
       <CategoriaNav
         onSelectSubcategoria={setSubcategoria}
-        categoriaActual="Perro"
+        categoriaActual="Gato"
       />
 
       <div className="flex flex-col md:flex-row gap-6 p-6">

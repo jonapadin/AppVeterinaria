@@ -13,8 +13,8 @@ function ProductBirdsPage() {
     marcas: [] as string[],
   });
   const [orden, setOrden] = useState<
-    "mas-vendidos" | "menor-mayor" | "mayor-menor" | "a-z" | "z-a"
-  >("mas-vendidos");
+     "menor-mayor" | "mayor-menor" | "a-z" | "z-a"
+  >("menor-mayor");
 
   return (
     <>
