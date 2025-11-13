@@ -186,7 +186,7 @@ export default function ProductList({
                 ${producto.precio.toLocaleString()}
               </p>
 
-              {/* 🟣 Opciones de pago */}
+              {/* Opciones de pago */}
               {producto.opciones_pago && (
                 <div className="text-center text-sm text-gray-600 mb-4">
                   <p>{producto.opciones_pago.descripcion}</p>
