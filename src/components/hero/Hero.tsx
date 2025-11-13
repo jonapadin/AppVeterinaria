@@ -1,4 +1,4 @@
-import React from "react";
+
 import ServiceList from "../servicioHero/Servicios";
 import TestimonioLista from "../testimonios/Testimonios";
 
@@ -97,7 +97,7 @@ function Hero() {
       parrafo: `Llevé a mi perrita Luna por una revisión y quedé encantada.
         El trato fue súper humano, se nota que aman a los animales.
         Ahora no la llevo a otro lugar. ¡Gracias por cuidarla tanto!
-        — María G., dueña de Luna.`,
+        — María G. Dueña de Luna.`,
     },
     {
       imagenbackgroud: "../../assets/img/backgroudtestimonios.webp",
@@ -111,7 +111,7 @@ function Hero() {
       imagen: "../../assets/img/testimonio3.webp",
       parrafo: `Mi perro Max odia ir al veterinario, pero acá entró moviendo la cola.
         El equipo fue súper paciente y profesional. Lo revisaron sin estrés y hasta le dieron una galletita.
-        ¡Mil gracias! — Lucas M., papá de Max`,
+        ¡Mil gracias! — Lucas M. Papá de Max`,
     },
   ]}
 />

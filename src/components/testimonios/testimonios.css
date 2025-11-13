@@ -1,7 +1,7 @@
-@media (min-width: 400px) {
- .img-400 {
-    width: 60% !important;  /* ejemplo: más ancha desde 400px */
-    height: 80% !important;
-    left: 45% !important;   /* ejemplo: la corrés un poco */
+@media (max-width: 375px) {
+  .img-375 {
+    width: 70% !important;   /* ejemplo: más chica o más grande según necesites */
+    height: 65% !important;
+    left: 50% !important;    /* centrada */
   }
 }

@@ -3,6 +3,7 @@
 /*custom tailwindcss*/
 
 @theme {
+  --breakpoint-xs: 23.5rem; /* 375px = 23.5rem (celulares) */
   --breakpoint-3xl: 120rem; /* 1920px = 120rem */
   /*Ultrawide*/
   --breakpoint-4xl: 160rem; /* 2560px = 160rem */

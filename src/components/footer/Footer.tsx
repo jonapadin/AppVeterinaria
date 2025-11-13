@@ -50,15 +50,16 @@ export default function Footer() {
         md:w-36
         lg:w-40
         xl:w-48
+        2xl:w-50
       "
     />
   </div>
 
   {/* Contenido del footer */}
-  <div className="flex w-full justify-evenly items-center pl-[150px] md:pl-[200px] lg:pl-[260px] lg:gap-6">
+  <div className="flex w-full justify-evenly items-center pl-[150px] md:pl-[200px] lg:pl-[260px] ">
     <div
       className="flex flex-col items-center 
-      md:text-xs lg:text-sm xl:text-lg
+      md:text-xs lg:text-xs xl:text-sm 2xl:text-lg
       font-lato font-bold text-center mx-auto"
     >
       <div className="text-center">
@@ -71,9 +72,9 @@ export default function Footer() {
     </div>
 
     <div
-      className="flex flex-col items-start gap-1 
-      text-sm md:text-base lg:text-sm xl:text-lg
-      font-lato font-bold lg:pl-10  xl:pl-20 md:pl-15"
+      className="flex flex-col items-baseline gap-1
+      text-xs md:text-sm lg:text-xs xl:text-lg 2xl:text-lg
+      font-lato font-bold  md:pl-20 lg:pl-30 xl:pl-30 2xl:pl-30"
     >
       <div className="flex items-center gap-2">
         <a
@@ -81,7 +82,7 @@ export default function Footer() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <BiLogoInstagramAlt className=" md:w-5 md:h-5 lg:w-7 lg:h-7 xl:w-8x l:h-8" />
+          <BiLogoInstagramAlt className=" md:w-4 md:h-4 lg:w-4 lg:h-4 xl:w-6 xl:h-6" />
         </a>
         <span>Veterinari.Ig</span>
       </div>
@@ -92,13 +93,13 @@ export default function Footer() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <AiFillFacebook className="md:w-5 md:h-5 lg:w-7 lg:h-7 xl:w-8x l:h-8" />
+          <AiFillFacebook className="md:w-4 md:h-4 lg:w-4 lg:h-4 xl:w-6 xl:h-6" />
         </a>
         <span>Veterinaria.FB</span>
       </div>
 
       <div className="flex items-center gap-2">
-        <BiLogoGmail className="md:w-5 md:h-5 lg:w-7 lg:h-7 xl:w-8x l:h-8" />
+        <BiLogoGmail className="md:w-4 md:h-4 lg:w-4 lg:h-4 xl:w-6 xl:h-6" />
         <span>veterinaria@gmail.com</span>
       </div>
 
@@ -108,7 +109,7 @@ export default function Footer() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <BsWhatsapp className="md:w-5 md:h-5 lg:w-7 lg:h-7 xl:w-8x l:h-8 text-green-500" />
+          <BsWhatsapp className="md:w-4 md:h-4 lg:w-4 lg:h-4 xl:w-6 xl:h-6 text-green-500" />
         </a>
         <span>2284557768</span>
       </div>
