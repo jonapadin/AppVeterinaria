@@ -1,4 +1,4 @@
-  @import "tailwindcss";
+@import "tailwindcss";
   /* En tu archivo CSS principal (ej. index.css o global.css) */
 @tailwind base;
 @tailwind components;

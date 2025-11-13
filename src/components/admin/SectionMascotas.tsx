@@ -60,9 +60,18 @@ const SectionMascotas: React.FC = () => {
   }, [mascotas, searchTerm, filtroEspecie]);
 
   // --- Handlers de Modales (CORREGIDOS) ---
-  const handleOpenModalNuevo = () => { setItemParaEditar(null); setIsModalOpen(true); };
-  const handleOpenModalEditar = (item: Mascota) => { setItemParaEditar(item); setIsModalOpen(true); };
-  const handleCloseModal = () => { setIsModalOpen(false); setItemParaEditar(null); };
+  const handleOpenModalNuevo = () => { 
+    setItemParaEditar(null); 
+    setIsModalOpen(true); 
+  };
+  const handleOpenModalEditar = (item: Mascota) => { 
+    setItemParaEditar(item); 
+    setIsModalOpen(true); 
+  };
+  const handleCloseModal = () => { 
+    setIsModalOpen(false); 
+    setItemParaEditar(null); 
+  };
 
   // --- Handlers de CRUD ---
   const handleSave = async (data: CreateMascotaDto) => {

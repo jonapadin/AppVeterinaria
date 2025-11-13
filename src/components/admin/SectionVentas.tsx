@@ -81,9 +81,18 @@ const SectionVentas: React.FC = () => {
   }, [ventas, searchTerm, filtroMetodoPago, filtroEstado]);
 
   // --- Handlers de Modales (CORREGIDOS) ---
-  const handleOpenModalNuevo = () => { setItemParaEditar(null); setIsModalOpen(true); };
-  const handleOpenModalEditar = (item: Venta) => { setItemParaEditar(item); setIsModalOpen(true); };
-  const handleCloseModal = () => { setIsModalOpen(false); setItemParaEditar(null); };
+  const handleOpenModalNuevo = () => { 
+    setItemParaEditar(null); 
+    setIsModalOpen(true); 
+  };
+  const handleOpenModalEditar = (item: Venta) => { 
+    setItemParaEditar(item); 
+    setIsModalOpen(true); 
+  };
+  const handleCloseModal = () => { 
+    setIsModalOpen(false); 
+    setItemParaEditar(null); 
+  };
 
   // --- Handlers de CRUD ---
   const handleSave = async (data: Omit<Venta, 'id'>) => {
