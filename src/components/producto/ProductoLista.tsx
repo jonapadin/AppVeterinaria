@@ -161,7 +161,7 @@ export default function ProductList({
 
      {/* Cards PRODUCTOS */}
       {productosFiltrados.length > 0 ? (
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-fr">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 auto-rows-fr">
           {productosFiltrados.map((producto) => (
             <div
               key={producto.id}
@@ -173,16 +173,16 @@ export default function ProductList({
                 className="h-40 object-contain"
               />
 
-              <p className="text-center font-semibold text-black text-xl">
+              <p className="text-center font-semibold text-black text-sm lg:text-xl">
                 {producto.marca}
               </p>
 
-              <p className="font-semibold text-sm text-center break-words">
+              <p className="font-semibold text-xs lg:text-sm text-center break-words">
                 {producto.descripcion}{" "}
                 {producto.presentacion && `(${producto.presentacion})`}
               </p>
 
-              <p className="text-center font-bold text-lg text-[#8F108D] mb-2">
+              <p className="text-center font-bold text-base lg:text-lg text-[#8F108D] mb-2">
                 ${producto.precio.toLocaleString()}
               </p>
 
@@ -198,7 +198,7 @@ export default function ProductList({
 
               <button
                 disabled={producto.stock === 0}
-                className={`w-full py-2 text-sm font-semibold border-2 rounded-md ${
+                className={`w-full py-2 text-xs lg:text-sm font-semibold border-2 rounded-md ${
                   producto.stock === 0
                     ? "border-gray-400 text-gray-400 cursor-not-allowed"
                     : "border-[#8F108D] text-[#8F108D] hover:bg-[#8F108D] hover:text-white"

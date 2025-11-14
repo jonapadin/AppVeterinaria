@@ -19,13 +19,15 @@ function ProductDogPage() {
   return (
     <>
       {/* Banner */}
-      <section className="relative w-full h-auto flex justify-center items-center overflow-hidden mt-[60px] md:mt-[95px]">
-        <img
-          src="../public/assets/img/banner-product/banner-perro.jpg"
-          alt="banner-perro"
-          className="w-full h-auto object-cover 3xl:h-[76vh] 4xl:h-[85vh] 4xl:object-center"
-        />
-      </section>
+    <section className="w-full">
+  <div className="w-full h-[180px] sm:h-[250px] md:h-[300px] lg:h-[400px] overflow-hidden">
+    <img
+      src="/assets/img/banner-product/banner-perro.jpg"
+      alt="banner-perro"
+      className="w-full h-full object-cover"
+    />
+  </div>
+</section>
 
       {/* Categorías */}
       <CategoriaNav

@@ -40,7 +40,7 @@ function NavbarCategorias({onSelectSubcategoria }: NavbarCategoriasProps) {
   };
 
   return (
-    <nav className="bg-[#8F108D] text-white py-3 flex flex-wrap justify-center gap-3 relative z-50">
+    <nav className="w-full bg-[#8F108D] text-white py-2 md:py-3 lg:py-4 flex flex-wrap justify-center gap-1 md:gap-3">
       {categorias.map((cat) => {
         const isActive = location.pathname.startsWith(cat.path);
 
@@ -49,7 +49,7 @@ function NavbarCategorias({onSelectSubcategoria }: NavbarCategoriasProps) {
             <Link to={cat.path}>
               <button
                 onClick={() => handleToggle(cat.nombre)}
-                className={`flex items-center gap-1 px-3 py-2 rounded-md transition-colors text-sm sm:text-lg md:text-xl ${
+                className={`flex items-center gap-1 px-1 py-2 rounded-md transition-colors text-xs sm:text-sm md:text-xl ${
                   isActive
                     ? "bg-white text-[#8F108D]"
                     : "hover:bg-white hover:text-[#8F108D]"
