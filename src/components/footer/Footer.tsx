@@ -2,31 +2,48 @@ import { VscAccount, VscHome } from "react-icons/vsc";
 import { BsCart, BsWhatsapp } from "react-icons/bs";
 import { AiFillFacebook } from "react-icons/ai";
 import { BiLogoGmail, BiLogoInstagramAlt } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
-export default function Footer() {
+interface FooterProps {
+  onOpenCarrito: () => void;
+}
+export default function Footer({ onOpenCarrito }: FooterProps) {
+  
   return (
     <>
       {/* Footer para móvil */}
       <footer className="sm:hidden fixed md:static bottom-0 w-full h-20 bg-[#8F108D] z-40">
         <ul className="grid grid-cols-3 h-full m-0 p-2 gap-10">
-          <li className="flex flex-col items-center justify-center">
-            <a href="/" className="flex flex-col items-center justify-center h-full" title="Inicio">
-              <VscHome className="w-8 h-8 text-white" />
-              <span className="text-white text-[15px] mt-1">INICIO</span>
-            </a>
-          </li>
-          <li className="flex flex-col items-center justify-center">
-            <a href="/l" className="flex flex-col items-center justify-center h-full" title="Ingresar">
-              <VscAccount className="w-8 h-8 text-white" />
-              <span className="text-white text-[15px] mt-1">INGRESAR</span>
-            </a>
-          </li>
-          <li className="flex flex-col items-center justify-center">
-            <a href="/" className="flex flex-col items-center justify-center h-full" title="Carrito">
-              <BsCart className="w-8 h-8 text-white" />
-              <span className="text-white text-[15px] mt-1">CARRITO</span>
-            </a>
-          </li>
+         <li className="flex flex-col items-center justify-center">
+     <Link to="/" className="flex flex-col items-center justify-center h-full" title="Inicio"
+  >
+    <VscHome className="w-8 h-8 text-white" />
+    <span className="text-white text-[15px] mt-1">INICIO</span>
+  </Link>
+</li>
+  <li className="flex flex-col items-center justify-center">
+  <Link
+    to="login"
+    className="flex flex-col items-center justify-center h-full"
+    title="Ingresar"
+  >
+    <VscAccount className="w-8 h-8 text-white" />
+    <span className="text-white text-[15px] mt-1">INGRESAR</span>
+  </Link>
+</li>
+        
+      {/* CARRO MOBILE */}
+           <li className="flex flex-col items-center justify-center">
+  <button
+    onClick={onOpenCarrito}
+    className="flex flex-col items-center justify-center h-full"
+    title="Carrito"
+  >
+    <BsCart className="w-8 h-8 text-white" />
+    <span className="text-white text-[15px] mt-1">CARRITO</span>
+  </button>
+
+        </li>
         </ul>
       </footer>
 

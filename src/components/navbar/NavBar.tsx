@@ -6,12 +6,16 @@ import { useState } from "react";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 
-function NavBar() {
-    const [mostrarMenu, setMostrarMenu] = useState(false);
+interface NavBarProps {
+  onOpenCarrito: () => void;
+}
 
-    const abrirMenu = () => {
-        setMostrarMenu(!mostrarMenu);
-    };
+function NavBar({ onOpenCarrito }: NavBarProps) {
+  const [mostrarMenu, setMostrarMenu] = useState(false);
+
+  const abrirMenu = () => {
+    setMostrarMenu(!mostrarMenu);
+  };
     return (
 
         <header className="w-full fixed top-0 z-50">
@@ -40,15 +44,27 @@ function NavBar() {
                         </button>
                     </div>
                 </div>
-                          <ul className="hidden lg:flex space-x-14 lg:space-x-8  lg:text-sm xl:text-xl  2xl:space-x-14  text-lg font-lato font-bold flex-row pr-10">
-                    <Link to= {""}><li className='cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer flex items-center gap-2.5'><FaCartShopping /><span>CARRITO</span></li></Link>
+                           <ul className="hidden lg:flex space-x-14 lg:space-x-8 lg:text-sm xl:text-xl text-lg font-lato font-bold pr-10">
+          <li
+            onClick={onOpenCarrito}
+            className="cursor-pointer hover:scale-105 flex items-center gap-2.5"
+          >
+            <FaCartShopping />
+            <span>CARRITO</span>
+          </li>
                     <Link to= {"login"}><li className='cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer flex items-center gap-2.5'><FaRegCircleUser /> <span>INGRESAR</span></li></Link>
                    
                 </ul>
-                {mostrarMenu && <MenuMob onClose={abrirMenu} />}
+               {/* Menú móvil */}
+        {mostrarMenu && (
+          <MenuMob
+            onClose={abrirMenu}
+            onOpenCarrito={onOpenCarrito}
+          />
+        )}
             </nav>
         </header>
-    )
+    );
 }
 export default NavBar
 

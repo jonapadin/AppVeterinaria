@@ -2,6 +2,7 @@ import { GoX } from "react-icons/go";
 
 type MenuMob = {
   onClose: () => void;
+    onOpenCarrito: () => void;
 };
 
 export default function MenuMob({ onClose }: MenuMob) {
