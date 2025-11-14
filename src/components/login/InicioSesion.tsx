@@ -5,6 +5,7 @@ import { Mail, Lock } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
 import { loginSuccess } from "../../features/usuarios/authSlice";
+import { Link } from "react-router-dom";
 
 interface LoginResponse {
   access_token: string;
@@ -112,11 +113,13 @@ export default function InicioSesion() {
             />
           </div>
 
-          <div className="text-right">
-            <a href="#" className="text-sm text-purple-600 hover:underline">
+        
+         <div className="text-right">
+            <a href="recover-pass" className="text-sm text-purple-600 hover:underline">
               ¿Olvidaste tu contraseña?
             </a>
           </div>
+         
 
           <button
             type="submit"
@@ -126,13 +129,14 @@ export default function InicioSesion() {
             INGRESAR
           </button>
 
-          <button
+         <Link to="/register"><button
             type="button"
             className="w-full rounded-lg border border-gray-300 py-3 font-semibold text-gray-600 transition-all
                        hover:bg-gray-100"
           >
             REGISTRARSE
           </button>
+          </Link> 
         </form>
 
         <div className="my-6 flex items-center">
@@ -142,23 +146,23 @@ export default function InicioSesion() {
         </div>
 
         <div className="flex flex-col gap-4 sm:flex-row">
-          <button
+          <a href="https://google.com/"
             className="flex flex-1 items-center justify-center gap-2 rounded-lg
                        border border-gray-300 py-2.5 text-gray-700
                        transition-all hover:bg-gray-100"
           >
             <FcGoogle size={22} />
             <span className="font-medium">Ingresar con Google</span>
-          </button>
+          </a>
 
-          <button
+          <a href="https://www.facebook.com/?locale=es_LA"
             className="flex flex-1 items-center justify-center gap-2 rounded-lg
                        border border-gray-300 py-2.5 text-gray-700
                        transition-all hover:bg-gray-100"
           >
             <FaFacebook size={22} className="text-blue-600" />
             <span className="font-medium">Ingresar con Facebook</span>
-          </button>
+          </a>
         </div>
       </div>
     </div>

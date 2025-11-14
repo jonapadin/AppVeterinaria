@@ -1,4 +1,5 @@
 
+import { Link } from "react-router-dom";
 import ServiceList from "../servicioHero/Servicios";
 import TestimonioLista from "../testimonios/Testimonios";
 
@@ -39,7 +40,7 @@ function Hero() {
         de tu familia.
       </p>
 
-      <div className="flex justify-start md:justify-center sm:mt-2 md:mt-4 lg:mt-6 xl:mt-6">
+      <Link to="/register" ><div className="flex justify-start md:justify-center sm:mt-2 md:mt-4 lg:mt-6 xl:mt-6">
         <button
           className="
            flex items-center justify-center bg-white border-2 border-[#8F108D] text-[#8F108D] font-sans font-semibold 
@@ -59,6 +60,7 @@ function Hero() {
           Registrarse
         </button>
       </div>
+      </Link>
 
     </div>
   </div>

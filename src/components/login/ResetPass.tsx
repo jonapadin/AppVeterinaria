@@ -69,7 +69,7 @@ export default function ResetPass() {
         {/* Enlace para volver al login */}
         <p className="mt-6 text-center text-sm text-gray-500">
           ¿Ya recordaste?{" "}
-          <a href="#" className="text-purple-600 hover:underline font-medium">
+          <a href="login" className="text-purple-600 hover:underline font-medium">
             Volver al Login
           </a>
         </p>

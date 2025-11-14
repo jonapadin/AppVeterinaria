@@ -11,12 +11,7 @@ function User(){
             <NavBar />
             <main className="flex flex-col items-center justify-center">
             <BannerPrincipal
-                banner="public/assets/img/DocsBanner.jpg"
-                imagen="public/assets/img/veterinaria.png"
-                textoPrincipal="Tu mascota, en las mejores manos"
-                textoSecundario="Atención profesional, con amor y dedicación."
-                enlace="turnos.html"
-                botonTexto="Solicitar turno"
+                banner="public/assets/img/BannerHome2.jpg"
                 />
 
             <Service servicios={[
@@ -26,11 +21,7 @@ function User(){
             { imagen: "public/assets/img/productos 1.png", titulo: "Productos", url: "productos.html" }
             ]}/>
             <BannerChat
-                banner="public/assets/img/banner-chat.png"
-                textoPrincipal="¿Alguna"
-                textoSecundario="consulta?"
-                enlace="chat.html"
-                botonTexto="Escribinos!"
+                banner="public/assets/img/bannerHome.jpg"
                 />
             </main>
             <Footer />
