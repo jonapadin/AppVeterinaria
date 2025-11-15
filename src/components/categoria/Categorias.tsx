@@ -22,7 +22,7 @@ const Categorias = () => {
       {isBaseRoute ? (
         <>
           {/* Banner totalmente responsive */}
-          <div className="relative mt-20">
+          <div className="relative mt-16">
             <img
               src={bannerPerro}
               alt="Varias mascotas"
@@ -101,7 +101,7 @@ const Categorias = () => {
           </div>
         </>
       ) : (
-        <div className="mt-24 px-4">
+        <div >
           <Outlet />
         </div>
       )}
