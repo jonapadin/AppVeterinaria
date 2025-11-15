@@ -31,7 +31,7 @@ function NavBar() {
                 <div className=" justify-center px-4 md:mr-48 lg:mr-0  ">
                     <div className="flex items-center border rounded overflow-hidden bg-white">
                         <input
-                            className="flex-1 px-2 py-1 outline-none text-black w-[220px] md:w-[400px] lg:w-[220px] xl:w-[300px] 2xl:w-[350px] "
+                            className=" buscador flex-1 px-2 py-1 outline-none text-black w-[230px] md:w-[400px] lg:w-[220px] xl:w-[300px] 2xl:w-[350px] "
                             type="search"
                             placeholder="Buscar"
                         />

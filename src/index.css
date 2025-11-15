@@ -45,5 +45,26 @@
   .td-center {
     @apply px-6 py-6 text-center text-gray-500 dark:text-gray-400;
   }
+
+
 }
 
+@media (min-width: 375px ) and (max-width: 390px) {
+  /* Estilos específicos para pantallas ultrawide */
+  .buscador{
+    width: 250px;
+  }
+}
+@media (min-width: 400px ) and (max-width: 500px) {
+  /* Estilos específicos para pantallas ultrawide */
+  .buscador{
+    width: 250px;
+  }
+}
+
+@media (min-width: 500px ) and (max-width: 768px) {
+  /* Estilos específicos para pantallas ultrawide */
+  .buscador{
+    width: 350px;
+  }
+}

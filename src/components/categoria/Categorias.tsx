@@ -27,8 +27,8 @@ const Categorias = () => {
               src={bannerPerro}
               alt="Varias mascotas"
               className="
-                w-full object-cover object-center
-                h-[40vh]
+                w-full object-contain object-center
+                h-[30vh]
                 sm:h-[50vh]
                 md:h-[60vh]
                 lg:h-[75vh]
@@ -51,7 +51,7 @@ const Categorias = () => {
               grid 
               grid-cols-2 
               sm:grid-cols-2 
-              md:grid-cols-3 
+              md:grid-cols-4 
               lg:grid-cols-4 
               gap-10 
               place-items-center
