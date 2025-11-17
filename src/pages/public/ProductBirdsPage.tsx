@@ -19,12 +19,12 @@ function ProductBirdsPage() {
   return (
     <>
       {/* Banner */}
-<section className="w-full mt-[60px] md:mt-[95px]">
-  <div className="flex justify-center w-full">
+  <section className="w-full">
+  <div className="  overflow-hidden  h-[180px] sm:h-[250px] md:h-[300px] lg:h-[750px] sm:pt-16 md:pt-20 xl:pt-30">
     <img
-      src="/assets/img/banner-product/banner-brirds.jpg"
-      alt="banner-aves"
-      className="object-contain h-auto w-auto max-w-full"
+      src="/assets/img/banner-product/banner-brirds.png"
+      alt="banner-ave"
+      className="w-full h-full object-top"
     />
   </div>
 </section>
