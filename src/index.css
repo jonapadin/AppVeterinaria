@@ -16,9 +16,23 @@
 /**/
 @layer components {
   /* Estilos reutilizables para inputs y botones */
-  .input-tailwind {
-    @apply block w-full px-3 py-2 border rounded-md shadow-sm dark:text-white dark:border-gray-600 bg-white focus:outline-none focus:ring-blue-500 focus:border-blue-500;
-  }
+.label-tailwind {
+  @apply block text-sm font-medium 
+  text-gray-700 dark:text-gray-300 
+  bg-transparent; /* O usa dark:bg-gray-800 si necesitas que tape algo */
+}
+
+.input-tailwind {
+  @apply block w-full px-3 py-2 border shadow-sm 
+  /* 1. Aumentamos el redondeado y quitamos estilos nativos */
+  rounded-lg appearance-none
+  
+  /* Colores (Corrección anterior) */
+  bg-white text-gray-900 border-gray-300
+  
+  /* Foco */
+  focus:outline-none focus:ring-blue-500 focus:border-blue-500;
+}
 
   .btn-primary {
     @apply px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold shadow-lg hover:bg-blue-700 transition-colors duration-200;

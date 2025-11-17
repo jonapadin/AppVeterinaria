@@ -2,7 +2,6 @@
 import React from 'react';
 import { 
   Users, // Para Clientes
-  User, // Para Usuarios
   Briefcase, // Para Empleados
   Heart, 
   Calendar, 
@@ -18,7 +17,6 @@ interface SidebarProps {
 
 const sidebarItems: { name: string; icon: React.ElementType; key: AdminSection }[] = [
   { name: 'Clientes', icon: Users, key: 'Clientes' },
-  { name: 'Usuarios', icon: User, key: 'Usuarios' },
   { name: 'Empleados', icon: Briefcase, key: 'Empleados' },
   { name: 'Mascotas', icon: Heart, key: 'Mascotas' },
   { name: 'Turnos', icon: Calendar, key: 'Turnos' },
@@ -52,7 +50,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection }) =>
                 ${
                   isActive
                     // Color primario para el activo
-                    ? 'bg-primary text-white shadow-lg' 
+                    ? 'bg-primary text-black shadow-lg' 
                     : 'text-gray-600 hover:bg-gray-100'
                 }
               `}

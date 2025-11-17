@@ -1,9 +1,8 @@
 // AdminDashboard.tsx
 import React, { useState } from 'react';
 import Sidebar from './Sidebar';
-import SectionClientes from './SectionClientes'; // Renombrado
-import SectionEmpleados from './SectionEmpleados'; // Nuevo
-import SectionUsuarios from './SectionUsuarios';
+import SectionClientes from './SectionClientes';
+import SectionEmpleados from './SectionEmpleados';
 import SectionMascotas from './SectionMascotas';
 import SectionTurnos from './SectionTurnos';
 import SectionVentas from './SectionVentas';
@@ -18,8 +17,6 @@ const AdminDashboard: React.FC = () => {
     switch (activeSection) {
       case 'Clientes':
         return <SectionClientes />;
-      case 'Usuarios':
-        return <SectionUsuarios />;
       case 'Empleados':
         return <SectionEmpleados />;
       case 'Mascotas':
