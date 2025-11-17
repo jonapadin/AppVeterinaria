@@ -3,12 +3,13 @@ import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import SectionClientes from './SectionClientes'; // Renombrado
 import SectionEmpleados from './SectionEmpleados'; // Nuevo
+import SectionUsuarios from './SectionUsuarios';
 import SectionMascotas from './SectionMascotas';
 import SectionTurnos from './SectionTurnos';
 import SectionVentas from './SectionVentas';
 
 // 1. Tipo de sección actualizado
-export type AdminSection = 'Clientes' | 'Empleados' | 'Mascotas' | 'Turnos' | 'Ventas';
+export type AdminSection = 'Clientes' | 'Usuarios' | 'Empleados' | 'Mascotas' | 'Turnos' | 'Ventas';
 
 const AdminDashboard: React.FC = () => {
   const [activeSection, setActiveSection] = useState<AdminSection>('Clientes');
@@ -17,6 +18,8 @@ const AdminDashboard: React.FC = () => {
     switch (activeSection) {
       case 'Clientes':
         return <SectionClientes />;
+      case 'Usuarios':
+        return <SectionUsuarios />;
       case 'Empleados':
         return <SectionEmpleados />;
       case 'Mascotas':

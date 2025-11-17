@@ -1,9 +1,7 @@
-// SectionUsuarios.tsx
-
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Plus, Search, Edit, Trash2 } from 'lucide-react';
-import { Tooltip } from 'react-tooltip'; // Importa el tooltip
-import 'react-tooltip/dist/react-tooltip.css'; // Estilos del tooltip
+import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 
 // 1. Definimos el TIPO de dato
 interface Usuario {
@@ -35,7 +33,7 @@ const SectionUsuarios: React.FC = () => {
     setTimeout(() => {
       setUsuarios(MOCK_USUARIOS);
       setLoading(false);
-    }, 1000); 
+    }, 500);
   }, []);
 
   // --- FILTROS ---
@@ -191,6 +189,7 @@ const SectionUsuarios: React.FC = () => {
 
 export default SectionUsuarios;
 
+
 // --- COMPONENTE MODAL (UsuarioModal) ---
 
 interface UsuarioModalProps {
@@ -203,6 +202,16 @@ interface UsuarioModalProps {
 const UsuarioModal: React.FC<UsuarioModalProps> = ({ isOpen, onClose, onSave, initialData }) => {
   const [nombre, setNombre] = useState(initialData?.nombre || '');
   const [email, setEmail] = useState(initialData?.email || '');
+
+  useEffect(() => {
+    if (initialData) {
+      setNombre(initialData.nombre || '');
+      setEmail(initialData.email || '');
+    } else {
+      setNombre('');
+      setEmail('');
+    }
+  }, [initialData, isOpen]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

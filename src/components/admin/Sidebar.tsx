@@ -2,6 +2,7 @@
 import React from 'react';
 import { 
   Users, // Para Clientes
+  User, // Para Usuarios
   Briefcase, // Para Empleados
   Heart, 
   Calendar, 
@@ -17,6 +18,7 @@ interface SidebarProps {
 
 const sidebarItems: { name: string; icon: React.ElementType; key: AdminSection }[] = [
   { name: 'Clientes', icon: Users, key: 'Clientes' },
+  { name: 'Usuarios', icon: User, key: 'Usuarios' },
   { name: 'Empleados', icon: Briefcase, key: 'Empleados' },
   { name: 'Mascotas', icon: Heart, key: 'Mascotas' },
   { name: 'Turnos', icon: Calendar, key: 'Turnos' },
