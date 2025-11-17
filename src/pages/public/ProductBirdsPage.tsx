@@ -20,7 +20,7 @@ function ProductBirdsPage() {
     <>
       {/* Banner */}
   <section className="w-full">
-  <div className="  overflow-hidden  h-[180px] sm:h-[250px] md:h-[300px] lg:h-[750px] sm:pt-16 md:pt-20 xl:pt-30">
+  <div className="  overflow-hidden  h-[180px] sm:h-[250px] md:h-[300px] lg:h-[750px]  pt-15 sm:pt-16 md:pt-20 xl:pt-30">
     <img
       src="/assets/img/banner-product/banner-brirds.png"
       alt="banner-ave"

@@ -20,7 +20,7 @@ function ProductDogPage() {
     <>
       {/* Banner */}
       <section className="w-full">
-  <div className="h-[180px] sm:h-[250px] md:h-[300px] lg:h-[700px] sm:pt-16 md:pt-20 xl:pt-20  everflow-hidden">
+  <div className="h-[180px] sm:h-[250px] md:h-[300px] lg:h-[700px] pt-15 sm:pt-16 md:pt-20 xl:pt-20  overflow-hidden">
     <img
       src="/assets/img/banner-product/banner-dog.png"
       alt="banner-perro"
