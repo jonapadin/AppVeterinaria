@@ -3,7 +3,10 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface User {
   email: string;
-  role: "admin" | "user";
+  // 🛑 CORRECCIÓN 1: El rol del backend es 'empleado' o 'cliente'.
+  // Ahora usaremos la bandera 'isAdmin' para la lógica de visualización.
+  role: "empleado" | "cliente" | "user"; // Ajustar para reflejar los roles reales del backend (ej. 'empleado')
+  isAdmin: boolean; // 👈 AÑADIDO: Propiedad crucial del backend.
 }
 
 interface AuthState {
@@ -44,7 +47,7 @@ const authSlice = createSlice({
       const user = localStorage.getItem("user");
       if (token && user) {
         state.token = token;
-        state.user = JSON.parse(user);
+        state.user = JSON.parse(user) as User;
         state.isAuthenticated = true;
       }
     },
