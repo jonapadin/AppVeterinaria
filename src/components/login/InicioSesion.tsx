@@ -11,7 +11,8 @@ interface LoginResponse {
   access_token: string;
   user: {
     email: string;
-    role: "admin" | "user";
+    role: "empleado" | "cliente";
+    isAdmin: boolean;
   };
 }
 
@@ -28,7 +29,6 @@ type AxiosErrorResponse = {
 export default function InicioSesion() {
   const dispatch = useDispatch();
 
-  // Estado local para los inputs
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -44,7 +44,6 @@ export default function InicioSesion() {
         },
       );
 
-      // Despachamos la acción para guardar sesión en Redux
       dispatch(
         loginSuccess({
           token: data.access_token,
@@ -52,11 +51,10 @@ export default function InicioSesion() {
         }),
       );
 
-      // Opcional: redirigir según el rol
-      if (data.user.role === "admin") {
+      if (data.user.isAdmin === true) {
         window.location.href = "/admin";
       } else {
-        window.location.href = "/user";
+        window.location.href = "/dashboard";
       }
     } catch (error) {
       const err = error as AxiosErrorResponse;
@@ -70,11 +68,9 @@ export default function InicioSesion() {
 
   return (
     <div
-      className="py-38 relative flex min-h-screen w-full items-center justify-center 
-                    bg-gradient-to-br from-purple-100 via-white to-purple-50 p-4"
+      className="py-38 relative flex min-h-screen w-full items-center justify-center  
+                  bg-gradient-to-br from-purple-100 via-white to-purple-50 p-4"
     >
-     
-
       <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl md:p-10">
         <div className="mb-6 text-center">
           <h1 className="text-3xl font-bold text-gray-800">¡Hola de Nuevo!</h1>
@@ -93,7 +89,7 @@ export default function InicioSesion() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="correo@correo.com"
               className="w-full rounded-lg border border-gray-300 py-3 pl-12 pr-4
-                         focus:outline-none focus:ring-2 focus:ring-purple-500"
+                             focus:outline-none focus:ring-2 focus:ring-purple-500"
               required
             />
           </div>
@@ -108,7 +104,7 @@ export default function InicioSesion() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="**********"
               className="w-full rounded-lg border border-gray-300 py-3 pl-12 pr-4
-                         focus:outline-none focus:ring-2 focus:ring-purple-500"
+                             focus:outline-none focus:ring-2 focus:ring-purple-500"
               required
             />
           </div>
@@ -124,7 +120,7 @@ export default function InicioSesion() {
           <button
             type="submit"
             className="w-full rounded-lg bg-[#8F108D] py-3 font-semibold text-white shadow-lg
-                       transition-all hover:bg-[#790e77] hover:shadow-xl"
+                         transition-all hover:bg-[#790e77] hover:shadow-xl"
           >
             INGRESAR
           </button>
@@ -132,7 +128,7 @@ export default function InicioSesion() {
          <Link to="/register"><button
             type="button"
             className="w-full rounded-lg border border-gray-300 py-3 font-semibold text-gray-600 transition-all
-                       hover:bg-gray-100"
+                         hover:bg-gray-100"
           >
             REGISTRARSE
           </button>
@@ -148,8 +144,8 @@ export default function InicioSesion() {
         <div className="flex flex-col gap-4 sm:flex-row">
           <a href="https://google.com/"
             className="flex flex-1 items-center justify-center gap-2 rounded-lg
-                       border border-gray-300 py-2.5 text-gray-700
-                       transition-all hover:bg-gray-100"
+                         border border-gray-300 py-2.5 text-gray-700
+                         transition-all hover:bg-gray-100"
           >
             <FcGoogle size={22} />
             <span className="font-medium">Ingresar con Google</span>
@@ -157,8 +153,8 @@ export default function InicioSesion() {
 
           <a href="https://www.facebook.com/?locale=es_LA"
             className="flex flex-1 items-center justify-center gap-2 rounded-lg
-                       border border-gray-300 py-2.5 text-gray-700
-                       transition-all hover:bg-gray-100"
+                         border border-gray-300 py-2.5 text-gray-700
+                         transition-all hover:bg-gray-100"
           >
             <FaFacebook size={22} className="text-blue-600" />
             <span className="font-medium">Ingresar con Facebook</span>
