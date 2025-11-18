@@ -7,6 +7,7 @@ import Turns from "../pages/private/Turns";
 import MedicalRecord from "../pages/private/MedicalRecord";
 import Notificaciones from "../pages/private/Notifications";
 import Layout from "../components/layout/Layout";
+import SectionInventarioEmpleado from "../pages/private/Inventary";
 
 export const privateRoutes: RouteObject[] = [
   {
@@ -19,7 +20,11 @@ export const privateRoutes: RouteObject[] = [
           {
             index: true,
             element: <AdminPanel />
-          }
+          },
+          {
+          path: "inventary",
+          element: <SectionInventarioEmpleado />,
+      },
         ]
       }
     ]
@@ -48,7 +53,6 @@ export const privateRoutes: RouteObject[] = [
         path: "notifications",
         element: <Notificaciones />,
       },
-
     ],
   },
 ];

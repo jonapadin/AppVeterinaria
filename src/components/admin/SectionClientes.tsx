@@ -8,10 +8,20 @@ import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { fetchApi } from '../../app/api'; 
 
-// 1. Interfaz CLIENTE
+// --- INTERFACES CORREGIDAS ---
+
+interface Usuario {
+  id: number;
+  email: string;
+  contrasena?: string; // Es opcional ya que no siempre se carga o se envía
+  rol: string;
+  fechaRegistro: string;
+  estado: string;
+}
+
+// 1. Interfaz CLIENTE (Ajustada para la estructura anidada)
 interface Cliente {
   id: number; 
-  email: string;
   foto_perfil: string;
   nombre: string;
   apellido: string;
@@ -20,10 +30,19 @@ interface Cliente {
   telefono: string;
   ciudad: string;
   direccion: string;
+  usuario: Usuario;
 }
 
-// 2. DTO para CREACIÓN
-type CreateClienteDto = Omit<Cliente, 'id'> & { contrasena: string };
+// 2. DTO para CREACIÓN (Para POST: incluye email y contrasena)
+type CreateClienteDto = Omit<Cliente, 'id' | 'usuario'> & { 
+    email: string;
+    contrasena: string;
+};
+
+// 3. DTO para EDICIÓN (Para PUT: NO incluye campos de usuario)
+type UpdateClienteDto = Omit<Cliente, 'id' | 'usuario'>;
+
+// --- COMPONENTE PRINCIPAL ---
 
 const SectionClientes: React.FC = () => {
   const [clientes, setClientes] = useState<Cliente[]>([]);
@@ -55,9 +74,9 @@ const SectionClientes: React.FC = () => {
   const clientesFiltrados = useMemo(() => {
     return clientes.filter((c) =>
         (c.nombre.toLowerCase() + " " + c.apellido.toLowerCase()).includes(searchTerm.toLowerCase()) ||
-        c.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        c.usuario.email.toLowerCase().includes(searchTerm.toLowerCase()) || // ⬅️ CAMBIO: Acceder a usuario.email
         c.dni.toString().includes(searchTerm) ||
-        c.id.toString().includes(searchTerm) // Añadido filtro por ID
+        c.id.toString().includes(searchTerm)
     );
   }, [clientes, searchTerm]);
 
@@ -76,18 +95,20 @@ const SectionClientes: React.FC = () => {
   };
 
   // --- Handlers de CRUD ---
-  const handleSave = async (data: CreateClienteDto | Omit<Cliente, 'id'>) => {
+  const handleSave = async (data: CreateClienteDto | UpdateClienteDto) => {
     try {
-      console.log('📧 Datos a enviar:', data); // Debug: Ver qué se envía
+      console.log('📧 Datos a enviar:', data);
       
       if (itemParaEditar) {
         console.log(`✏️ Editando cliente ${itemParaEditar.id}...`);
+        // Para la edición (PUT), la data solo contiene campos de Cliente, no de usuario
         await fetchApi(`/cliente/${itemParaEditar.id}`, { 
           method: 'PUT', 
           body: JSON.stringify(data) 
         });
       } else {
         console.log('➕ Creando nuevo cliente...');
+        // Para la creación (POST), la data contiene campos de Cliente, email y contrasena
         await fetchApi('/cliente', { 
           method: 'POST', 
           body: JSON.stringify(data) 
@@ -99,9 +120,8 @@ const SectionClientes: React.FC = () => {
       const errorMessage = (err as Error).message;
       console.error('🚨 Error:', errorMessage);
       
-      // Mejorar el mensaje de error para el usuario
-      if (errorMessage.includes('mail') || errorMessage.includes('email')) {
-        alert(`❌ Email duplicado: ${errorMessage}`);
+      if (errorMessage.toLowerCase().includes('email') || errorMessage.toLowerCase().includes('unique')) {
+        alert(`❌ Error: El email o DNI ya están registrados.`);
       } else {
         alert(`❌ Error al guardar: ${errorMessage}`);
       }
@@ -131,7 +151,7 @@ const SectionClientes: React.FC = () => {
           <div className="relative w-full md:w-1/3">
             <input
               type="text"
-              placeholder="Buscar por Nombre, Email, DNI o ID..." // Actualizado placeholder
+              placeholder="Buscar por Nombre, Email, DNI o ID..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
@@ -183,7 +203,7 @@ const SectionClientes: React.FC = () => {
                 clientesFiltrados.map((item) => (
                   <tr key={item.id} className="hover:bg-gray-50">
                     <td className="td-cell-main">{item.nombre} {item.apellido}</td>
-                    <td className="td-cell">{item.email}</td> 
+                    <td className="td-cell">{item.usuario.email}</td> {/* ⬅️ CAMBIO: Acceder a usuario.email */}
                     <td className="td-cell">{item.dni}</td>
                     <td className="td-cell">{item.telefono}</td>
                     <td className="td-cell">{item.ciudad}</td>
@@ -231,12 +251,11 @@ const SectionClientes: React.FC = () => {
 export default SectionClientes;
 
 // --- COMPONENTE MODAL (ClienteModal) ---
-// (Sin cambios, pero lo incluyo para que el archivo esté completo)
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (data: CreateClienteDto | Omit<Cliente, 'id'>) => void;
+  onSave: (data: CreateClienteDto | UpdateClienteDto) => void;
   initialData: Cliente | null; 
 }
 
@@ -248,7 +267,8 @@ const formatToInputDate = (isoString: string | undefined) => {
 const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialData }) => {
   
   const [formData, setFormData] = useState({
-    email: initialData?.email || '',
+    // ⬅️ CAMBIO: Leer el email del objeto 'usuario'
+    email: initialData?.usuario.email || '', 
     contrasena: '', 
     foto_perfil: initialData?.foto_perfil || '',
     nombre: initialData?.nombre || '',
@@ -266,7 +286,8 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
   useEffect(() => {
     if (initialData) {
       setFormData({
-        email: initialData.email || '',
+        // ⬅️ CAMBIO: Leer el email del objeto 'usuario'
+        email: initialData.usuario.email || '', 
         contrasena: '', 
         foto_perfil: initialData.foto_perfil || '',
         nombre: initialData.nombre || '',
@@ -290,7 +311,6 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
     e.preventDefault();
     setErrorModal(null);
     
-    // Validar email
     if (!formData.email || !formData.email.includes('@')) {
       setErrorModal('Por favor, ingresa un email válido.');
       return;
@@ -298,17 +318,21 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
     
     let dataToSend: any = { ...formData };
     dataToSend.dni = Number(dataToSend.dni);
-    dataToSend.email = formData.email.trim().toLowerCase(); // Normalizar email
+    dataToSend.email = formData.email.trim().toLowerCase();
     dataToSend.fecha_nacimiento = `${formData.fecha_nacimiento}T00:00:00Z`;
 
     if (initialData) {
+      // EDICIÓN (PUT): Solo se envían campos de Cliente, no de usuario
       delete dataToSend.contrasena;
+      delete dataToSend.email; // ⬅️ CAMBIO: Eliminar email
+      
       try {
-        onSave(dataToSend as Omit<Cliente, 'id'>);
+        onSave(dataToSend as UpdateClienteDto); 
       } catch (err) {
         setErrorModal((err as Error).message);
       }
     } else {
+      // CREACIÓN (POST): Se envía todo para crear el Cliente y el Usuario
       if (!formData.contrasena) {
         setErrorModal('La contraseña es requerida para crear un nuevo cliente.');
         return;
@@ -364,9 +388,11 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
                 value={formData.email} 
                 onChange={handleChange} 
                 className="mt-1 w-full input-tailwind" 
-                readOnly={!!initialData}
+                // El email no se puede editar si ya existe el cliente
+                readOnly={!!initialData} 
                 required 
               />
+              {!!initialData && <p className='text-xs text-gray-500 mt-1'>El email no se puede modificar desde esta vista.</p>}
             </div>
             {!initialData && (
               <div>
@@ -382,11 +408,11 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
               <label className="label-tailwind">Teléfono</label>
               <input type="tel" name="telefono" value={formData.telefono} onChange={handleChange} className="mt-1 w-full input-tailwind" />
             </div>
-             <div>
+              <div>
               <label className="label-tailwind">Fecha Nacimiento</label>
               <input type="date" name="fecha_nacimiento" value={formData.fecha_nacimiento} onChange={handleChange} className="mt-1 w-full input-tailwind" />
             </div>
-             <div>
+              <div>
               <label className="label-tailwind">Ciudad</label>
               <input type="text" name="ciudad" value={formData.ciudad} onChange={handleChange} className="mt-1 w-full input-tailwind" />
             </div>
@@ -394,7 +420,7 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
 
           {/* Fila 4: Dirección y Foto Perfil */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-             <div>
+              <div>
               <label className="label-tailwind">Dirección</label>
               <input type="text" name="direccion" value={formData.direccion} onChange={handleChange} className="mt-1 w-full input-tailwind" />
             </div>
