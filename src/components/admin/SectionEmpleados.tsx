@@ -5,6 +5,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Plus, Search, Edit, Trash2 } from 'lucide-react';
 // Importación corregida de Tooltip.
 import { Tooltip } from 'react-tooltip'; 
+import { fetchApi } from '../../app/api'; 
 
 // --- INTERFACES ---
 interface Usuario {
@@ -36,108 +37,6 @@ type CreateEmpleadoDto = Omit<Empleado, 'id' | 'usuario'> & {
 
 type UpdateEmpleadoDto = Omit<Empleado, 'id' | 'usuario'>;
 
-// --- MOCK DATA & MOCK API ---
-let empleadosData: Empleado[] = [
-  {
-    id: 1,
-    nombre: 'Juan',
-    apellido: 'Pérez',
-    fecha_nacimiento: '1985-05-15T00:00:00Z',
-    dni: 12345678,
-    telefono: '1123456789',
-    ciudad: 'Buenos Aires',
-    direccion: 'Calle Falsa 123',
-    especialidad: 'Desarrollador',
-    usuario: { id: 101, email: 'juan.perez@mock.com', rol: 'EMPLEADO', fechaRegistro: '2023-01-01', estado: 'ACTIVO' }
-  },
-  {
-    id: 2,
-    nombre: 'Ana',
-    apellido: 'García',
-    fecha_nacimiento: '1990-11-20T00:00:00Z',
-    dni: 23456789,
-    telefono: '1198765432',
-    ciudad: 'Córdoba',
-    direccion: 'Av. Siempre Viva 45',
-    especialidad: 'Diseñadora',
-    usuario: { id: 102, email: 'ana.garcia@mock.com', rol: 'EMPLEADO', fechaRegistro: '2023-02-01', estado: 'ACTIVO' }
-  },
-];
-let nextEmpleadoId = 3;
-
-/**
- * MOCK de la función fetchApi para simular llamadas al backend.
- */
-const fetchApi = async (path: string, options: any = {}): Promise<any> => {
-  await new Promise(resolve => setTimeout(resolve, 500)); // Simula latencia
-  
-  const method = options.method || 'GET';
-  const endpoint = path.split('/')[1];
-  const id = path.split('/')[2] ? parseInt(path.split('/')[2]) : undefined;
-
-  if (endpoint !== 'empleado') {
-    throw new Error(`Endpoint no soportado en mock: ${endpoint}`);
-  }
-
-  // Lógica de MOCK para el endpoint /empleado
-  switch (method) {
-    case 'GET':
-      return empleadosData;
-    
-    case 'POST':
-      const newEmpleadoData: CreateEmpleadoDto = JSON.parse(options.body);
-      
-      // Simular validación de unicidad
-      if (empleadosData.some(e => e.usuario.email === newEmpleadoData.email)) {
-        throw new Error('El email ya está registrado.');
-      }
-      if (empleadosData.some(e => e.dni === newEmpleadoData.dni)) {
-        throw new Error('El DNI ya está registrado.');
-      }
-
-      const newEmpleado: Empleado = {
-        ...newEmpleadoData,
-        id: nextEmpleadoId++,
-        usuario: {
-          id: empleadosData.length + 101,
-          email: newEmpleadoData.email,
-          rol: newEmpleadoData.especialidad.toUpperCase(),
-          fechaRegistro: new Date().toISOString().split('T')[0],
-          estado: 'ACTIVO'
-        }
-      };
-      empleadosData.push(newEmpleado);
-      return newEmpleado;
-
-    case 'PUT':
-      if (!id) throw new Error('ID es requerido para la actualización.');
-      const updateData: UpdateEmpleadoDto = JSON.parse(options.body);
-      
-      const index = empleadosData.findIndex(e => e.id === id);
-      if (index === -1) throw new Error(`Empleado con ID ${id} no encontrado.`);
-
-      // Actualizar los campos del Empleado
-      empleadosData[index] = {
-        ...empleadosData[index],
-        ...updateData,
-        dni: Number(updateData.dni), 
-      };
-      return empleadosData[index];
-
-    case 'DELETE':
-      if (!id) throw new Error('ID es requerido para la eliminación.');
-      const initialLength = empleadosData.length;
-      empleadosData = empleadosData.filter(e => e.id !== id);
-      if (empleadosData.length === initialLength) {
-        throw new Error(`Empleado con ID ${id} no encontrado para eliminar.`);
-      }
-      return { success: true };
-
-    default:
-      throw new Error(`Método no permitido: ${method}`);
-  }
-};
-// --- FIN MOCK API ---
 
 // --- MODAL (EmpleadoModal) ---
 interface EmpleadoModalProps {
