@@ -8,28 +8,64 @@ import { fetchApi } from '../../app/api';
 
 // 1. Interfaz VENTA y DETALLE
 interface DetalleVenta {
-  id_producto: number;
+  id_detalle: number;
   cantidad: number;
+  precio: string;
+  subtotal: number;
+  producto: {
+    id: number;
+    nombre: string;
+    marca: string;
+    descripcion: string;
+    precio: string;
+    stock: number;
+    categoria: string;
+    subcategoria: string;
+    tipo_uso: string;
+    fecha_vencimiento: string;
+  };
 }
+
 interface Venta {
-  id: number;
-  id_cliente: number;
-  id_empleado: number;
+  id_compra: number;
   fecha: string;
+  total: string;
   metodo_pago: string;
   estado_pago: string;
   detalles: DetalleVenta[];
+  empleado: {
+    id: number;
+    nombre: string;
+    apellido: string;
+    fecha_nacimiento: string;
+    dni: number;
+    telefono: string;
+    ciudad: string;
+    direccion: string;
+    especialidad: string;
+  };
+  cliente: {
+    id: number;
+    foto_perfil: string;
+    nombre: string;
+    apellido: string;
+    fecha_nacimiento: string;
+    dni: number;
+    telefono: string;
+    ciudad: string;
+    direccion: string;
+  };
 }
+
+type CreateVentaDto = Omit<Venta, 'id_compra' | 'detalles'> & {
+  detalles: DetalleVenta[];
+};
 
 // DTO para el ESTADO del modal (incluye precio)
 interface DetalleModalState {
   id_producto: string;
   cantidad: string;
   precio_unitario: string; 
-}
-// DTO para crear/editar
-type CreateVentaDto = Omit<Venta, 'id' | 'detalles'> & {
-  detalles: DetalleVenta[] // El backend solo necesita ID y cantidad
 }
 
 // Opciones
@@ -57,8 +93,25 @@ const SectionVentas: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const data = await fetchApi('/ventas'); 
-      setVentas(data);
+      const listData = await fetchApi('/ventas'); 
+      console.log('✅ Lista de ventas cargada:', listData);
+      
+      // Cargar detalles de cada venta
+      const ventasCompletas = await Promise.all(
+        listData.map(async (venta: Venta) => {
+          try {
+            const detalles = await fetchApi(`/ventas/${venta.id_compra}`);
+            console.log(`📦 Detalles de venta ${venta.id_compra}:`, detalles);
+            return detalles;
+          } catch (err) {
+            console.warn(`⚠️ Error cargando detalles de venta ${venta.id_compra}:`, err);
+            return venta; // Retornar lo que tenemos si falla
+          }
+        })
+      );
+      
+      console.log('✅ Ventas completas cargadas:', ventasCompletas);
+      setVentas(ventasCompletas);
     } catch (err) {
       setError((err as Error).message);
     } finally {
@@ -72,8 +125,10 @@ const SectionVentas: React.FC = () => {
 
   const ventasFiltradas = useMemo(() => {
     return ventas.filter(v => {
-      const searchMatch = v.id_cliente.toString().includes(searchTerm) ||
-                          v.id_empleado.toString().includes(searchTerm);
+      // Protección contra campos undefined/null
+      const idClienteStr = String(v.cliente?.id ?? '');
+      const idEmpleadoStr = String(v.empleado?.id ?? '');
+      const searchMatch = idClienteStr.includes(searchTerm) || idEmpleadoStr.includes(searchTerm);
       const metodoMatch = !filtroMetodoPago || v.metodo_pago === filtroMetodoPago;
       const estadoMatch = !filtroEstado || v.estado_pago === filtroEstado;
       return searchMatch && metodoMatch && estadoMatch;
@@ -95,21 +150,15 @@ const SectionVentas: React.FC = () => {
   };
 
   // --- Handlers de CRUD ---
-  const handleSave = async (data: Omit<Venta, 'id'>) => {
+  const handleSave = async (data: Omit<Venta, 'id_compra'>) => {
     const dataToSend: CreateVentaDto = {
       ...data,
-      id_cliente: Number(data.id_cliente),
-      id_empleado: Number(data.id_empleado),
       fecha: new Date(data.fecha).toISOString(),
-      detalles: data.detalles.map(d => ({ 
-        id_producto: Number(d.id_producto),
-        cantidad: Number(d.cantidad)
-      }))
     };
 
     try {
       if (itemParaEditar) {
-        await fetchApi(`/ventas/${itemParaEditar.id}`, { method: 'PUT', body: JSON.stringify(dataToSend) });
+        await fetchApi(`/ventas/${itemParaEditar.id_compra}`, { method: 'PUT', body: JSON.stringify(dataToSend) });
       } else {
         await fetchApi('/ventas', { method: 'POST', body: JSON.stringify(dataToSend) });
       }
@@ -132,7 +181,8 @@ const SectionVentas: React.FC = () => {
   };
   
   const calcularTotalItems = (detalles: DetalleVenta[]) => {
-    return detalles.reduce((acc, item) => acc + item.cantidad, 0);
+    if (!detalles || detalles.length === 0) return 0;
+    return detalles.reduce((acc, item) => acc + (Number(item.cantidad) || 0), 0);
   };
 
   // --- RENDER ---
@@ -196,13 +246,18 @@ const SectionVentas: React.FC = () => {
               ) : ventasFiltradas.length === 0 ? (
                  <tr><td colSpan={8} className="td-center">No se encontraron ventas.</td></tr>
               ) : (
-                ventasFiltradas.map((item) => (
-                  <tr key={item.id} className="hover:bg-gray-50">
-                    <td className="td-cell-main">#{item.id}</td>
+                ventasFiltradas.map((item, i) => {
+                  const idCliente = item.cliente?.id?.toString() ?? 'N/A';
+                  const idEmpleado = item.empleado?.id?.toString() ?? 'N/A';
+                  const totalItems = calcularTotalItems(item.detalles);
+                  console.log(`🔄 Fila ${i}:`, { idCliente, idEmpleado, totalItems });
+                  return (
+                  <tr key={item.id_compra ?? `venta-${i}`} className="hover:bg-gray-50">
+                    <td className="td-cell-main">#{item.id_compra}</td>
                     <td className="td-cell">{formatFechaDisplay(item.fecha)}</td>
-                    <td className="td-cell">{item.id_cliente}</td>
-                    <td className="td-cell">{item.id_empleado}</td>
-                    <td className="td-cell">{calcularTotalItems(item.detalles)}</td>
+                    <td className="td-cell">{String(idCliente)}</td>
+                    <td className="td-cell">{String(idEmpleado)}</td>
+                    <td className="td-cell">{String(totalItems)}</td>
                     <td className="td-cell">{item.metodo_pago}</td>
                     <td className="td-cell">
                       <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
@@ -217,12 +272,13 @@ const SectionVentas: React.FC = () => {
                       <button onClick={() => handleOpenModalEditar(item)} className="text-primary hover:text-primary-700" data-tooltip-id="tooltip-main" data-tooltip-content="Editar">
                         <Edit className="w-5 h-5" />
                       </button>
-                      <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:text-red-800" data-tooltip-id="tooltip-main" data-tooltip-content="Eliminar">
+                      <button onClick={() => handleDelete(item.id_compra)} className="text-red-600 hover:text-red-800" data-tooltip-id="tooltip-main" data-tooltip-content="Eliminar">
                         <Trash2 className="w-5 h-5" />
                       </button>
                     </td>
                   </tr>
-                ))
+                  );
+                })
               )}
             </tbody>
           </table>
@@ -254,22 +310,38 @@ const VentaModal: React.FC<VentaModalProps> = ({ isOpen, onClose, onSave, initia
   
   const [formData, setFormData] = useState({
     fecha: initialData ? initialData.fecha.split('T')[0] : new Date().toISOString().split('T')[0],
-    id_cliente: initialData?.id_cliente || '',
-    id_empleado: initialData?.id_empleado || '',
+    cliente: initialData?.cliente || { id: '', nombre: '', apellido: '', foto_perfil: '', fecha_nacimiento: '', dni: 0, telefono: '', ciudad: '', direccion: '' },
+    empleado: initialData?.empleado || { id: '', nombre: '', apellido: '', fecha_nacimiento: '', dni: 0, telefono: '', ciudad: '', direccion: '', especialidad: '' },
     metodo_pago: initialData?.metodo_pago || 'Efectivo',
     estado_pago: initialData?.estado_pago || 'Pendiente',
   });
   
   const [detalles, setDetalles] = useState<DetalleModalState[]>(
     initialData?.detalles.map(d => ({ 
-      id_producto: String(d.id_producto),
+      id_producto: String(d.producto?.id ?? ''),
       cantidad: String(d.cantidad),
-      precio_unitario: '0' 
+      precio_unitario: d.precio 
     })) || [{ id_producto: '', cantidad: '1', precio_unitario: '0' }]
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    
+    // Manejar propiedades anidadas como "cliente.id"
+    if (name.includes('.')) {
+      const [parent, child] = name.split('.');
+      setFormData(prev => ({
+        ...prev,
+        // @ts-ignore
+        [parent]: {
+          // @ts-ignore
+          ...prev[parent],
+          [child]: value
+        }
+      }));
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleDetalleChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
@@ -302,11 +374,18 @@ const VentaModal: React.FC<VentaModalProps> = ({ isOpen, onClose, onSave, initia
     e.preventDefault();
     const dataFinal = {
       ...formData,
-      // @ts-ignore
-      detalles: detalles.map(d => ({ 
-        id_producto: Number(d.id_producto),
-        cantidad: Number(d.cantidad)
-      })),
+      // El backend espera detalles con toda la información
+      detalles: detalles.map(d => {
+        const cantNum = Number(d.cantidad) || 0;
+        const precioNum = Number(d.precio_unitario) || 0;
+        return {
+          // @ts-ignore
+          cantidad: cantNum,
+          precio: d.precio_unitario,
+          subtotal: cantNum * precioNum,
+          producto: { id: Number(d.id_producto) }
+        };
+      }),
     };
     // @ts-ignore
     onSave(dataFinal);
@@ -326,11 +405,11 @@ const VentaModal: React.FC<VentaModalProps> = ({ isOpen, onClose, onSave, initia
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <label className="label-tailwind">ID Cliente</label>
-              <input type="number" name="id_cliente" value={formData.id_cliente} onChange={handleChange} className="mt-1 w-full input-tailwind" required />
+              <input type="number" name="cliente.id" value={formData.cliente.id} onChange={handleChange} className="mt-1 w-full input-tailwind" required />
             </div>
             <div>
               <label className="label-tailwind">ID Empleado</label>
-              <input type="number" name="id_empleado" value={formData.id_empleado} onChange={handleChange} className="mt-1 w-full input-tailwind" required />
+              <input type="number" name="empleado.id" value={formData.empleado.id} onChange={handleChange} className="mt-1 w-full input-tailwind" required />
             </div>
             <div>
               <label className="label-tailwind">Fecha</label>
@@ -358,7 +437,7 @@ const VentaModal: React.FC<VentaModalProps> = ({ isOpen, onClose, onSave, initia
           <div className="space-y-3 pt-4 border-t">
             <h3 className="text-lg font-medium text-gray-700">Productos/Servicios</h3>
             {detalles.map((detalle, index) => (
-              <div key={index} className="grid grid-cols-12 gap-2 items-center">
+              <div key={`${detalle.id_producto ?? 'prod'}-${index}`} className="grid grid-cols-12 gap-2 items-center">
                 <div className="col-span-4">
                   <label className="label-tailwind text-xs">ID Producto</label>
                   <input type="number" name="id_producto" value={detalle.id_producto} onChange={e => handleDetalleChange(index, e)} className="mt-1 w-full input-tailwind" placeholder="ID Producto" />
