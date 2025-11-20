@@ -13,7 +13,7 @@ import { fetchApi } from '../../app/api';
 interface Usuario {
   id: number;
   email: string;
-  contrasena?: string; // Es opcional ya que no siempre se carga o se envía
+  contrasena?: string;
   rol: string;
   fechaRegistro: string;
   estado: string;
