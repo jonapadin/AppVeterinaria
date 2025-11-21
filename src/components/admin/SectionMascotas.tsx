@@ -6,11 +6,19 @@ import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { fetchApi } from '../../app/api';
 
+interface Cliente {
+  id: number;
+  nombre: string;
+  apellido: string;
+  email: string;
+  telefono: string;
+}
+
 // 1. Interfaz MASCOTA
 interface Mascota {
   id: number;
-  nombre: string;
   cliente_id: number;
+  nombre: string;
   especie: string;
   raza: string;
   edad: number;
@@ -18,6 +26,7 @@ interface Mascota {
   esterilizado: boolean;
   foto: string;
   observaciones: string;
+  cliente: Cliente;
 }
 type CreateMascotaDto = Omit<Mascota, 'id'>;
 
@@ -49,15 +58,21 @@ const SectionMascotas: React.FC = () => {
     cargarDatos();
   }, []);
 
-  const mascotasFiltradas = useMemo(() => {
-    return mascotas.filter(m => {
-      const searchMatch = m.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          m.raza.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          m.cliente_id.toString().includes(searchTerm);
-      const especieMatch = !filtroEspecie || m.especie === filtroEspecie;
-      return searchMatch && especieMatch;
-    });
-  }, [mascotas, searchTerm, filtroEspecie]);
+const mascotasFiltradas = useMemo(() => {
+  return mascotas.filter(m => {
+    const searchMatch =
+      m.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      m.raza.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (m.cliente?.nombre ?? '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (m.cliente?.apellido ?? '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (m.cliente?.id?.toString() ?? '').includes(searchTerm);
+
+    const especieMatch = !filtroEspecie || m.especie === filtroEspecie;
+
+    return searchMatch && especieMatch;
+  });
+}, [mascotas, searchTerm, filtroEspecie]);
+
 
   // --- Handlers de Modales (CORREGIDOS) ---
   const handleOpenModalNuevo = () => { 
@@ -77,6 +92,7 @@ const SectionMascotas: React.FC = () => {
   const handleSave = async (data: CreateMascotaDto) => {
     const dataToSend = {
       ...data,
+      // @ts-ignore
       cliente_id: Number(data.cliente_id),
       edad: Number(data.edad),
       peso: parseFloat(data.peso.toString()),
@@ -170,7 +186,7 @@ const SectionMascotas: React.FC = () => {
                 mascotasFiltradas.map((item) => (
                   <tr key={item.id} className="hover:bg-gray-50">
                     <td className="td-cell-main">{item.nombre}</td>
-                    <td className="td-cell">{item.cliente_id}</td>
+                    <td className="td-cell">{item.cliente?.id ?? 'Sin cliente'}</td>
                     <td className="td-cell">{item.especie}</td>
                     <td className="td-cell">{item.raza}</td>
                     <td className="td-cell">{item.edad}</td>
@@ -216,7 +232,7 @@ interface MascotaModalProps {
 const MascotaModal: React.FC<MascotaModalProps> = ({ isOpen, onClose, onSave, initialData }) => {
   const [formData, setFormData] = useState({
     nombre: initialData?.nombre || '',
-    cliente_id: initialData?.cliente_id || '',
+    cliente_id: initialData?.cliente?.id || '',
     especie: initialData?.especie || 'Perro',
     raza: initialData?.raza || '',
     edad: initialData?.edad || 0,
@@ -260,7 +276,7 @@ const MascotaModal: React.FC<MascotaModalProps> = ({ isOpen, onClose, onSave, in
             </div>
             <div>
               <label className="label-tailwind">ID Cliente</label>
-              <input type="number" name="cliente_id" value={formData.cliente_id} onChange={handleChange} className="mt-1 w-full input-tailwind" required />
+              <input type="number" name="cliente_id" value={formData.cliente_id   } onChange={handleChange} className="mt-1 w-full input-tailwind" required />
             </div>
           </div>
           {/* Fila 2: Especie, Raza */}
