@@ -84,7 +84,7 @@ export default function InicioSesion() {
   return (
     <div
       className="py-38 relative flex min-h-screen w-full items-center justify-center 
-                   bg-gradient-to-br from-purple-100 via-white to-purple-50 p-4"
+                    from-purple-100 via-white to-purple-50 p-4"
     >
       <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl md:p-10">
         <div className="mb-6 text-center">
@@ -159,9 +159,9 @@ export default function InicioSesion() {
         </form>
 
         <div className="my-6 flex items-center">
-          <div className="flex-grow border-t border-gray-300"></div>
-          <span className="mx-4 text-sm text-gray-400">o</span>
-          <div className="flex-grow border-t border-gray-300"></div>
+          <div className="border-t border-gray-300"></div>
+          <span className="mx-4 text-sm text-gray-400"></span>
+          <div className="border-t border-gray-300"></div>
         </div>
 
         <div className="flex flex-col gap-4 sm:flex-row">

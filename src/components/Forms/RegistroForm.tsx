@@ -20,7 +20,7 @@ type AxiosErrorResponse = {
 type ValidationError = {
   nombre?: string;
   apellido?: string;
-  dni?: string; 
+  dni?: string;
   telefono?: string; 
   email?: string;
   fechaNacimiento?: string;
@@ -179,7 +179,7 @@ export default function RegistroForm() {
         apellido,
         // *** ARREGLO PARA ERROR 500 ***
         // Se envía DNI como string (no Number(dni)) para coincidir con el tipo esperado en el backend.
-        dni: dni, 
+        dni: Number(dni), 
         telefono, 
         email,
         // La fecha de nacimiento ya está en formato ISO 8601 (YYYY-MM-DD)
@@ -188,7 +188,7 @@ export default function RegistroForm() {
         direccion, 
         contrasena,
         // Se mantiene foto_perfil: null para satisfacer el DTO de backend opcional.
-        foto_perfil: null, 
+        foto_perfil: '', 
     };
     
     // 2. Lógica para añadir foto_perfil_url eliminada
@@ -241,7 +241,7 @@ export default function RegistroForm() {
   return (
     // Contenedor principal de toda la página
     <div className="relative flex min-h-screen w-full items-center justify-center 
-                    bg-gradient-to-br from-purple-100 via-white to-purple-50 p-4 py-10 md:py-20">
+                     from-purple-100 via-white to-purple-50 p-4 py-10 md:py-20">
       
       {/* Tarjeta de Registro */}
       <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl md:p-10">

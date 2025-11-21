@@ -4,7 +4,7 @@ export default function ResetPass() {
   return (
     <div
       className=" py-38 relative flex min-h-screen w-full items-center justify-center 
-                    bg-gradient-to-br from-purple-100 via-white to-purple-50 p-4"
+                     from-purple-100 via-white to-purple-50 p-4"
     >
       {/* Tarjeta de Restablecimiento de Contraseña */}
       <div className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-2xl md:p-10">
