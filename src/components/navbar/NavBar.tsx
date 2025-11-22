@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { useState } from "react";
-// Importamos un ícono más adecuado para cerrar sesión
 import { FaRegCircleUser, FaCartShopping, FaRightFromBracket } from "react-icons/fa6";
 import { FiAlignJustify } from "react-icons/fi";
 import { FaSearch } from "react-icons/fa";
@@ -15,6 +14,7 @@ function NavBar({ onOpenCarrito }: NavBarProps) {
 
   // Obtener el token. 
   const token = localStorage.getItem("token");
+  const user = localStorage.getItem("user");
 
   const abrirMenu = () => {
     setMostrarMenu(!mostrarMenu);
@@ -24,35 +24,44 @@ function NavBar({ onOpenCarrito }: NavBarProps) {
   const handleLogout = () => {
     // Elimina el token del almacenamiento local
     localStorage.removeItem("token");
-    
+
     //Recarga la página para forzar la actualización de la barra de navegación
-    window.location.reload(); 
-    
+    window.location.reload();
+
   };
 
   return (
     <header className="w-full fixed top-0 z-50">
       <nav className="flex justify-between p-0 md:p-4 md:relative lg:static lg:p-4 bg-[#8F108D] text-white items-center">
-        <button onClick={abrirMenu} className="block lg:hidden p-2 bg-[#8F108D]"> 
+        <button onClick={abrirMenu} className="block lg:hidden p-2 bg-[#8F108D]">
           <FiAlignJustify className="w-16 h-12" />
         </button>
-        
+
         {/* Logo */}
         <img src="../../assets/icons/logoVet.png" alt="Logo Veterinaria" className="w-40 h-20 lg:w-32 lg:h-16 xl:w-40 xl:h-20 2xl:h-24 2xl:w-52 hidden md:flex cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer md:absolute md:right-5 lg:static" />
 
         {/* Menú principal */}
         <ul className="hidden lg:flex space-x-14 lg:space-x-8 lg:text-sm xl:text-xl 2xl:space-x-14 font-lato font-bold">
-          <Link to={"/"}> 
-            <li className='cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer'>INICIO</li>
-          </Link>
-          <Link to={"categoria"}> 
+          {token ? (
+            <Link to={`${user?.includes('"isAdmin":true') ? '/admin' : '/user'}`}>
+
+              <li className='cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer'>INICIO</li>
+            </Link>
+          ) : (
+            <Link to={"/"}>
+              <li className='cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer'>INICIO</li>
+            </Link>
+          )
+          }
+
+          <Link to={"/categoria"}>
             <li className='cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer'>PRODUCTOS</li>
           </Link>
-          <Link to={"services"}> 
+          <Link to={"/services"}>
             <li className='cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer'>SERVICIOS</li>
           </Link>
         </ul>
-        
+
         {/* Input buscador (desktop) */}
         <div className="justify-center px-4 md:mr-48 lg:mr-0">
           <div className="flex items-center border rounded overflow-hidden bg-white">
@@ -66,10 +75,10 @@ function NavBar({ onOpenCarrito }: NavBarProps) {
             </button>
           </div>
         </div>
-        
+
         {/* Íconos de Carrito y Autenticación CONDICIONAL) */}
         <ul className="hidden lg:flex space-x-14 lg:space-x-8 lg:text-sm xl:text-xl text-lg font-lato font-bold pr-10">
-          
+
           <li
             onClick={onOpenCarrito}
             className="cursor-pointer hover:scale-105 flex items-center gap-2.5"
@@ -77,29 +86,29 @@ function NavBar({ onOpenCarrito }: NavBarProps) {
             <FaCartShopping />
             <span>CARRITO</span>
           </li>
-          
+
           {/* Lógica de Autenticación Condicional */}
           {token ? (
             <li
               onClick={handleLogout}
               className='cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer flex items-center gap-2.5'
             >
-              <FaRightFromBracket /> 
+              <FaRightFromBracket />
               <span>CERRAR SESIÓN</span>
             </li>
           ) : (
             <Link to={"login"}>
               <li className='cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 hover:cursor-pointer flex items-center gap-2.5'>
-                <FaRegCircleUser /> 
+                <FaRegCircleUser />
                 <span>INGRESAR</span>
               </li>
             </Link>
           )}
         </ul>
-        
+
         {/* Menú móvil */}
         {mostrarMenu && (
-          <MenuMob     
+          <MenuMob
             isAuthenticated={!!token}
             onLogout={handleLogout}
             onClose={abrirMenu}

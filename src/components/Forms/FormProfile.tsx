@@ -1,6 +1,15 @@
 import { FaRegUser, FaEnvelope, FaPhone } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function Formulario() {
+  const handleLogout = () => {
+    // Elimina el token del almacenamiento local
+    localStorage.removeItem("token");
+    
+    //Recarga la página para forzar la actualización de la barra de navegación
+    window.location.reload(); 
+    
+  };
   return (
     <form className="max-w-lg mx-auto p-6 my-9 bg-white shadow-lg rounded-lg">
       <div className="flex flex-row items-center mb-6">
@@ -71,13 +80,15 @@ function Formulario() {
         <h2 className="text-lg font-semibold text-gray-700 mb-4">Seguridad</h2>
 
         <div className="flex flex-col gap-3">
-          <button
+          <Link to = "/recover-pass"><button
             type="button"
             className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-yellow-400"
           >
             Cambiar contraseña
           </button>
+          </Link>
           <button
+          onClick={handleLogout}
             type="button"
             className="w-full py-2 px-4 bg-red-500 text-white font-semibold rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
           >

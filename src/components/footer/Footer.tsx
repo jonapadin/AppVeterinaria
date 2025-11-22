@@ -8,6 +8,8 @@ interface FooterProps {
   onOpenCarrito: () => void;
 }
 export default function Footer({ onOpenCarrito }: FooterProps) {
+  // Obtener el token. 
+  const token = localStorage.getItem("token");
   
   return (
     <>
@@ -21,16 +23,34 @@ export default function Footer({ onOpenCarrito }: FooterProps) {
     <span className="text-white text-[15px] mt-1">INICIO</span>
   </Link>
 </li>
+{ token ? (
+<li className="flex flex-col items-center justify-center">
+  <Link
+    to="/user/profile"
+    className="flex flex-col items-center justify-center h-full"
+    title="Ingresar"
+  >
+    
+    <VscAccount className="w-8 h-8 text-white" />
+    <span className="text-white text-[15px] mt-1">MI PERFIL</span>
+  </Link>
+</li>
+) : 
+(
   <li className="flex flex-col items-center justify-center">
   <Link
     to="login"
     className="flex flex-col items-center justify-center h-full"
     title="Ingresar"
   >
+    
     <VscAccount className="w-8 h-8 text-white" />
     <span className="text-white text-[15px] mt-1">INGRESAR</span>
   </Link>
 </li>
+)}
+
+  
         
       {/* CARRO MOBILE */}
            <li className="flex flex-col items-center justify-center">
