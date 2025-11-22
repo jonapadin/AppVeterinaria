@@ -1,20 +1,22 @@
-
-
 import { useState } from "react";
-import CategoriaNav from "../../components/navbar-categoria/NavbarCategorias";
+import NavbarCategorias from "../../components/navbar-categoria/NavbarCategorias";
 import FiltroProductos from "../../components/producto/FiltroProducto";
 import OrdenarProductos from "../../components/producto/OrdenarProductos";
 import ProductList from "../../components/producto/ProductoLista";
+import { useProductos } from "../../components/producto/Fetch";
+import type { Producto } from "../../components/producto/Fetch";
 
 function ProductCatPage() {
+  const { productos, loading } = useProductos();
+
   const [subcategoria, setSubcategoria] = useState<string>("Alimento");
   const [filtros, setFiltros] = useState({
     presentaciones: [] as string[],
     marcas: [] as string[],
   });
-  const [orden, setOrden] = useState<
-     "menor-mayor" | "mayor-menor" | "a-z" | "z-a"
-  >("menor-mayor");
+  const [orden, setOrden] = useState<"menor-mayor" | "mayor-menor" | "a-z" | "z-a">(
+    "menor-mayor"
+  );
 
   return (
     <>
@@ -27,17 +29,18 @@ function ProductCatPage() {
         />
       </section>
 
-      {/* Categorías */}
-      <CategoriaNav
-        onSelectSubcategoria={setSubcategoria}
+      {/* Navbar de categorías */}
+      <NavbarCategorias
         categoriaActual="Gato"
+        productos={productos}
+        onSelectSubcategoria={setSubcategoria}
       />
 
       <div className="flex flex-col md:flex-row gap-6 p-6">
-
         {/* FILTROS PC */}
         <div className="w-full md:w-1/4 hidden md:block">
           <FiltroProductos
+            productos={productos}
             categoriaActual="Gato"
             subcategoriaActual={subcategoria}
             onSelectSubcategoria={setSubcategoria}
@@ -61,6 +64,10 @@ function ProductCatPage() {
           />
         </div>
       </div>
+
+      {loading && (
+        <p className="text-center text-gray-500 mt-4">Cargando productos...</p>
+      )}
     </>
   );
 }
