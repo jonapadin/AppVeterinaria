@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { useState } from "react";
-// Importamos un ícono más adecuado para cerrar sesión
 import { FaRegCircleUser, FaCartShopping, FaRightFromBracket } from "react-icons/fa6";
 import { FiAlignJustify } from "react-icons/fi";
 import { FaSearch } from "react-icons/fa";
