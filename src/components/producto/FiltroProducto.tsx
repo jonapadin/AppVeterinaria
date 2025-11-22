@@ -1,55 +1,37 @@
 import { useEffect, useState } from "react";
-import productosJson from "./producto.json";
+import type { Producto } from "./Fetch";
 
 interface FiltroProps {
+  productos: Producto[];
   categoriaActual: string;
   subcategoriaActual: string;
   onSelectSubcategoria: (subcategoria: string) => void;
   onChange: (filtros: { presentaciones: string[]; marcas: string[] }) => void;
 }
 
-interface Producto {
-  marca: string;
-  presentacion: string;
-}
-
 export default function FiltroProductos({
+  productos,
   categoriaActual,
   subcategoriaActual,
   onSelectSubcategoria,
   onChange,
 }: FiltroProps) {
   const [marcasDisponibles, setMarcasDisponibles] = useState<string[]>([]);
-  const [presentacionesDisponibles, setPresentacionesDisponibles] = useState<
-    string[]
-  >([]);
+  const [presentacionesDisponibles, setPresentacionesDisponibles] = useState<string[]>([]);
   const [selectedMarcas, setSelectedMarcas] = useState<string[]>([]);
-  const [selectedPresentaciones, setSelectedPresentaciones] = useState<
-    string[]
-  >([]);
-
-  
-  const productosCategoria = (productosJson as any)
-    .flatMap((item: any) => item.categoria[categoriaActual] ?? {})
-    .reduce((acc: any, cur: any) => ({ ...acc, ...cur }), {});
+  const [selectedPresentaciones, setSelectedPresentaciones] = useState<string[]>([]);
 
   useEffect(() => {
-    if (!productosCategoria) return;
-
-    const productos: Producto[] = productosCategoria[subcategoriaActual] || [];
-
-   
-    const marcas = Array.from(
-      new Set(productos.map((p) => (p.marca?.trim() ?? "") as string))
+    const productosFiltrados = productos.filter(
+      (p) => p.categoria === categoriaActual && p.subcategoria === subcategoriaActual
     );
 
-    const presentaciones = Array.from(
-      new Set(productos.map((p) => (p.presentacion?.trim() ?? "") as string))
-    );
+    const marcas = Array.from(new Set(productosFiltrados.map((p) => p.marca)));
+    const presentaciones = Array.from(new Set(productosFiltrados.map((p) => p.kg.toString())));
 
     setMarcasDisponibles(marcas);
     setPresentacionesDisponibles(presentaciones);
-  }, [categoriaActual, subcategoriaActual]);
+  }, [productos, categoriaActual, subcategoriaActual]);
 
   useEffect(() => {
     onChange({
@@ -65,25 +47,20 @@ export default function FiltroProductos({
 
   const togglePresentacion = (presentacion: string) =>
     setSelectedPresentaciones((prev) =>
-      prev.includes(presentacion)
-        ? prev.filter((p) => p !== presentacion)
-        : [...prev, presentacion]
+      prev.includes(presentacion) ? prev.filter((p) => p !== presentacion) : [...prev, presentacion]
     );
 
   return (
     <div className="hidden md:block border-2 border-[#8F108D] rounded-lg bg-white">
-
-      {/* CATEGORÍAS */}
+      {/* Subcategorías */}
       <h3 className="bg-gray-300 border-b-2 border-[#8F108D] text-center font-semibold py-2">
-        Categorías:
+        Subcategorías
       </h3>
       <div className="p-3 bg-gray-200">
-        {Object.keys(productosCategoria).map((sub) => (
+        {[...new Set(productos.filter((p) => p.categoria === categoriaActual).map((p) => p.subcategoria))].map((sub) => (
           <button
             key={sub}
-            className={`w-full py-1 ${
-              sub === subcategoriaActual ? "font-bold text-[#8F108D]" : ""
-            }`}
+            className={`w-full py-1 ${sub === subcategoriaActual ? "font-bold text-[#8F108D]" : ""}`}
             onClick={() => onSelectSubcategoria(sub)}
           >
             {sub}
@@ -91,9 +68,9 @@ export default function FiltroProductos({
         ))}
       </div>
 
-      {/* PRESENTACIONES */}
+      {/* Presentaciones */}
       <h3 className="bg-gray-300 border-t-2 border-b-2 border-[#8F108D] text-center font-semibold py-2">
-        Presentaciones (Kg):
+        Presentaciones (Kg)
       </h3>
       <div className="grid grid-cols-2 gap-2 p-4 border-b-2 border-[#8F108D]">
         {presentacionesDisponibles.map((pre) => (
@@ -108,9 +85,9 @@ export default function FiltroProductos({
         ))}
       </div>
 
-      {/* MARCAS */}
+      {/* Marcas */}
       <h3 className="bg-gray-300 border-b-2 border-[#8F108D] text-center font-semibold py-2">
-        Marca:
+        Marca
       </h3>
       <div className="flex flex-col gap-2 p-4">
         {marcasDisponibles.map((marca) => (
