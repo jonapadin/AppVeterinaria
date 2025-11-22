@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
-import type { Producto } from "./Fetch";
+import { useState, useEffect } from "react";
+import type { Producto } from "../producto/Fetch";
+import type { CategoriaProducto } from "../../enums/categoriaProductos";
+import type { SubcategoriaProducto } from "../../enums/subCategoriaProductos";
 
-interface FiltroProps {
+interface FiltroProductosProps {
   productos: Producto[];
-  categoriaActual: string;
-  subcategoriaActual: string;
-  onSelectSubcategoria: (subcategoria: string) => void;
+  categoriaActual: CategoriaProducto;
+  subcategoriaActual: SubcategoriaProducto;
+  onSelectSubcategoria: (subcategoria: SubcategoriaProducto) => void;
   onChange: (filtros: { presentaciones: string[]; marcas: string[] }) => void;
 }
 
@@ -15,91 +17,121 @@ export default function FiltroProductos({
   subcategoriaActual,
   onSelectSubcategoria,
   onChange,
-}: FiltroProps) {
-  const [marcasDisponibles, setMarcasDisponibles] = useState<string[]>([]);
-  const [presentacionesDisponibles, setPresentacionesDisponibles] = useState<string[]>([]);
-  const [selectedMarcas, setSelectedMarcas] = useState<string[]>([]);
-  const [selectedPresentaciones, setSelectedPresentaciones] = useState<string[]>([]);
+}: FiltroProductosProps) {
+  const [marcasSeleccionadas, setMarcasSeleccionadas] = useState<string[]>([]);
+  const [kgsSeleccionados, setKgsSeleccionados] = useState<string[]>([]);
+
+  const subcategorias = Array.from(
+    new Set(
+      productos
+        .filter((p) => p.categoria === categoriaActual)
+        .map((p) => p.subcategoria)
+    )
+  );
+
+  const marcas = Array.from(
+    new Set(
+      productos
+        .filter(
+          (p) =>
+            p.categoria === categoriaActual &&
+            p.subcategoria === subcategoriaActual
+        )
+        .map((p) => p.marca)
+    )
+  );
+
+  const kgs = Array.from(
+    new Set(
+      productos
+        .filter(
+          (p) =>
+            p.categoria === categoriaActual &&
+            p.subcategoria === subcategoriaActual
+        )
+        .map((p) => p.kg.toString())
+    )
+  );
 
   useEffect(() => {
-    const productosFiltrados = productos.filter(
-      (p) => p.categoria === categoriaActual && p.subcategoria === subcategoriaActual
-    );
+    onChange({ marcas: marcasSeleccionadas, presentaciones: kgsSeleccionados });
+  }, [marcasSeleccionadas, kgsSeleccionados]);
 
-    const marcas = Array.from(new Set(productosFiltrados.map((p) => p.marca)));
-    const presentaciones = Array.from(new Set(productosFiltrados.map((p) => p.kg.toString())));
-
-    setMarcasDisponibles(marcas);
-    setPresentacionesDisponibles(presentaciones);
-  }, [productos, categoriaActual, subcategoriaActual]);
-
-  useEffect(() => {
-    onChange({
-      marcas: selectedMarcas,
-      presentaciones: selectedPresentaciones,
-    });
-  }, [selectedMarcas, selectedPresentaciones]);
-
-  const toggleMarca = (marca: string) =>
-    setSelectedMarcas((prev) =>
+  const toggleMarca = (marca: string) => {
+    setMarcasSeleccionadas((prev) =>
       prev.includes(marca) ? prev.filter((m) => m !== marca) : [...prev, marca]
     );
+  };
 
-  const togglePresentacion = (presentacion: string) =>
-    setSelectedPresentaciones((prev) =>
-      prev.includes(presentacion) ? prev.filter((p) => p !== presentacion) : [...prev, presentacion]
+  const toggleKg = (kg: string) => {
+    setKgsSeleccionados((prev) =>
+      prev.includes(kg) ? prev.filter((k) => k !== kg) : [...prev, kg]
     );
+  };
+
 
   return (
-    <div className="hidden md:block border-2 border-[#8F108D] rounded-lg bg-white">
+    <div className="flex flex-col text-center text:lg border-5 border-[#8F108D] p-6 rounded-md">
       {/* Subcategorías */}
-      <h3 className="bg-gray-300 border-b-2 border-[#8F108D] text-center font-semibold py-2">
-        Subcategorías
-      </h3>
-      <div className="p-3 bg-gray-200">
-        {[...new Set(productos.filter((p) => p.categoria === categoriaActual).map((p) => p.subcategoria))].map((sub) => (
-          <button
-            key={sub}
-            className={`w-full py-1 ${sub === subcategoriaActual ? "font-bold text-[#8F108D]" : ""}`}
-            onClick={() => onSelectSubcategoria(sub)}
-          >
-            {sub}
-          </button>
-        ))}
+      <div>
+        <h3 className="font-bold  p-3 bg-[#D9D9D9] text-black">Categorías:</h3>
+        <div className="flex flex-col ">
+          {subcategorias.map((sub) => (
+            <button
+              key={sub}
+              onClick={() => onSelectSubcategoria(sub as SubcategoriaProducto)}
+              className={` py-3 rounded-md  ${
+                sub === subcategoriaActual
+                  ? `bg-[#D9D9D9] text-black `
+                  : `bg-white text-[#8F108D] border-[#8F108D]`
+              } hover:bg-[#8F108D] hover:text-white transition`}
+            >
+              {sub}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* Presentaciones */}
-      <h3 className="bg-gray-300 border-t-2 border-b-2 border-[#8F108D] text-center font-semibold py-2">
-        Presentaciones (Kg)
-      </h3>
-      <div className="grid grid-cols-2 gap-2 p-4 border-b-2 border-[#8F108D]">
-        {presentacionesDisponibles.map((pre) => (
-          <label key={pre} className="flex items-center gap-2 text-sm">
-            <input
-              type="checkbox"
-              className="w-4 h-4 border-2 border-[#8F108D] accent-[#8F108D] appearance-none checked:bg-[#8F108D] checked:border-[#8F108D] cursor-pointer"
-              onChange={() => togglePresentacion(pre)}
-            />
-            {pre}
-          </label>
-        ))}
+      {/* KG */}
+      <div>
+        <h3 className="font-bold mb-5 p-3 bg-[#D9D9D9] text-black">Presentaciones (kg):</h3>
+        <div className="grid grid-cols-2 gap-2">
+          {kgs.map((kg) => (
+            <label
+              key={kg}
+              className="flex items-center gap-2 rounded p-3 cursor-pointer text-[#8F108D] hover:bg-[#8F108D] hover:text-white transition"
+            >
+              <input
+                type="checkbox"
+                checked={kgsSeleccionados.includes(kg)}
+                onChange={() => toggleKg(kg)}
+          
+              />
+              {kg} kg
+            </label>
+          ))}
+        </div>
       </div>
 
       {/* Marcas */}
-      <h3 className="bg-gray-300 border-b-2 border-[#8F108D] text-center font-semibold py-2">
-        Marca
-      </h3>
-      <div className="flex flex-col gap-2 p-4">
-        {marcasDisponibles.map((marca) => (
-          <label key={marca} className="flex items-center gap-2 text-sm">
-            <input
-              type="checkbox"
-              className="w-4 h-4 border-2 border-[#8F108D] accent-[#8F108D] appearance-none checked:bg-[#8F108D] checked:border-[#8F108D] cursor-pointer"
-              onChange={() => toggleMarca(marca)}
-            />
-            {marca}
-          </label>
-        ))}
+      <div>
+        <h3 className="font-bold mb-5 p-3 bg-[#D9D9D9] text-black">Marca:</h3>
+        <div className="grid grid-cols-2 gap-2">
+          {marcas.map((marca) => (
+            <label
+              key={marca}
+              className="flex items-center gap-2  rounded p-1 cursor-pointer text-[#8F108D] hover:bg-[#8F108D] hover:text-white transition"
+            >
+              <input
+                type="checkbox"
+                checked={marcasSeleccionadas.includes(marca)}
+                onChange={() => toggleMarca(marca)}
+                
+              />
+              {marca}
+            </label>
+          ))}
+        </div>
       </div>
     </div>
   );
