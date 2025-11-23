@@ -52,18 +52,32 @@ export default function ProductList({
       {ordenados.map((prod) => (
         <div
           key={prod.id}
-          className="p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center text-center bg-white w-70"
+          className="p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200
+                     flex flex-col items-center text-center bg-white 2xl:w-70"
         >
+         
           <img
             src={prod.img}
             alt={prod.descripcion}
-            className="w-32 h-48 object-cover rounded mb-3"
+            className="
+              w-24 h-24           
+              sm:w-28 sm:h-28     
+              md:w-32 md:h-32     
+              lg:w-36 lg:h-36     
+              xl:w-40 xl:h-40     
+              object-contain
+              rounded
+              mb-2
+            "
           />
-          <p className="font-bold text-lg">{prod.marca}</p>
-          <p className="text-md mb-2 text-gray-600">{prod.descripcion}</p>
+
+          <p className="font-bold text-md md:text-lg">{prod.marca}</p>
+          <p className="text-xs md:text-sm mb-2 text-gray-600">{prod.descripcion}</p>
+
           <p className="text-[#8F108D] font-semibold mb-3">${prod.precio}</p>
+
           <button
-            className="bg-[#8F108D] text-white text-md px-6 py-2 rounded hover:bg-purple-700 transition"
+            className="bg-[#8F108D] text-white text-sm md:text-md px-3 md:px-6 py-2 rounded hover:bg-purple-700 transition"
             onClick={() => console.log("Comprar producto", prod.id)}
           >
             Comprar
