@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { User, Mail, Calendar, Lock, CreditCard, Phone, MapPin, Home } from 'lucide-react';
 import { useState } from 'react';
 import axios from 'axios';
