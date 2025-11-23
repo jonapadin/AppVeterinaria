@@ -196,7 +196,7 @@ export default function RegistroForm() {
     try {
       // Endpoint de registro
       await axios.post(
-        "http://localhost:3000/api/v1/cliente", 
+        "http://localhost:4000/api/v1/cliente", 
         formData // Usamos el payload dinámico
       );
 

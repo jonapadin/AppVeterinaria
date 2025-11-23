@@ -43,7 +43,7 @@ export default function InicioSesion() {
 
     try {
       const { data } = await axios.post<LoginResponse>(
-        "http://localhost:3000/api/v1/auth/login",
+        "http://localhost:4000/api/v1/auth/login",
         {
           email,
           contrasena: password,

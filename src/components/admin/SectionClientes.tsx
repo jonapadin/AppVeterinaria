@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable prefer-const */
-// SectionClientes.tsx
+
 
 import React, { useState, useMemo, useEffect } from 'react';
 import { Plus, Search, Edit, Trash2 } from 'lucide-react';
@@ -8,7 +8,7 @@ import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { fetchApi } from '../../app/api'; 
 
-// --- INTERFACES CORREGIDAS ---
+
 
 interface Usuario {
   id: number;
@@ -18,8 +18,7 @@ interface Usuario {
   fechaRegistro: string;
   estado: string;
 }
-
-// 1. Interfaz CLIENTE (Ajustada para la estructura anidada)
+// 1. Interfaz Cliente
 interface Cliente {
   id: number; 
   foto_perfil: string;
@@ -33,16 +32,14 @@ interface Cliente {
   usuario: Usuario;
 }
 
-// 2. DTO para CREACIÓN (Para POST: incluye email y contrasena)
+// 2. DTO para CREACIÓN
 type CreateClienteDto = Omit<Cliente, 'id' | 'usuario'> & { 
     email: string;
     contrasena: string;
 };
 
-// 3. DTO para EDICIÓN (Para PUT: NO incluye campos de usuario)
+// 3. DTO para EDICIÓN
 type UpdateClienteDto = Omit<Cliente, 'id' | 'usuario'>;
-
-// --- COMPONENTE PRINCIPAL ---
 
 const SectionClientes: React.FC = () => {
   const [clientes, setClientes] = useState<Cliente[]>([]);
@@ -52,7 +49,7 @@ const SectionClientes: React.FC = () => {
   const [itemParaEditar, setItemParaEditar] = useState<Cliente | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // --- Carga de Datos (FETCH) ---
+  // FETCH
   const cargarDatos = async () => {
     setLoading(true);
     setError(null);
@@ -74,7 +71,7 @@ const SectionClientes: React.FC = () => {
   const clientesFiltrados = useMemo(() => {
     return clientes.filter((c) =>
         (c.nombre.toLowerCase() + " " + c.apellido.toLowerCase()).includes(searchTerm.toLowerCase()) ||
-        c.usuario.email.toLowerCase().includes(searchTerm.toLowerCase()) || // ⬅️ CAMBIO: Acceder a usuario.email
+        c.usuario.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
         c.dni.toString().includes(searchTerm) ||
         c.id.toString().includes(searchTerm)
     );
@@ -101,14 +98,14 @@ const SectionClientes: React.FC = () => {
       
       if (itemParaEditar) {
         console.log(`✏️ Editando cliente ${itemParaEditar.id}...`);
-        // Para la edición (PUT), la data solo contiene campos de Cliente, no de usuario
+        // PUT
         await fetchApi(`/cliente/${itemParaEditar.id}`, { 
           method: 'PUT', 
           body: JSON.stringify(data) 
         });
       } else {
         console.log('➕ Creando nuevo cliente...');
-        // Para la creación (POST), la data contiene campos de Cliente, email y contrasena
+        // POST
         await fetchApi('/cliente', { 
           method: 'POST', 
           body: JSON.stringify(data) 
