@@ -6,7 +6,6 @@ import OrdenarProductos from "../../components/producto/OrdenarProductos";
 import ProductList from "../../components/producto/ProductoLista";
 import Paginator from "../../components/producto/Paginador";
 import { useProductos } from "../../components/producto/Fetch";
-import type { Producto } from "../../components/producto/Fetch";
 import type { CategoriaProducto } from "../../enums/categoriaProductos";
 import { SubcategoriaProducto } from "../../enums/subCategoriaProductos";
 
@@ -72,7 +71,7 @@ function ProductDogPage() {
     <>
       {/* Banner */}
       <section className="w-full">
-        <div className="h-[180px] sm:h-[250px] md:h-[300px] lg:h-[700px] overflow-hidden">
+        <div className="h-[280px] sm:h-[250px] md:h-[300px] lg:h-[700px] overflow-hidden">
           <img
             src="/assets/img/banner-product/banner-dog.png"
             alt="banner-perro"
