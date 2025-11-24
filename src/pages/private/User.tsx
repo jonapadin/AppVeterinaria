@@ -1,21 +1,21 @@
-function UserHome() {
+function User() {
     return (
         <>
             <main className="w-full flex flex-col items-center pt-16 md:pt-16">
 
                 {/* -------------------- BANNER PRINCIPAL -------------------- */}
-                <section className="w-full">
-                    <div className="h-[200px] sm:h-[250px] md:h-[300px] lg:h-[700px] overflow-hidden">
+                <section className="">
+                    <div className="h-[200px] sm:h-[250px] md:h-[300px] lg:h-[500px] ">
                         <img
-                            src="/public/assets/img/BannerHome2.jpg"
+                            src="/public/assets/img/bannerHome.png"
                             alt="banner"
                             className="w-full h-full object-cover object-center"
                         />
                     </div>
                 </section>
 
-                {/* -------------------- SERVICIOS --------------------------- */}
-                <section className="w-full max-w-6xl py-10 px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {/* -------------------- SERVICIOS (ESTILO IGUAL AL EJEMPLO) ----------- */}
+                <section className="w-full max-w-6xl py-10 px-4 flex  justify-center gap-6">
                     {[
                         { img: "/public/assets/img/vacunacion.png", title: "Vacunación", url: "/turnos" },
                         { img: "/public/assets/img/hospitalizacion.png", title: "Hospitalización", url: "/turnos" },
@@ -25,18 +25,28 @@ function UserHome() {
                         <a
                             key={i}
                             href={s.url}
-                            className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center 
-                                       hover:scale-[1.03] transition cursor-pointer"
+                            className="relative hover:brightness-90 transition rounded-lg"
                         >
-                            <img src={s.img} alt={s.title} className="w-24 h-24 object-contain mb-4" />
-                            <p className="font-semibold text-center">{s.title}</p>
+                            <div className="relative">
+                                {/* Imagen EXACTAMENTE igual al otro componente */}
+                                <img
+                                    src={s.img}
+                                    alt={s.title}
+                                    className="h-[180px] w-[260px] sm:w-[300px] md:w-[350px] rounded-lg object-cover"
+                                />
+
+                                {/* Texto superpuesto */}
+                                <div className="absolute bottom-2 left-0 right-0 text-center font-bold text-white text-xl drop-shadow-[2px_2px_4px_rgba(0,0,0,0.7)]">
+                                    {s.title}
+                                </div>
+                            </div>
                         </a>
                     ))}
                 </section>
 
                 {/* -------------------- BANNER CHAT ------------------------- */}
-                <section className="w-full">
-                    <div className="h-[160px] sm:h-[220px] md:h-[280px] lg:h-[350px] overflow-hidden mt-6">
+                <section >
+                    <div className=" sm:h-[220px] md:h-[280px] lg:h-[350px] overflow-hidden mt-6">
                         <img
                             src="/public/assets/img/bannerHome.jpg"
                             alt="banner chat"
@@ -50,4 +60,4 @@ function UserHome() {
     );
 }
 
-export default UserHome;
+export default User;
