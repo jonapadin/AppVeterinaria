@@ -1,7 +1,7 @@
 // src/api/api.ts
 
 // REEMPLAZA ESTO CON LA URL BASE DE TU BACKEND (CORREGIDA)
-const API_BASE_URL = 'http://localhost:3000/api/v1'; // <--- CORREGIDO
+const API_BASE_URL = 'http://localhost:4000/api/v1';
 
 /**
  * Función genérica para hacer peticiones FETCH

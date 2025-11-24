@@ -1,5 +1,4 @@
-// AdminDashboard.tsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Sidebar from './Sidebar';
 import SectionClientes from './SectionClientes';
 import SectionEmpleados from './SectionEmpleados';
@@ -7,7 +6,6 @@ import SectionMascotas from './SectionMascotas';
 import SectionTurnos from './SectionTurnos';
 import SectionVentas from './SectionVentas';
 
-// 1. Tipo de sección actualizado
 export type AdminSection = 'Clientes' | 'Usuarios' | 'Empleados' | 'Mascotas' | 'Turnos' | 'Ventas';
 
 const AdminDashboard: React.FC = () => {
@@ -31,7 +29,6 @@ const AdminDashboard: React.FC = () => {
   };
 
   return (
-    // Fondo claro
     <div className="flex bg-gray-100 pt-28 h-screen">
       <Sidebar 
         activeSection={activeSection} 
