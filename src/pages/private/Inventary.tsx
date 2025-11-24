@@ -71,7 +71,7 @@ const SectionInventarioEmpleado: React.FC = () => {
     };
     
     try {
-      await fetchApi('/inventario/uso', { 
+      await fetchApi('/inventario', { 
         method: 'POST', 
         body: JSON.stringify(dataToSend) 
       });

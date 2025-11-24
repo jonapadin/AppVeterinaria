@@ -73,7 +73,7 @@ const SectionInventario: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const usosData = await fetchApi('/inventario/uso'); // Endpoint asumido para los registros de uso
+      const usosData = await fetchApi('/inventario'); // Endpoint para los registros de uso
       setUsos(usosData);
     } catch (err) {
       setError((err as Error).message);
@@ -132,12 +132,12 @@ const SectionInventario: React.FC = () => {
     try {
       if (itemParaEditar) {
         // En un PUT, debes enviar los IDs originales
-        await fetchApi(`/inventario/uso/${itemParaEditar.id}`, { 
+        await fetchApi(`/inventario/${itemParaEditar.id}`, { 
           method: 'PUT', 
           body: JSON.stringify(dataToSend) 
         });
       } else {
-        await fetchApi('/inventario/uso', { 
+        await fetchApi('/inventario', { 
           method: 'POST', 
           body: JSON.stringify(dataToSend) 
         });
@@ -153,7 +153,7 @@ const SectionInventario: React.FC = () => {
   const handleDelete = async (id: number) => {
     if (window.confirm('¿Estás seguro de que deseas eliminar este registro de uso?')) {
       try {
-        await fetchApi(`/inventario/uso/${id}`, { method: 'DELETE' });
+        await fetchApi(`/inventario/${id}`, { method: 'DELETE' });
         cargarDatos(); 
         cargarLookups(); // Recargar lookups por si se actualizó el stock implícitamente
       } catch (err) {

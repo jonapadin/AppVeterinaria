@@ -2,11 +2,12 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import type { Producto } from "../producto/Fetch";
+import type { SubcategoriaProducto } from "../../enums/subCategoriaProductos";
 
 interface NavbarCategoriasProps {
   categoriaActual: "Perro" | "Gato" | "Aves" | "Exóticos";
   productos: Producto[];
-  onSelectSubcategoria: (subcategoria: string) => void;
+   onSelectSubcategoria: (subcategoria: SubcategoriaProducto) => void
 }
 
 function NavbarCategorias({ categoriaActual, productos, onSelectSubcategoria }: NavbarCategoriasProps) {
