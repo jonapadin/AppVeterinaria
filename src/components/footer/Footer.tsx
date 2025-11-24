@@ -121,7 +121,7 @@ export default function Footer({ onOpenCarrito }: FooterProps) {
         >
           <BiLogoInstagramAlt className=" md:w-4 md:h-4 lg:w-4 lg:h-4 xl:w-6 xl:h-6" />
         </a>
-        <span>Veterinari.Ig</span>
+        <span>Veterinaria.Ig</span>
       </div>
 
       <div className="flex items-center gap-2">
@@ -148,7 +148,7 @@ export default function Footer({ onOpenCarrito }: FooterProps) {
         >
           <BsWhatsapp className="md:w-4 md:h-4 lg:w-4 lg:h-4 xl:w-6 xl:h-6 text-green-500" />
         </a>
-        <span>2284557768</span>
+        <span>228412345678</span>
       </div>
     </div>
   </div>
