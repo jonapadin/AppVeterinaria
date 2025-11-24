@@ -18,9 +18,11 @@ export default function FiltroProductos({
   onSelectSubcategoria,
   onChange,
 }: FiltroProductosProps) {
+  
   const [marcasSeleccionadas, setMarcasSeleccionadas] = useState<string[]>([]);
   const [kgsSeleccionados, setKgsSeleccionados] = useState<string[]>([]);
 
+  // SUBCATEGORÍAS
   const subcategorias = Array.from(
     new Set(
       productos
@@ -29,6 +31,7 @@ export default function FiltroProductos({
     )
   );
 
+  // MARCAS
   const marcas = Array.from(
     new Set(
       productos
@@ -41,37 +44,43 @@ export default function FiltroProductos({
     )
   );
 
+  // KG (solo números válidos)
   const kgs = Array.from(
     new Set(
       productos
         .filter(
           (p) =>
             p.categoria === categoriaActual &&
-            p.subcategoria === subcategoriaActual
+            p.subcategoria === subcategoriaActual &&
+            p.kg != null &&
+            !isNaN(Number(p.kg))
         )
-        .map((p) => p.kg.toString())
+        .map((p) => String(p.kg))
     )
   );
 
+  // Enviar filtros al padre
   useEffect(() => {
     onChange({ marcas: marcasSeleccionadas, presentaciones: kgsSeleccionados });
   }, [marcasSeleccionadas, kgsSeleccionados]);
 
+  // Toggle marca
   const toggleMarca = (marca: string) => {
     setMarcasSeleccionadas((prev) =>
       prev.includes(marca) ? prev.filter((m) => m !== marca) : [...prev, marca]
     );
   };
 
+  // Toggle KG
   const toggleKg = (kg: string) => {
     setKgsSeleccionados((prev) =>
       prev.includes(kg) ? prev.filter((k) => k !== kg) : [...prev, kg]
     );
   };
 
-
   return (
     <div className="flex flex-col text-center text:lg border-5 border-[#8F108D] p-6 rounded-md">
+
       {/* Subcategorías */}
       <div>
         <h3 className="font-bold  p-3 bg-[#D9D9D9] text-black">Categorías:</h3>
@@ -80,9 +89,9 @@ export default function FiltroProductos({
             <button
               key={sub}
               onClick={() => onSelectSubcategoria(sub as SubcategoriaProducto)}
-              className={` py-3 rounded-md  ${
+              className={` py-3 rounded-md ${
                 sub === subcategoriaActual
-                  ? `bg-[#D9D9D9] text-black `
+                  ? `bg-[#D9D9D9] text-black`
                   : `bg-white text-[#8F108D] border-[#8F108D]`
               } hover:bg-[#8F108D] hover:text-white transition`}
             >
@@ -94,7 +103,9 @@ export default function FiltroProductos({
 
       {/* KG */}
       <div>
-        <h3 className="font-bold mb-5 p-3 bg-[#D9D9D9] text-black">Presentaciones (kg):</h3>
+        <h3 className="font-bold mb-5 p-3 bg-[#D9D9D9] text-black">
+          Presentaciones (kg):
+        </h3>
         <div className="grid grid-cols-2 gap-2">
           {kgs.map((kg) => (
             <label
@@ -105,7 +116,6 @@ export default function FiltroProductos({
                 type="checkbox"
                 checked={kgsSeleccionados.includes(kg)}
                 onChange={() => toggleKg(kg)}
-          
               />
               {kg} kg
             </label>
@@ -120,19 +130,19 @@ export default function FiltroProductos({
           {marcas.map((marca) => (
             <label
               key={marca}
-              className="flex items-center gap-2  rounded p-1 cursor-pointer text-[#8F108D] hover:bg-[#8F108D] hover:text-white transition"
+              className="flex items-center gap-2 rounded p-1 cursor-pointer text-[#8F108D] hover:bg-[#8F108D] hover:text-white transition"
             >
               <input
                 type="checkbox"
                 checked={marcasSeleccionadas.includes(marca)}
                 onChange={() => toggleMarca(marca)}
-                
               />
               {marca}
             </label>
           ))}
         </div>
       </div>
+
     </div>
   );
 }
