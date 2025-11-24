@@ -17,7 +17,7 @@ function User() {
                 {/* -------------------- SERVICIOS (ESTILO IGUAL AL EJEMPLO) ----------- */}
                 <h2 className="text-center text-4xl font-extrabold text-[#8F108D] my-12">
                     NUESTROS SERVICIOS CLAVES
-                </h2>
+                </h2> 
                 <section className="w-full max-w-6xl pb-20 px-4 flex  justify-center gap-9">
                     {[
                         { img: "/public/assets/img/vacunacion.png", title: "Vacunación", url: "/turnos" },
