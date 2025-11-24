@@ -7,7 +7,7 @@ export interface Producto {
   precio: number;
   stock: number;
   descripcion: string;
-  kg: number;
+  kg: number|null;
   marca: string;
   img: string;
   categoria: CategoriaProducto;
@@ -28,9 +28,11 @@ export function useProductos() {
         const res = await fetch("http://localhost:4000/api/v1/productos");
         const data: Producto[] = await res.json();
 
-        // si quieres, puedes transformar opciones_pago para tener más campos
+        // NORMALIZAMOS KG Y PRECIO (VIENEN COMO STRING DESDE DECIMAL)
         const productosTransformados = data.map((p) => ({
           ...p,
+          kg: p.kg !== null ? Number(p.kg) : null,
+          precio: Number(p.precio),
           opciones_pago: p.opciones_pago
             ? {
                 cuotas: p.opciones_pago.cuotas,
@@ -51,3 +53,4 @@ export function useProductos() {
 
   return { productos, loading };
 }
+
