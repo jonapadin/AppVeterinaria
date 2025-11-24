@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { User, Mail, Calendar, Lock, CreditCard, Phone, MapPin, Home } from 'lucide-react';
 import { useState } from 'react';
 import axios from 'axios';
@@ -196,7 +197,7 @@ export default function RegistroForm() {
     try {
       // Endpoint de registro
       await axios.post(
-        "http://localhost:3000/api/v1/cliente", 
+        "http://localhost:4000/api/v1/cliente", 
         formData // Usamos el payload dinámico
       );
 
