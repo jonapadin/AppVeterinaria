@@ -88,7 +88,7 @@ const SectionProductos: React.FC = () => {
     try {
       if (itemParaEditar) {
         await fetchApi(`/producto/${itemParaEditar.id}`, { 
-          method: 'PUT', 
+          method: 'PATCH', 
           body: JSON.stringify(dataToSend) 
         });
       } else {

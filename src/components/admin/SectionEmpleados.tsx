@@ -305,7 +305,7 @@ const App: React.FC = () => {
     try {
       if (itemParaEditar) {
         await fetchApi(`/empleado/${itemParaEditar.id}`, { 
-          method: 'PUT', 
+          method: 'PATCH', 
           body: JSON.stringify(data) 
         });
       } else {

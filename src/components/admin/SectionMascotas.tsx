@@ -101,7 +101,7 @@ const mascotasFiltradas = useMemo(() => {
 
     try {
       if (itemParaEditar) {
-        await fetchApi(`/mascotas/${itemParaEditar.id}`, { method: 'PUT', body: JSON.stringify(dataToSend) });
+        await fetchApi(`/mascotas/${itemParaEditar.id}`, { method: 'PATCH', body: JSON.stringify(dataToSend) });
       } else {
         await fetchApi('/mascotas', { method: 'POST', body: JSON.stringify(dataToSend) });
       }
