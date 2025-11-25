@@ -133,7 +133,7 @@ const SectionInventario: React.FC = () => {
       if (itemParaEditar) {
         // En un PUT, debes enviar los IDs originales
         await fetchApi(`/inventario/${itemParaEditar.id}`, { 
-          method: 'PUT', 
+          method: 'PATCH', 
           body: JSON.stringify(dataToSend) 
         });
       } else {

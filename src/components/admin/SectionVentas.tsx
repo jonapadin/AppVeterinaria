@@ -158,7 +158,7 @@ const SectionVentas: React.FC = () => {
 
     try {
       if (itemParaEditar) {
-        await fetchApi(`/ventas/${itemParaEditar.id_compra}`, { method: 'PUT', body: JSON.stringify(dataToSend) });
+        await fetchApi(`/ventas/${itemParaEditar.id_compra}`, { method: 'PATCH', body: JSON.stringify(dataToSend) });
       } else {
         await fetchApi('/ventas', { method: 'POST', body: JSON.stringify(dataToSend) });
       }

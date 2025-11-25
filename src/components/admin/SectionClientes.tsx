@@ -100,7 +100,7 @@ const SectionClientes: React.FC = () => {
         console.log(`✏️ Editando cliente ${itemParaEditar.id}...`);
         // PUT
         await fetchApi(`/cliente/${itemParaEditar.id}`, { 
-          method: 'PUT', 
+          method: 'PATCH', 
           body: JSON.stringify(data) 
         });
       } else {
