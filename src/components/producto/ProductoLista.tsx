@@ -1,6 +1,8 @@
 import { useProductos, type Producto } from "../producto/Fetch";
 import type { CategoriaProducto } from "../../enums/categoriaProductos";
 import type { SubcategoriaProducto } from "../../enums/subCategoriaProductos";
+import { useCarrito } from "../producto/CarritoContext";
+
 
 interface ProductListProps {
   categoria: CategoriaProducto;
@@ -23,8 +25,9 @@ export default function ProductList({
 }: ProductListProps) {
   const { productos: productosApi } = useProductos();
   const productosAMostrar = productos ?? productosApi;
+  const { agregarAlCarrito } = useCarrito();
 
-  // Filtrar productos (CORREGIDO EL FILTRO DE KG)
+  // Filtrar productos 
   const filtrados = productosAMostrar.filter(
     (p) =>
       p.categoria === categoria &&
@@ -84,11 +87,11 @@ export default function ProductList({
 
           <p className="text-[#8F108D] font-semibold mb-3">${prod.precio}</p>
 
-          <button
-            className="bg-[#8F108D] text-white text-sm md:text-md px-3 md:px-6 py-2 rounded hover:bg-purple-700 transition"
-            onClick={() => console.log("Comprar producto", prod.id)}
-          >
-            Comprar
+         <button
+          className="bg-[#8F108D] text-white text-sm md:text-md px-3 md:px-6 py-2 rounded hover:bg-purple-700 transition"
+         onClick={() => agregarAlCarrito(prod)}
+>
+          Comprar
           </button>
         </div>
       ))}
