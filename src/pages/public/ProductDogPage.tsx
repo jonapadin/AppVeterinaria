@@ -71,9 +71,9 @@ function ProductDogPage() {
     <>
       {/* Banner */}
       <section className="w-full">
-        <div className="h-[280px] sm:h-[250px] md:h-[300px] lg:h-[700px] overflow-hidden">
+        <div className="h-[280px] sm:h-[250px] md:h-[300px] lg:h-[700px] overflow-hidden pt-18">
           <img
-            src="/assets/img/banner-product/banner-dog.png"
+            src="/assets/img/banner-product/perro.jpg"
             alt="banner-perro"
             className="w-full h-full object-top"
           />

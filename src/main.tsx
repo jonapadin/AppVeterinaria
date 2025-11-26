@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { store } from "./app/store";
 import App from "./App";
 import "./index.css";
-import { CarritoProvider } from "./components/producto/CarritoContext";  // <--- IMPORTANTE
+import { CarritoProvider } from "./components/carrito/CarritoContext";  // <--- IMPORTANTE
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

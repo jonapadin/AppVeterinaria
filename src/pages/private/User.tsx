@@ -1,11 +1,11 @@
 function User() {
     return (
         <>
-            <main className="w-full flex flex-col items-center pt-16 md:pt-16 ">
+            <main className="w-full flex flex-col items-center pt-16  ">
 
                 {/* -------------------- BANNER PRINCIPAL -------------------- */}
                 <section className="w-full ">
-                    <div className="h-[280px] sm:h-[250px] md:h-[300px] lg:h-[500px] overflow-hidden">
+                    <div className="h-[190px] md:h-[400px] lg:h-[500px] 2xl:h-[650px] banner overflow-hidden">
                         <img
                             src="/public/assets/img/bannerHome.png"
                             alt="banner"
@@ -15,10 +15,10 @@ function User() {
                 </section>
 
                 {/* -------------------- SERVICIOS (ESTILO IGUAL AL EJEMPLO) ----------- */}
-                <h2 className="text-center text-4xl font-extrabold text-[#8F108D] my-12">
+                <h2 className="text-center text-xl lg:text-4xl font-extrabold text-[#8F108D] my-12 ">
                     NUESTROS SERVICIOS CLAVES
-                </h2> 
-                <section className="w-full max-w-6xl pb-20 px-4 flex  justify-center gap-9">
+                </h2>
+                <section className="w-full max-w-6xl pb-20 px-4 gap-4 grid grid-cols-2 md:grid-cols-4 md:gap-5 lg:grid-cols-4 lg:gap-6 ">
                     {[
                         { img: "/public/assets/img/vacunacion.png", title: "Vacunación", url: "/turnos" },
                         { img: "/public/assets/img/hospitalizacion.png", title: "Turnos", url: "/turnos" },
@@ -49,21 +49,24 @@ function User() {
 
                 {/* -------------------- BANNER CHAT ------------------------- */}
                 <section className="w-full">
-                    <div className="relative h-[200px] sm:h-[250px] md:h-[300px] lg:h-[500px] overflow-hidden">
+                    <div className="relative h-[200px] mb-20 xs:mb-20 md:-mb-28 sm:h-[250px] md:h-[400px] 2xl:h-[500px] 2xl:-mb-[180px] overflow-hidden">
 
                         {/* Imagen del banner */}
                         <img
                             src="/public/assets/img/bannerHome2.png"
                             alt="banner"
-                            className="w-full h-full object-cover object-center"
+                            className="w-full h-full object-cover"
                         />
 
                         {/* Botón posicionado sobre la imagen */}
                         <button
-                            className="absolute text-amber-50 bottom-20 left-1/2 -translate-x-2/2 
-                 text-lg font-bold py-4 px-10 rounded-full 
-                 bg-fuchsia-700 hover:bg-fuchsia-900
-                 transition-all duration-300 transform hover:scale-105 shadow-xl"
+                            className="absolute text-amber-50 justify-center 
+                  font-bold  rounded-full bg-fuchsia-700 hover:bg-fuchsia-900 
+                 transition-all duration-300 transform hover:scale-105 shadow-xl button
+                 bottom-6 left-1/2 -translate-x-1/2 text-xs py-2 px-2
+                 md:bottom-32 md:left-1/2 md:-translate-x-1/2 md:py-4 md:px-4 md:text-lg 
+                 lg:text-2xl lg:py-4 lg:px-6
+                 2xl:bottom-56 2xl:left-1/2 2xl:-translate-x-1/2 2xl:py-5 2xl:px-8 2xl:text-2xl"
                         >
                             Chateá con nosotros
                         </button>
