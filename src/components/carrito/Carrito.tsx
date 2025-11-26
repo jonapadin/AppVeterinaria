@@ -1,6 +1,6 @@
 import React, { useState } from "react"; // 👈 Añadir useState
-import { useCarrito } from "../producto/CarritoContext";
 import { IoClose } from "react-icons/io5";
+import { useCarrito } from "./CarritoContext";
 
 // URL base de tu backend de NestJS (ajusta el puerto/ruta si es necesario)
 const NESTJS_BASE_URL = "http://localhost:4000";
