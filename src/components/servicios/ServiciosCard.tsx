@@ -51,11 +51,11 @@ const ServiceCard: React.FC<Service> = ({ title, description, imgVet, imgDec, al
   
   return (
     <article 
-      className="w-full max-w-sm sm:max-w-md bg-white rounded-xl overflow-hidden shadow-2xl 
+      className="w-full max-w-sm sm:max-w-md rounded-xl overflow-hidden shadow-2xl 
                  transition-all duration-300 hover:shadow-gray-700/80 mb-6 lg:mb-0"
     >
       {/* Sección Superior: Imagen y Decoración */}
-      <div className="relative h-60 md:h-72 bg-purple-100 overflow-hidden flex items-center justify-center p-4">
+      <div className="relative h-60 md:h-72  overflow-hidden flex items-center justify-center p-4">
         
       
         <img 

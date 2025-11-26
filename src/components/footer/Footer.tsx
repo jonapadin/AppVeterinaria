@@ -93,7 +93,7 @@ export default function Footer({ onOpenCarrito }: FooterProps) {
   </div>
 
   {/* Contenido del footer */}
-  <div className="flex w-full justify-evenly items-center pl-[150px] md:pl-[200px] lg:pl-[260px] ">
+  <div className="flex w-full  items-center pl-[150px] md:pl-[200px] lg:pl-[260px] ">
     <div
       className="flex flex-col items-center 
       md:text-xs lg:text-xs xl:text-sm 2xl:text-lg
@@ -111,7 +111,7 @@ export default function Footer({ onOpenCarrito }: FooterProps) {
     <div
       className="flex flex-col items-baseline gap-1
       text-xs md:text-sm lg:text-xs xl:text-lg 2xl:text-lg
-      font-lato font-bold  md:pl-20 lg:pl-30 xl:pl-30 2xl:pl-30"
+      font-lato font-bold "
     >
       <div className="flex items-center gap-2">
         <a
@@ -119,7 +119,7 @@ export default function Footer({ onOpenCarrito }: FooterProps) {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <BiLogoInstagramAlt className=" md:w-4 md:h-4 lg:w-4 lg:h-4 xl:w-6 xl:h-6" />
+          <BiLogoInstagramAlt className=" md:w-4 md:h-4 lg:w-4 lg:h-4 xl:w-6 xl:h-6 ml-20" />
         </a>
         <span>Veterinaria.Ig</span>
       </div>
@@ -130,13 +130,13 @@ export default function Footer({ onOpenCarrito }: FooterProps) {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <AiFillFacebook className="md:w-4 md:h-4 lg:w-4 lg:h-4 xl:w-6 xl:h-6" />
+          <AiFillFacebook className="md:w-4 md:h-4 lg:w-4 lg:h-4 xl:w-6 xl:h-6 ml-20" />
         </a>
         <span>Veterinaria.FB</span>
       </div>
 
       <div className="flex items-center gap-2">
-        <BiLogoGmail className="md:w-4 md:h-4 lg:w-4 lg:h-4 xl:w-6 xl:h-6" />
+        <BiLogoGmail className="md:w-4 md:h-4 lg:w-4 lg:h-4 xl:w-6 xl:h-6 ml-20" />
         <span>veterinaria@gmail.com</span>
       </div>
 
@@ -146,7 +146,7 @@ export default function Footer({ onOpenCarrito }: FooterProps) {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <BsWhatsapp className="md:w-4 md:h-4 lg:w-4 lg:h-4 xl:w-6 xl:h-6 text-green-500" />
+          <BsWhatsapp className="md:w-4 md:h-4 lg:w-4 lg:h-4 xl:w-6 xl:h-6 text-green-500 ml-20" />
         </a>
         <span>228412345678</span>
       </div>
