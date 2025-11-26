@@ -1,7 +1,7 @@
 import { useProductos, type Producto } from "../producto/Fetch";
 import type { CategoriaProducto } from "../../enums/categoriaProductos";
 import type { SubcategoriaProducto } from "../../enums/subCategoriaProductos";
-import { useCarrito } from "../producto/CarritoContext";
+import { useCarrito } from "../carrito/CarritoContext";
 
 
 interface ProductListProps {

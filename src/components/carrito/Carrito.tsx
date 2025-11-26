@@ -1,4 +1,4 @@
-import { useCarrito } from "../producto/CarritoContext";
+import { useCarrito } from "./CarritoContext";
 import { IoClose } from "react-icons/io5";
 
 interface CarritoModalProps {
