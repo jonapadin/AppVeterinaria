@@ -49,13 +49,13 @@ function User() {
 
                 {/* -------------------- BANNER CHAT ------------------------- */}
                 <section className="w-full">
-                    <div className="relative h-[200px] mb-20 xs:mb-20 md:-mb-28 sm:h-[250px] md:h-[400px] 2xl:h-[500px] 2xl:-mb-[180px] overflow-hidden">
+                    <div className="relative w-full h-[180px] mb-20 xs:mb-20 md:-mb-2 sm:h-[300px] md:h-[400px] 2xl:h-[500px] 2xl:mb-0 overflow-hidden">
 
                         {/* Imagen del banner */}
                         <img
                             src="/public/assets/img/bannerHome2.png"
                             alt="banner"
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-center"
                         />
 
                         {/* Botón posicionado sobre la imagen */}
@@ -64,9 +64,9 @@ function User() {
                   font-bold  rounded-full bg-fuchsia-700 hover:bg-fuchsia-900 
                  transition-all duration-300 transform hover:scale-105 shadow-xl button
                  bottom-6 left-1/2 -translate-x-1/2 text-xs py-2 px-2
-                 md:bottom-32 md:left-1/2 md:-translate-x-1/2 md:py-4 md:px-4 md:text-lg 
+                 md:bottom-10 md:left-1/2 md:-translate-x-1/2 md:py-4 md:px-4 md:text-lg 
                  lg:text-2xl lg:py-4 lg:px-6
-                 2xl:bottom-56 2xl:left-1/2 2xl:-translate-x-1/2 2xl:py-5 2xl:px-8 2xl:text-2xl"
+                 2xl:bottom-16 2xl:left-1/2 2xl:-translate-x-1/2 2xl:py-5 2xl:px-8 2xl:text-2xl"
                         >
                             Chateá con nosotros
                         </button>
