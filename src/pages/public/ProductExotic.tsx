@@ -39,7 +39,7 @@ function ProductExotic() {
   // Filtrar productos según subcategoría y filtros
   const productosFiltrados = productos.filter(
     (p) =>
-      p.categoria === ("Gato" as CategoriaProducto) &&
+      p.categoria === ("Exótico" as CategoriaProducto) &&
       p.subcategoria === subcategoria &&
       (filtros.marcas.length === 0 || filtros.marcas.includes(p.marca)) &&
       (filtros.presentaciones.length === 0 ||
@@ -95,7 +95,7 @@ function ProductExotic() {
         <div className="w-full md:w-1/4 hidden md:block">
           <FiltroProductos
             productos={productos}
-            categoriaActual={"Exóticos" as CategoriaProducto}
+            categoriaActual={"Exótico" as CategoriaProducto}
             subcategoriaActual={subcategoria}
             onSelectSubcategoria={(sub) =>
               setSubcategoria(sub as SubcategoriaProducto)
@@ -113,7 +113,7 @@ function ProductExotic() {
 
           {/* Lista de productos */}
           <ProductList
-            categoria={"Exóticos" as CategoriaProducto}
+            categoria={"Exótico" as CategoriaProducto}
             subcategoria={subcategoria}
             filtros={filtros}
             orden={orden}
