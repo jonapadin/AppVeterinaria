@@ -39,10 +39,10 @@ const Categorias = () => {
 
           {/* Título */}
           <div className="text-center my-10">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-800">
-              Categorías
-            </h2>
-            <div className="w-20 h-1 bg-gray-300 mx-auto mt-3"></div>
+              <h2 className="text-center text-xl lg:text-4xl font-extrabold text-[#8F108D] my-12 ">
+                    CATEGORIAS
+                </h2>
+
           </div>
 
           {/* Lista de categorías RESPONSIVA */}
