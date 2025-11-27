@@ -40,7 +40,7 @@ function ProductBirdsPage() {
   // Filtrar productos según subcategoría y filtros
   const productosFiltrados = productos.filter(
     (p) =>
-      p.categoria === ("Gato" as CategoriaProducto) &&
+      p.categoria === ("Ave" as CategoriaProducto) &&
       p.subcategoria === subcategoria &&
       (filtros.marcas.length === 0 || filtros.marcas.includes(p.marca)) &&
       (filtros.presentaciones.length === 0 ||
@@ -96,7 +96,7 @@ function ProductBirdsPage() {
         <div className="w-full md:w-1/4 hidden md:block">
           <FiltroProductos
             productos={productos}
-            categoriaActual={"Aves" as CategoriaProducto}
+            categoriaActual={"Ave" as CategoriaProducto}
             subcategoriaActual={subcategoria}
             onSelectSubcategoria={(sub) =>
               setSubcategoria(sub as SubcategoriaProducto)
@@ -114,7 +114,7 @@ function ProductBirdsPage() {
 
           {/* Lista de productos */}
           <ProductList
-            categoria={"Aves" as CategoriaProducto}
+            categoria={"Ave" as CategoriaProducto}
             subcategoria={subcategoria}
             filtros={filtros}
             orden={orden}
