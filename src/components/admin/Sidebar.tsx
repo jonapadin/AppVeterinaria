@@ -6,20 +6,32 @@ import {
   Heart, 
   Calendar, 
   ShoppingCart, 
+  MessageSquare, // ⬅️ 1. Importar ícono para Chat
 } from 'lucide-react';
+// ⚠️ Nota: Asumo que debes importar el tipo AdminSection desde el archivo AdminDashboard,
+// pero el tipo debe ser extendido para incluir 'Chat'. 
+// Lo hacemos aquí o en AdminDashboard.tsx.
 import type { AdminSection } from './AdminDashboard'; 
+
+
+// 2. Extender el tipo AdminSection
+// (Si AdminDashboard está en otro archivo, DEBES agregar ' | "Chat"' a la definición de AdminSection allí).
+// Ejemplo si estuviera en este mismo archivo:
+// type AdminSection = 'Clientes' | 'Empleados' | 'Mascotas' | 'Turnos' | 'Ventas' | 'Chat';
 
 interface SidebarProps {
   activeSection: AdminSection;
   setActiveSection: React.Dispatch<React.SetStateAction<AdminSection>>;
 }
 
+// 3. Agregar el nuevo item de Chat
 const sidebarItems: { name: string; icon: React.ElementType; key: AdminSection }[] = [
   { name: 'Clientes', icon: Users, key: 'Clientes' },
   { name: 'Empleados', icon: Briefcase, key: 'Empleados' },
   { name: 'Mascotas', icon: Heart, key: 'Mascotas' },
   { name: 'Turnos', icon: Calendar, key: 'Turnos' },
   { name: 'Ventas', icon: ShoppingCart, key: 'Ventas' },
+  { name: 'Chat', icon: MessageSquare, key: 'Chat' }, // ⬅️ Nuevo item de Chat
 ];
 
 const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection }) => {

@@ -188,12 +188,12 @@ const SectionVentas: React.FC = () => {
   // --- RENDER ---
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-gray-800">Gestión de Ventas</h1>
+      <h1 className="text-3xl font-bold text-[#8F108D]">Gestión de Ventas</h1>
       <div className="bg-white p-6 rounded-xl shadow-lg">
         {/* Filtros */}
         <div className="mb-6 space-y-4">
           <div className="flex flex-col md:flex-row gap-4">
-            <div className="relative flex-grow">
+            <div className="relative ">
               <input type="text" placeholder="Buscar por ID Cliente o ID Empleado..."
                 value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
