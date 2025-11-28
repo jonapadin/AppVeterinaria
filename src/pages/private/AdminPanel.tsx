@@ -1,9 +1,10 @@
-import SectionUsuarios from "../../components/admin/SectionUsuarios";
+import AdminDashboard from "../../components/admin/AdminDashboard";
+
 
 export default function AdminPanel() {
   return (
     <div className="p-6">
-      <SectionUsuarios />
+      <AdminDashboard />
     </div>
   );
 }

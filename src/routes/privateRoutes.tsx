@@ -1,0 +1,96 @@
+import type { RouteObject } from "react-router-dom";
+import AdminPanel from "../pages/private/AdminPanel";
+import User from "../pages/private/User";
+import PrivateRoute from "../guards/privateGuard";
+import Profile from "../pages/private/UserProfile";
+import Turns from "../pages/private/Turns";
+import MedicalRecord from "../pages/private/MedicalRecord";
+import Notificaciones from "../pages/private/Notifications";
+import Layout from "../components/layout/Layout";
+import SectionInventarioEmpleado from "../pages/private/Inventary";
+import Categorias from "../components/categoria/Categorias";
+import ProductDogPage from "../pages/public/ProductDogPage";
+import ProductCatPage from "../pages/public/ProductCatPage";
+import ProductBirdsPage from "../pages/public/ProductBirdsPage";
+import ProductExotic from "../pages/public/ProductExotic";
+import ServicePage from "../pages/public/ServicePage";
+export const privateRoutes: RouteObject[] = [
+  {
+    path: "/admin",
+    element: <Layout />,
+    children: [
+      {
+        element: <PrivateRoute allowedRoles={["admin"]} />,
+        children: [
+          {
+            index: true,
+            element: <AdminPanel />
+          },
+          {
+            path: "inventary",
+            element: <SectionInventarioEmpleado />,
+          },
+        ]
+      }
+    ]
+  },
+  {
+    path: "/user",
+    element: <Layout />,
+    children: [
+      {
+        element: <PrivateRoute allowedRoles={["user"]} />,
+        children: [
+          {
+            index: true,
+            element: <User />,
+          },
+          {
+            path: "profile",
+            element: <Profile />,
+          },
+          {
+            path: "turns",
+            element: <Turns />,
+          },
+          {
+            path: "medical-record",
+            element: <MedicalRecord />
+          },
+          {
+            path: "notifications",
+            element: <Notificaciones />,
+          },
+          {
+            path: "categoria",
+            element: <Categorias />,
+            children: [
+              {
+                path: "productosPerro",
+                element: <ProductDogPage />,
+              },
+              {
+                path: "productosGato",
+                element: <ProductCatPage />,
+              },
+              {
+                path: "productosAves",
+                element: <ProductBirdsPage />
+              },
+              {
+                path: "productosExoticos",
+                element: <ProductExotic />
+              },
+              {
+                path: "services",
+
+                element: <ServicePage />,
+              },
+            ]
+          },
+        ],
+      },
+    ],
+  },
+
+];

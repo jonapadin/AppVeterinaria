@@ -1,1 +1,92 @@
-  @import "tailwindcss";
+@import "tailwindcss";
+
+/*custom tailwindcss*/
+
+@theme {
+  --breakpoint-xs: 23.5rem;
+  /* 375px = 23.5rem (celulares) */
+  --breakpoint-3xl: 120rem;
+  /* 1920px = 120rem */
+  /*Ultrawide*/
+  --breakpoint-4xl: 160rem;
+  /* 2560px = 160rem */
+}
+
+/* En tu archivo CSS principal (ej. index.css o global.css) */
+/* @tailwind base; */
+/* @tailwind components; */
+/* @tailwind utilities; */
+/**/
+@layer components {
+
+  /* Estilos reutilizables para inputs y botones */
+  .label-tailwind {
+    @apply block text-sm font-medium text-gray-700 dark:text-gray-300 bg-transparent;
+    /* O usa dark:bg-gray-800 si necesitas que tape algo */
+  }
+
+  .input-tailwind {
+    @apply block w-full px-3 py-2 border shadow-sm
+    /* 1. Aumentamos el redondeado y quitamos estilos nativos */
+    rounded-lg appearance-none
+    /* Colores (Corrección anterior) */
+    bg-white text-gray-900 border-gray-300
+    /* Foco */
+    focus:outline-none focus:ring-blue-500 focus:border-blue-500;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold shadow-lg hover:bg-blue-700 transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500;
+  }
+
+  /* Estilos para etiquetas de formulario */
+  .label-tailwind {
+    @apply block text-sm font-medium text-gray-700 dark:text-gray-300 bg-white;
+  }
+
+  /* Estilos reutilizables para Tablas */
+  .th-cell {
+    @apply px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider;
+  }
+
+  .td-cell {
+    @apply px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300;
+  }
+
+  .td-center {
+    @apply px-6 py-6 text-center text-gray-500 dark:text-gray-400;
+  }
+
+
+}
+
+@media (min-width: 375px) and (max-width: 390px) {
+
+  /* Estilos específicos para pantallas ultrawide */
+  .buscador {
+    width: 250px;
+  }
+}
+
+@media (min-width: 400px) and (max-width: 500px) {
+
+  /* Estilos específicos para pantallas ultrawide */
+  .buscador {
+    width: 250px;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 768px) {
+
+  /* Estilos específicos para pantallas ultrawide */
+  .buscador {
+    width: 350px;
+  }
+
+}
+
+

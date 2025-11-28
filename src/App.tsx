@@ -1,18 +1,11 @@
- {/* import Turns from "./pages/private/Turns" */}
-import AdminPanel from "./pages/private/AdminPanel";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { publicRoutes } from "./routes/publicRoutes";
+import { privateRoutes } from "./routes/privateRoutes";
 
-
-
+const router = createBrowserRouter([...publicRoutes, ...privateRoutes]);
 
 function App() {
-
-
-  return (
-    <>
-    <AdminPanel />
-    {/*  <Turns/> */}
-    </>
-  )
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;
