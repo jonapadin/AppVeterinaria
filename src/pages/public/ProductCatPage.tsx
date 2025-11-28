@@ -72,7 +72,7 @@ function ProductCatPage() {
     <>
       {/* Banner */}
       <section className="w-full">
-        <div className="h-[180px] sm:h-[250px] md:h-[300px] lg:h-[700px] overflow-hidden">
+        <div className="h-[180px] sm:h-[250px] md:h-[300px] lg:h-[700px] overflow-hidden pt-12 md:pt-16 2xl:pt-18">
           <img
             src="/assets/img/banner-product/banner-gato.avif"
             alt="banner-gato"

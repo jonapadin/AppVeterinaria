@@ -72,7 +72,7 @@ function ProductExotic() {
     <>
       {/* Banner */}
       <section className="w-full">
-        <div className="h-[180px] sm:h-[250px] md:h-[300px] lg:h-[700px] overflow-hidde ">
+        <div className="h-[180px] sm:h-[250px] md:h-[300px] lg:h-[700px] overflow-hidde pt-12 md:pt-18  ">
           <img
             src="/assets/img/banner-product/exo.webp"
             alt="banner-exoticos"
