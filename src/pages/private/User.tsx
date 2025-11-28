@@ -1,7 +1,18 @@
-function User() {
+import React, { useState } from 'react';
+// Asegúrate de que la ruta de importación sea correcta
+import LiveChatModal from '../../components/chat/Chat'; 
+
+const User: React.FC = () => {
+    
+    // 1. Estado y funciones para el Modal de Chat
+    const [isChatOpen, setIsChatOpen] = useState(false);
+
+    const handleOpenChat = () => setIsChatOpen(true);
+    const handleCloseChat = () => setIsChatOpen(false);
+
     return (
         <>
-            <main className="w-full flex flex-col items-center pt-16  ">
+            <main className="w-full flex flex-col items-center pt-16  ">
 
                 {/* -------------------- BANNER PRINCIPAL -------------------- */}
                 <section className="w-full ">
@@ -47,7 +58,7 @@ function User() {
                     ))}
                 </section>
 
-                {/* -------------------- BANNER CHAT ------------------------- */}
+                {/* -------------------- BANNER CHAT Y BOTÓN ------------------------- */}
                 <section className="w-full">
                     <div className="relative w-full h-[180px] mb-20 xs:mb-20 md:-mb-2 sm:h-[300px] md:h-[400px] 2xl:h-[500px] 2xl:mb-0 overflow-hidden">
 
@@ -58,15 +69,17 @@ function User() {
                             className="w-full h-full object-center"
                         />
 
-                        {/* Botón posicionado sobre la imagen */}
+                        {/* Botón posicionado sobre la imagen (¡AQUÍ ESTÁ LA INTEGRACIÓN!) */}
                         <button
+                            // 2. Asignación del manejador de apertura
+                            onClick={handleOpenChat}
                             className="absolute text-amber-50 justify-center 
-                  font-bold  rounded-full bg-fuchsia-700 hover:bg-fuchsia-900 
-                 transition-all duration-300 transform hover:scale-105 shadow-xl button
-                 bottom-6 left-1/2 -translate-x-1/2 text-xs py-2 px-2
-                 md:bottom-10 md:left-1/2 md:-translate-x-1/2 md:py-4 md:px-4 md:text-lg 
-                 lg:text-2xl lg:py-4 lg:px-6
-                 2xl:bottom-16 2xl:left-1/2 2xl:-translate-x-1/2 2xl:py-5 2xl:px-8 2xl:text-2xl"
+                                       font-bold rounded-full bg-fuchsia-700 hover:bg-fuchsia-900 
+                                       transition-all duration-300 transform hover:scale-105 shadow-xl button
+                                       bottom-6 left-1/2 -translate-x-1/2 text-xs py-2 px-2
+                                       md:bottom-10 md:left-1/2 md:-translate-x-1/2 md:py-4 md:px-4 md:text-lg 
+                                       lg:text-2xl lg:py-4 lg:px-6
+                                       2xl:bottom-16 2xl:left-1/2 2xl:-translate-x-1/2 2xl:py-5 2xl:px-8 2xl:text-2xl"
                         >
                             Chateá con nosotros
                         </button>
@@ -74,6 +87,11 @@ function User() {
                     </div>
                 </section>
 
+                {/* 3. Renderizado Condicional del Modal */}
+                <LiveChatModal 
+                    isOpen={isChatOpen} 
+                    onClose={handleCloseChat} 
+                />
 
             </main>
         </>

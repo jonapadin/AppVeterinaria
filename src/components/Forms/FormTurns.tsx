@@ -531,8 +531,8 @@ setAppointments(mappedAppointments);
                         </h2>
                         
                         {availablePets.length === 0 ? (
-                            <div className="bg-yellow-50 text-yellow-800 p-4 rounded-lg">
-                                🚨 No tienes mascotas registradas. Por favor, registra una mascota primero para solicitar un turno.
+                            <div className="bg-pink-100 text-gray-800 p-4 rounded-lg">
+                             No tienes mascotas registradas. Por favor, registra una mascota primero para solicitar un turno.
                             </div>
                         ) : (
                             <BookingForm 
@@ -571,8 +571,8 @@ setAppointments(mappedAppointments);
                                     ))}
                                 </div>
                             ) : (
-                                <div className="bg-yellow-50 text-yellow-800 p-4 rounded-lg">
-                                   🚨 No tienes turnos pendientes.
+                                <div className="bg-pink-100 text-gray-800  p-4 rounded-lg">
+                                   No tienes turnos pendientes.
                                 </div>
                             )}
                         </div>
