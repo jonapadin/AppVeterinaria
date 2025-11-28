@@ -510,9 +510,9 @@ setAppointments(mappedAppointments);
 
 
     return (
-        <div className="min-h-screen bg-gray-100 p-4 md:p-10">
+        <div className="min-h-screen bg-gray-100 mt-14 md:p-10">
             <div className="max-w-7xl mx-auto">
-                <h1 className="text-4xl font-extrabold text-gray-900 mb-8">
+                <h1 className="text-center text-xl lg:text-4xl font-extrabold text-[#8F108D] my-12">
                     Reserva y Gestión de Turnos
                 </h1>
                 
@@ -526,13 +526,13 @@ setAppointments(mappedAppointments);
 
                     {/* --- COLUMNA 1: FORMULARIO --- */}
                     <div className="lg:col-span-3 bg-white p-8 rounded-2xl shadow-xl mb-8 lg:mb-0">
-                        <h2 className="text-2xl font-bold text-blue-700 mb-6">
+                        <h2 className="text-2xl font-bold text-[#8F108D] mb-6">
                             {editingAppointment ? 'Modificar Turno' : 'Solicitar Nuevo Turno'}
                         </h2>
                         
                         {availablePets.length === 0 ? (
-                            <div className="bg-yellow-50 text-yellow-800 p-4 rounded-lg">
-                                🚨 No tienes mascotas registradas. Por favor, registra una mascota primero para solicitar un turno.
+                            <div className="bg-pink-100 text-gray-800 p-4 rounded-lg">
+                             No tienes mascotas registradas. Por favor, registra una mascota primero para solicitar un turno.
                             </div>
                         ) : (
                             <BookingForm 
@@ -555,8 +555,8 @@ setAppointments(mappedAppointments);
                     {/* --- COLUMNA 2: TURNOS RESERVADOS --- */}
                     <aside className="lg:col-span-2">
                         <div>
-                            <h2 className="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
-                                <FaCheckCircle className="text-blue-600" />
+                            <h2 className="text-3xl font-bold text-[#8F108D] mb-6 flex items-center gap-3">
+                                <FaCheckCircle className="text-[#8F108D]" />
                                 Tus Próximos Turnos
                             </h2>
                             {appointments.length > 0 ? (
@@ -571,8 +571,8 @@ setAppointments(mappedAppointments);
                                     ))}
                                 </div>
                             ) : (
-                                <div className="bg-white p-6 rounded-lg shadow-md text-center text-gray-500">
-                                    No tienes turnos pendientes.
+                                <div className="bg-pink-100 text-gray-800  p-4 rounded-lg">
+                                   No tienes turnos pendientes.
                                 </div>
                             )}
                         </div>
