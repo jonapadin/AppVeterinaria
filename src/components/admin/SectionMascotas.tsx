@@ -126,12 +126,12 @@ const mascotasFiltradas = useMemo(() => {
   // --- RENDER ---
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-gray-800">Gestión de Mascotas</h1>
+      <h1 className="text-3xl font-bold text-[#8F108D]">Gestión de Mascotas</h1>
       <div className="bg-white p-6 rounded-xl shadow-lg">
         {/* Barra de Filtros */}
         <div className="mb-6 space-y-4">
           <div className="flex flex-col md:flex-row gap-4">
-            <div className="relative flex-grow">
+            <div className="relative ">
               <input
                 type="text"
                 placeholder="Buscar por Nombre, Raza, ID Cliente..."

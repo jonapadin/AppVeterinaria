@@ -139,7 +139,7 @@ const SectionClientes: React.FC = () => {
   // --- RENDER ---
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-gray-800">Gestión de Clientes</h1>
+      <h1 className="text-3xl font-bold text-[#8F108D]">Gestión de Clientes</h1>
 
       <div className="bg-white p-6 rounded-xl shadow-lg">
         

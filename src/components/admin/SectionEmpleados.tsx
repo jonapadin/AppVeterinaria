@@ -368,9 +368,9 @@ const App: React.FC = () => {
   return (
     <>
     <style>{customStyles}</style>
-    <div className="p-4 sm:p-6 lg:p-8 space-y-6 min-h-screen bg-gray-100 font-sans">
-      <h1 className="text-4xl font-extrabold text-indigo-700 mb-6 border-b pb-2">Gestión de Empleados</h1>
-      <div className="bg-white p-6 rounded-xl shadow-2xl">
+    <div className="space-y-6">
+      <h1 className="text-3xl font-bold text-[#8F108D]">Gestión de Empleados</h1>
+      <div className="bg-white p-6 rounded-xl shadow-lg">
         {/* Barra de Filtros y Acciones */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
           <div className="relative w-full md:w-1/3">
@@ -394,7 +394,7 @@ const App: React.FC = () => {
 
 
         {/* Tabla de Empleados */}
-        <div className="overflow-x-auto border border-gray-200 rounded-lg shadow-sm">
+        <div className="overflow-x-auto rounded-lg shadow-sm">
           <table className="min-w-full divide-y divide-gray-200">
             <thead>
               <tr>
