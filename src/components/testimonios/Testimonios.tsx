@@ -9,12 +9,12 @@ export interface Testimonio {
 function TestimonioLista({ testimonios }: { testimonios: Testimonio[] }) {
   return (
     <section className="py-10">
-      <h3 className="text-center text-2xl md:text-3xl font-bold mb-6 uppercase">
+      <h3 className="text-center text-2xl md:text-3xl font-bold mb-6 2xl:mb-10 uppercase">
         Testimonios
       </h3>
 
       <div className="grid grid-cols-1 xs:grid-cols-1  md:grid-cols-3 lg:grid-cols-3
-       xl:grid-cols-3 gap-1 xs:gap-1 sm:gap-1 md:gap-5 lg:gap-6 px-4 lg:max-w-7xl mx-auto">
+       xl:grid-cols-3 gap-1 xs:gap-1 sm:gap-1 md:gap-5 lg:gap-6 2xl:gap-8 px-4 lg:max-w-7xl mx-auto">
         {testimonios.map((testimonio, index) => (
           <article key={index} className="relative rounded-lg ">
             {/* contenedor-superpuesto */}
