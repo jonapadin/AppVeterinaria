@@ -1,4 +1,4 @@
-import { useEffect, useState, type useMemo, type FC } from 'react';
+import { useEffect, useState, type FC } from 'react';
 import { Link } from 'react-router-dom';
 // Importamos todas las iconos necesarios
 import { FaRegUser, FaEnvelope, FaPhone, FaCalendarAlt, FaIdCard, FaMapMarkerAlt, FaHome, FaCamera, FaSave } from "react-icons/fa"; 
@@ -84,7 +84,7 @@ function Formulario() {
   const [shouldRemovePhoto, setShouldRemovePhoto] = useState(false);
 
   // URL del endpoint (Ajustar a tu API real)
-  const API_URL = "http://localhost:4000/api/v1/cliente/perfil"; 
+  // const API_URL = "http://localhost:4000/api/v1/cliente/perfil"; 
 
   // LÓGICA DE CARGA INICIAL (Simulación de GET)
   useEffect(() => {
