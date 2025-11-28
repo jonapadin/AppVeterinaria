@@ -20,9 +20,9 @@ function User() {
                 </h2>
                 <section className="w-full max-w-6xl pb-20 px-4 gap-4 grid grid-cols-2 md:grid-cols-4 md:gap-5 lg:grid-cols-4 lg:gap-6 ">
                     {[
-                        { img: "/public/assets/img/vacunacion.png", title: "Vacunación", url: "/turns" },
-                        { img: "/public/assets/img/hospitalizacion.png", title: "Turnos", url: "/turns" },
-                        { img: "/public/assets/img/historiaclinica.png", title: "Historia Clínica", url: "/medical-record" },
+                        { img: "/public/assets/img/vacunacion.png", title: "Vacunación", url: "/user/turns" },
+                        { img: "/public/assets/img/hospitalizacion.png", title: "Turnos", url: "/user/turns" },
+                        { img: "/public/assets/img/historiaclinica.png", title: "Historia Clínica", url: "/user/medical-record" },
                         { img: "/public/assets/img/productos 1.png", title: "Productos", url: "/categoria" }
                     ].map((s, i) => (
                         <a

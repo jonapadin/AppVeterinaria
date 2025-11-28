@@ -10,7 +10,7 @@ export default function ResetPass() {
       <div className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-2xl md:p-10">
         {/* Encabezado */}
         <div className="mb-6 text-left">
-          <h1 className="text-3xl font-bold text-gray-800">
+          <h1 className="text-center text-xl lg:text-4xl font-extrabold text-[#8F108D] my-12">
             Restablece tu Clave
           </h1>
           <p className="mt-2 text-gray-500">
