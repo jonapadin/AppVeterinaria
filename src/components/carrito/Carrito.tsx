@@ -30,7 +30,7 @@ export default function Carrito({ onClose }: CarritoModalProps) {
     try {
       // 2. Llamar al endpoint de NestJS para crear la preferencia
       const response = await fetch(
-        // 🛑 NOTA: Debes crear este endpoint en NestJS
+        //  NOTA: Debes crear este endpoint en NestJS
         `${NESTJS_BASE_URL}/api/v1/checkout`,
         {
           method: "POST",
@@ -77,7 +77,7 @@ export default function Carrito({ onClose }: CarritoModalProps) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl lg:text-2xl   font-bold text-[#8F108D]">
+          <h2 className="text-xl lg:text-2xl 2xl:text-4xl  font-bold text-[#8F108D]">
             Carrito
           </h2>
           <button className="text-2xl text-gray-700" onClick={onClose}>
@@ -86,7 +86,7 @@ export default function Carrito({ onClose }: CarritoModalProps) {
         </div>
         <div className="flex-1 overflow-y-auto">
           {carrito.length === 0 ? (
-            <p className="text-gray-500">Tu carrito está vacío.</p>
+            <p className="text-gray-500 2xl:text-xl">Tu carrito está vacío.</p>
           ) : (
             carrito.map((item) => (
               <div
@@ -106,12 +106,17 @@ export default function Carrito({ onClose }: CarritoModalProps) {
                   <div className="flex gap-2 mt-1">
                     <button
                       onClick={() => restar(item.producto.id)}
-                      className="px-2 py-1 bg-gray-200 rounded"
-                    ></button>
+                        className="px-2 py-1 bg-gray-200 rounded"
+                      
+                    >
+                      -
+                    </button>
                     <button
                       onClick={() => sumar(item.producto.id)}
                       className="px-2 py-1 bg-gray-200 rounded"
-                    ></button>
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
                 <button
@@ -125,10 +130,10 @@ export default function Carrito({ onClose }: CarritoModalProps) {
           )}
         </div>
         <div className="mt-4">
-          <p className="font-bold mb-2">Total: ${total}</p>
+          <p className="font-bold lg:text-lg xl:text-xl 2xl:text-2xl mb-2">Total: ${total}</p>
           <button
-            onClick={handleCheckout} // 👈 ¡Llamar a la función de pago!
-            disabled={carrito.length === 0 || isSubmitting} // 👈 Deshabilitar si está vacío o enviando
+            onClick={handleCheckout} // ¡Llamar a la función de pago!
+            disabled={carrito.length === 0 || isSubmitting} //  Deshabilitar si está vacío o enviando
             className={`w-full py-2 bg-[#8F108D] text-white font-semibold rounded
  ${carrito.length === 0 || isSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
           >
