@@ -498,7 +498,7 @@ export default function RegistroForm() {
 
         <div className="mb-6 text-left">
 
-          <h1 className="text-3xl font-bold text-gray-800">Crea tu Cuenta</h1>
+          <h1 className="text-center text-xl lg:text-4xl font-extrabold text-[#8F108D] my-12">Creá tu Cuenta</h1>
 
           <p className="mt-2 text-gray-500">Completa tus datos para unirte.</p>
 
