@@ -21,47 +21,107 @@ const CarritoContext = createContext<CarritoContextType | undefined>(undefined);
 export function CarritoProvider({ children }: { children: ReactNode }) {
   const [carrito, setCarrito] = useState<ItemCarrito[]>([]);
 
+  // 🟣 AGREGAR AL CARRITO ↓
   function agregarAlCarrito(producto: Producto) {
     setCarrito((prev) => {
-      const existente = prev.find((item) => item.producto.id === producto.id);
-      if (existente) {
-        if (existente.cantidad >= producto.stock) return prev;
+      const itemExistente = prev.find((p) => p.producto.id === producto.id);
+
+      if (itemExistente) {
+        if (itemExistente.producto.stock <= 0) return prev;
+
         return prev.map((item) =>
           item.producto.id === producto.id
-            ? { ...item, cantidad: item.cantidad + 1 }
+            ? {
+                ...item,
+                cantidad: item.cantidad + 1,
+                producto: {
+                  ...item.producto,
+                  stock: item.producto.stock - 1,
+                },
+              }
             : item
         );
       }
-      return [...prev, { producto, cantidad: 1 }];
+
+      return [
+        ...prev,
+        {
+          producto: { ...producto, stock: producto.stock - 1 },
+          cantidad: 1,
+        },
+      ];
     });
   }
 
+  // 🟣 SUMAR (+) ↓
   function sumar(id: number) {
     setCarrito((prev) =>
-      prev.map((item) =>
-        item.producto.id === id
-          ? item.cantidad < item.producto.stock
-            ? { ...item, cantidad: item.cantidad + 1 }
-            : item
-          : item
-      )
+      prev.map((item) => {
+        if (item.producto.id !== id) return item;
+
+        if (item.producto.stock <= 0) return item; // ❗ evitar sumar sin stock
+
+        return {
+          ...item,
+          cantidad: item.cantidad + 1,
+          producto: {
+            ...item.producto,
+            stock: item.producto.stock - 1,
+          },
+        };
+      })
     );
   }
 
+  // 🟣 RESTAR (–) ↓
   function restar(id: number) {
     setCarrito((prev) =>
       prev
-        .map((item) =>
-          item.producto.id === id
-            ? { ...item, cantidad: item.cantidad - 1 }
-            : item
-        )
-        .filter((item) => item.cantidad > 0)
+        .map((item) => {
+          if (item.producto.id !== id) return item;
+
+          // Si queda 1 → lo sacamos del carrito
+          if (item.cantidad <= 1) {
+            return null;
+          }
+
+          return {
+            ...item,
+            cantidad: item.cantidad - 1,
+            producto: {
+              ...item.producto,
+              stock: item.producto.stock + 1,
+            },
+          };
+        })
+        .filter(Boolean) as ItemCarrito[]
     );
   }
 
+  // 🟣 ELIMINAR (devuelve todo el stock del item)
   function eliminar(id: number) {
-    setCarrito((prev) => prev.filter((item) => item.producto.id !== id));
+    setCarrito((prev) => {
+      const item = prev.find((i) => i.producto.id === id);
+      if (!item) return prev;
+
+      const devolverStock = item.cantidad;
+
+      // 1️⃣ devolver stock
+      const actualizados = prev.map((i) =>
+        i.producto.id === id
+          ? {
+              ...i,
+              producto: {
+                ...i.producto,
+                stock: i.producto.stock + devolverStock,
+              },
+            }
+          : i
+      );
+
+      // 2️⃣ quitar del carrito
+      return actualizados.filter((i) => i.producto.id !== id);
+    });
   }
 
   const total = carrito.reduce(
