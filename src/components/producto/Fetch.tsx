@@ -31,6 +31,7 @@ export function useProductos() {
         // NORMALIZAMOS KG Y PRECIO (VIENEN COMO STRING DESDE DECIMAL)
         const productosTransformados = data.map((p) => ({
           ...p,
+            marca: p.marca.trim(),
           kg: p.kg !== null ? Number(p.kg) : null,
           precio: Number(p.precio),
           opciones_pago: p.opciones_pago

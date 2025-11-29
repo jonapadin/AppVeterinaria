@@ -98,33 +98,36 @@ export default function FiltroProductos({
       {openMobileMenu && (
         <div className="lg:hidden flex flex-col text-center xs:text-sm border-3 border-[#8F108D] p-2 rounded-md">
 
-          {/* PRESENTACIONES */}
-          <button
-            onClick={() => setOpenKg(!openKg)}
-            className="font-bold p-1 bg-[#D9D9D9] text-black w-full flex justify-between items-center"
+        {/* PRESENTACIONES — solo si existen kg */}
+{kgs.length > 0 && (
+  <>
+    <button
+      onClick={() => setOpenKg(!openKg)}
+      className="font-bold p-1 bg-[#D9D9D9] text-black w-full flex justify-between items-center"
+    >
+      Presentaciones (kg)
+      {openKg ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+    </button>
+
+    {openKg && (
+      <div className="grid grid-cols-2 gap-2 mb-2">
+        {kgs.map((kg) => (
+          <label
+            key={kg}
+            className="flex items-center gap-2 rounded p-2 cursor-pointer text-[#8F108D] hover:bg-[#8F108D] hover:text-white transition"
           >
-            Presentaciones (kg)
-            {openKg ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-          </button>
-
-          {openKg && (
-            <div className="grid grid-cols-2 gap-2 mb-2">
-              {kgs.map((kg) => (
-                <label
-                  key={kg}
-                  className="flex items-center gap-2 rounded p-2 cursor-pointer text-[#8F108D] hover:bg-[#8F108D] hover:text-white transition"
-                >
-                  <input
-                    type="checkbox"
-                    checked={kgsSeleccionados.includes(kg)}
-                    onChange={() => toggleKg(kg)}
-                  />
-                  {kg} kg
-                </label>
-              ))}
-            </div>
-          )}
-
+            <input
+              type="checkbox"
+              checked={kgsSeleccionados.includes(kg)}
+              onChange={() => toggleKg(kg)}
+            />
+            {kg} kg
+          </label>
+        ))}
+      </div>
+    )}
+  </>
+)}
           {/* MARCAS */}
           <button
             onClick={() => setOpenMarca(!openMarca)}
@@ -155,11 +158,11 @@ export default function FiltroProductos({
       )}
 
       {/* FILTRO DESKTOP (desde 1024px) */}
-      <div className="hidden lg:flex flex-col text-center md:text-base 2xl:text-2xl border-5 border-[#8F108D] p-6 rounded-md">
+      <div className="hidden lg:flex flex-col text-center  md:text-base 2xl:text-xl border-5 border-[#8F108D] p-6 rounded-md">
 
         {/* SUBCATEGORÍAS */}
         <div>
-          <h3 className="font-bold p-3 bg-[#D9D9D9] text-black 2xl:text-2xl">Subcategorías:</h3>
+          <h3 className="font-bold p-3 bg-[#8F108D] text-white  rounded-md 2xl:text-xl">Subcategorías:</h3>
           <div className="flex flex-col">
             {subcategorias.map((sub) => (
               <button
@@ -178,31 +181,33 @@ export default function FiltroProductos({
         </div>
 
         {/* KG DESKTOP */}
-        <div className="mt-4">
-          <h3 className="font-bold mb-3 p-3 bg-[#D9D9D9] text-black 2xl:text-2xl">
-            Presentaciones (kg):
-          </h3>
+       {kgs.length > 0 && (
+  <div className="mt-4">
+    <h3 className="font-bold mb-3 p-3 bg-[#8F108D] text-white  rounded-md 2xl:text-xl">
+      Presentaciones (kg):
+    </h3>
 
-          <div className="grid grid-cols-2 gap-2">
-            {kgs.map((kg) => (
-              <label
-                key={kg}
-                className="flex items-center gap-2 rounded p-3 cursor-pointer text-[#8F108D] hover:bg-[#8F108D] hover:text-white transition"
-              >
-                <input
-                  type="checkbox"
-                  checked={kgsSeleccionados.includes(kg)}
-                  onChange={() => toggleKg(kg)}
-                />
-                {kg} kg
-              </label>
-            ))}
-          </div>
-        </div>
+    <div className="grid grid-cols-2 gap-2">
+      {kgs.map((kg) => (
+        <label
+          key={kg}
+          className="flex items-center gap-2 rounded p-3 cursor-pointer text-[#8F108D] hover:bg-[#8F108D] hover:text-white transition"
+        >
+          <input
+            type="checkbox"
+            checked={kgsSeleccionados.includes(kg)}
+            onChange={() => toggleKg(kg)}
+          />
+          {kg} kg
+        </label>
+      ))}
+    </div>
+  </div>
+)}
 
         {/* MARCAS DESKTOP */}
         <div className="mt-4">
-          <h3 className="font-bold mb-3 p-3 bg-[#D9D9D9] text-black 2xl:text-2xl">
+          <h3 className="font-bold mb-3 p-3 bg-[#8F108D] text-white  rounded-md 2xl:text-xl ">
             Marca:
           </h3>
 
