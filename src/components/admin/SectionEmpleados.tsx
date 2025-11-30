@@ -394,7 +394,7 @@ const App: React.FC = () => {
 
 
         {/* Tabla de Empleados */}
-        <div className="overflow-x-auto rounded-lg shadow-sm">
+        <div className="overflow-x-auto rounded-lg">
           <table className="min-w-full divide-y divide-gray-200">
             <thead>
               <tr>
