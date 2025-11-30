@@ -114,7 +114,7 @@ export default function Carrito({ onClose }: CarritoModalProps) {
                     <button
                       onClick={() => restar(item.producto.id)}
                       className="px-2 py-1 bg-gray-200 rounded"
-                      className="px-2 py-1 bg-gray-200 rounded"
+                     
                     >
                       -
                     </button>
