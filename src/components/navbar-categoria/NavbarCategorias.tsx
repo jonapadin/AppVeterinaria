@@ -5,7 +5,7 @@ import type { Producto } from "../producto/Fetch";
 import type { SubcategoriaProducto } from "../../enums/subCategoriaProductos";
 
 interface NavbarCategoriasProps {
-  categoriaActual: "Perro" | "Gato" | "Aves" | "Exóticos";
+  categoriaActual: "Perro" | "Gato" | "Ave" | "Exótico";
   productos: Producto[];
    onSelectSubcategoria: (subcategoria: SubcategoriaProducto) => void
 }
@@ -21,8 +21,8 @@ function NavbarCategorias({ categoriaActual, productos, onSelectSubcategoria }: 
   const categorias = [
     { nombre: "Perro", path: "/categoria/productosPerro" },
     { nombre: "Gato", path: "/categoria/productosGato" },
-    { nombre: "Aves", path: "/categoria/productosAves" },
-    { nombre: "Exóticos", path: "/categoria/productosExoticos" },
+    { nombre: "Ave", path: "/categoria/productosAves" },
+    { nombre: "Exótico", path: "/categoria/productosExoticos" },
   ];
 
   const handleToggle = (nombre: string) => setOpenMenu(openMenu === nombre ? null : nombre);

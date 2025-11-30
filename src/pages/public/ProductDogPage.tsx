@@ -1,4 +1,4 @@
-// src/pages/public/ProductDogPage.tsx
+
 import { useState, useEffect } from "react";
 import NavbarCategorias from "../../components/navbar-categoria/NavbarCategorias";
 import FiltroProductos from "../../components/producto/FiltroProducto";
@@ -130,7 +130,6 @@ function ProductDogPage() {
             subcategoria={subcategoria}
             filtros={filtros}
             orden={orden}
-            setOrden={setOrden}
             productos={currentProducts}
           />
 
