@@ -376,7 +376,6 @@ export default function RegistroForm() {
           <div>
             <div className="relative">
               <span className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-400">
-
                 <Home size={20} />
               </span>
               <input
@@ -451,6 +450,9 @@ export default function RegistroForm() {
             >
               YA TENGO UNA CUENTA
             </button>
+            >
+              YA TENGO UNA CUENTA
+            </button>
           </Link>
         </form>
 
@@ -470,3 +472,4 @@ export default function RegistroForm() {
     </div>
   );
 }
+
