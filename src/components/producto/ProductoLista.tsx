@@ -2,6 +2,8 @@ import { useProductos, type Producto } from "../producto/Fetch";
 import type { CategoriaProducto } from "../../enums/categoriaProductos";
 import type { SubcategoriaProducto } from "../../enums/subCategoriaProductos";
 import { useCarrito } from "../carrito/CarritoContext";
+import { formatearPrecio } from "./FormatoPrecios";
+import toast from "react-hot-toast";
 
 
 interface ProductListProps {
@@ -9,18 +11,15 @@ interface ProductListProps {
   subcategoria: SubcategoriaProducto;
   filtros: { presentaciones: string[]; marcas: string[] };
   orden: "menor-mayor" | "mayor-menor" | "a-z" | "z-a";
-  setOrden: React.Dispatch<
-    React.SetStateAction<"menor-mayor" | "mayor-menor" | "a-z" | "z-a">
-  >;
   productos?: Producto[];
 }
+
 
 export default function ProductList({
   categoria,
   subcategoria,
   filtros,
   orden,
-  setOrden,
   productos,
 }: ProductListProps) {
   const { productos: productosApi } = useProductos();
@@ -41,19 +40,19 @@ export default function ProductList({
 
   // Ordenar productos
   const ordenados = [...filtrados].sort((a, b) => {
-    switch (orden) {
-      case "menor-mayor":
-        return a.precio - b.precio;
-      case "mayor-menor":
-        return b.precio - a.precio;
-      case "a-z":
-        return a.marca.localeCompare(b.marca);
-      case "z-a":
-        return b.marca.localeCompare(a.marca);
-      default:
-        return 0;
-    }
-  });
+  switch (orden) {
+    case "menor-mayor":
+      return a.precio - b.precio;
+    case "mayor-menor":
+      return b.precio - a.precio;
+    case "a-z":
+      return a.marca.localeCompare(b.marca, undefined, { sensitivity: "base" });
+    case "z-a":
+      return b.marca.localeCompare(a.marca, undefined, { sensitivity: "base" });
+    default:
+      return 0;
+  }
+});
 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 font-semibold">
@@ -85,14 +84,21 @@ export default function ProductList({
          <p className="text-sm text-gray-700 mb-2">{prod.kg} kg</p>
           )}
 
-          <p className="text-[#8F108D] font-semibold mb-3">${prod.precio}</p>
-
-         <button
-          className="bg-[#8F108D] text-white text-sm md:text-md px-3 md:px-6 py-2 rounded hover:bg-purple-700 transition"
-         onClick={() => agregarAlCarrito(prod)}
->
-          Comprar
-          </button>
+          <p className="text-[#8F108D] font-semibold mb-3"> ${formatearPrecio(prod.precio)}</p>
+       <button
+       className="bg-[#8F108D] text-white text-sm md:text-md px-3 md:px-6 py-2 rounded hover:bg-purple-700 transition"
+       onClick={() => {
+        agregarAlCarrito(prod);
+       toast(
+      <div className="bg-white border-4 border-[#8F108D] text-[#8F108D] px-4 py-3 items-center text-center rounded-lg shadow-md  text-xs sm:text-sm 2xl:text-xl font-extrabold ">
+       🐾 Muchisimas Gracias!! 
+       Su Producto fue agregado al carrito 🐾 🛒 
+      </div>
+     ,{duration:2000,});
+      }}
+    >
+      Comprar
+     </button>
         </div>
       ))}
     </div>

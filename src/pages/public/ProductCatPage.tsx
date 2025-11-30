@@ -6,7 +6,6 @@ import OrdenarProductos from "../../components/producto/OrdenarProductos";
 import ProductList from "../../components/producto/ProductoLista";
 import Paginator from "../../components/producto/Paginador";
 import { useProductos } from "../../components/producto/Fetch";
-import type { Producto } from "../../components/producto/Fetch";
 import type { CategoriaProducto } from "../../enums/categoriaProductos";
 import { SubcategoriaProducto } from "../../enums/subCategoriaProductos";
 
@@ -90,19 +89,34 @@ function ProductCatPage() {
         }
       />
 
-      <div className="flex flex-col md:flex-row gap-6 p-6">
-        {/* FILTROS PC */}
-        <div className="w-full md:w-1/4 hidden md:block">
-          <FiltroProductos
-            productos={productos}
-            categoriaActual={"Gato" as CategoriaProducto}
-            subcategoriaActual={subcategoria}
-            onSelectSubcategoria={(sub) =>
-              setSubcategoria(sub as SubcategoriaProducto)
-            }
-            onChange={setFiltros}
-          />
-        </div>
+       {/* FILTROS MOBILE */}
+   <div className="block md:hidden px-6">
+     <FiltroProductos
+       productos={productos}
+       categoriaActual={"Perro" as CategoriaProducto}
+       subcategoriaActual={subcategoria}
+       onSelectSubcategoria={(sub) =>
+         setSubcategoria(sub as SubcategoriaProducto)
+       }
+       onChange={setFiltros}
+     />
+   </div>
+   
+   <div className="flex flex-col md:flex-row gap-6 p-6"></div>
+   
+         <div className="flex flex-col md:flex-row gap-6 p-6">
+           {/* FILTROS PC */}
+           <div className="w-full md:w-1/4 hidden md:block">
+             <FiltroProductos
+               productos={productos}
+               categoriaActual={"Perro" as CategoriaProducto}
+               subcategoriaActual={subcategoria}
+               onSelectSubcategoria={(sub) =>
+                 setSubcategoria(sub as SubcategoriaProducto)
+               }
+               onChange={setFiltros}
+             />
+           </div>
 
         {/* PRODUCTOS */}
         <div className="flex-1 flex flex-col gap-4">
@@ -117,7 +131,7 @@ function ProductCatPage() {
             subcategoria={subcategoria}
             filtros={filtros}
             orden={orden}
-            setOrden={setOrden}
+          
             productos={currentProducts}
           />
 

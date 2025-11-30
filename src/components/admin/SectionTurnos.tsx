@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // SectionTurnos.tsx
 import React, { useState, useMemo, useEffect } from 'react';
@@ -6,21 +7,27 @@ import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { fetchApi } from '../../app/api';
 
-// 1. Interfaz TURNO (Modelo Asumido)
-interface Turno {
-  id: number;
-  id_cliente: number;
-  id_mascota: number;
-  id_empleado: number; 
-  fechaHora: string; 
-  tipo: string; 
-  estado: string; 
-}
-type CreateTurnoDto = Omit<Turno, 'id'>;
+// --- INTERFACES Y CONSTANTES ---
+const OPCIONES_TIPO_TURNO = ['consulta', 'vacunacion', 'peluqueria', 'urgencia'];
+const OPCIONES_ESTADO_TURNO = ['pendiente', 'completado', 'cancelado'];
 
-// Opciones
-const OPCIONES_TIPO_TURNO = ['Consulta', 'Vacunación', 'Peluquería', 'Urgencia'];
-const OPCIONES_ESTADO_TURNO = ['Pendiente', 'Confirmado', 'Completado', 'Cancelado'];
+interface MascotaSimple {
+    id: number;
+    nombre: string;
+}
+
+interface Turno {
+  id_turno: number;
+  fecha_turno: string; 
+  tipo: typeof OPCIONES_TIPO_TURNO[number]; 
+  estado: typeof OPCIONES_ESTADO_TURNO[number];
+  observaciones: string;
+  // La Mascota PUEDE ser null si la relación no se carga (DB/API)
+  mascota: { id: number, nombre: string, cliente?: { id: number } } | null; 
+}
+
+// DTO para enviar a la API: usa la clave foránea simple (mascota_id)
+type CreateTurnoDto = Omit<Turno, 'id_turno' | 'mascota'> & { mascota_id: number | string };
 
 // Helper para formato de fecha
 const dateToLocalISOString = (date: Date): string => {
@@ -44,13 +51,23 @@ const SectionTurnos: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [itemParaEditar, setItemParaEditar] = useState<Turno | null>(null);
   const [error, setError] = useState<string | null>(null);
+  
+  // Estado para la lista de mascotas
+  const [mascotas, setMascotas] = useState<MascotaSimple[]>([]);
 
   const cargarDatos = async () => {
     setLoading(true);
     setError(null);
     try {
-      const data = await fetchApi('/turno'); 
-      setTurnos(data);
+      // 1. Carga de turnos
+      const turnosData = await fetchApi('/turno'); 
+      setTurnos(turnosData);
+      
+      // 2. Carga de mascotas para el selector
+      const mascotasData = await fetchApi('/mascotas'); // Endpoint de mascotas
+      // Mapeamos a MascotaSimple para el selector
+      setMascotas(mascotasData.map((m: any) => ({ id: m.id, nombre: m.nombre })));
+
     } catch (err) {
       setError((err as Error).message);
     } finally {
@@ -64,16 +81,22 @@ const SectionTurnos: React.FC = () => {
 
   const turnosFiltrados = useMemo(() => {
     return turnos.filter(t => {
-      const searchMatch = t.id_cliente.toString().includes(searchTerm) ||
-                          t.id_mascota.toString().includes(searchTerm) ||
-                          t.id_empleado.toString().includes(searchTerm);
+      // Usamos encadenamiento opcional para evitar errores si 'mascota' es null
+      const mascotaNombre = t.mascota?.nombre?.toLowerCase() ?? '';
+      const clienteId = t.mascota?.cliente?.id?.toString() ?? '';
+      
+      const searchMatch = mascotaNombre.includes(searchTerm.toLowerCase()) ||
+                          t.mascota?.id?.toString().includes(searchTerm) ||
+                          clienteId.includes(searchTerm);
+      
       const tipoMatch = !filtroTipo || t.tipo === filtroTipo;
       const estadoMatch = !filtroEstado || t.estado === filtroEstado;
+      
       return searchMatch && tipoMatch && estadoMatch;
-    }).sort((a, b) => new Date(b.fechaHora).getTime() - new Date(a.fechaHora).getTime());
+    }).sort((a, b) => new Date(b.fecha_turno).getTime() - new Date(a.fecha_turno).getTime());
   }, [turnos, searchTerm, filtroTipo, filtroEstado]);
 
-  // --- Handlers de Modales (CORREGIDOS) ---
+  // --- Handlers de Modales ---
   const handleOpenModalNuevo = () => { 
     setItemParaEditar(null); 
     setIsModalOpen(true); 
@@ -89,16 +112,20 @@ const SectionTurnos: React.FC = () => {
 
   // --- Handlers de CRUD ---
   const handleSave = async (data: CreateTurnoDto) => {
+    
+    // Mapeo del DTO para enviar a la API
     const dataToSend = {
-      ...data,
-      id_cliente: Number(data.id_cliente),
-      id_mascota: Number(data.id_mascota),
-      id_empleado: Number(data.id_empleado),
-      fechaHora: new Date(data.fechaHora).toISOString(), 
+      fecha_turno: new Date(data.fecha_turno).toISOString(), 
+      tipo: data.tipo, 
+      estado: data.estado,
+      observaciones: data.observaciones,
+      // CORRECTO: Enviamos la clave foránea simple como número
+      mascota_id: Number(data.mascota_id), 
     };
+    
     try {
       if (itemParaEditar) {
-        await fetchApi(`/turno/${itemParaEditar.id}`, { method: 'PUT', body: JSON.stringify(dataToSend) });
+        await fetchApi(`/turno/${itemParaEditar.id_turno}`, { method: 'PATCH', body: JSON.stringify(dataToSend) });
       } else {
         await fetchApi('/turno', { method: 'POST', body: JSON.stringify(dataToSend) });
       }
@@ -115,7 +142,7 @@ const SectionTurnos: React.FC = () => {
         await fetchApi(`/turno/${id}`, { method: 'DELETE' });
         cargarDatos();
       } catch (err) {
-         alert(`Error al eliminar: ${(err as Error).message}`);
+        alert(`Error al eliminar: ${(err as Error).message}`);
       }
     }
   };
@@ -123,13 +150,13 @@ const SectionTurnos: React.FC = () => {
   // --- RENDER ---
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-gray-800">Gestión de Turnos</h1>
+      <h1 className="text-3xl font-bold text-[#8F108D]">Gestión de Turnos</h1>
       <div className="bg-white p-6 rounded-xl shadow-lg">
-        {/* Filtros */}
+        {/* Filtros y Botón Nuevo */}
         <div className="mb-6 space-y-4">
           <div className="flex flex-col md:flex-row gap-4">
-            <div className="relative flex-grow">
-              <input type="text" placeholder="Buscar por ID Cliente, Mascota o Empleado..."
+            <div className="relative">
+              <input type="text" placeholder="Buscar por Mascota o ID Mascota/Cliente..."
                 value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               />
@@ -145,14 +172,14 @@ const SectionTurnos: React.FC = () => {
               <label className="label-tailwind mb-1">Tipo de Turno</label>
               <select value={filtroTipo} onChange={(e) => setFiltroTipo(e.target.value)} className="input-tailwind w-full">
                 <option value="">Todos los Tipos</option>
-                {OPCIONES_TIPO_TURNO.map(e => <option key={e} value={e}>{e}</option>)}
+                {OPCIONES_TIPO_TURNO.map(e => <option key={e} value={e}>{e.charAt(0).toUpperCase() + e.slice(1)}</option>)}
               </select>
             </div>
             <div className="flex-1">
               <label className="label-tailwind mb-1">Estado del Turno</label>
               <select value={filtroEstado} onChange={(e) => setFiltroEstado(e.target.value)} className="input-tailwind w-full">
                 <option value="">Todos los Estados</option>
-                {OPCIONES_ESTADO_TURNO.map(e => <option key={e} value={e}>{e}</option>)}
+                {OPCIONES_ESTADO_TURNO.map(e => <option key={e} value={e}>{e.charAt(0).toUpperCase() + e.slice(1)}</option>)}
               </select>
             </div>
           </div>
@@ -165,11 +192,11 @@ const SectionTurnos: React.FC = () => {
           <table className="min-w-full divide-y divide-gray-200">
             <thead>
               <tr>
+                <th className="th-cell">ID Turno</th>
                 <th className="th-cell">Fecha y Hora</th>
-                <th className="th-cell">ID Cliente</th>
-                <th className="th-cell">ID Mascota</th>
-                <th className="th-cell">ID Empleado</th>
+                <th className="th-cell">Mascota (ID)</th>
                 <th className="th-cell">Tipo</th>
+                <th className="th-cell">Observaciones</th>
                 <th className="th-cell">Estado</th>
                 <th className="th-cell text-right">Acciones</th>
               </tr>
@@ -178,21 +205,28 @@ const SectionTurnos: React.FC = () => {
               {loading ? (
                 <tr><td colSpan={7} className="td-center">Cargando turnos...</td></tr>
               ) : turnosFiltrados.length === 0 ? (
-                 <tr><td colSpan={7} className="td-center">No se encontraron turnos.</td></tr>
+                <tr><td colSpan={7} className="td-center">No se encontraron turnos.</td></tr>
               ) : (
                 turnosFiltrados.map((item) => (
-                  <tr key={item.id} className="hover:bg-gray-50">
-                    <td className="td-cell-main">{formatFechaDisplay(item.fechaHora)}</td>
-                    <td className="td-cell">{item.id_cliente}</td>
-                    <td className="td-cell">{item.id_mascota}</td>
-                    <td className="td-cell">{item.id_empleado}</td>
-                    <td className="td-cell">{item.tipo}</td>
-                    <td className="td-cell">{item.estado}</td>
+                  <tr key={item.id_turno} className="hover:bg-gray-50">
+                    <td className="td-cell">{item.id_turno}</td>
+                    <td className="td-cell-main">{formatFechaDisplay(item.fecha_turno)}</td>
+                    
+                    {/* Verificación de Nulidad para la mascota */}
+                    <td className="td-cell">
+                        {item.mascota
+                            ? `${item.mascota.nombre} (${item.mascota.id})`
+                            : 'Mascota no disponible'}
+                    </td>
+                    
+                    <td className="td-cell">{item.tipo.charAt(0).toUpperCase() + item.tipo.slice(1)}</td>
+                    <td className="td-cell truncate max-w-xs">{item.observaciones}</td>
+                    <td className="td-cell">{item.estado.charAt(0).toUpperCase() + item.estado.slice(1)}</td>
                     <td className="td-cell text-right space-x-2">
                       <button onClick={() => handleOpenModalEditar(item)} className="text-primary hover:text-primary-700" data-tooltip-id="tooltip-main" data-tooltip-content="Editar">
                         <Edit className="w-5 h-5" />
                       </button>
-                      <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:text-red-800" data-tooltip-id="tooltip-main" data-tooltip-content="Eliminar">
+                      <button onClick={() => handleDelete(item.id_turno)} className="text-red-600 hover:text-red-800" data-tooltip-id="tooltip-main" data-tooltip-content="Eliminar">
                         <Trash2 className="w-5 h-5" />
                       </button>
                     </td>
@@ -209,6 +243,8 @@ const SectionTurnos: React.FC = () => {
           onClose={handleCloseModal}
           onSave={handleSave}
           initialData={itemParaEditar}
+          // Pasamos la lista de mascotas al modal
+          mascotas={mascotas} 
         />
       )}
       <Tooltip id="tooltip-main" />
@@ -217,33 +253,35 @@ const SectionTurnos: React.FC = () => {
 };
 export default SectionTurnos;
 
+// ----------------------------------------------------------------------------------
+
 // --- MODAL (TurnoModal) ---
 interface TurnoModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSave: (data: CreateTurnoDto) => void;
   initialData: Turno | null;
+  mascotas: MascotaSimple[]; // Nueva Prop para el selector
 }
 
-const TurnoModal: React.FC<TurnoModalProps> = ({ isOpen, onClose, onSave, initialData }) => {
+const TurnoModal: React.FC<TurnoModalProps> = ({ isOpen, onClose, onSave, initialData, mascotas }) => {
   
   const [formData, setFormData] = useState({
-    fechaHora: initialData ? dateToLocalISOString(new Date(initialData.fechaHora)) : dateToLocalISOString(new Date()),
-    id_cliente: initialData?.id_cliente || '',
-    id_mascota: initialData?.id_mascota || '',
-    id_empleado: initialData?.id_empleado || '',
-    tipo: initialData?.tipo || 'Consulta',
-    estado: initialData?.estado || 'Pendiente',
+    // Usamos encadenamiento opcional para obtener el ID inicial, o cadena vacía si es null
+    mascota_id: initialData?.mascota?.id.toString() || '', 
+    fecha_turno: initialData ? dateToLocalISOString(new Date(initialData.fecha_turno)) : dateToLocalISOString(new Date()),
+    tipo: initialData?.tipo || OPCIONES_TIPO_TURNO[0], 
+    estado: initialData?.estado || OPCIONES_ESTADO_TURNO[0],
+    observaciones: initialData?.observaciones || '',
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // @ts-ignore
-    onSave(formData);
+    onSave(formData as CreateTurnoDto);
   };
 
   if (!isOpen) return null;
@@ -255,39 +293,88 @@ const TurnoModal: React.FC<TurnoModalProps> = ({ isOpen, onClose, onSave, initia
           {initialData ? 'Editar Turno' : 'Agregar Turno'}
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="label-tailwind">Fecha y Hora</label>
-            <input type="datetime-local" name="fechaHora" value={formData.fechaHora}
-              onChange={handleChange} className="mt-1 w-full input-tailwind" />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-             <div>
-              <label className="label-tailwind">ID Cliente</label>
-              <input type="number" name="id_cliente" value={formData.id_cliente} onChange={handleChange} className="mt-1 w-full input-tailwind" />
-            </div>
-             <div>
-              <label className="label-tailwind">ID Mascota</label>
-              <input type="number" name="id_mascota" value={formData.id_mascota} onChange={handleChange} className="mt-1 w-full input-tailwind" />
-            </div>
-             <div>
-              <label className="label-tailwind">ID Empleado</label>
-              <input type="number" name="id_empleado" value={formData.id_empleado} onChange={handleChange} className="mt-1 w-full input-tailwind" />
-            </div>
-          </div>
+          
           <div className="grid grid-cols-2 gap-4">
+            {/* ✅ CAMPO DE SELECCIÓN DE MASCOTA */}
+            <div>
+              <label className="label-tailwind">Mascota</label>
+              <select 
+                name="mascota_id" 
+                value={formData.mascota_id} 
+                onChange={handleChange} 
+                className="mt-1 w-full input-tailwind"
+                required
+              >
+                <option value="" disabled>Seleccione una mascota</option>
+                {mascotas.map(m => (
+                    <option key={m.id} value={m.id}>
+                        {m.nombre} (ID: {m.id})
+                    </option>
+                ))}
+              </select>
+            </div>
+            
+            {/* Campo de Fecha */}
+            <div>
+              <label className="label-tailwind">Fecha y Hora</label>
+              <input 
+                type="datetime-local" 
+                name="fecha_turno" 
+                value={formData.fecha_turno}
+                onChange={handleChange} 
+                className="mt-1 w-full input-tailwind" 
+                required
+              />
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-2 gap-4">
+            {/* Campo de Tipo */}
             <div>
               <label className="label-tailwind">Tipo de Turno</label>
-              <select name="tipo" value={formData.tipo} onChange={handleChange} className="mt-1 w-full input-tailwind">
-                {OPCIONES_TIPO_TURNO.map(e => <option key={e} value={e}>{e}</option>)}
+              <select 
+                name="tipo" 
+                value={formData.tipo} 
+                onChange={handleChange} 
+                className="mt-1 w-full input-tailwind" 
+                required
+              >
+                {OPCIONES_TIPO_TURNO.map(e => (
+                  <option key={e} value={e}>{e.charAt(0).toUpperCase() + e.slice(1)}</option>
+                ))}
               </select>
             </div>
-             <div>
+            {/* Campo de Estado */}
+            <div>
               <label className="label-tailwind">Estado del Turno</label>
-              <select name="estado" value={formData.estado} onChange={handleChange} className="mt-1 w-full input-tailwind">
-                {OPCIONES_ESTADO_TURNO.map(e => <option key={e} value={e}>{e}</option>)}
+              <select 
+                name="estado" 
+                value={formData.estado} 
+                onChange={handleChange} 
+                className="mt-1 w-full input-tailwind" 
+                required
+              >
+                {OPCIONES_ESTADO_TURNO.map(e => (
+                  <option key={e} value={e}>{e.charAt(0).toUpperCase() + e.slice(1)}</option>
+                ))}
               </select>
             </div>
           </div>
+          
+          {/* Campo de Observaciones */}
+          <div>
+            <label className="label-tailwind">Observaciones</label>
+            <textarea 
+              name="observaciones" 
+              value={formData.observaciones} 
+              onChange={handleChange as any} 
+              rows={3}
+              className="mt-1 w-full input-tailwind"
+              required
+            />
+          </div>
+          
+          {/* Botones */}
           <div className="flex justify-end space-x-3 pt-4 border-t mt-6">
             <button type="button" onClick={onClose} className="btn-secondary">Cancelar</button>
             <button type="submit" className="btn-primary">Guardar</button>

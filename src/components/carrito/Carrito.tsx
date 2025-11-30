@@ -1,9 +1,12 @@
 import React, { useState } from "react"; // 👈 Añadir useState
 import { IoClose } from "react-icons/io5";
 import { useCarrito } from "./CarritoContext";
+import { formatearPrecio } from "../producto/FormatoPrecios";
+
 
 // URL base de tu backend de NestJS (ajusta el puerto/ruta si es necesario)
 const NESTJS_BASE_URL = "http://localhost:4000";
+
 
 interface CarritoModalProps {
   onClose: () => void;
@@ -101,19 +104,31 @@ export default function Carrito({ onClose }: CarritoModalProps) {
                 <div className="flex-1">
                   <p className="font-semibold">{item.producto.marca}</p>
                   <p className="text-md text-gray-600">
-                    ${item.producto.precio}
+                    ${formatearPrecio(item.producto.precio)}
                   </p>
+                  <p className="text-sm text-gray-500">
+                    Stock: {item.producto.stock > 0 ? item.producto.stock : "Sin stock"}
+                  </p>
+
                   <div className="flex gap-2 mt-1">
                     <button
                       onClick={() => restar(item.producto.id)}
-                        className="px-2 py-1 bg-gray-200 rounded"
-                      
+                      className="px-2 py-1 bg-gray-200 rounded"
+                     
                     >
                       -
                     </button>
+
+                      <p className="flex gap-2 mt-1 text-base font-semibold">
+                    {item.cantidad}
+                  </p>
                     <button
                       onClick={() => sumar(item.producto.id)}
-                      className="px-2 py-1 bg-gray-200 rounded"
+                      disabled={item.producto.stock <= 0}
+                      className={`px-2 py-1 rounded
+                    ${item.producto.stock <= 0
+                          ? "bg-gray-300 cursor-not-allowed"
+                          : "bg-gray-200"}`}
                     >
                       +
                     </button>
@@ -130,12 +145,14 @@ export default function Carrito({ onClose }: CarritoModalProps) {
           )}
         </div>
         <div className="mt-4">
-          <p className="font-bold lg:text-lg xl:text-xl 2xl:text-2xl mb-2">Total: ${total}</p>
+          <p className="font-bold text-lg mb-2">
+            Total: ${formatearPrecio(total)}
+          </p>
           <button
             onClick={handleCheckout} // ¡Llamar a la función de pago!
             disabled={carrito.length === 0 || isSubmitting} //  Deshabilitar si está vacío o enviando
             className={`w-full py-2 bg-[#8F108D] text-white font-semibold rounded
- ${carrito.length === 0 || isSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
+            ${carrito.length === 0 || isSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
           >
             {isSubmitting ? "Iniciando Pago..." : "Finalizar compra"}
           </button>

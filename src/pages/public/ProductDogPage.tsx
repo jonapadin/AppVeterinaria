@@ -1,4 +1,4 @@
-// src/pages/public/ProductDogPage.tsx
+
 import { useState, useEffect } from "react";
 import NavbarCategorias from "../../components/navbar-categoria/NavbarCategorias";
 import FiltroProductos from "../../components/producto/FiltroProducto";
@@ -88,6 +88,20 @@ function ProductDogPage() {
           setSubcategoria(sub as SubcategoriaProducto)
         }
       />
+      {/* FILTROS MOBILE */}
+<div className="block md:hidden px-6">
+  <FiltroProductos
+    productos={productos}
+    categoriaActual={"Perro" as CategoriaProducto}
+    subcategoriaActual={subcategoria}
+    onSelectSubcategoria={(sub) =>
+      setSubcategoria(sub as SubcategoriaProducto)
+    }
+    onChange={setFiltros}
+  />
+</div>
+
+<div className="flex flex-col md:flex-row gap-6 p-6"></div>
 
       <div className="flex flex-col md:flex-row gap-6 p-6">
         {/* FILTROS PC */}
@@ -116,7 +130,6 @@ function ProductDogPage() {
             subcategoria={subcategoria}
             filtros={filtros}
             orden={orden}
-            setOrden={setOrden}
             productos={currentProducts}
           />
 
