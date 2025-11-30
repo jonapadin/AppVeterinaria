@@ -3,7 +3,7 @@ import { IoClose } from "react-icons/io5";
 import { useCarrito } from "./CarritoContext";
 
 // URL base de tu backend de NestJS (ajusta el puerto/ruta si es necesario)
-const NESTJS_BASE_URL = "http://localhost:4000";
+const NESTJS_BASE_URL = "https://apiv1-vet.onrender.com";
 
 interface CarritoModalProps {
   onClose: () => void;
@@ -106,8 +106,7 @@ export default function Carrito({ onClose }: CarritoModalProps) {
                   <div className="flex gap-2 mt-1">
                     <button
                       onClick={() => restar(item.producto.id)}
-                        className="px-2 py-1 bg-gray-200 rounded"
-                      
+                      className="px-2 py-1 bg-gray-200 rounded"
                     >
                       -
                     </button>
@@ -130,7 +129,9 @@ export default function Carrito({ onClose }: CarritoModalProps) {
           )}
         </div>
         <div className="mt-4">
-          <p className="font-bold lg:text-lg xl:text-xl 2xl:text-2xl mb-2">Total: ${total}</p>
+          <p className="font-bold lg:text-lg xl:text-xl 2xl:text-2xl mb-2">
+            Total: ${total}
+          </p>
           <button
             onClick={handleCheckout} // ¡Llamar a la función de pago!
             disabled={carrito.length === 0 || isSubmitting} //  Deshabilitar si está vacío o enviando
