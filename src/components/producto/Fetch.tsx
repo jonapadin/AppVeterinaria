@@ -7,7 +7,7 @@ export interface Producto {
   precio: number;
   stock: number;
   descripcion: string;
-  kg: number|null;
+  kg: number | null;
   marca: string;
   img: string;
   categoria: CategoriaProducto;
@@ -22,7 +22,9 @@ export function useProductos() {
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        const res = await fetch("http://localhost:4000/api/v1/productos");
+        const res = await fetch(
+          "https://apiv1-vet.onrender.com/api/v1/productos",
+        );
         const data: Producto[] = await res.json();
 
         // VIENEN COMO STRING DESDE DECIMAL)
@@ -46,4 +48,3 @@ export function useProductos() {
 
   return { productos, loading };
 }
-
