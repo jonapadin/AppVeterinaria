@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// SectionProductos.tsx
-
 import React, { useState, useMemo, useEffect } from 'react';
 import { Plus, Search, Edit, Trash2 } from 'lucide-react';
 import { Tooltip } from 'react-tooltip';
@@ -9,7 +6,7 @@ import { fetchApi } from '../../app/api';
 
 // 1. Interfaz PRODUCTO
 interface Producto {
-  id: number; // Asumo que el ID se auto-genera
+  id: number; 
   nombre: string;
   marca: string;
   descripcion: string;
@@ -34,7 +31,7 @@ const SectionProductos: React.FC = () => {
   const [itemParaEditar, setItemParaEditar] = useState<Producto | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // --- Carga de Datos (FETCH) ---
+  //Carga de Datos (FETCH)
   const cargarDatos = async () => {
     setLoading(true);
     setError(null);
@@ -52,7 +49,7 @@ const SectionProductos: React.FC = () => {
     cargarDatos();
   }, []); 
 
-  // --- Filtros ---
+  // Filtros
   const productosFiltrados = useMemo(() => {
     return productos.filter((p) => {
         const searchMatch = p.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -63,7 +60,7 @@ const SectionProductos: React.FC = () => {
     });
   }, [productos, searchTerm, filtroCategoria]);
 
-  // --- Handlers de Modales ---
+  // Handlers de Modales
   const handleOpenModalNuevo = () => { 
     setItemParaEditar(null); 
     setIsModalOpen(true); 
@@ -77,7 +74,7 @@ const SectionProductos: React.FC = () => {
     setItemParaEditar(null); 
   };
 
-  // --- Handlers de CRUD ---
+  // Handlers de CRUD
   const handleSave = async (data: CreateProductoDto) => {
     const dataToSend = {
       ...data,
@@ -115,7 +112,7 @@ const SectionProductos: React.FC = () => {
     }
   };
 
-  // --- RENDER ---
+  // RENDER
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold text-gray-800">Gestión de Productos</h1>
@@ -125,7 +122,7 @@ const SectionProductos: React.FC = () => {
         {/* Barra de Filtros y Acciones */}
         <div className="mb-6 space-y-4">
           <div className="flex flex-col md:flex-row gap-4">
-            <div className="relative flex-grow">
+            <div className="relative ">
               <input
                 type="text"
                 placeholder="Buscar por Nombre, Marca o Descripción..." 
@@ -248,7 +245,7 @@ const SectionProductos: React.FC = () => {
 
 export default SectionProductos;
 
-// --- COMPONENTE MODAL (ProductoModal) ---
+// COMPONENTE MODAL 
 
 interface ModalProps {
   isOpen: boolean;

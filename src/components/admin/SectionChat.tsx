@@ -1,9 +1,5 @@
-// SectionChat.tsx
 import React from 'react';
-
 const SectionChat: React.FC = () => {
-  // Aquí irá la lógica de Socket.IO, la lista de chats activos,
-  // el área de chat (adaptada de LiveChatModal), y el input para el agente.
   
   return (
     <div>
@@ -11,11 +7,6 @@ const SectionChat: React.FC = () => {
         Asistencia de Chat en Vivo 💬
       </h1>
       
-      {/* Estructura sugerida para el panel de Chat del Agente: 
-        Grid con dos columnas: 
-        1. Lista de conversaciones pendientes/activas (Sidebar de Chats)
-        2. Área de chat para la conversación seleccionada
-      */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[75vh]">
         
         {/* Columna 1: Lista de Chats Activos */}

@@ -1,6 +1,3 @@
-// src/api/api.ts
-
-// REEMPLAZA ESTO CON LA URL BASE DE TU BACKEND (CORREGIDA)
 const API_BASE_URL = 'http://localhost:4000/api/v1';
 
 /**
@@ -12,7 +9,6 @@ export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
   const url = `${API_BASE_URL}${endpoint}`;
 
   // 1. Obtener el token de localStorage
-  // Asumimos que lo guardas con la key 'token' al hacer login
   const token = localStorage.getItem('token');
   
   // 2. Headers por defecto
@@ -52,12 +48,10 @@ export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
         url: url
       });
       
-      // Si el error es "No token provided" y estamos en el frontend,
-      // es una buena práctica redirigir al login.
+    
       if (response.status === 401 || response.status === 403) {
          console.error("Error de autenticación. Redirigiendo al login...");
-         // Descomenta la siguiente línea si quieres redirigir automáticamente
-         // window.location.href = '/login'; 
+     
       }
       
       throw new Error(errorData.message || `Error ${response.status}: ${response.statusText}`);
