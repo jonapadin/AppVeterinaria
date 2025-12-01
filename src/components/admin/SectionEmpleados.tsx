@@ -1,13 +1,9 @@
-/* eslint-disable no-case-declarations */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable prefer-const */
 import React, { useState, useMemo, useEffect } from 'react';
 import { Plus, Search, Edit, Trash2 } from 'lucide-react';
-// Importación corregida de Tooltip.
 import { Tooltip } from 'react-tooltip'; 
 import { fetchApi } from '../../app/api'; 
 
-// --- INTERFACES ---
+// INTERFACES 
 interface Usuario {
   id: number;
   email: string;
@@ -38,7 +34,7 @@ type CreateEmpleadoDto = Omit<Empleado, 'id' | 'usuario'> & {
 type UpdateEmpleadoDto = Omit<Empleado, 'id' | 'usuario'>;
 
 
-// --- MODAL (EmpleadoModal) ---
+// MODAL (EmpleadoModal) 
 interface EmpleadoModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -123,7 +119,7 @@ const EmpleadoModal: React.FC<EmpleadoModalProps> = ({ isOpen, onClose, onSave, 
     }
 
     if (initialData) {
-      // EDICIÓN (PUT): Eliminar campos de Usuario (email/contrasena) del payload
+      // Eliminar campos de Usuario (email/contrasena) del payload
       delete dataToSend.contrasena;
       delete dataToSend.email; 
       
@@ -241,7 +237,7 @@ const EmpleadoModal: React.FC<EmpleadoModalProps> = ({ isOpen, onClose, onSave, 
 };
 
 
-// --- COMPONENTE PRINCIPAL (EXPORTADO COMO APP) ---
+// COMPONENTE PRINCIPAL (EXPORTADO COMO APP) 
 const App: React.FC = () => {
   const [empleados, setEmpleados] = useState<Empleado[]>([]);
   const [loading, setLoading] = useState(true);
@@ -257,7 +253,7 @@ const App: React.FC = () => {
     setTimeout(() => setMainErrorModal(null), 5000);
   };
   
-  // --- Carga de Datos (FETCH) ---
+  // Carga de Datos (FETCH) 
   const cargarDatos = async () => {
     setLoading(true);
     setError(null);
@@ -275,7 +271,7 @@ const App: React.FC = () => {
     cargarDatos();
   }, []);
 
-  // --- Filtros ---
+  // Filtros 
   const empleadosFiltrados = useMemo(() => {
     return empleados.filter((e) =>
       (e.nombre.toLowerCase() + " " + e.apellido.toLowerCase()).includes(searchTerm.toLowerCase()) ||
@@ -286,7 +282,7 @@ const App: React.FC = () => {
     );
   }, [empleados, searchTerm]);
 
-  // --- Handlers de Modales ---
+  // Handlers de Modales 
   const handleOpenModalNuevo = () => {
     setItemParaEditar(null); 
     setIsModalOpen(true);
@@ -300,7 +296,7 @@ const App: React.FC = () => {
     setItemParaEditar(null);
   };
 
-  // --- Handlers de CRUD ---
+  // Handlers de CRUD 
   const handleSave = async (data: CreateEmpleadoDto | UpdateEmpleadoDto) => {
     try {
       if (itemParaEditar) {
@@ -323,7 +319,6 @@ const App: React.FC = () => {
   };
 
   const handleDelete = async (id: number) => {
-    // Reemplazo de window.confirm() por un prompt, ya que alert/confirm están prohibidos
     if (prompt('Para confirmar la eliminación, escribe "ELIMINAR"') === 'ELIMINAR') {
       try {
         await fetchApi(`/empleado/${id}`, { method: 'DELETE' });
@@ -336,7 +331,7 @@ const App: React.FC = () => {
     }
   };
 
-  // --- ESTILOS NECESARIOS ---
+  // ESTILOS NECESARIOS 
   const customStyles = `
     .btn-primary {
       @apply bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition duration-150 shadow-md;
@@ -364,7 +359,7 @@ const App: React.FC = () => {
     }
   `;
 
-  // --- RENDER ---
+  // RENDER 
   return (
     <>
     <style>{customStyles}</style>
@@ -379,7 +374,7 @@ const App: React.FC = () => {
               placeholder="Buscar por Nombre, Email, Especialidad..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 bg-[#8F108D]"
             />
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
           </div>
@@ -452,7 +447,6 @@ const App: React.FC = () => {
           initialData={itemParaEditar}
         />
       )}
-      {/* CORREGIDO: Eliminación de la propiedad 'effect' */}
       <Tooltip id="tooltip-main" place="top" className="z-50 shadow-lg opacity-100" />
     </div>
     </>
