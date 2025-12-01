@@ -16,7 +16,7 @@ interface SidebarProps {
   setActiveSection: React.Dispatch<React.SetStateAction<AdminSection>>;
 }
 
-// 3. Agregar el nuevo item de Chat
+// Agregar el nuevo item de Chat
 const sidebarItems: { name: string; icon: React.ElementType; key: AdminSection }[] = [
   { name: 'Clientes', icon: Users, key: 'Clientes' },
   { name: 'Empleados', icon: Briefcase, key: 'Empleados' },

@@ -7,7 +7,7 @@ import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { fetchApi } from '../../app/api';
 
-// 1. INTERFACES DE DATOS DE LA VENTA (Lo que devuelve el GET)
+//  INTERFACES DE DATOS DE LA VENTA (Lo que devuelve el GET)
 interface ProductoDetalle {
   id: number;
   nombre: string;
@@ -62,14 +62,14 @@ interface Venta {
   cliente: ClienteCompleto;
 }
 
-// 2. INTERFACES PARA LA CREACIÓN/ACTUALIZACIÓN (Lo que espera el POST/PATCH)
+// INTERFACES PARA LA CREACIÓN/ACTUALIZACIÓN (Lo que espera el POST/PATCH)
 type CreateVentaDto = {
   fecha: string;
   metodo_pago: string;
   estado_pago: string;
   id_cliente: number;
   id_empleado: number;
-  // 💡 CORRECCIÓN 1: Añadir el total al DTO para el backend
+  // :  el total al DTO para el backend
   total: number;
   detalles: {
     id_producto: number;
@@ -77,7 +77,7 @@ type CreateVentaDto = {
   }[];
 };
 
-// 3. INTERFACES PARA LOS DESPLEGABLES (listas simplificadas)
+// INTERFACES PARA LOS DESPLEGABLES (listas simplificadas)
 interface ClienteSimple {
   id: number;
   nombre: string;
@@ -106,7 +106,7 @@ interface DetalleModalState {
 
 // Opciones (CORREGIDAS SEGÚN LOS ERRORES DEL BACKEND)
 const OPCIONES_METODO_PAGO = ['Efectivo', 'Transferencia', 'Tarjeta de Crédito', 'Tarjeta de Débito'];
-// 💡 CORRECCIÓN 2: Ajustar valores para que coincidan con el backend (Aprobado, Pagado)
+//Ajustar valores para que coincidan con el backend (Aprobado, Pagado)
 const OPCIONES_ESTADO_PAGO = ['Pendiente', 'Aprobado', 'Cancelado', 'Pagado']; 
 
 const formatFechaDisplay = (isoString: string) => {
@@ -134,7 +134,7 @@ const SectionVentas: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      // 1. Cargar las listas de opciones (Clientes, Empleados, Productos)
+      //  Cargar las listas de opciones (Clientes, Empleados, Productos)
       const [
         listData, 
         clientesData, 
@@ -157,7 +157,7 @@ const SectionVentas: React.FC = () => {
         precio: p.precio 
       })));
                 
-      // 2. Cargar detalles de cada venta para la tabla principal
+      //  Cargar detalles de cada venta para la tabla principal
       const ventasCompletas = await Promise.all(
         listData.map(async (venta: Venta) => {
           try {
@@ -250,7 +250,7 @@ const handleShowDetalles = (detalles: DetalleVenta[], idVenta: number) => {
   }
   
   const detalleTexto = detalles.map(d => {
-    // 💡 CORRECCIÓN: Verifica si d.producto existe antes de intentar acceder a sus propiedades
+    //  Verifica si d.producto existe antes de intentar acceder a sus propiedades
     const nombreProducto = d.producto 
       ? (d.producto.nombre || 
          `${d.producto.marca || 'Marca Desconocida'} (${d.producto.descripcion.substring(0, 20)}...)`)
@@ -393,7 +393,7 @@ const handleShowDetalles = (detalles: DetalleVenta[], idVenta: number) => {
 };
 export default SectionVentas;
 
-// --- MODAL (VentaModal) ---
+// --- MODAL (Venta) ---
 interface VentaModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -485,13 +485,13 @@ const handleSubmit = (e: React.FormEvent) => {
     // Calcula el total con la función calcularTotal()
     const totalCalculado = calcularTotal();
 
-    // 💡 Paso 1: Validación de total > 0.01 (Necesario por el error "must not be less than 0.01")
+    //  Validación de total > 0.01 (Necesario por el error "must not be less than 0.01")
     if (totalCalculado < 0.01) {
       alert("❌ El total de la venta debe ser mayor a $0.00. Verifique los productos y cantidades.");
       return;
     }
     
-    // 💡 Paso 2: Redondeo estricto y conversión a NUMBER (Necesario por el error "conforming to the specified constraints")
+    // Redondeo estricto y conversión a NUMBER (Necesario por el error "conforming to the specified constraints")
     const totalRedondeado = parseFloat(totalCalculado.toFixed(2)); 
     // toFixed(2) devuelve un string, parseFloat lo convierte de nuevo a number (ej: 10.50)
 
@@ -509,7 +509,7 @@ const handleSubmit = (e: React.FormEvent) => {
         id_cliente: Number(formData.cliente.id),
         id_empleado: Number(formData.empleado.id),
         
-        // 💡 Solución Final del Error del Total
+        // Solución Final del Error del Total
         total: totalRedondeado, 
         
         detalles: detalles
@@ -518,7 +518,7 @@ const handleSubmit = (e: React.FormEvent) => {
           .map(d => ({
             id_producto: Number(d.id_producto),
             cantidad: Number(d.cantidad),
-            // Nota: Aquí no incluimos precio_unitario, lo cual es correcto si el 
+            //  Aquí no incluimos precio_unitario, lo cual es correcto si el 
             // backend usa id_producto y total para sus validaciones internas.
           })),
     };
@@ -536,7 +536,7 @@ const handleSubmit = (e: React.FormEvent) => {
         </h2>
         
         <form onSubmit={handleSubmit} className="space-y-4 max-h-[80vh] overflow-y-auto pr-2">
-          {/* Fila 1: Cliente, Empleado, Fecha */}
+          {/*  Cliente, Empleado, Fecha */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <label className="label-tailwind">ID Cliente</label>
@@ -566,7 +566,7 @@ const handleSubmit = (e: React.FormEvent) => {
             </div>
           </div>
           
-          {/* Fila 2: Pago */}
+          {/* Pago */}
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="label-tailwind">Método de Pago</label>
@@ -583,7 +583,7 @@ const handleSubmit = (e: React.FormEvent) => {
             </div>
           </div>
 
-          {/* Fila 3: Detalles de Productos (Dinámico) */}
+          {/* Detalles de Productos (Dinámico) */}
           <div className="space-y-3 pt-4 border-t">
             <h3 className="text-lg font-medium text-gray-700">Productos/Servicios</h3>
             {detalles.map((detalle, index) => (

@@ -55,11 +55,11 @@ const SectionTurnos: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      // 1. Carga de turnos
+      // Carga de turnos
       const turnosData = await fetchApi('/turno'); 
       setTurnos(turnosData);
       
-      // 2. Carga de mascotas para el selector
+      //  Carga de mascotas para el selector
       const mascotasData = await fetchApi('/mascotas');
       setMascotas(mascotasData.map((m: any) => ({ id: m.id, nombre: m.nombre })));
 

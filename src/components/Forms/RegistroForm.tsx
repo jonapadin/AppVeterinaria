@@ -76,13 +76,13 @@ export default function RegistroForm() {
     const minLengthName = 3;
     const minLengthAddress = 5;
 
-    // 1. Nombres
+    //  Nombres
     if (nombre.length < minLengthName) {
       errors.nombre = `El nombre debe tener al menos ${minLengthName} caracteres.`;
     } else if (!nameRegex.test(nombre)) {
       errors.nombre = 'El nombre solo puede contener letras y espacios.';
     }
-    // 2. Apellidos
+    //  Apellidos
     if (apellido.length < minLengthName) {
       errors.apellido = `El apellido debe tener al menos ${minLengthName} caracteres.`;
     } else if (!nameRegex.test(apellido)) {
@@ -94,17 +94,17 @@ export default function RegistroForm() {
     } else if (!/^\d+$/.test(dni)) {
       errors.dni = 'El DNI solo debe contener números.';
     }
-    // 4. Teléfono
+    //  Teléfono
     if (telefono.length < 8) {
       errors.telefono = 'El teléfono debe tener al menos 8 dígitos.';
     } else if (!/^\d+$/.test(telefono)) {
       errors.telefono = 'El teléfono solo debe contener números.';
     }
-    // 5. Email
+    // Email
     if (!emailRegex.test(email)) {
       errors.email = 'Introduce un correo electrónico válido.';
     }
-    // 6. Fecha de Nacimiento (Mayor de 18 años)
+    //  Fecha de Nacimiento (Mayor de 18 años)
     if (!fechaNacimiento) {
       errors.fechaNacimiento = 'La fecha de nacimiento es requerida.';
     } else {
@@ -119,17 +119,17 @@ export default function RegistroForm() {
         errors.fechaNacimiento = 'Debes ser mayor de 18 años para registrarte.';
       }
     }
-    // 7. Ciudad
+    // Ciudad
     if (ciudad.length < minLengthName) {
       errors.ciudad = `La ciudad debe tener al menos ${minLengthName} caracteres.`;
     } else if (!nameRegex.test(ciudad)) {
       errors.ciudad = 'La ciudad solo puede contener letras y espacios.';
     }
-    // 8. Dirección
+    //  Dirección
     if (direccion.length < minLengthAddress) {
       errors.direccion = `La dirección debe tener al menos ${minLengthAddress} caracteres.`;
     }
-    // 9. Contraseña y Confirmación
+    // Contraseña y Confirmación
     if (contrasena.length < 8) {
       errors.contrasena = 'La clave debe tener al menos 8 caracteres.';
     }
@@ -137,7 +137,7 @@ export default function RegistroForm() {
     if (contrasena !== repetirContrasena) {
       errors.repetirContrasena = 'Las claves no coinciden.';
     }
-    // 10. Errores de la foto - Lógica eliminada
+    // 10Errores de la foto - Lógica eliminada
     setValidationErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -193,7 +193,7 @@ export default function RegistroForm() {
 
       setApiErrorMsg(message);
 
-// *** MEJORA: Imprimimos el error completo y el payload enviado para mejor depuración ***
+//  Imprimimos el error completo y el payload enviado para mejor depuración ***
       console.error("Error de Registro (400/500):", err);
       console.warn("Payload enviado:", formData);
     } finally {

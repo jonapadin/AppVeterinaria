@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 
-// 🚨 IMPORTANTE: Asegúrate de cambiar esto a la URL de tu servidor de backend (ej. Node.js)
+// Asegúrate de cambiar esto a la URL de tu servidor de backend (ej. Node.js)
 const SOCKET_SERVER_URL = "http://localhost:4000"; // Usualmente en el puerto 3001 o 8080
 
 // Colores de la paleta
@@ -9,7 +9,7 @@ const PRIMARY_COLOR = 'bg-[#8F108D]';
 const AGENT_COLOR = 'bg-fuchsia-600';     
 const HOVER_COLOR = 'hover:bg-fuchsia-900';
 
-// 1. Tipado para un objeto de mensaje
+// Tipado para un objeto de mensaje
 interface Message {
     type: 'agent' | 'user';
     text: string;
@@ -59,7 +59,7 @@ const MessageBubble: React.FC<Message> = ({ type, text }) => { // Usamos la inte
 
 const LiveChatModal: React.FC<LiveChatModalProps> = ({ isOpen, onClose }) => {
     
-    // 2. Estado para el socket, los mensajes y el input
+    //  Estado para el socket, los mensajes y el input
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState('');
     const socketRef = useRef<any>(null);
@@ -70,7 +70,7 @@ const LiveChatModal: React.FC<LiveChatModalProps> = ({ isOpen, onClose }) => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
-    // 3. useEffect para manejar la conexión y desconexión
+    //  useEffect para manejar la conexión y desconexión
     useEffect(() => {
         if (isOpen) {
             // Conectar al abrir el modal
@@ -92,25 +92,25 @@ const LiveChatModal: React.FC<LiveChatModalProps> = ({ isOpen, onClose }) => {
                 console.log('Conectado al servidor de chat.');
             });
 
-            // Limpieza: desconectar al cerrar o desmontar el componente
+            // desconectar al cerrar o desmontar el componente
             return () => {
                 socketRef.current.disconnect();
             };
         }
     }, [isOpen]); 
 
-    // 4. useEffect para hacer scroll cuando llegan nuevos mensajes
+    // useEffect para hacer scroll cuando llegan nuevos mensajes
     useEffect(() => {
         scrollToBottom();
     }, [messages]);
 
 
-    // 5. Función para enviar el mensaje
+    //  Función para enviar el mensaje
     const sendMessage = () => {
         if (input.trim()) {
             const newMessage: Message = { type: 'user', text: input.trim() };
             
-            // 6. Emitir mensaje al servidor
+            //  Emitir mensaje al servidor
             socketRef.current.emit('sendMessage', newMessage); 
             
             // Actualizar localmente la lista de mensajes (renderizado optimista)
@@ -172,12 +172,12 @@ const LiveChatModal: React.FC<LiveChatModalProps> = ({ isOpen, onClose }) => {
                         placeholder="Escriba su mensaje aquí..."
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
-                        onKeyPress={handleKeyPress} // 7. Envío al presionar Enter
+                        onKeyPress={handleKeyPress} // Envío al presionar Enter
                         className="w-full p-3 text-sm border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-[#8F108D]"
                         aria-label="Campo de entrada de mensaje"
                     />
                     <button
-                        onClick={sendMessage} // 8. Envío al hacer click
+                        onClick={sendMessage} //  Envío al hacer click
                         className={`px-5 py-3 text-sm font-semibold text-white transition-colors duration-300 rounded-r-lg ${PRIMARY_COLOR} ${HOVER_COLOR} `}
                         aria-label="Enviar Mensaje"
                     >

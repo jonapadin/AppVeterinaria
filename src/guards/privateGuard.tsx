@@ -1,10 +1,10 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-// 1. Definir la interfaz User (debe coincidir con la de authSlice)
+//  Definir la interfaz User (debe coincidir con la de authSlice)
 interface User {
   email: string;
   role: "empleado" | "cliente";
-  isAdmin: boolean; // 👈 AÑADIDO: Propiedad crucial para la autorización de Admin Especial
+  isAdmin: boolean; //Propiedad crucial para la autorización de Admin Especial
 }
 
 interface PrivateRouteProps {
@@ -19,18 +19,18 @@ const PrivateRoute = ({ allowedRoles }: PrivateRouteProps) => {
     localStorage.getItem("user") || "null",
   ) as User | null;
 
-  // VERIFICACIÓN 1: Autenticación (¿Hay Token y Usuario?)
+  // VERIFICACIÓN de Autenticación Token y Usuario
   if (!token || !user) {
     return <Navigate to="/login" replace />;
   }
 
-  // VERIFICACIÓN 2: Autorización (¿Tiene el Rol/Permiso Necesario?)
+  // VERI Autorización si el Rol/Permiso Necesario
   if (allowedRoles) {
     let hasAccess = false;
 
     // Lógica para verificar si el usuario tiene acceso
     if (allowedRoles.includes("admin") && user.isAdmin) {
-      // 3. Si se requiere 'admin', comprobamos la bandera isAdmin
+      // Si se requiere 'admin', comprobamos la bandera isAdmin
       hasAccess = true;
     } else if (allowedRoles.includes(user.role)) {
       // Si el rol requerido es un rol estándar (ej. 'cliente', 'empleado'), comprobamos el role
@@ -38,7 +38,7 @@ const PrivateRoute = ({ allowedRoles }: PrivateRouteProps) => {
     }
 
     if (!hasAccess) {
-      // 4. Si el acceso es denegado, redirigir
+      //  Si el acceso es denegado, redirigir
       return user.role === "cliente" ? (
         <Navigate to="/" replace />
       ) : (

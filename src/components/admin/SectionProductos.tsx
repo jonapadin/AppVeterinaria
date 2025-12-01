@@ -4,7 +4,7 @@ import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { fetchApi } from '../../app/api'; 
 
-// 1. Interfaz PRODUCTO
+// Interfaz PRODUCTO
 interface Producto {
   id: number; 
   nombre: string;
@@ -288,7 +288,7 @@ const ProductoModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialD
         
         <form onSubmit={handleSubmit} className="space-y-4 max-h-[70vh] overflow-y-auto pr-2">
           
-          {/* Fila 1: Nombre y Marca */}
+          {/* Nombre y Marca */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="label-tailwind">Nombre</label>
@@ -300,7 +300,7 @@ const ProductoModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialD
             </div>
           </div>
           
-          {/* Fila 2: Categoría y Tipo Uso */}
+          {/*  Categoría y Tipo Uso */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="label-tailwind">Categoría</label>
@@ -316,7 +316,7 @@ const ProductoModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialD
             </div>
           </div>
 
-          {/* Fila 3: Precio y Stock */}
+          {/*  Precio y Stock */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="label-tailwind">Precio ($)</label>
@@ -328,7 +328,7 @@ const ProductoModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialD
             </div>
           </div>
           
-          {/* Fila 4: Descripción */}
+          {/*  Descripción */}
           <div>
             <label className="label-tailwind">Descripción</label>
             <textarea name="descripcion" value={formData.descripcion} onChange={handleChange} rows={3} className="mt-1 w-full input-tailwind" />

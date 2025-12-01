@@ -4,7 +4,7 @@ import LiveChatModal from '../../components/chat/Chat';
 
 const User: React.FC = () => {
     
-    // 1. Estado y funciones para el Modal de Chat
+    //  Estado y funciones para el Modal de Chat
     const [isChatOpen, setIsChatOpen] = useState(false);
 
     const handleOpenChat = () => setIsChatOpen(true);

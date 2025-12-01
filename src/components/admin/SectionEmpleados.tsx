@@ -166,7 +166,7 @@ const EmpleadoModal: React.FC<EmpleadoModalProps> = ({ isOpen, onClose, onSave, 
             </div>
           </div>
 
-          {/* Fila 2: Email y Contraseña */}
+          {/* Email y Contraseña */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="label-tailwind">Email</label>
@@ -197,13 +197,13 @@ const EmpleadoModal: React.FC<EmpleadoModalProps> = ({ isOpen, onClose, onSave, 
             )}
           </div>
           
-          {/* Fila 3: Especialidad */}
+          {/* Especialidad */}
           <div>
             <label className="label-tailwind">Especialidad</label>
             <input type="text" name="especialidad" value={formData.especialidad} onChange={handleChange} className="input-tailwind" required />
           </div>
 
-          {/* Fila 4: Teléfono, Fecha Nacimiento, Ciudad */}
+          {/* Teléfono, Fecha Nacimiento, Ciudad */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <label className="label-tailwind">Teléfono</label>
@@ -219,7 +219,7 @@ const EmpleadoModal: React.FC<EmpleadoModalProps> = ({ isOpen, onClose, onSave, 
             </div>
           </div>
 
-          {/* Fila 5: Dirección */}
+          {/*  Dirección */}
           <div>
             <label className="label-tailwind">Dirección</label>
             <input type="text" name="direccion" value={formData.direccion} onChange={handleChange} className="input-tailwind" />

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { FaRegUser, FaEnvelope, FaPhone, FaCalendarAlt, FaIdCard, FaMapMarkerAlt, FaHome, FaCamera, FaSave } from "react-icons/fa"; 
 import { Lock, Image as ImageIcon, Trash2 } from 'lucide-react'; 
 
-// 1. Tipado para los datos del usuario (basado en la entidad proporcionada)
+//  Tipado para los datos del usuario (basado en la entidad proporcionada)
 type UserData = {
   nombre: string;
   apellido: string;
@@ -17,7 +17,7 @@ type UserData = {
   foto_perfil?: string | null; // URL de la foto de perfil
 };
 
-// 2. Tipado para errores de validación
+//  Tipado para errores de validación
 type ValidationError = {
   [key: string]: string | undefined;
 };
@@ -232,7 +232,7 @@ function Formulario() {
         return;
     }
 
-    // 1. Crear el payload (FormData para archivo, JSON para solo texto)
+    //  Crear el payload (FormData para archivo, JSON para solo texto)
     const isFileUpdate = !!newFotoPerfilFile || shouldRemovePhoto;
     let finalPayload: FormData | Partial<UserData>;
     
@@ -333,7 +333,7 @@ function Formulario() {
   return (
     <form className="max-w-lg mx-auto p-6 my-9 bg-white shadow-lg rounded-lg 2xl:py-36" onSubmit={handleSubmit}>
       
-      {/* 3. ENCABEZADO CON FOTO DE PERFIL */}
+      {/*  ENCABEZADO CON FOTO DE PERFIL */}
       <div className="flex flex-col items-center mb-6 border-b pb-4">
         <div className='relative w-24 h-24 mb-3'>
           <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center border-4 border-[#8F108D]">
@@ -403,7 +403,7 @@ function Formulario() {
       )}
       <ErrorMessage message={validationErrors.foto_perfil} />
 
-      {/* 4. CAMPOS EDITABLES COMPLETOS */}
+      {/*  CAMPOS EDITABLES COMPLETOS */}
       
       {/* Nombre y Apellido */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
