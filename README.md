@@ -1,6 +1,6 @@
 Veterinaria App - Frontend
 
-Frontend de la aplicación de gestión de veterinaria. Permite a los usuarios interactuar con turnos, clientes, productos y pagos de manera intuitiva y rápida.
+Frontend de la aplicación de gestión de veterinaria. Permite a los usuarios interactuar con turnos, clientes, mascotas ,productos y pagos de manera intuitiva y rápida.
 
 🛠 Tecnologías
 
@@ -63,22 +63,19 @@ http://localhost:5173
 
 /turnos - Gestión de turnos.
 
-/clientes - Gestión de clientes.
+/cliente - Gestión de clientes.
+
+/empleado - Gestión de empleados.
 
 /productos - Gestión de productos.
+
+/mascotas - Gestión de mascotas.
 
 /notificaciones - Notificaciones en tiempo real.
 
 /login - Inicio de sesión.
 
 Algunas rutas requieren autenticación según el rol del usuario.
-
-🧪 Pruebas
-
-Si implementaste pruebas:
-
-npm run test
-npm run test:coverage
 
 🤝 Contribuciones
 
