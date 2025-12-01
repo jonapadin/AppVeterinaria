@@ -67,7 +67,7 @@ export default function FiltroProductos({
         .map((p) => String(p.kg))
     )
   );
-  // Cada vez que el usuario cambia marcas o kgs, aviso al componente padre.
+  // Cada vez que el usuario cambia marcas o kgs aviso al componente padre.
   useEffect(() => {
     onChange({ marcas: marcasSeleccionadas, presentaciones: kgsSeleccionados });
   }, [marcasSeleccionadas, kgsSeleccionados]);
