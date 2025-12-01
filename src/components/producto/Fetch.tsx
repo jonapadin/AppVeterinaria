@@ -12,16 +12,15 @@ export interface Producto {
   img: string;
   categoria: CategoriaProducto;
   subcategoria: SubcategoriaProducto;
-
 }
-
+// Custom Hook para obtener productos del backend 
 export function useProductos() {
-  const [productos, setProductos] = useState<Producto[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [productos, setProductos] = useState<Producto[]>([]); // Estado donde se guardan los productos
+  const [loading, setLoading] = useState<boolean>(true);// Estado que indicar si se está cargando la info
 
-  useEffect(() => {
+  useEffect(() => {  // Función interna para obtener productos desde la API
     const fetchProductos = async () => {
-      try {
+      try {  // Hacemos la petición al backend y convertimos la respuesta a JSon
         const res = await fetch(
           "https://apiv1-vet.onrender.com/api/v1/productos",
         );
@@ -30,10 +29,9 @@ export function useProductos() {
         // VIENEN COMO STRING DESDE DECIMAL)
         const productosTransformados = data.map((p) => ({
           ...p,
-            marca: p.marca.trim(),
+          marca: p.marca.trim(),
           kg: p.kg !== null ? Number(p.kg) : null,
           precio: Number(p.precio),
-         
         }));
 
         setProductos(productosTransformados);

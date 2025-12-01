@@ -1,14 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable prefer-const */
-
-
 import React, { useState, useMemo, useEffect } from 'react';
 import { Plus, Search, Edit, Trash2 } from 'lucide-react';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { fetchApi } from '../../app/api'; 
-
-
 
 interface Usuario {
   id: number;
@@ -32,13 +26,13 @@ interface Cliente {
   usuario: Usuario;
 }
 
-// 2. DTO para CREACIÓN
+//  DTO para CREACIÓN
 type CreateClienteDto = Omit<Cliente, 'id' | 'usuario'> & { 
     email: string;
     contrasena: string;
 };
 
-// 3. DTO para EDICIÓN
+// DTO para EDICIÓN
 type UpdateClienteDto = Omit<Cliente, 'id' | 'usuario'>;
 
 const SectionClientes: React.FC = () => {
@@ -67,7 +61,7 @@ const SectionClientes: React.FC = () => {
     cargarDatos();
   }, []); 
 
-  // --- Filtros ---
+  //  Filtros 
   const clientesFiltrados = useMemo(() => {
     return clientes.filter((c) =>
         (c.nombre.toLowerCase() + " " + c.apellido.toLowerCase()).includes(searchTerm.toLowerCase()) ||
@@ -77,7 +71,7 @@ const SectionClientes: React.FC = () => {
     );
   }, [clientes, searchTerm]);
 
-  // --- Handlers de Modales ---
+  //  Handlers de Modales 
   const handleOpenModalNuevo = () => {
     setItemParaEditar(null); 
     setIsModalOpen(true);
@@ -91,7 +85,7 @@ const SectionClientes: React.FC = () => {
     setItemParaEditar(null);
   };
 
-  // --- Handlers de CRUD ---
+  //  Handlers de CRUD 
   const handleSave = async (data: CreateClienteDto | UpdateClienteDto) => {
     try {
       console.log('📧 Datos a enviar:', data);
@@ -136,7 +130,7 @@ const SectionClientes: React.FC = () => {
     }
   };
 
-  // --- RENDER ---
+  //  RENDER 
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold text-[#8F108D]">Gestión de Clientes</h1>
@@ -158,7 +152,7 @@ const SectionClientes: React.FC = () => {
           
           <button 
             onClick={handleOpenModalNuevo} 
-            className="btn-primary flex items-center justify-center"
+            className="btn-primary bg-[#8F108D] flex items-center justify-center"
           >
             <Plus className="w-5 h-5 mr-2" />
             Nuevo Cliente
@@ -200,7 +194,7 @@ const SectionClientes: React.FC = () => {
                 clientesFiltrados.map((item) => (
                   <tr key={item.id} className="hover:bg-gray-50">
                     <td className="td-cell-main">{item.nombre} {item.apellido}</td>
-                    <td className="td-cell">{item.usuario.email}</td> {/* ⬅️ CAMBIO: Acceder a usuario.email */}
+                    <td className="td-cell">{item.usuario.email}</td>
                     <td className="td-cell">{item.dni}</td>
                     <td className="td-cell">{item.telefono}</td>
                     <td className="td-cell">{item.ciudad}</td>
@@ -247,7 +241,7 @@ const SectionClientes: React.FC = () => {
 
 export default SectionClientes;
 
-// --- COMPONENTE MODAL (ClienteModal) ---
+//  COMPONENTE MODAL (ClienteModal) 
 
 interface ModalProps {
   isOpen: boolean;
@@ -264,7 +258,7 @@ const formatToInputDate = (isoString: string | undefined) => {
 const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialData }) => {
   
   const [formData, setFormData] = useState({
-    // ⬅️ CAMBIO: Leer el email del objeto 'usuario'
+    //Leer el email del objeto 'usuario'
     email: initialData?.usuario.email || '', 
     contrasena: '', 
     foto_perfil: initialData?.foto_perfil || '',
@@ -283,7 +277,6 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
   useEffect(() => {
     if (initialData) {
       setFormData({
-        // ⬅️ CAMBIO: Leer el email del objeto 'usuario'
         email: initialData.usuario.email || '', 
         contrasena: '', 
         foto_perfil: initialData.foto_perfil || '',
@@ -319,9 +312,9 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
     dataToSend.fecha_nacimiento = `${formData.fecha_nacimiento}T00:00:00Z`;
 
     if (initialData) {
-      // EDICIÓN (PUT): Solo se envían campos de Cliente, no de usuario
+      // PUT: Solo se envían campos de Cliente, no de usuario
       delete dataToSend.contrasena;
-      delete dataToSend.email; // ⬅️ CAMBIO: Eliminar email
+      delete dataToSend.email; // 
       
       try {
         onSave(dataToSend as UpdateClienteDto); 
@@ -329,7 +322,7 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
         setErrorModal((err as Error).message);
       }
     } else {
-      // CREACIÓN (POST): Se envía todo para crear el Cliente y el Usuario
+      // POST: Se envía todo para crear el Cliente y el Usuario
       if (!formData.contrasena) {
         setErrorModal('La contraseña es requerida para crear un nuevo cliente.');
         return;
@@ -359,7 +352,7 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
         
         <form onSubmit={handleSubmit} className="space-y-4 max-h-[70vh] overflow-y-auto pr-2">
           
-          {/* Fila 1: Nombre, Apellido, DNI */}
+          {/* Nombre, Apellido, DNI */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <label className="label-tailwind">Nombre</label>
@@ -375,7 +368,7 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
             </div>
           </div>
 
-          {/* Fila 2: Email y Contraseña (solo al crear) */}
+          {/* Email y Contraseña (solo al crear) */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="label-tailwind">Email</label>
@@ -399,7 +392,7 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
             )}
           </div>
 
-          {/* Fila 3: Teléfono, Fecha Nacimiento, Ciudad */}
+          {/* Teléfono, Fecha Nacimiento, Ciudad */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <label className="label-tailwind">Teléfono</label>
@@ -415,7 +408,7 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
             </div>
           </div>
 
-          {/* Fila 4: Dirección y Foto Perfil */}
+          {/*  Dirección y Foto Perfil */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
               <label className="label-tailwind">Dirección</label>

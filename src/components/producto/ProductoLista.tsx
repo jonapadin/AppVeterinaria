@@ -5,7 +5,7 @@ import { useCarrito } from "../carrito/CarritoContext";
 import { formatearPrecio } from "./FormatoPrecios";
 import toast from "react-hot-toast";
 
-
+// define qué datos recibe este componente
 interface ProductListProps {
   categoria: CategoriaProducto;
   subcategoria: SubcategoriaProducto;
@@ -14,7 +14,7 @@ interface ProductListProps {
   productos?: Producto[];
 }
 
-
+//Componente muestra la lista de productos
 export default function ProductList({
   categoria,
   subcategoria,
@@ -22,23 +22,26 @@ export default function ProductList({
   orden,
   productos,
 }: ProductListProps) {
+    // Si no recibo productos por props, uso los de la API
   const { productos: productosApi } = useProductos();
   const productosAMostrar = productos ?? productosApi;
   const { agregarAlCarrito } = useCarrito();
 
-  // Filtrar productos 
+   // Filtra por categoría, subcategoría, marca y presentaciones 
   const filtrados = productosAMostrar.filter(
     (p) =>
       p.categoria === categoria &&
       p.subcategoria === subcategoria &&
+       // Si no hay filtros de marca muestra todas.
       (filtros.marcas.length === 0 || filtros.marcas.includes(p.marca)) &&
+            // Si no hay filtros de presentaciones muestra todas.
       (filtros.presentaciones.length === 0 ||
         (p.kg !== null &&
           p.kg !== undefined &&
           filtros.presentaciones.includes(String(p.kg))))
   );
 
-  // Ordenar productos
+    // Ordenamiento según lo que el usuario elija
   const ordenados = [...filtrados].sort((a, b) => {
   switch (orden) {
     case "menor-mayor":
@@ -53,7 +56,7 @@ export default function ProductList({
       return 0;
   }
 });
-
+  //  RENDERIZAR PRODUCTOS
   return (
     <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 font-semibold">
       {ordenados.map((prod) => (

@@ -81,7 +81,7 @@ function ProductBirdsPage() {
         </div>
       </section>
 
-      {/* Navbar de categorías */}
+     
     
       {/* Navbar de categorías */}
       <NavbarCategorias

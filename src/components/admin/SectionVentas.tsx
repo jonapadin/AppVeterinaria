@@ -2,15 +2,15 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // SectionVentas.tsx
 import React, { useState, useMemo, useEffect } from 'react';
-import { Plus, Search, Edit, Trash2, X, Eye } from 'lucide-react'; // Añadimos Eye
+import { Plus, Search, Edit, Trash2, X, Eye } from 'lucide-react';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { fetchApi } from '../../app/api';
 
-// 1. INTERFACES DE DATOS DE LA VENTA (Lo que devuelve el GET)
+//  INTERFACES DE DATOS DE LA VENTA (Lo que devuelve el GET)
 interface ProductoDetalle {
   id: number;
-  nombre: string; // Se asume que el backend lo llena
+  nombre: string;
   marca: string;
   descripcion: string;
   precio: string;
@@ -62,20 +62,22 @@ interface Venta {
   cliente: ClienteCompleto;
 }
 
-// 2. INTERFACES PARA LA CREACIÓN/ACTUALIZACIÓN (Lo que espera el POST/PATCH)
+// INTERFACES PARA LA CREACIÓN/ACTUALIZACIÓN (Lo que espera el POST/PATCH)
 type CreateVentaDto = {
   fecha: string;
   metodo_pago: string;
   estado_pago: string;
   id_cliente: number;
   id_empleado: number;
+  // :  el total al DTO para el backend
+  total: number;
   detalles: {
     id_producto: number;
     cantidad: number;
   }[];
 };
 
-// 3. INTERFACES PARA LOS DESPLEGABLES (listas simplificadas)
+// INTERFACES PARA LOS DESPLEGABLES (listas simplificadas)
 interface ClienteSimple {
   id: number;
   nombre: string;
@@ -91,7 +93,7 @@ interface EmpleadoSimple {
 interface ProductoSimple {
   id: number;
   nombre: string; // Contendrá la marca + descripción
-  precio: string; 
+  precio: string;
 }
 
 
@@ -99,12 +101,13 @@ interface ProductoSimple {
 interface DetalleModalState {
   id_producto: string;
   cantidad: string;
-  precio_unitario: string; 
+  precio_unitario: string;
 }
 
 // Opciones (CORREGIDAS SEGÚN LOS ERRORES DEL BACKEND)
 const OPCIONES_METODO_PAGO = ['Efectivo', 'Transferencia', 'Tarjeta de Crédito', 'Tarjeta de Débito'];
-const OPCIONES_ESTADO_PAGO = ['Pendiente', 'Completado', 'Cancelado', 'PAGADO'];
+//Ajustar valores para que coincidan con el backend (Aprobado, Pagado)
+const OPCIONES_ESTADO_PAGO = ['Pendiente', 'Aprobado', 'Cancelado', 'Pagado']; 
 
 const formatFechaDisplay = (isoString: string) => {
   if (!isoString) return 'Fecha inválida';
@@ -131,7 +134,7 @@ const SectionVentas: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      // 1. Cargar las listas de opciones (Clientes, Empleados, Productos)
+      //  Cargar las listas de opciones (Clientes, Empleados, Productos)
       const [
         listData, 
         clientesData, 
@@ -147,14 +150,14 @@ const SectionVentas: React.FC = () => {
       setListaClientes(clientesData.map((c: any) => ({ id: c.id, nombre: c.nombre, apellido: c.apellido })));
       setListaEmpleados(empleadosData.map((e: any) => ({ id: e.id, nombre: e.nombre, apellido: e.apellido })));
       
-      // 💡 CORRECCIÓN: Construir el nombre del producto usando marca y descripción 
+      // Construir el nombre del producto usando marca y descripción 
       setListaProductos(productosData.map((p: any) => ({ 
         id: p.id, 
         nombre: `${p.marca} - ${p.descripcion}`, 
         precio: p.precio 
       })));
-            
-      // 2. Cargar detalles de cada venta para la tabla principal
+                
+      //  Cargar detalles de cada venta para la tabla principal
       const ventasCompletas = await Promise.all(
         listData.map(async (venta: Venta) => {
           try {
@@ -239,23 +242,27 @@ const SectionVentas: React.FC = () => {
     return detalles.reduce((acc, item) => acc + (Number(item.cantidad) || 0), 0);
   };
   
-  // 💡 NUEVO HANDLER: Mostrar detalles de venta
-  const handleShowDetalles = (detalles: DetalleVenta[], idVenta: number) => {
-    if (!detalles || detalles.length === 0) {
-        alert(`Venta #${idVenta} no tiene detalles de productos.`);
-        return;
-    }
-    
-    const detalleTexto = detalles.map(d => {
-      const nombreProducto = d.producto?.nombre 
-        ? d.producto.nombre 
-        : `${d.producto?.marca} (${d.producto?.descripcion.substring(0, 20)}...)`;
-        
-      return `• ${d.cantidad}x ${nombreProducto} (P.U.: $${d.precio})`;
-    }).join('\n');
-    
-    alert(`🛒 Detalles de Venta #${idVenta} (Total: $${detalles[0].subtotal || 'N/A'}):\n\n${detalleTexto}`);
-  };
+  // NUEVO HANDLER: Mostrar detalles de venta
+const handleShowDetalles = (detalles: DetalleVenta[], idVenta: number) => {
+  if (!detalles || detalles.length === 0) {
+      alert(`Venta #${idVenta} no tiene detalles de productos.`);
+      return;
+  }
+  
+  const detalleTexto = detalles.map(d => {
+    //  Verifica si d.producto existe antes de intentar acceder a sus propiedades
+    const nombreProducto = d.producto 
+      ? (d.producto.nombre || 
+         `${d.producto.marca || 'Marca Desconocida'} (${d.producto.descripcion.substring(0, 20)}...)`)
+      : 'Producto no disponible'; // Mensaje de reserva si la relación no se cargó
+      
+    return `• ${d.cantidad}x ${nombreProducto} (P.U.: $${d.precio})`;
+  }).join('\n');
+  
+  // Nota: El total de detalles[0].subtotal no siempre es el total de la venta, 
+  // pero lo dejamos si tu API lo envía así.
+  alert(`🛒 Detalles de Venta #${idVenta} (Total: $${detalles[0].subtotal || 'N/A'}):\n\n${detalleTexto}`);
+};
 
 
   // --- RENDER ---
@@ -273,7 +280,7 @@ const SectionVentas: React.FC = () => {
               />
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
             </div>
-            <button onClick={handleOpenModalNuevo} className="btn-primary flex items-center justify-center">
+            <button onClick={handleOpenModalNuevo} className="btn-primary bg-[#8F108D] flex items-center justify-center">
               <Plus className="w-5 h-5 mr-2" />
               Nueva Venta
             </button>
@@ -310,7 +317,7 @@ const SectionVentas: React.FC = () => {
                 <th className="th-cell">Items (Cant.)</th>
                 <th className="th-cell">Método Pago</th>
                 <th className="th-cell">Estado Pago</th>
-                <th className="th-cell">Detalles</th> {/* ⬅️ NUEVA COLUMNA */}
+                <th className="th-cell">Detalles</th>
                 <th className="th-cell text-right">Acciones</th>
               </tr>
             </thead>
@@ -334,14 +341,14 @@ const SectionVentas: React.FC = () => {
                       <td className="td-cell">{item.metodo_pago}</td>
                       <td className="td-cell">
                         <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                            item.estado_pago === 'Pagada' || item.estado_pago === 'Completado' || item.estado_pago === 'Pagado' ? 'bg-green-100 text-green-800' 
-                            : item.estado_pago === 'Cancelada' ? 'bg-red-100 text-red-800'
+                            item.estado_pago === 'Pagado' || item.estado_pago === 'Aprobado' ? 'bg-green-100 text-green-800' 
+                            : item.estado_pago === 'Cancelado' ? 'bg-red-100 text-red-800'
                             : 'bg-yellow-100 text-yellow-800'
                           }`}>
                           {item.estado_pago}
                           </span>
                       </td>
-                      {/* ⬅️ CELDA DE DETALLES */}
+                      {/* CELDA DE DETALLES */}
                       <td className="td-cell">
                         <button 
                           onClick={() => handleShowDetalles(item.detalles, item.id_compra)} 
@@ -352,7 +359,7 @@ const SectionVentas: React.FC = () => {
                           <Eye className="w-5 h-5" />
                         </button>
                       </td>
-                      {/* ⬅️ FIN CELDA DE DETALLES */}
+                      {/* FIN CELDA DE DETALLES */}
                       <td className="td-cell text-right space-x-2">
                         <button onClick={() => handleOpenModalEditar(item)} className="text-primary hover:text-primary-700" data-tooltip-id="tooltip-main" data-tooltip-content="Editar">
                           <Edit className="w-5 h-5" />
@@ -386,7 +393,7 @@ const SectionVentas: React.FC = () => {
 };
 export default SectionVentas;
 
-// --- MODAL (VentaModal) ---
+// --- MODAL (Venta) ---
 interface VentaModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -445,7 +452,8 @@ const VentaModal: React.FC<VentaModalProps> = ({ isOpen, onClose, onSave, initia
 
     if (name === 'id_producto') {
       nuevosDetalles[index].id_producto = value;
-      nuevosDetalles[index].precio_unitario = getPrecioProducto(value);
+      // Obtiene el precio del producto seleccionado
+      nuevosDetalles[index].precio_unitario = getPrecioProducto(value); 
     } else {
       // @ts-ignore
       nuevosDetalles[index][name] = value;
@@ -471,25 +479,52 @@ const VentaModal: React.FC<VentaModalProps> = ({ isOpen, onClose, onSave, initia
     }, 0);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Calcula el total con la función calcularTotal()
+    const totalCalculado = calcularTotal();
+
+    //  Validación de total > 0.01 (Necesario por el error "must not be less than 0.01")
+    if (totalCalculado < 0.01) {
+      alert("❌ El total de la venta debe ser mayor a $0.00. Verifique los productos y cantidades.");
+      return;
+    }
+    
+    // Redondeo estricto y conversión a NUMBER (Necesario por el error "conforming to the specified constraints")
+    const totalRedondeado = parseFloat(totalCalculado.toFixed(2)); 
+    // toFixed(2) devuelve un string, parseFloat lo convierte de nuevo a number (ej: 10.50)
+
+    // Asegúrate de que los IDs estén seleccionados para que el DTO sea válido
+    if (!formData.cliente.id || !formData.empleado.id || detalles.filter(d => d.id_producto).length === 0) {
+        alert("Por favor, selecciona un Cliente, un Empleado y al menos un Producto válido.");
+        return;
+    }
         
     const dataFinal: CreateVentaDto = {
-      fecha: formData.fecha,
-      metodo_pago: formData.metodo_pago,
-      estado_pago: formData.estado_pago,
-      id_cliente: Number(formData.cliente.id),
-      id_empleado: Number(formData.empleado.id),
-      detalles: detalles
-        .filter(d => d.id_producto && Number(d.cantidad) > 0) 
-        .map(d => ({
-          id_producto: Number(d.id_producto),
-          cantidad: Number(d.cantidad),
-        })),
+        fecha: formData.fecha,
+        metodo_pago: formData.metodo_pago,
+        // El valor de estado_pago ya está corregido al usar las OPCIONES_ESTADO_PAGO actualizadas
+        estado_pago: formData.estado_pago, 
+        id_cliente: Number(formData.cliente.id),
+        id_empleado: Number(formData.empleado.id),
+        
+        // Solución Final del Error del Total
+        total: totalRedondeado, 
+        
+        detalles: detalles
+          // Filtramos solo los detalles que tienen un producto seleccionado y una cantidad positiva
+          .filter(d => d.id_producto && Number(d.cantidad) > 0) 
+          .map(d => ({
+            id_producto: Number(d.id_producto),
+            cantidad: Number(d.cantidad),
+            //  Aquí no incluimos precio_unitario, lo cual es correcto si el 
+            // backend usa id_producto y total para sus validaciones internas.
+          })),
     };
 
     onSave(dataFinal);
-  };
+};
 
   if (!isOpen) return null;
 
@@ -501,7 +536,7 @@ const VentaModal: React.FC<VentaModalProps> = ({ isOpen, onClose, onSave, initia
         </h2>
         
         <form onSubmit={handleSubmit} className="space-y-4 max-h-[80vh] overflow-y-auto pr-2">
-          {/* Fila 1: Cliente, Empleado, Fecha */}
+          {/*  Cliente, Empleado, Fecha */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <label className="label-tailwind">ID Cliente</label>
@@ -531,7 +566,7 @@ const VentaModal: React.FC<VentaModalProps> = ({ isOpen, onClose, onSave, initia
             </div>
           </div>
           
-          {/* Fila 2: Pago */}
+          {/* Pago */}
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="label-tailwind">Método de Pago</label>
@@ -541,13 +576,14 @@ const VentaModal: React.FC<VentaModalProps> = ({ isOpen, onClose, onSave, initia
             </div>
               <div>
               <label className="label-tailwind">Estado de Pago</label>
+              {/* Usa las opciones corregidas OPCIONES_ESTADO_PAGO */}
               <select name="estado_pago" value={formData.estado_pago} onChange={handleChange} className="mt-1 w-full input-tailwind">
                 {OPCIONES_ESTADO_PAGO.map(e => <option key={e} value={e}>{e}</option>)}
               </select>
             </div>
           </div>
 
-          {/* Fila 3: Detalles de Productos (Dinámico) */}
+          {/* Detalles de Productos (Dinámico) */}
           <div className="space-y-3 pt-4 border-t">
             <h3 className="text-lg font-medium text-gray-700">Productos/Servicios</h3>
             {detalles.map((detalle, index) => (

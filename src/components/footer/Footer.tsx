@@ -80,14 +80,14 @@ export default function Footer({ onOpenCarrito }: FooterProps) {
     "
   >
     <img
-      src="../../assets/icons/logoVet.png"
+      src="../../assets/icons/iconosVet.png"
       alt="Logo Veterinaria"
       className="
         w-20 h-auto
         md:w-36
         lg:w-40
         xl:w-48
-        2xl:w-50
+        2xl:w-55
       "
     />
   </div>
@@ -121,7 +121,7 @@ export default function Footer({ onOpenCarrito }: FooterProps) {
         >
           <BiLogoInstagramAlt className=" md:w-4 md:h-4 lg:w-4 lg:h-4 xl:w-6 xl:h-6 ml-20" />
         </a>
-        <span>Veterinaria.Ig</span>
+        <span>HappyPaws.Ig</span>
       </div>
 
       <div className="flex items-center gap-2">
@@ -132,12 +132,12 @@ export default function Footer({ onOpenCarrito }: FooterProps) {
         >
           <AiFillFacebook className="md:w-4 md:h-4 lg:w-4 lg:h-4 xl:w-6 xl:h-6 ml-20" />
         </a>
-        <span>Veterinaria.FB</span>
+        <span>HappyPaws.FB</span>
       </div>
 
       <div className="flex items-center gap-2">
         <BiLogoGmail className="md:w-4 md:h-4 lg:w-4 lg:h-4 xl:w-6 xl:h-6 ml-20" />
-        <span>veterinaria@gmail.com</span>
+        <span>info@happypaws.com</span>
       </div>
 
       <div className="flex items-center gap-2">
