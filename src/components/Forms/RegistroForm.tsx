@@ -450,9 +450,7 @@ export default function RegistroForm() {
             >
               YA TENGO UNA CUENTA
             </button>
-            >
-              YA TENGO UNA CUENTA
-            </button>
+         
           </Link>
         </form>
 
