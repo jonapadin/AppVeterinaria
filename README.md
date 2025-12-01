@@ -1,69 +1,93 @@
-# React + TypeScript + Vite
+Veterinaria App - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend de la aplicación de gestión de veterinaria. Permite a los usuarios interactuar con turnos, clientes, productos y pagos de manera intuitiva y rápida.
 
-Currently, two official plugins are available:
+🛠 Tecnologías
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+React - Librería para construir interfaces de usuario.
 
-## Expanding the ESLint configuration
+Vite - Herramienta de construcción rápida y ligera.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+TypeScript - Para tipado estático y mayor seguridad en el código.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Tailwind CSS - Framework de estilos utility-first para diseño rápido.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+React Router - Manejo de rutas en la aplicación.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Axios / Fetch API - Para consumir el backend.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+⚡ Funcionalidades
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Visualizar y gestionar turnos.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Listar y editar clientes.
+
+Consultar y administrar productos.
+
+Recibir notificaciones en tiempo real.
+
+Integración con Mercado Pago para pagos online.
+
+Autenticación y control de acceso según rol de usuario.
+
+📦 Instalación
+
+Clonar el repositorio:
+
+git clone https://github.com/tu-usuario/veterinaria-frontend.git
+
+
+Instalar dependencias:
+
+cd veterinaria-frontend
+npm install
+
+
+Crear archivo .env en la raíz del proyecto y configurar la URL del backend:
+
+VITE_API_BASE_URL=http://localhost:3000/api/v1
+
+
+Iniciar la aplicación en modo desarrollo:
+
+npm run dev
+
+
+La aplicación correrá por defecto en:
+
+http://localhost:5173
+
+🚀 Rutas principales
+
+/ - Inicio / Dashboard.
+
+/turnos - Gestión de turnos.
+
+/clientes - Gestión de clientes.
+
+/productos - Gestión de productos.
+
+/notificaciones - Notificaciones en tiempo real.
+
+/login - Inicio de sesión.
+
+Algunas rutas requieren autenticación según el rol del usuario.
+
+🧪 Pruebas
+
+Si implementaste pruebas:
+
+npm run test
+npm run test:coverage
+
+🤝 Contribuciones
+
+Hacer un fork del repositorio.
+
+Crear una rama nueva (git checkout -b feature/nueva-funcionalidad).
+
+Hacer commit de los cambios (git commit -am 'Agregar nueva funcionalidad').
+
+Hacer push a la rama (git push origin feature/nueva-funcionalidad).
+
+Crear un Pull Request.
