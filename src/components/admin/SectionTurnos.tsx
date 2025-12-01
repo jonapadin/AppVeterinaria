@@ -156,7 +156,7 @@ const SectionTurnos: React.FC = () => {
               />
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
             </div>
-            <button onClick={handleOpenModalNuevo} className="btn-primary flex items-center justify-center">
+            <button onClick={handleOpenModalNuevo} className="btn-primary bg-[#8F108D] flex items-center justify-center">
               <Plus className="w-5 h-5 mr-2" />
               Nuevo Turno
             </button>

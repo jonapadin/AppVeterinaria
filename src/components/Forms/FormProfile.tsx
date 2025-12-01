@@ -403,7 +403,7 @@ function Formulario() {
 
   // RENDERIZADO DEL FORMULARIO
   return (
-    <form className="max-w-lg mx-auto p-6 my-9 bg-white shadow-lg rounded-lg 2xl:py-36" onSubmit={handleSubmit}>
+    <form className="max-w-lg mx-auto my-24 px-4  bg-white shadow-lg rounded-lg 2xl:py-36" onSubmit={handleSubmit}>
 
       <div className="flex flex-col items-center mb-6 border-b pb-4">
         <div className='relative w-24 h-24 mb-3'>

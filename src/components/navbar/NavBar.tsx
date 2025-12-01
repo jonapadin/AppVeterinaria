@@ -10,9 +10,9 @@ interface NavBarProps {
 }
 const renderLogo = () => (
         <img
-            src="../../assets/icons/logoVet.png"
+            src="../../assets/icons/iconosVet.png"
             alt="Logo Veterinaria"
-            className="w-40 h-20 lg:w-32 lg:h-16 xl:w-40 xl:h-20 2xl:h-24 2xl:w-52 cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105"
+            className="hidden md:block w-40 h-20 lg:w-32 lg:h-16 xl:w-40 xl:h-20 2xl:h-24 2xl:w-52 cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105"
         />
     );
 

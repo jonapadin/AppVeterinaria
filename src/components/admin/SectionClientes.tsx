@@ -152,7 +152,7 @@ const SectionClientes: React.FC = () => {
           
           <button 
             onClick={handleOpenModalNuevo} 
-            className="btn-primary flex items-center justify-center"
+            className="btn-primary bg-[#8F108D] flex items-center justify-center"
           >
             <Plus className="w-5 h-5 mr-2" />
             Nuevo Cliente
