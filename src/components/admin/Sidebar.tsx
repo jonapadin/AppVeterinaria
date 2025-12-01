@@ -32,6 +32,7 @@ const sidebarItems: { name: string; icon: React.ElementType; key: AdminSection }
   { name: 'Turnos', icon: Calendar, key: 'Turnos' },
   { name: 'Ventas', icon: ShoppingCart, key: 'Ventas' },
   { name: 'Chat', icon: MessageSquare, key: 'Chat' }, // ⬅️ Nuevo item de Chat
+  { name: 'Inventario', icon: ShoppingCart, key: 'Inventario' },
 ];
 
 const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection }) => {

@@ -6,9 +6,10 @@ import SectionMascotas from './SectionMascotas';
 import SectionTurnos from './SectionTurnos';
 import SectionVentas from './SectionVentas';
 import SectionChat from './SectionChat'; 
+import SectionInventarioEmpleado from '../../pages/private/Inventary';
 
 // 2. Extender el tipo AdminSection para incluir 'Chat'
-export type AdminSection = 'Clientes' | 'Usuarios' | 'Empleados' | 'Mascotas' | 'Turnos' | 'Ventas' | 'Chat'; 
+export type AdminSection = 'Clientes' | 'Usuarios' | 'Empleados' | 'Mascotas' | 'Turnos' | 'Ventas' | 'Chat' | 'Inventario'; 
 
 const AdminDashboard: React.FC = () => {
     // Inicializamos con 'Clientes', pero el tipo ahora incluye 'Chat'
@@ -27,7 +28,9 @@ const AdminDashboard: React.FC = () => {
             case 'Ventas':
                 return <SectionVentas />;
             case 'Chat':
-                return <SectionChat />; 
+                return <SectionChat />;
+            case 'Inventario':
+                return <SectionInventarioEmpleado />;
             default:
                 return <SectionClientes />;
         }

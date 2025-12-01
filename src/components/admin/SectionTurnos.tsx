@@ -125,7 +125,7 @@ const SectionTurnos: React.FC = () => {
     
     try {
       if (itemParaEditar) {
-        await fetchApi(`/turno/${itemParaEditar.id_turno}`, { method: 'PUT', body: JSON.stringify(dataToSend) });
+        await fetchApi(`/turno/${itemParaEditar.id_turno}`, { method: 'PATCH', body: JSON.stringify(dataToSend) });
       } else {
         await fetchApi('/turno', { method: 'POST', body: JSON.stringify(dataToSend) });
       }
