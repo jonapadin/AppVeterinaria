@@ -45,12 +45,14 @@ const SectionInventario: React.FC = () => {
   //  Carga de Datos (FETCH) 
   const cargarLookups = async () => {
     try {
+      // Asumo que tu endpoint de Empleado devuelve al menos {id, nombre, apellido}
       const empleadosData = await fetchApi('/empleado');
       setEmpleadosLookup(empleadosData.map((e: any) => ({ 
         id: e.id, 
         nombre: `${e.nombre} ${e.apellido || ''}` 
       })));
       
+      // Asumo que tu endpoint de Producto devuelve al menos {id, nombre}
       const productosData = await fetchApi('/producto');
       setProductosLookup(productosData.map((p: any) => ({ 
         id: p.id, 
@@ -124,6 +126,7 @@ const SectionInventario: React.FC = () => {
     
     try {
       if (itemParaEditar) {
+        // En un PUT, debes enviar los IDs originales
         await fetchApi(`/inventario/${itemParaEditar.id}`, { 
           method: 'PATCH', 
           body: JSON.stringify(dataToSend) 
@@ -300,7 +303,7 @@ export const UsoInventarioModal: React.FC<ModalProps> = ({ isOpen, onClose, onSa
 
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-md bg-transparent p-4">
       <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-lg">
         <h2 className="text-xl font-bold text-gray-800 mb-4">
           {initialData ? 'Editar Registro de Uso' : 'Registrar Uso de Inventario'}

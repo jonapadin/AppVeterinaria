@@ -529,7 +529,7 @@ const handleSubmit = (e: React.FormEvent) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+     <div className="fixed inset-0 z-50 flex items-center justify-center bg-opaque-50  bg-opacity-60 backdrop-blur-sm p-4">
       <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-3xl">
         <h2 className="text-xl font-bold text-gray-800 mb-4">
           {initialData ? 'Editar Venta' : 'Registrar Venta'}
@@ -627,7 +627,7 @@ const handleSubmit = (e: React.FormEvent) => {
             </span>
             <div className="flex space-x-3">
               <button type="button" onClick={onClose} className="btn-secondary">Cancelar</button>
-              <button type="submit" className="btn-primary">Guardar Venta</button>
+              <button type="submit" className="btn-primary bg-[#8F108D]">Guardar Venta</button>
             </div>
           </div>
         </form>
