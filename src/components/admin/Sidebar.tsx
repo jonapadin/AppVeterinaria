@@ -17,14 +17,19 @@ interface SidebarProps {
 }
 
 // Agregar el nuevo item de Chat
-const sidebarItems: { name: string; icon: React.ElementType; key: AdminSection }[] = [
-  { name: 'Clientes', icon: Users, key: 'Clientes' },
-  { name: 'Empleados', icon: Briefcase, key: 'Empleados' },
-  { name: 'Mascotas', icon: Heart, key: 'Mascotas' },
-  { name: 'Turnos', icon: Calendar, key: 'Turnos' },
-  { name: 'Ventas', icon: ShoppingCart, key: 'Ventas' },
-  { name: 'Chat', icon: MessageSquare, key: 'Chat' }, // 
-  { name: 'Inventario', icon: Package, key: 'Inventario' },
+const sidebarItems: {
+  name: string;
+  icon: React.ElementType;
+  key: AdminSection;
+}[] = [
+  { name: "Clientes", icon: Users, key: "Clientes" },
+  { name: "Empleados", icon: Briefcase, key: "Empleados" },
+  { name: "Mascotas", icon: Heart, key: "Mascotas" },
+  { name: "Turnos", icon: Calendar, key: "Turnos" },
+  { name: "Ventas", icon: ShoppingCart, key: "Ventas" },
+  { name: "Chat", icon: MessageSquare, key: "Chat" }, //
+  { name: "Inventario", icon: Package, key: "Inventario" },
+  { name: "Notificaciones", icon: Bell, key: "Notifications" },
 ];
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -64,4 +69,3 @@ const Sidebar: React.FC<SidebarProps> = ({
 };
 
 export default Sidebar;
-

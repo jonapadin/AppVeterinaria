@@ -16,7 +16,6 @@ interface ProductoDetalle {
   precio: string;
   stock: number;
   categoria: string;
-  // ... otras propiedades
 }
 
 interface ClienteCompleto {
@@ -62,7 +61,7 @@ interface Venta {
   cliente: ClienteCompleto;
 }
 
-// INTERFACES PARA LA CREACIÓN/ACTUALIZACIÓN (Lo que espera el POST/PATCH)
+// INTERFACES PARA LA CREACIÓN/ACTUALIZACIÓN 
 type CreateVentaDto = {
   fecha: string;
   metodo_pago: string;
@@ -77,7 +76,7 @@ type CreateVentaDto = {
   }[];
 };
 
-// INTERFACES PARA LOS DESPLEGABLES (listas simplificadas)
+// INTERFACES PARA LOS DESPLEGABLES
 interface ClienteSimple {
   id: number;
   nombre: string;
@@ -92,7 +91,7 @@ interface EmpleadoSimple {
 
 interface ProductoSimple {
   id: number;
-  nombre: string; // Contendrá la marca + descripción
+  nombre: string;
   precio: string;
 }
 
@@ -104,7 +103,6 @@ interface DetalleModalState {
   precio_unitario: string;
 }
 
-// Opciones (CORREGIDAS SEGÚN LOS ERRORES DEL BACKEND)
 const OPCIONES_METODO_PAGO = ['Efectivo', 'Transferencia', 'Tarjeta de Crédito', 'Tarjeta de Débito'];
 //Ajustar valores para que coincidan con el backend (Aprobado, Pagado)
 const OPCIONES_ESTADO_PAGO = ['Pendiente', 'Aprobado', 'Cancelado', 'Pagado']; 
@@ -134,7 +132,6 @@ const SectionVentas: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      //  Cargar las listas de opciones (Clientes, Empleados, Productos)
       const [
         listData, 
         clientesData, 
@@ -150,14 +147,12 @@ const SectionVentas: React.FC = () => {
       setListaClientes(clientesData.map((c: any) => ({ id: c.id, nombre: c.nombre, apellido: c.apellido })));
       setListaEmpleados(empleadosData.map((e: any) => ({ id: e.id, nombre: e.nombre, apellido: e.apellido })));
       
-      // Construir el nombre del producto usando marca y descripción 
       setListaProductos(productosData.map((p: any) => ({ 
         id: p.id, 
         nombre: `${p.marca} - ${p.descripcion}`, 
         precio: p.precio 
       })));
                 
-      //  Cargar detalles de cada venta para la tabla principal
       const ventasCompletas = await Promise.all(
         listData.map(async (venta: Venta) => {
           try {
@@ -193,7 +188,7 @@ const SectionVentas: React.FC = () => {
     }).sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime());
   }, [ventas, searchTerm, filtroMetodoPago, filtroEstado]);
 
-  // --- Handlers de Modales ---
+  // Handlers de Modales
   const handleOpenModalNuevo = () => { 
     setItemParaEditar(null); 
     setIsModalOpen(true); 
@@ -242,7 +237,6 @@ const SectionVentas: React.FC = () => {
     return detalles.reduce((acc, item) => acc + (Number(item.cantidad) || 0), 0);
   };
   
-  // NUEVO HANDLER: Mostrar detalles de venta
 const handleShowDetalles = (detalles: DetalleVenta[], idVenta: number) => {
   if (!detalles || detalles.length === 0) {
       alert(`Venta #${idVenta} no tiene detalles de productos.`);
@@ -250,22 +244,19 @@ const handleShowDetalles = (detalles: DetalleVenta[], idVenta: number) => {
   }
   
   const detalleTexto = detalles.map(d => {
-    //  Verifica si d.producto existe antes de intentar acceder a sus propiedades
     const nombreProducto = d.producto 
       ? (d.producto.nombre || 
          `${d.producto.marca || 'Marca Desconocida'} (${d.producto.descripcion.substring(0, 20)}...)`)
-      : 'Producto no disponible'; // Mensaje de reserva si la relación no se cargó
+      : 'Producto no disponible';
       
     return `• ${d.cantidad}x ${nombreProducto} (P.U.: $${d.precio})`;
   }).join('\n');
   
-  // Nota: El total de detalles[0].subtotal no siempre es el total de la venta, 
-  // pero lo dejamos si tu API lo envía así.
   alert(`🛒 Detalles de Venta #${idVenta} (Total: $${detalles[0].subtotal || 'N/A'}):\n\n${detalleTexto}`);
 };
 
 
-  // --- RENDER ---
+  // RENDER 
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold text-[#8F108D]">Gestión de Ventas</h1>
@@ -393,7 +384,7 @@ const handleShowDetalles = (detalles: DetalleVenta[], idVenta: number) => {
 };
 export default SectionVentas;
 
-// --- MODAL (Venta) ---
+// MODAL
 interface VentaModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -452,7 +443,6 @@ const VentaModal: React.FC<VentaModalProps> = ({ isOpen, onClose, onSave, initia
 
     if (name === 'id_producto') {
       nuevosDetalles[index].id_producto = value;
-      // Obtiene el precio del producto seleccionado
       nuevosDetalles[index].precio_unitario = getPrecioProducto(value); 
     } else {
       // @ts-ignore
@@ -481,21 +471,16 @@ const VentaModal: React.FC<VentaModalProps> = ({ isOpen, onClose, onSave, initia
 
 const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Calcula el total con la función calcularTotal()
+  
     const totalCalculado = calcularTotal();
 
-    //  Validación de total > 0.01 (Necesario por el error "must not be less than 0.01")
     if (totalCalculado < 0.01) {
       alert("❌ El total de la venta debe ser mayor a $0.00. Verifique los productos y cantidades.");
       return;
     }
     
-    // Redondeo estricto y conversión a NUMBER (Necesario por el error "conforming to the specified constraints")
     const totalRedondeado = parseFloat(totalCalculado.toFixed(2)); 
-    // toFixed(2) devuelve un string, parseFloat lo convierte de nuevo a number (ej: 10.50)
 
-    // Asegúrate de que los IDs estén seleccionados para que el DTO sea válido
     if (!formData.cliente.id || !formData.empleado.id || detalles.filter(d => d.id_producto).length === 0) {
         alert("Por favor, selecciona un Cliente, un Empleado y al menos un Producto válido.");
         return;
@@ -504,22 +489,20 @@ const handleSubmit = (e: React.FormEvent) => {
     const dataFinal: CreateVentaDto = {
         fecha: formData.fecha,
         metodo_pago: formData.metodo_pago,
-        // El valor de estado_pago ya está corregido al usar las OPCIONES_ESTADO_PAGO actualizadas
+
         estado_pago: formData.estado_pago, 
         id_cliente: Number(formData.cliente.id),
         id_empleado: Number(formData.empleado.id),
         
-        // Solución Final del Error del Total
         total: totalRedondeado, 
         
         detalles: detalles
-          // Filtramos solo los detalles que tienen un producto seleccionado y una cantidad positiva
+
           .filter(d => d.id_producto && Number(d.cantidad) > 0) 
           .map(d => ({
             id_producto: Number(d.id_producto),
             cantidad: Number(d.cantidad),
-            //  Aquí no incluimos precio_unitario, lo cual es correcto si el 
-            // backend usa id_producto y total para sus validaciones internas.
+
           })),
     };
 
