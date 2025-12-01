@@ -303,7 +303,7 @@ export const UsoInventarioModal: React.FC<ModalProps> = ({ isOpen, onClose, onSa
 
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-md bg-transparent p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
       <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-lg">
         <h2 className="text-xl font-bold text-gray-800 mb-4">
           {initialData ? 'Editar Registro de Uso' : 'Registrar Uso de Inventario'}

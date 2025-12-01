@@ -66,7 +66,7 @@
 
 @media (min-width: 375px) and (max-width: 390px) {
 
-  /* Estilos específicos para pantallas ultrawide */
+
   .buscador {
     width: 250px;
   }
@@ -74,7 +74,7 @@
 
 @media (min-width: 400px) and (max-width: 500px) {
 
-  /* Estilos específicos para pantallas ultrawide */
+
   .buscador {
     width: 250px;
   }
@@ -82,11 +82,20 @@
 
 @media (min-width: 500px) and (max-width: 768px) {
 
-  /* Estilos específicos para pantallas ultrawide */
+
   .buscador {
     width: 350px;
   }
 
 }
+@media (min-width: 768px) and (max-width: 875px) {
+
+
+  .logo {
+    visibility: hidden;
+  }
+
+}
+
 
 
