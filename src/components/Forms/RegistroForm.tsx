@@ -243,7 +243,7 @@ export default function RegistroForm() {
                 value={nombre}
                 onChange={(e) => handleTextOnlyChange(e, setNombre)}
                 onBlur={() => validateForm()}
-                placeholder="Nombres (solo letras)"
+                placeholder="Nombres"
                 className={`w-full rounded-lg border py-3 pl-12 pr-4 focus:outline-none focus:ring-2
                             ${validationErrors.nombre ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-purple-500'}`}
                 required
@@ -263,7 +263,7 @@ export default function RegistroForm() {
                 value={apellido}
                 onChange={(e) => handleTextOnlyChange(e, setApellido)}
                 onBlur={() => validateForm()}
-                placeholder="Apellidos (solo letras)"
+                placeholder="Apellidos"
                 className={`w-full rounded-lg border py-3 pl-12 pr-4 focus:outline-none focus:ring-2
                             ${validationErrors.apellido ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-purple-500'}`}
                 required
@@ -284,7 +284,7 @@ export default function RegistroForm() {
                 maxLength={9}
                 onChange={(e) => handleNumberOnlyChange(e, setDni)}
                 onBlur={() => validateForm()}
-                placeholder="DNI / Documento de Identidad (7-9 dígitos)"
+                placeholder="DNI / Documento de Identidad"
                 className={`w-full rounded-lg border py-3 pl-12 pr-4 focus:outline-none focus:ring-2
                             ${validationErrors.dni ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-purple-500'}`}
                 required
@@ -304,7 +304,7 @@ export default function RegistroForm() {
                 value={telefono}
                 onChange={(e) => handleNumberOnlyChange(e, setTelefono)}
                 onBlur={() => validateForm()}
-                placeholder="Teléfono (mínimo 8 dígitos)"
+                placeholder="Teléfono"
                 className={`w-full rounded-lg border py-3 pl-12 pr-4 focus:outline-none focus:ring-2
                             ${validationErrors.telefono ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-purple-500'}`}
                 required
