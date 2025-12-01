@@ -43,7 +43,7 @@ npm install
 
 Crear archivo .env en la raíz del proyecto y configurar la URL del backend:
 
-VITE_API_BASE_URL=http://localhost:3000/api/v1
+VITE_API_BASE_URL=http://localhost:4000/api/v1
 
 
 Iniciar la aplicación en modo desarrollo:
