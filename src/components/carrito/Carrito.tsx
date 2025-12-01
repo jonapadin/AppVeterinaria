@@ -5,7 +5,7 @@ import { formatearPrecio } from "../producto/FormatoPrecios";
 
 
 // URL base de tu backend de NestJS (ajusta el puerto/ruta si es necesario)
-const NESTJS_BASE_URL = "http://localhost:4000";
+const NESTJS_BASE_URL = process.env.URL 
 
 
 interface CarritoModalProps {
