@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:4000/api/v1';
+const API_BASE_URL = "https://apiv1-vet.onrender.com/api/v1";
 
 /**
  * Función genérica para hacer peticiones FETCH
@@ -13,12 +13,12 @@ export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
   
   // Headers por defecto
   const defaultHeaders: HeadersInit = {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
 
   //  AÑADIR EL TOKEN DE AUTENTICACIÓN SI EXISTE
   if (token) {
-    defaultHeaders['Authorization'] = `Bearer ${token}`;
+    defaultHeaders["Authorization"] = `Bearer ${token}`;
   }
 
   const config = {
@@ -39,32 +39,32 @@ export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
       } catch {
         errorData = { message: response.statusText };
       }
-      
-      console.error('❌ Error en la API:', {
+
+      console.error("❌ Error en la API:", {
         status: response.status,
         statusText: response.statusText,
         message: errorData.message,
         details: errorData,
-        url: url
+        url: url,
       });
-      
-    
+
       if (response.status === 401 || response.status === 403) {
-         console.error("Error de autenticación. Redirigiendo al login...");
-     
+        console.error("Error de autenticación. Redirigiendo al login...");
       }
-      
-      throw new Error(errorData.message || `Error ${response.status}: ${response.statusText}`);
+
+      throw new Error(
+        errorData.message || `Error ${response.status}: ${response.statusText}`,
+      );
     }
-    
-    if (config.method === 'DELETE' || response.status === 204) {
+
+    if (config.method === "DELETE" || response.status === 204) {
       return null;
     }
 
     return await response.json();
-    
   } catch (error) {
     console.error(`Error en la petición a ${url}:`, error);
     throw error;
   }
 };
+

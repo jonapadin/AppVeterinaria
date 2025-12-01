@@ -42,7 +42,7 @@ export default function InicioSesion() {
 
     try {
       const { data } = await axios.post<LoginResponse>(
-        "http://localhost:4000/api/v1/auth/login",
+        "https://apiv1-vet.onrender.com/api/v1/auth/login",
         {
           email,
           contrasena: password,
@@ -88,7 +88,9 @@ export default function InicioSesion() {
     >
       <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl md:p-10">
         <div className="mb-6 text-center">
-          <h1 className="text-center text-xl lg:text-4xl font-extrabold text-[#8F108D] my-12">¡Hola de Nuevo!</h1>
+          <h1 className="text-center text-xl lg:text-4xl font-extrabold text-[#8F108D] my-12">
+            ¡Hola de Nuevo!
+          </h1>
           <p className="mt-2 text-gray-500">Inicia sesión para continuar</p>
         </div>
 
@@ -191,4 +193,3 @@ export default function InicioSesion() {
     </div>
   );
 }
-

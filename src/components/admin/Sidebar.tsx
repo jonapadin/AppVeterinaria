@@ -1,15 +1,15 @@
-import React from 'react';
-import { 
-  Users, 
-  Briefcase, 
-  Heart, 
-  Calendar, 
-  ShoppingCart, 
-  MessageSquare, 
+import React from "react";
+import {
+  Users,
+  Briefcase,
+  Heart,
+  Calendar,
+  ShoppingCart,
+  MessageSquare,
   Package,
-} from 'lucide-react';
-import type { AdminSection } from './AdminDashboard'; 
-
+  Bell,
+} from "lucide-react";
+import type { AdminSection } from "./AdminDashboard";
 
 interface SidebarProps {
   activeSection: AdminSection;
@@ -27,15 +27,14 @@ const sidebarItems: { name: string; icon: React.ElementType; key: AdminSection }
   { name: 'Inventario', icon: Package, key: 'Inventario' },
 ];
 
-const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection }) => {
-  
-
+const Sidebar: React.FC<SidebarProps> = ({
+  activeSection,
+  setActiveSection,
+}) => {
   return (
     <aside className="w-64 bg-white shadow-xl flex flex-col">
       <div className="p-6 border-b border-gray-200">
-        <h2 className="text-2xl font-bold text-gray-800">
-          Panel Admin
-        </h2>
+        <h2 className="text-2xl font-bold text-gray-800">Panel Admin</h2>
       </div>
 
       <nav className="flex-1 p-4 space-y-2">
@@ -49,8 +48,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection }) =>
                 flex items-center w-full px-4 py-3 rounded-lg transition-colors duration-200
                 ${
                   isActive
-                    ? 'bg-primary text-black shadow-lg' 
-                    : 'text-gray-600 hover:bg-gray-100'
+                    ? "bg-primary text-black shadow-lg"
+                    : "text-gray-600 hover:bg-gray-100"
                 }
               `}
             >
@@ -60,10 +59,9 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection }) =>
           );
         })}
       </nav>
-
-      
     </aside>
   );
 };
 
 export default Sidebar;
+

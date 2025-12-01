@@ -12,7 +12,6 @@ export interface Producto {
   img: string;
   categoria: CategoriaProducto;
   subcategoria: SubcategoriaProducto;
-
 }
 // Custom Hook para obtener productos del backend 
 export function useProductos() {
@@ -23,17 +22,16 @@ export function useProductos() {
     const fetchProductos = async () => {
       try {  // Hacemos la petición al backend y convertimos la respuesta a JSon
         const res = await fetch(
-          "http://localhost:4000/api/v1/productos",
+          "https://apiv1-vet.onrender.com/api/v1/productos",
         );
         const data: Producto[] = await res.json();
 
         // VIENEN COMO STRING DESDE DECIMAL)
         const productosTransformados = data.map((p) => ({
           ...p,
-            marca: p.marca.trim(),
-          kg: p.kg !== null ? Number(p.kg) : null,// convertimos en número
+          marca: p.marca.trim(),
+          kg: p.kg !== null ? Number(p.kg) : null,
           precio: Number(p.precio),
-         
         }));
 
         setProductos(productosTransformados);
