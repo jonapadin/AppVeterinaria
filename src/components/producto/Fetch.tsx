@@ -22,7 +22,8 @@ export function useProductos() {
     const fetchProductos = async () => {
       try {  // Hacemos la petición al backend y convertimos la respuesta a JSon
         const res = await fetch(
-          "https://apiv1-vet.onrender.com/api/v1/productos",
+         // "https://apiv1-vet.onrender.com/api/v1/productos",
+             "http://localhost:4000/api/v1/productos",
         );
         const data: Producto[] = await res.json();
 

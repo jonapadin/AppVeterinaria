@@ -3,11 +3,11 @@ import type { JSX } from 'react/jsx-runtime';
 
 // Props que recibe el componente del paginador
 interface PaginatorProps {
-  currentPage: number;          // Página actual que se está mostrando
-  totalPages: number;           // Cantidad total de páginas disponibles
+  currentPage: number;          // Página actual 
+  totalPages: number;           // Cantidad total
   onPageChange: (page: number) => void;  // Función que se ejecuta cuando el usuario cambia de página
 }
-// React.FC<PaginatorProps significa que este componente RECEBE propiedades que deben coincidir con la interfaz PaginatorProps.
+// React.FC<PaginatorProps significa que este componente RECiBE propiedades que deben coincidir con la interfaz PaginatorProps.
 const Paginator: React.FC<PaginatorProps> = ({ currentPage, totalPages, onPageChange }) => {
     
     // Esta función calcula qué números de páginas mostrar en la paginación
@@ -59,7 +59,7 @@ const Paginator: React.FC<PaginatorProps> = ({ currentPage, totalPages, onPageCh
     //  Función que pinta cada botón de página
     const renderPageButton = (page: number | '...'): JSX.Element => {
 
-        //  Si la página es "..." se muestra como texto, no botón
+        //  Si la página  se muestra como texto, no botón
         if (page === '...') {
             return (
                 <span

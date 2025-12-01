@@ -83,7 +83,7 @@ function Formulario() {
   const [newFotoPerfilPreviewUrl, setNewFotoPerfilPreviewUrl] = useState<string | null>(null);
   const [shouldRemovePhoto, setShouldRemovePhoto] = useState(false);
 
-  const BASE_URL = "http://localhost:apiv1-vet.onrender.com/api/v1";
+  const BASE_URL = "https://apiv1-vet.onrender.com/api/v1";
 
   //OBTENER ID y CAPTURAR ID de ENTIDAD
   useEffect(() => {
