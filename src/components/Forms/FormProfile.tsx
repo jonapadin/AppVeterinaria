@@ -17,7 +17,7 @@ type UserData = {
   foto_perfil?: string | null;
 };
 
-// 2. Tipado para errores de validación
+//  Tipado para errores de validación
 type ValidationError = {
   [key in keyof UserData]?: string;
 };

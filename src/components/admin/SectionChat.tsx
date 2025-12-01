@@ -16,7 +16,7 @@ const SectionChat: React.FC = () => {
           <div className="text-gray-500 italic">No hay chats pendientes.</div>
         </div>
 
-        {/* Columna 2: Área de Chat Seleccionada */}
+        {/*  Área de Chat Seleccionada */}
         <div className="lg:col-span-2 bg-white rounded-xl shadow-lg flex flex-col border border-gray-200">
           <div className="p-4 border-b">
             <span className="font-semibold text-gray-800">Selecciona un chat...</span>

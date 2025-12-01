@@ -7,15 +7,19 @@ import type { SubcategoriaProducto } from "../../enums/subCategoriaProductos";
 interface NavbarCategoriasProps {
   categoriaActual: "Perro" | "Gato" | "Ave" | "Exótico";
   productos: Producto[];
-   onSelectSubcategoria: (subcategoria: SubcategoriaProducto) => void
+   onSelectSubcategoria: (subcategoria: SubcategoriaProducto) => void // función para elegir subcategoría
 }
 
 function NavbarCategorias({ categoriaActual, productos, onSelectSubcategoria }: NavbarCategoriasProps) {
-  const [openMenu, setOpenMenu] = useState<string | null>(null);
-  const location = useLocation();
+  const [openMenu, setOpenMenu] = useState<string | null>(null);// Estado que controla qué menú desplegable está abierto
+  const location = useLocation(); // Hook para saber en qué URL estamos
 
+  // Subcategorías filtradas dependiendo de la categoría actual filtran los productos por categoría
+  // Se extrae la subcategoría de cada uno
+  // Se usa Set para eliminar duplicados
   const subcategorias = Array.from(
-    new Set(productos.filter((p) => p.categoria === categoriaActual).map((p) => p.subcategoria))
+    new Set(productos.filter((p) =>
+       p.categoria === categoriaActual).map((p) => p.subcategoria))
   );
 
   const categorias = [
@@ -24,13 +28,13 @@ function NavbarCategorias({ categoriaActual, productos, onSelectSubcategoria }: 
     { nombre: "Ave", path: "/categoria/productosAves" },
     { nombre: "Exótico", path: "/categoria/productosExoticos" },
   ];
-
+  // Función para abrir/cerrar el menú de una categoría
   const handleToggle = (nombre: string) => setOpenMenu(openMenu === nombre ? null : nombre);
 
   return (
     <nav className="w-full bg-[#8F108D] text-white py-2 md:py-3 lg:py-4 flex flex-wrap justify-center gap-1 md:gap-3">
-      {categorias.map((cat) => {
-        const isActive = location.pathname.startsWith(cat.path);
+      {categorias.map((cat) => {     {/* Recorrer todas las categorías y mostrarlas */}
+        const isActive = location.pathname.startsWith(cat.path);// Detectar si estamos dentro de la ruta de esa categoría
         return (
           <div key={cat.nombre} className="relative">
             <Link to={cat.path}>
@@ -41,13 +45,15 @@ function NavbarCategorias({ categoriaActual, productos, onSelectSubcategoria }: 
                 }`}
               >
                 {cat.nombre}
+                 {/* Flechita que rota cuando el menú está abierto */}
                 <ChevronDown size={20} className={`transition-transform duration-300 ${openMenu === cat.nombre ? "rotate-180" : ""}`} />
               </button>
             </Link>
-
+             {/* Menú desplegable de subcategorías */}
             {openMenu === cat.nombre && (
               <div className="absolute left-0 mt-2 w-48 bg-white text-[#8F108D] rounded-md shadow-lg">
-                {subcategorias.map((sub) => (
+                  {/* Mostrar todas las subcategorías encontradas */}
+                {subcategorias.map((sub) => ( 
                   <button
                     key={sub}
                     onClick={() => {

@@ -14,14 +14,14 @@ export interface Producto {
   subcategoria: SubcategoriaProducto;
 
 }
-
+// Custom Hook para obtener productos del backend 
 export function useProductos() {
-  const [productos, setProductos] = useState<Producto[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [productos, setProductos] = useState<Producto[]>([]); // Estado donde se guardan los productos
+  const [loading, setLoading] = useState<boolean>(true);// Estado que indicar si se está cargando la info
 
-  useEffect(() => {
+  useEffect(() => {  // Función interna para obtener productos desde la API
     const fetchProductos = async () => {
-      try {
+      try {  // Hacemos la petición al backend y convertimos la respuesta a JSon
         const res = await fetch(
           "http://localhost:4000/api/v1/productos",
         );
@@ -31,7 +31,7 @@ export function useProductos() {
         const productosTransformados = data.map((p) => ({
           ...p,
             marca: p.marca.trim(),
-          kg: p.kg !== null ? Number(p.kg) : null,
+          kg: p.kg !== null ? Number(p.kg) : null,// convertimos en número
           precio: Number(p.precio),
          
         }));
