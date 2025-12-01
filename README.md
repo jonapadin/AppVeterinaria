@@ -34,14 +34,12 @@ Autenticación y control de acceso según rol de usuario.
 
 Clonar el repositorio:
 
-git clone https://github.com/tu-usuario/veterinaria-frontend.git
-
+git clone https://github.com/jonapadin/AppVeterinaria.git
 
 Instalar dependencias:
 
-cd veterinaria-frontend
+cd AppVeterinaria
 npm install
-
 
 Crear archivo .env en la raíz del proyecto y configurar la URL del backend:
 
