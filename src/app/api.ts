@@ -8,15 +8,15 @@ const API_BASE_URL = 'http://localhost:4000/api/v1';
 export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
   const url = `${API_BASE_URL}${endpoint}`;
 
-  // 1. Obtener el token de localStorage
+  //Obtener el token de localStorage
   const token = localStorage.getItem('token');
   
-  // 2. Headers por defecto
+  // Headers por defecto
   const defaultHeaders: HeadersInit = {
     'Content-Type': 'application/json',
   };
 
-  // 3. AÑADIR EL TOKEN DE AUTENTICACIÓN SI EXISTE
+  //  AÑADIR EL TOKEN DE AUTENTICACIÓN SI EXISTE
   if (token) {
     defaultHeaders['Authorization'] = `Bearer ${token}`;
   }

@@ -47,9 +47,9 @@ const formatFecha = (
   });
 };
 
-// ====================================================================
+
 // Componente: UsoInventarioModal (Integrado en el mismo archivo)
-// ====================================================================
+
 
 interface ModalProps {
   isOpen: boolean;
@@ -200,9 +200,9 @@ const UsoInventarioModal: React.FC<ModalProps> = ({
   );
 };
 
-// ====================================================================
+
 // Componente Principal: SectionInventarioEmpleado
-// ====================================================================
+
 
 const SectionInventarioEmpleado: React.FC = () => {
   const [productosInternos, setProductosInternos] = useState<ProductoInterno[]>(
@@ -248,7 +248,7 @@ const SectionInventarioEmpleado: React.FC = () => {
         .filter((p: any) => p.tipo_uso === "Interno")
         .map((p: any) => ({
           id: p.id,
-          // ✅ CORRECCIÓN 1: Asegurar que 'nombre' siempre es un string válido (fallback)
+          // Asegurar que 'nombre' siempre es un string válido (fallback)
           nombre:
             p.nombre ??
             `${p.marca || "Sin Marca"} - ${
@@ -269,7 +269,7 @@ const SectionInventarioEmpleado: React.FC = () => {
 
   const cargarHistorialReservas = async () => {
     try {
-      // ✅ CORRECCIÓN 2: Usar el endpoint /inventario para traer todos los registros.
+      // Usar el endpoint /inventario para traer todos los registros.
       const historialData = await fetchApi(`/inventario`);
       setHistorialReservas(historialData.reverse());
     } catch (err) {
@@ -390,7 +390,7 @@ const SectionInventarioEmpleado: React.FC = () => {
         </div>
       )}
 
-      {/* 1. SECCIÓN DE REGISTRO RÁPIDO Y STOCK INTERNO */}
+      {/* SECCIÓN DE REGISTRO RÁPIDO Y STOCK INTERNO */}
       <div className="bg-white p-6 rounded-xl shadow-lg space-y-6">
         <h2 className="text-2xl font-semibold mb-4 flex items-center text-gray-700">
           <Archive className="w-6 h-6 mr-2 text-[#8F108D]" />
@@ -472,7 +472,7 @@ const SectionInventarioEmpleado: React.FC = () => {
 
       <hr />
 
-      {/* 2. SECCIÓN HISTORIAL DE RESERVAS */}
+      {/*  SECCIÓN HISTORIAL DE RESERVAS */}
       <div className="bg-white p-6 rounded-xl shadow-lg space-y-6">
         <h2 className="text-2xl font-semibold mb-4 flex items-center text-gray-700">
           <Clock className="w-6 h-6 mr-2 text-[#8F108D]" />
@@ -532,7 +532,7 @@ const SectionInventarioEmpleado: React.FC = () => {
                       #{uso.id_uso}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                      {/* ✅ CORRECCIÓN 3: Uso de encadenamiento opcional para Producto */}
+                      {/* Uso de encadenamiento opcional para Producto */}
                       {uso.producto?.nombre ||
                         uso.producto?.marca ||
                         `[Producto ID: ${uso.producto?.id || "?"}]`}
@@ -541,7 +541,7 @@ const SectionInventarioEmpleado: React.FC = () => {
                       {uso.cantidad} Uds.
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {/* ✅ CORRECCIÓN 4: Uso de encadenamiento opcional para Empleado */}
+                      {/*  Uso de encadenamiento opcional para Empleado */}
                       {uso.empleado
                         ? `${uso.empleado.nombre} ${uso.empleado.apellido}`
                         : "[Empleado Desconocido]"}

@@ -6,9 +6,9 @@ import { FaCheckCircle } from "react-icons/fa";
 // ASUME que tienes una implementación de fetchApi en esta ruta:
 import { fetchApi } from "../../app/api";
 
-// -----------------------------------------------------------------
-// --- CONFIGURACIÓN DE API Y UTILS ---
-// -----------------------------------------------------------------
+
+// CONFIGURACIÓN DE API Y UTILS 
+
 const API_TURNO_BASE_URL = "/turno"; // Base: /api/v1/turno
 const API_MASCOTA_BASE_URL = "/mascotas"; // Base: /api/v1/mascotas
 const API_CLIENTE_BASE_URL = "/cliente"; // Base: /api/v1/cliente
@@ -40,7 +40,7 @@ const getClientFromLocalStorage = (): {
   if (clientData) {
     try {
       const user: UserData = JSON.parse(clientData);
-      // 🚨 CORRECCIÓN CLAVE: Solo devolvemos el ID del Usuario (user.id)
+      // devolvemos el ID del Usuario (user.id)
       return {
         userId: user.id,
         token: user.token || "fake_token",
@@ -111,9 +111,8 @@ const parseReason = (observaciones: string): AppointmentReason => {
   return "Consulta General";
 };
 
-// -----------------------------------------------------------------
 // --- COMPONENTES SECUNDARIOS: AppointmentCard y BookingForm (SIN CAMBIOS FUNCIONALES) ---
-// -----------------------------------------------------------------
+
 
 interface AppointmentCardProps {
   appointment: Appointment;
@@ -360,7 +359,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
   );
 };
 
-// -----------------------------------------------------------------
+
 // --- COMPONENTE PRINCIPAL (BookingPage) ---
 // -----------------------------------------------------------------
 
@@ -375,7 +374,7 @@ const BookingPage: React.FC = () => {
   const { userId } = useMemo(() => getClientFromLocalStorage(), []);
 
   // Estado para el ID del Cliente, que se obtendrá por API
-  const [finalClientId, setFinalClientId] = useState<number | null>(null); // --- Lógica de Mapeo para POST/PATCH (Depende de las Mascotas disponibles) ---
+  const [finalClientId, setFinalClientId] = useState<number | null>(null); // Lógica de Mapeo para POST/PATCH (Depende de las Mascotas disponibles) ---
 
   const createAppointmentFromResponse = useCallback(
     (data: any): Appointment => {
@@ -416,7 +415,7 @@ const BookingPage: React.FC = () => {
       setIsLoading(true);
       setError(null);
       try {
-        // 1. Obtener Usuario para conseguir el ID del Cliente
+        //  Obtener Usuario para conseguir el ID del Cliente
         const userData: UserData = await fetchApi(
           `${API_USER_BASE_URL}/${currentUserId}`
         );
@@ -440,7 +439,7 @@ const BookingPage: React.FC = () => {
 
         setFinalClientId(clientIdFromUser); // Guardamos el ID del cliente
 
-        // 2. Obtener Cliente (asumo que esta ruta devuelve el cliente con sus mascotas)
+        //  Obtener Cliente (asumo que esta ruta devuelve el cliente con sus mascotas)
         const clientData: Cliente = await fetchApi(
           `${API_CLIENTE_BASE_URL}/${clientIdFromUser}`
         );
@@ -455,7 +454,7 @@ const BookingPage: React.FC = () => {
 
         setAvailablePets(clientPets);
 
-        // 3. Obtener Turnos para CADA Mascota (Múltiples llamadas)
+        //  Obtener Turnos para CADA Mascota (Múltiples llamadas)
         // Creamos un array de promesas para obtener los turnos de todas las mascotas
         const turnosPromises = clientPets.map((pet) =>
           fetchApi(`${API_TURNO_BASE_URL}/mascota/${pet.id}`)
@@ -522,12 +521,12 @@ const BookingPage: React.FC = () => {
     []
   );
 
-  // 4. useEffect: Llama a la función de carga principal
+  //  useEffect: Llama a la función de carga principal
   useEffect(() => {
     if (userId) {
       fetchUserClientAndAppointments(userId);
     }
-  }, [userId, fetchUserClientAndAppointments]); // --- LÓGICA DE CREACIÓN Y EDICIÓN (POST/PATCH) ---
+  }, [userId, fetchUserClientAndAppointments]); //  LÓGICA DE CREACIÓN Y EDICIÓN (POST/PATCH) ---
 
   const handleBookingSubmit = async (formData: FormState) => {
     if (!finalClientId) {
@@ -667,7 +666,7 @@ const BookingPage: React.FC = () => {
           </div>
         )}{" "}
         <div className="grid grid-cols-1 lg:grid-cols-5 lg:gap-10">
-          {/* --- COLUMNA 1: FORMULARIO --- */}{" "}
+          {/*  FORMULARIO --- */}{" "}
           <div className="lg:col-span-3 bg-white p-8 rounded-2xl shadow-xl mb-8 lg:mb-0">
             {" "}
             <h2 className="text-2xl font-bold text-[#8F108D] mb-6">
@@ -697,7 +696,7 @@ const BookingPage: React.FC = () => {
               </button>
             )}{" "}
           </div>
-          {/* --- COLUMNA 2: TURNOS RESERVADOS --- */}{" "}
+          {/* --- TURNOS RESERVADOS --- */}{" "}
           <aside className="lg:col-span-2">
             {" "}
             <div>

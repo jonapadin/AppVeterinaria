@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-// 🐾 Definimos el tipo de mascota
+//  Definimos el tipo de mascota
 interface Mascota {
   nombre: string;
   especie: "Perro" | "Gato" | "Ave" | string;
@@ -11,7 +11,7 @@ interface Mascota {
 }
 
 export default function AcordeonMascotas() {
-  // 🐶 Datos iniciales por defecto
+  //  Datos iniciales por defecto
   const [mascotas] = useState<Mascota[]>([
     {
       nombre: "Firulais",

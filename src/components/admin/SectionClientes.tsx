@@ -26,13 +26,13 @@ interface Cliente {
   usuario: Usuario;
 }
 
-// 2. DTO para CREACIÓN
+//  DTO para CREACIÓN
 type CreateClienteDto = Omit<Cliente, 'id' | 'usuario'> & { 
     email: string;
     contrasena: string;
 };
 
-// 3. DTO para EDICIÓN
+// DTO para EDICIÓN
 type UpdateClienteDto = Omit<Cliente, 'id' | 'usuario'>;
 
 const SectionClientes: React.FC = () => {
@@ -312,7 +312,7 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
     dataToSend.fecha_nacimiento = `${formData.fecha_nacimiento}T00:00:00Z`;
 
     if (initialData) {
-      // (PUT): Solo se envían campos de Cliente, no de usuario
+      // PUT: Solo se envían campos de Cliente, no de usuario
       delete dataToSend.contrasena;
       delete dataToSend.email; // 
       
@@ -322,7 +322,7 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
         setErrorModal((err as Error).message);
       }
     } else {
-      // (POST): Se envía todo para crear el Cliente y el Usuario
+      // POST: Se envía todo para crear el Cliente y el Usuario
       if (!formData.contrasena) {
         setErrorModal('La contraseña es requerida para crear un nuevo cliente.');
         return;
@@ -352,7 +352,7 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
         
         <form onSubmit={handleSubmit} className="space-y-4 max-h-[70vh] overflow-y-auto pr-2">
           
-          {/* Fila 1: Nombre, Apellido, DNI */}
+          {/* Nombre, Apellido, DNI */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <label className="label-tailwind">Nombre</label>
@@ -368,7 +368,7 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
             </div>
           </div>
 
-          {/* Fila 2: Email y Contraseña (solo al crear) */}
+          {/* Email y Contraseña (solo al crear) */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="label-tailwind">Email</label>
@@ -392,7 +392,7 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
             )}
           </div>
 
-          {/* Fila 3: Teléfono, Fecha Nacimiento, Ciudad */}
+          {/* Teléfono, Fecha Nacimiento, Ciudad */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <label className="label-tailwind">Teléfono</label>
@@ -408,7 +408,7 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
             </div>
           </div>
 
-          {/* Fila 4: Dirección y Foto Perfil */}
+          {/*  Dirección y Foto Perfil */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
               <label className="label-tailwind">Dirección</label>

@@ -74,7 +74,7 @@ const SectionMascotas: React.FC = () => {
     cargarDatos();
   }, []);
 
-  // 2. Filtrado 
+  // Filtrado 
   const mascotasFiltradas = useMemo(() => {
     return mascotasConCliente.filter((m) => {
       const searchTermLower = searchTerm.toLowerCase();
@@ -349,7 +349,7 @@ const MascotaModal: React.FC<MascotaModalProps> = ({
           onSubmit={handleSubmit}
           className="space-y-4 max-h-[70vh] overflow-y-auto pr-2"
         >
-          {/* Fila 1: Nombre */}{" "}
+          {/*  Nombre */}{" "}
           <div className="grid grid-cols-2 gap-4">
             {" "}
             <div>

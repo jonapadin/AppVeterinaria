@@ -4,7 +4,7 @@ import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { fetchApi } from '../../app/api'; 
 
-// 1. Interfaz USO DE INVENTARIO
+// Interfaz USO DE INVENTARIO
 interface UsoInventario {
   id: number;
   id_producto: number;
@@ -308,7 +308,7 @@ export const UsoInventarioModal: React.FC<ModalProps> = ({ isOpen, onClose, onSa
         
         <form onSubmit={handleSubmit} className="space-y-4">
           
-          {/* Fila 1: Producto */}
+          {/*  Producto */}
           <div>
             <label className="label-tailwind">Producto Consumido</label>
             <select name="id_producto" value={formData.id_producto} onChange={handleChange} className="mt-1 w-full input-tailwind" required disabled={productoOptions.length === 0}>
@@ -319,7 +319,7 @@ export const UsoInventarioModal: React.FC<ModalProps> = ({ isOpen, onClose, onSa
             </select>
           </div>
           
-          {/* Fila 2: Empleado */}
+          {/*  Empleado */}
           <div>
             <label className="label-tailwind">Empleado que Usó el Producto</label>
             <select name="id_empleado" value={formData.id_empleado} onChange={handleChange} className="mt-1 w-full input-tailwind" required disabled={empleadoOptions.length === 0}>
@@ -330,7 +330,7 @@ export const UsoInventarioModal: React.FC<ModalProps> = ({ isOpen, onClose, onSa
             </select>
           </div>
 
-          {/* Fila 3: Fecha de Uso */}
+          {/*  Fecha de Uso */}
           <div>
             <label className="label-tailwind">Fecha y Hora de Uso</label>
             <input type="datetime-local" name="fecha_uso" value={formData.fecha_uso} onChange={handleChange} className="mt-1 w-full input-tailwind" required />

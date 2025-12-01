@@ -40,14 +40,14 @@ function NavBar({ onOpenCarrito }: NavBarProps) {
         <header className="w-full fixed top-0 z-50">
             <nav className="flex justify-between p-0 md:p-4 bg-[#8F108D] text-white items-center">
                 
-                {/* 1. Botón de Menú Móvil (Solo visible si NO es Admin y hay token, o si no hay token) */}
+                {/*Botón de Menú Móvil (Solo visible si NO es Admin y hay token, o si no hay token) */}
                 {!isAdmin && (
                     <button onClick={abrirMenu} className="block lg:hidden p-2 bg-[#8F108D]">
                         <FiAlignJustify className="w-16 h-12" />
                     </button>
                 )}
 
-                {/* 2. Logo - Ajustado para estar siempre a la izquierda y dentro del nav */}
+                {/*  Ajustado para estar siempre a la izquierda y dentro del nav */}
 
                {isAdmin ? (
                     // Si es Admin, el logo no tiene enlace (es un simple div)
@@ -61,7 +61,7 @@ function NavBar({ onOpenCarrito }: NavBarProps) {
                     </Link>
                 )}
 
-                {/* 3. Menú principal (OCULTAR para Admin) */}
+                {/*  Menú principal (OCULTAR para Admin) */}
                 {!isAdmin && (
                     <ul className="hidden lg:flex space-x-14 lg:space-x-8 lg:text-sm xl:text-xl 2xl:space-x-14 font-lato font-bold">
                         {token ? (
@@ -82,7 +82,7 @@ function NavBar({ onOpenCarrito }: NavBarProps) {
                     </ul>
                 )}
 
-                {/* 4. Buscador desktop (OCULTAR para Admin) */}
+                {/* Buscador desktop (OCULTAR para Admin) */}
                 {!isAdmin && (
                     <div className="justify-center px-4 md:mr-48 lg:mr-0">
                         <div className="flex items-center border rounded overflow-hidden bg-white">
@@ -99,8 +99,8 @@ function NavBar({ onOpenCarrito }: NavBarProps) {
                 )}
 
 
-                {/* 5. Iconos de Carrito + Login/Logout + Perfil */}
-                {/* 5.1. Si es Admin, solo mostramos Logout en un formato simplificado */}
+                {/*  Iconos de Carrito + Login/Logout + Perfil */}
+                {/*  Si es Admin, solo mostramos Logout en un formato simplificado */}
                 {isAdmin ? (
                     <ul className="lg:flex space-x-8 lg:text-sm xl:text-xl text-lg font-lato font-bold pr-10 hidden md:flex">
                         {/* Botón CERRAR SESIÓN para Admin */}
@@ -114,7 +114,7 @@ function NavBar({ onOpenCarrito }: NavBarProps) {
                     </ul>
 
                 ) : (
-                    /* 5.2. Si NO es Admin (o no está logueado), mostramos la barra completa de iconos */
+                    /* Si NO es Admin (o no está logueado), mostramos la barra completa de iconos */
                     <ul className="hidden lg:flex space-x-14 lg:space-x-8 lg:text-sm xl:text-xl text-lg font-lato font-bold pr-10">
                         {/* Carrito */}
                         <li
@@ -156,7 +156,7 @@ function NavBar({ onOpenCarrito }: NavBarProps) {
                 )}
 
 
-                {/* 6. Menú móvil (OCULTAR si es Admin) */}
+                {/*  Menú móvil (OCULTAR si es Admin) */}
                 {mostrarMenu && !isAdmin && (
                     <MenuMob
                         isAuthenticated={!!token}

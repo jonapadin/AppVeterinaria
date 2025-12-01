@@ -5,7 +5,7 @@ import "react-calendar/dist/Calendar.css";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
-// ⚠️ Definimos el tipo manualmente
+//Definimos el tipo manualmente
 type CalendarValue = Date | [Date, Date] | null;
 
 export const MyCalendar = () => {
@@ -18,7 +18,7 @@ export const MyCalendar = () => {
     <div style={{ padding: "1rem" }}>
       <h2>Seleccioná una fecha</h2>
       <Calendar
-        onChange={(val) => setValue(val as CalendarValue)} // 👈 usamos type assertion si hace falta
+        onChange={(val) => setValue(val as CalendarValue)} //  usamos type assertion si hace falta
         value={value}
         locale="es-AR"
       />
