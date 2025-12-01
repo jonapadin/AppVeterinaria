@@ -22,7 +22,7 @@ export function useProductos() {
     const fetchProductos = async () => {
       try {
         const res = await fetch(
-          "http://localhost:4000/api/v1/productos",
+          "https://apiv1-vet.onrender.com/api/v1/productos",
         );
         const data: Producto[] = await res.json();
 
