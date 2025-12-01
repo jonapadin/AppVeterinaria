@@ -50,7 +50,7 @@ const getClientFromLocalStorage = (): {
       return { userId: null, token: null };
     }
   } // Valor simulado para pruebas
-  return { userId: 3, token: "fake_token" };
+  return { userId: 4, token: "fake_token" };
 };
 
 const IS_USER_LOGGED_IN = !!getClientFromLocalStorage().token;

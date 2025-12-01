@@ -65,6 +65,7 @@ function ProductDogPage() {
   const totalPages = Math.ceil(productosOrdenados.length / productsPerPage);
   const indexOfLast = currentPage * productsPerPage;
   const indexOfFirst = indexOfLast - productsPerPage;
+  // devuelve una nueva lista que incluye el índice start y excluye el índice end.
   const currentProducts = productosOrdenados.slice(indexOfFirst, indexOfLast);
 
   return (

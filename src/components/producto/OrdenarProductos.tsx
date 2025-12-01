@@ -1,8 +1,5 @@
 import type { Dispatch, SetStateAction } from "react";//es la función que va a actualizar el estado del orden.
 
-
-
-
 //  el valor actual del orden seleccionado y onChange: función que actualiza el orden (viene del estado del padre).
 interface OrdenarProductosProps {
   orden:  "menor-mayor" | "mayor-menor" | "a-z" | "z-a";
