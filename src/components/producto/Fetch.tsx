@@ -12,7 +12,6 @@ export interface Producto {
   img: string;
   categoria: CategoriaProducto;
   subcategoria: SubcategoriaProducto;
-
 }
 
 export function useProductos() {
@@ -30,10 +29,9 @@ export function useProductos() {
         // VIENEN COMO STRING DESDE DECIMAL)
         const productosTransformados = data.map((p) => ({
           ...p,
-            marca: p.marca.trim(),
+          marca: p.marca.trim(),
           kg: p.kg !== null ? Number(p.kg) : null,
           precio: Number(p.precio),
-         
         }));
 
         setProductos(productosTransformados);

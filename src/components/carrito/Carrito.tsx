@@ -3,10 +3,8 @@ import { IoClose } from "react-icons/io5";
 import { useCarrito } from "./CarritoContext";
 import { formatearPrecio } from "../producto/FormatoPrecios";
 
-
 // URL base de tu backend de NestJS (ajusta el puerto/ruta si es necesario)
-const NESTJS_BASE_URL = "http://localhost:4000";
-
+const NESTJS_BASE_URL = "https://apiv1-vet.onrender.com";
 
 interface CarritoModalProps {
   onClose: () => void;
@@ -107,28 +105,32 @@ export default function Carrito({ onClose }: CarritoModalProps) {
                     ${formatearPrecio(item.producto.precio)}
                   </p>
                   <p className="text-sm text-gray-500">
-                    Stock: {item.producto.stock > 0 ? item.producto.stock : "Sin stock"}
+                    Stock:{" "}
+                    {item.producto.stock > 0
+                      ? item.producto.stock
+                      : "Sin stock"}
                   </p>
 
                   <div className="flex gap-2 mt-1">
                     <button
                       onClick={() => restar(item.producto.id)}
                       className="px-2 py-1 bg-gray-200 rounded"
-                     
                     >
                       -
                     </button>
 
-                      <p className="flex gap-2 mt-1 text-base font-semibold">
-                    {item.cantidad}
-                  </p>
+                    <p className="flex gap-2 mt-1 text-base font-semibold">
+                      {item.cantidad}
+                    </p>
                     <button
                       onClick={() => sumar(item.producto.id)}
                       disabled={item.producto.stock <= 0}
                       className={`px-2 py-1 rounded
-                    ${item.producto.stock <= 0
-                          ? "bg-gray-300 cursor-not-allowed"
-                          : "bg-gray-200"}`}
+                    ${
+                      item.producto.stock <= 0
+                        ? "bg-gray-300 cursor-not-allowed"
+                        : "bg-gray-200"
+                    }`}
                     >
                       +
                     </button>
