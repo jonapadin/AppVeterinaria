@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronDown, ChevronUp, SlidersHorizontal } from "lucide-react"; 
+import { ChevronDown, ChevronUp} from "lucide-react"; 
 import type { Producto } from "../producto/Fetch";
 import type { CategoriaProducto } from "../../enums/categoriaProductos";
 import type { SubcategoriaProducto } from "../../enums/subCategoriaProductos";
