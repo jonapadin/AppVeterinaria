@@ -4,7 +4,7 @@ import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { fetchApi } from "../../app/api";
 
-// INTERFACES 
+// ------------------ INTERFACES ------------------
 interface Mascota {
   id: number;
   nombre: string;
@@ -25,18 +25,19 @@ interface Cliente {
   mascotas?: Mascota[];
 }
 
-// INTERFACES PARA EL COMPONENTE 
 interface MascotaConCliente extends Mascota {
   cliente_id: number;
-  cliente: Cliente; // Usada solo para el renderizado
+  cliente: Cliente;
 }
+
 type CreateMascotaDto = Omit<Mascota, "id"> & { cliente_id: string | number };
 
+// ------------------ COMPONENTE PRINCIPAL ------------------
 const SectionMascotas: React.FC = () => {
   const [mascotasConCliente, setMascotasConCliente] = useState<
     MascotaConCliente[]
   >([]);
-  const [clientes, setClientes] = useState<Cliente[]>([]); // Lista completa de clientes
+  const [clientes, setClientes] = useState<Cliente[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [filtroEspecie, setFiltroEspecie] = useState("");
@@ -47,7 +48,7 @@ const SectionMascotas: React.FC = () => {
 
   const OPCIONES_ESPECIE = ["Perro", "Gato", "Otro"];
 
-  // 1. Función para cargar datos
+  // ------------------ CARGAR DATOS ------------------
   const cargarDatos = async () => {
     setLoading(true);
     setError(null);
@@ -59,9 +60,9 @@ const SectionMascotas: React.FC = () => {
         (cliente) =>
           cliente.mascotas?.map((mascota) => ({
             ...mascota,
-            cliente_id: cliente.id, // Adjuntamos el ID del cliente al objeto mascota
-            cliente: cliente, // Adjuntamos el objeto cliente (para evitar re-búsquedas)
-          })) || []
+            cliente_id: cliente.id,
+            cliente: cliente,
+          })) || [],
       );
       setMascotasConCliente(listadoAplanado);
     } catch (err) {
@@ -70,19 +71,17 @@ const SectionMascotas: React.FC = () => {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     cargarDatos();
   }, []);
 
-  // Filtrado 
+  // ------------------ FILTRADO ------------------
   const mascotasFiltradas = useMemo(() => {
     return mascotasConCliente.filter((m) => {
       const searchTermLower = searchTerm.toLowerCase();
-
       const clienteNombre = m.cliente?.nombre ?? "";
       const clienteApellido = m.cliente?.apellido ?? "";
-
-      // Convertimos el ID del cliente a string
       const clienteIdStr = m.cliente_id?.toString() ?? "";
 
       const searchMatch =
@@ -93,12 +92,11 @@ const SectionMascotas: React.FC = () => {
         clienteIdStr.includes(searchTermLower);
 
       const especieMatch = !filtroEspecie || m.especie === filtroEspecie;
-
       return searchMatch && especieMatch;
     });
   }, [mascotasConCliente, searchTerm, filtroEspecie]);
 
-  // Handlers de Modales
+  // ------------------ MODALES ------------------
   const handleOpenModalNuevo = () => {
     setItemParaEditar(null);
     setIsModalOpen(true);
@@ -112,11 +110,11 @@ const SectionMascotas: React.FC = () => {
     setItemParaEditar(null);
   };
 
-  // Handlers de CRUD
+  // ------------------ CRUD ------------------
   const handleSave = async (data: CreateMascotaDto) => {
     const dataToSend = {
       ...data,
-      cliente_id: Number(data.cliente_id), // Convertimos a número para el backend
+      cliente_id: Number(data.cliente_id),
       edad: Number(data.edad),
       peso: parseFloat(data.peso.toString()),
       esterilizado: Boolean(data.esterilizado),
@@ -137,7 +135,7 @@ const SectionMascotas: React.FC = () => {
         });
       }
       handleCloseModal();
-      cargarDatos(); // Recargar datos de clientes y mascotas
+      cargarDatos();
     } catch (err) {
       alert(`Error al guardar: ${(err as Error).message}`);
     }
@@ -154,15 +152,15 @@ const SectionMascotas: React.FC = () => {
     }
   };
 
-  // RENDER Y CORRECCIÓN DE HYDRATION
+  // ------------------ RENDER ------------------
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold text-[#8F108D]">Gestión de Mascotas</h1>
       <div className="bg-white p-6 rounded-xl shadow-lg">
-        {/* Barra de Filtros */}
+        {/* Barra de filtros */}
         <div className="mb-6 space-y-4">
           <div className="flex flex-col md:flex-row gap-4">
-            <div className="relative ">
+            <div className="relative">
               <input
                 type="text"
                 placeholder="Buscar por Nombre, Raza, ID Cliente..."
@@ -180,7 +178,8 @@ const SectionMascotas: React.FC = () => {
               Nueva Mascota
             </button>
           </div>
-          {/* Filtro de Especie */}
+
+          {/* Filtro de especie */}
           <div className="flex-1">
             <label className="label-tailwind mb-1">Especie</label>
             <select
@@ -204,7 +203,7 @@ const SectionMascotas: React.FC = () => {
           </div>
         )}
 
-        {/* Tabla de Mascotas  */}
+        {/* Tabla */}
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead>
@@ -236,7 +235,6 @@ const SectionMascotas: React.FC = () => {
                 mascotasFiltradas.map((item) => (
                   <tr key={item.id} className="hover:bg-gray-50">
                     <td className="td-cell-main">{item.nombre}</td>
-                    {/* Muestra el ID del cliente y su nombre */}
                     <td className="td-cell">
                       {item.cliente_id} - (
                       {item.cliente?.nombre ?? "Desconocido"})
@@ -273,22 +271,25 @@ const SectionMascotas: React.FC = () => {
           </table>
         </div>
       </div>
+
       {isModalOpen && (
         <MascotaModal
           isOpen={isModalOpen}
           onClose={handleCloseModal}
           onSave={handleSave}
           initialData={itemParaEditar}
-          clientesList={clientes} // Pasamos la lista completa de clientes
+          clientesList={clientes}
         />
       )}
-      <Tooltip id="tooltip-main" />{" "}
+
+      <Tooltip id="tooltip-main" />
     </div>
   );
 };
+
 export default SectionMascotas;
 
-// MODAL 
+// ------------------ MODAL ------------------
 interface MascotaModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -305,7 +306,7 @@ const MascotaModal: React.FC<MascotaModalProps> = ({
   clientesList,
 }) => {
   const [formData, setFormData] = useState({
-    nombre: initialData?.nombre || "", // Cliente_id es requerido para el POST/PATCH de la API
+    nombre: initialData?.nombre || "",
     cliente_id: initialData?.cliente_id?.toString() || "",
     especie: initialData?.especie || "Perro",
     raza: initialData?.raza || "",
@@ -319,7 +320,7 @@ const MascotaModal: React.FC<MascotaModalProps> = ({
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    >,
   ) => {
     const { name, value, type } = e.target;
     if (type === "checkbox") {
@@ -331,7 +332,7 @@ const MascotaModal: React.FC<MascotaModalProps> = ({
   };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); // @ts-ignore
+    e.preventDefault();
     onSave(formData);
   };
 
@@ -339,21 +340,18 @@ const MascotaModal: React.FC<MascotaModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      {" "}
       <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-lg">
-        {" "}
         <h2 className="text-xl font-bold text-gray-800 mb-4">
-          {initialData ? "Editar Mascota" : "Agregar Mascota"}{" "}
-        </h2>{" "}
+          {initialData ? "Editar Mascota" : "Agregar Mascota"}
+        </h2>
         <form
           onSubmit={handleSubmit}
           className="space-y-4 max-h-[70vh] overflow-y-auto pr-2"
         >
-          {/*  Nombre */}{" "}
+          {/* Nombre y Cliente */}
           <div className="grid grid-cols-2 gap-4">
-            {" "}
             <div>
-              <label className="label-tailwind">Nombre</label>{" "}
+              <label className="label-tailwind">Nombre</label>
               <input
                 type="text"
                 name="nombre"
@@ -361,13 +359,10 @@ const MascotaModal: React.FC<MascotaModalProps> = ({
                 onChange={handleChange}
                 className="mt-1 w-full input-tailwind"
                 required
-              />{" "}
-            </div>{" "}
+              />
+            </div>
             <div>
-              {" "}
-              <label className="label-tailwind">
-                Cliente (ID y Nombre)
-              </label>{" "}
+              <label className="label-tailwind">Cliente (ID y Nombre)</label>
               <select
                 name="cliente_id"
                 value={formData.cliente_id}
@@ -377,20 +372,20 @@ const MascotaModal: React.FC<MascotaModalProps> = ({
               >
                 <option value="" disabled>
                   Seleccione un Cliente
-                </option>{" "}
+                </option>
                 {clientesList.map((cliente) => (
                   <option key={cliente.id} value={cliente.id}>
-                    {cliente.nombre} {cliente.apellido} (ID: {cliente.id}){" "}
+                    {cliente.nombre} {cliente.apellido} (ID: {cliente.id})
                   </option>
-                ))}{" "}
-              </select>{" "}
-            </div>{" "}
+                ))}
+              </select>
+            </div>
           </div>
-          {/* Fila 2 en adelante */}{" "}
+
+          {/* Especie y Raza */}
           <div className="grid grid-cols-2 gap-4">
-            {" "}
             <div>
-              <label className="label-tailwind">Especie</label>{" "}
+              <label className="label-tailwind">Especie</label>
               <select
                 name="especie"
                 value={formData.especie}
@@ -398,12 +393,12 @@ const MascotaModal: React.FC<MascotaModalProps> = ({
                 className="mt-1 w-full input-tailwind"
               >
                 <option value="Perro">Perro</option>
-                <option value="Gato">Gato</option>{" "}
-                <option value="Otro">Otro</option>{" "}
-              </select>{" "}
-            </div>{" "}
+                <option value="Gato">Gato</option>
+                <option value="Otro">Otro</option>
+              </select>
+            </div>
             <div>
-              <label className="label-tailwind">Raza</label>{" "}
+              <label className="label-tailwind">Raza</label>
               <input
                 type="text"
                 name="raza"
@@ -411,24 +406,24 @@ const MascotaModal: React.FC<MascotaModalProps> = ({
                 onChange={handleChange}
                 className="mt-1 w-full input-tailwind"
                 required
-              />{" "}
-            </div>{" "}
-          </div>{" "}
+              />
+            </div>
+          </div>
+
+          {/* Edad, Peso, Esterilizado */}
           <div className="grid grid-cols-3 gap-4 items-center">
-            {" "}
             <div>
-              {" "}
-              <label className="label-tailwind">Edad (años)</label>{" "}
+              <label className="label-tailwind">Edad (años)</label>
               <input
                 type="number"
                 name="edad"
                 value={formData.edad}
                 onChange={handleChange}
                 className="mt-1 w-full input-tailwind"
-              />{" "}
-            </div>{" "}
+              />
+            </div>
             <div>
-              <label className="label-tailwind">Peso (kg)</label>{" "}
+              <label className="label-tailwind">Peso (kg)</label>
               <input
                 type="number"
                 step="0.1"
@@ -436,55 +431,55 @@ const MascotaModal: React.FC<MascotaModalProps> = ({
                 value={formData.peso}
                 onChange={handleChange}
                 className="mt-1 w-full input-tailwind"
-              />{" "}
-            </div>{" "}
+              />
+            </div>
             <div className="pt-6">
-              {" "}
               <label className="flex items-center space-x-2">
-                {" "}
                 <input
                   type="checkbox"
                   name="esterilizado"
                   checked={formData.esterilizado}
                   onChange={handleChange}
                   className="h-5 w-5 text-primary focus:ring-primary border-gray-300 rounded"
-                />{" "}
-                <span className="label-tailwind">Esterilizado</span>{" "}
-              </label>{" "}
-            </div>{" "}
-          </div>{" "}
+                />
+                <span className="label-tailwind">Esterilizado</span>
+              </label>
+            </div>
+          </div>
+
+          {/* Foto y Observaciones */}
           <div>
-            <label className="label-tailwind">URL Foto</label>{" "}
+            <label className="label-tailwind">URL Foto</label>
             <input
               type="text"
               name="foto"
               value={formData.foto}
               onChange={handleChange}
               className="mt-1 w-full input-tailwind"
-            />{" "}
-          </div>{" "}
+            />
+          </div>
           <div>
-            <label className="label-tailwind">Observaciones</label>{" "}
+            <label className="label-tailwind">Observaciones</label>
             <textarea
               name="observaciones"
               value={formData.observaciones}
               onChange={handleChange}
               rows={3}
               className="mt-1 w-full input-tailwind"
-            />{" "}
+            />
           </div>
-          {/* Botones */}{" "}
+
+          {/* Botones */}
           <div className="flex justify-end space-x-3 pt-4 border-t mt-6">
-            {" "}
             <button type="button" onClick={onClose} className="btn-secondary">
               Cancelar
-            </button>{" "}
+            </button>
             <button type="submit" className="btn-primary">
               Guardar
-            </button>{" "}
-          </div>{" "}
-        </form>{" "}
-      </div>{" "}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
