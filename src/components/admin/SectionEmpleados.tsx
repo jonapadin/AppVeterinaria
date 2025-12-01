@@ -374,11 +374,11 @@ const App: React.FC = () => {
               placeholder="Buscar por Nombre, Email, Especialidad..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 bg-[#8F108D]"
+              className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 "
             />
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
           </div>
-          <button onClick={handleOpenModalNuevo} className="btn-primary flex items-center justify-center">
+          <button onClick={handleOpenModalNuevo} className="btn-primary bg-[#8F108D] flex items-center justify-center">
             <Plus className="w-5 h-5 mr-2" />
             Nuevo Empleado
           </button>
