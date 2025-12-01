@@ -80,14 +80,14 @@ export default function Footer({ onOpenCarrito }: FooterProps) {
     "
   >
     <img
-      src="../../assets/icons/logoVet.png"
+      src="../../assets/icons/iconosVet.png"
       alt="Logo Veterinaria"
       className="
         w-20 h-auto
         md:w-36
         lg:w-40
         xl:w-48
-        2xl:w-50
+        2xl:w-55
       "
     />
   </div>
