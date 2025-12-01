@@ -4,6 +4,7 @@ import { FaRegCircleUser, FaCartShopping, FaRightFromBracket } from "react-icons
 import { FiAlignJustify } from "react-icons/fi";
 import { FaSearch } from "react-icons/fa";
 import MenuMob from './MenuMob';
+import { Bell } from 'lucide-react';
 
 interface NavBarProps {
     onOpenCarrito: () => void;
@@ -131,6 +132,14 @@ function NavBar({ onOpenCarrito }: NavBarProps) {
                                 <li className="cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 flex items-center gap-2.5">
                                     <FaRegCircleUser />
                                     <span>MI PERFIL</span>
+                                </li>
+                            </Link>
+                        )}
+
+                      {token && (
+                            <Link to={"notifications"}>
+                                <li className=" cursor-pointer transition-all duration-300 hover:text-gray-200 hover:scale-105 flex items-center gap-2.5">
+                                    <Bell />
                                 </li>
                             </Link>
                         )}
