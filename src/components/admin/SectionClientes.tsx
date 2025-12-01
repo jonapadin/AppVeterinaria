@@ -338,7 +338,7 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-opaque-50  bg-opacity-60 backdrop-blur-sm p-4">
       <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-2xl">
         <h2 className="text-xl font-bold text-gray-800 mb-4">
           {initialData ? 'Editar Cliente' : 'Agregar Cliente'}
@@ -350,7 +350,7 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
           </div>
         )}
         
-        <form onSubmit={handleSubmit} className="space-y-4 max-h-[70vh] overflow-y-auto pr-2">
+        <form onSubmit={handleSubmit} className="space-y-4 max-h-[70vh] overflow-y-auto pr-2 ">
           
           {/* Nombre, Apellido, DNI */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -423,7 +423,7 @@ const ClienteModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, initialDa
           {/* Botones */}
           <div className="flex justify-end space-x-3 pt-4 border-t mt-6">
             <button type="button" onClick={onClose} className="btn-secondary">Cancelar</button>
-            <button type="submit" className="btn-primary">Guardar</button>
+            <button type="submit" className="btn-primary bg-[#8F108D]">Guardar</button>
           </div>
         </form>
       </div>

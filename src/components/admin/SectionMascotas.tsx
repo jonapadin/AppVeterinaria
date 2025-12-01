@@ -340,6 +340,7 @@ const MascotaModal: React.FC<MascotaModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      {" "}
       <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-lg">
         <h2 className="text-xl font-bold text-gray-800 mb-4">
           {initialData ? "Editar Mascota" : "Agregar Mascota"}
@@ -473,7 +474,7 @@ const MascotaModal: React.FC<MascotaModalProps> = ({
           <div className="flex justify-end space-x-3 pt-4 border-t mt-6">
             <button type="button" onClick={onClose} className="btn-secondary">
               Cancelar
-            </button>
+            </button>{" "}
             <button type="submit" className="btn-primary">
               Guardar
             </button>

@@ -133,7 +133,7 @@ const LiveChatModal: React.FC<LiveChatModalProps> = ({ isOpen, onClose }) => {
     
     return (
         // Overlay (Fondo oscuro)
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 transition-opacity duration-300 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-opaque-50  bg-opacity-60 backdrop-blur-sm p-4">
             
             {/* Contenedor del Modal */}
             <div className="w-11/12 max-w-md overflow-hidden rounded-xl shadow-2xl transition-transform duration-300 ease-out transform scale-100">

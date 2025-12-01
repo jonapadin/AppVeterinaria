@@ -41,43 +41,52 @@ const servicesData: Service[] = [
 ];
 
 // Componente reutilizable
-const ServiceCard: React.FC<Service> = ({ title, description, imgVet, imgDec, altVet, altDec }) => {
+const ServiceCard: React.FC<Service> = ({
+  title,
+  description,
+  imgVet,
+  imgDec,
+  altVet,
+  altDec,
+}) => {
   // Función para manejar el error de imagen
-  const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  const handleError = (
+    e: React.SyntheticEvent<HTMLImageElement, Event>
+  ) => {
     const target = e.target as HTMLImageElement;
-    target.onerror = null; 
-    target.src = "https://placehold.co/100x180/ccc/333?text=IMG"; // Placeholder
+    target.onerror = null;
+    target.src = "https://placehold.co/100x180/ccc/333?text=IMG";
   };
-  
+
   return (
-    <article 
-      className="w-full max-w-sm sm:max-w-md rounded-xl 2xl:max-w-2xl overflow-hidden shadow-2xl 
-                 transition-all duration-300 hover:shadow-gray-700/80 mb-6 lg:mb-0 "
+    <article
+      className="w-full max-w-[380px] lg:max-w-[420px] rounded-xl overflow-hidden shadow-2xl
+                 transition-all duration-300 hover:shadow-gray-700/80 mb-6"
     >
-      {/* Sección Superior: Imagen y Decoración */}
-      <div className="relative h-60 md:h-72  overflow-hidden flex items-center justify-center p-4">
-        
-      
-        <img 
-          className="absolute inset-0 w-full h-full object-cover opacity-80" 
-          src={imgDec} 
-          alt={altDec} 
+      {/* Sección Superior */}
+      <div className="relative h-60 md:h-72 overflow-hidden flex items-center justify-center p-4">
+        <img
+          className="absolute inset-0 w-full h-full object-cover opacity-80"
+          src={imgDec}
+          alt={altDec}
           onError={handleError}
         />
-        
-        <img 
-          className="relative z-10 w-3/5 h-auto max-h-[90%] object-contain" 
-          src={imgVet} 
-          alt={altVet} 
+
+        <img
+          className="relative z-10 w-3/5 h-auto max-h-[90%] object-contain"
+          src={imgVet}
+          alt={altVet}
           onError={handleError}
         />
       </div>
 
+      {/* Contenido */}
       <div className="bg-[#8f108d] text-white p-6 min-h-[170px] flex flex-col justify-start">
-        <h2 className="text-xl font-bold mb-3 border-b border-white/30 pb-2">
+        <h2 className="text-xl font-bold mb-3 border-b border-white/30 pb-2 break-words">
           {title}
         </h2>
-        <p className="text-sm md:text-base">
+
+        <p className="text-sm md:text-base break-words hyphens-auto">
           {description}
         </p>
       </div>
@@ -87,14 +96,14 @@ const ServiceCard: React.FC<Service> = ({ title, description, imgVet, imgDec, al
 
 // Componente principal
 const Services: React.FC = () => (
-  <main className="min-h-screen"> 
+  <main className="min-h-screen">
     <section className="py-16 md:py-24 px-4 mt-16 lg:w-[90%] xl:w-[80%] mx-auto">
       <h2 className="text-center text-4xl font-extrabold text-[#8F108D] mb-12">
         NUESTROS SERVICIOS CLAVES
       </h2>
-      
-      {/* Contenedor Grid Responsive */}
-      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-8 justify-items-center">
+
+      {/* Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 justify-items-center">
         {servicesData.map((service, index) => (
           <ServiceCard key={index} {...service} />
         ))}
