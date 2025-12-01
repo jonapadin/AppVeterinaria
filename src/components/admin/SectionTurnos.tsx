@@ -22,15 +22,17 @@ const OPCIONES_TIPO_TURNO = [
 const OPCIONES_ESTADO_TURNO = ["pendiente", "completado", "cancelado"];
 
 // INTERFACES
+interface ClienteSimple {
+  id: number;
+  nombre: string;
+  mascotas?: MascotaSimple[];
+}
+
 interface MascotaSimple {
   id: number;
   nombre: string;
-}
-
-interface ClienteConMascotas {
-  id: number;
-  nombre: string;
-  mascotas: MascotaSimple[];
+  id_mascota?: number;
+  cliente_id?: number;
 }
 
 interface Turno {
@@ -94,7 +96,7 @@ const NotificationMessage: React.FC<MessageProps> = ({
 
   return (
     <div
-      className={`fixed top-4 right-4 z-[100] p-4 rounded-lg shadow-2xl text-white max-w-sm flex items-center ${bgColor}`}
+      className={`fixed top-4 right-4  p-4 rounded-lg shadow-2xl text-white max-w-sm flex items-center ${bgColor}`}
     >
       {icon}
       <span>{message}</span>
@@ -165,7 +167,7 @@ const TurnoModal: React.FC<TurnoModalProps> = ({
     ? mascotas.find((m) => m.id === initialData.mascota_id)
     : null;
   const initialClienteId =
-    initialMascota?.cliente?.id.toString() ||
+    initialMascota?.cliente_id?.toString() ||
     initialData?.cliente_id?.toString() ||
     "";
 
@@ -227,7 +229,7 @@ const TurnoModal: React.FC<TurnoModalProps> = ({
     try {
       // Convertimos a los tipos correctos para enviar
       const dataToSend: CreateTurnoDto = {
-        cliente_id: Number(formData.cliente_id), // number
+        cliente_id: formData.cliente_id, // string
         mascota_id: formData.mascota_id
           ? Number(formData.mascota_id)
           : undefined, // opcional
