@@ -1,13 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// SectionTurnos.tsx
 import React, { useState, useMemo, useEffect } from 'react';
 import { Plus, Search, Edit, Trash2 } from 'lucide-react';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { fetchApi } from '../../app/api';
 
-// --- INTERFACES Y CONSTANTES ---
+// INTERFACES Y CONSTANTES
 const OPCIONES_TIPO_TURNO = ['consulta', 'vacunacion', 'peluqueria', 'urgencia'];
 const OPCIONES_ESTADO_TURNO = ['pendiente', 'completado', 'cancelado'];
 
@@ -22,11 +19,10 @@ interface Turno {
   tipo: typeof OPCIONES_TIPO_TURNO[number]; 
   estado: typeof OPCIONES_ESTADO_TURNO[number];
   observaciones: string;
-  // La Mascota PUEDE ser null si la relación no se carga (DB/API)
   mascota: { id: number, nombre: string, cliente?: { id: number } } | null; 
 }
 
-// DTO para enviar a la API: usa la clave foránea simple (mascota_id)
+// DTO para enviar a la API
 type CreateTurnoDto = Omit<Turno, 'id_turno' | 'mascota'> & { mascota_id: number | string };
 
 // Helper para formato de fecha
@@ -64,8 +60,7 @@ const SectionTurnos: React.FC = () => {
       setTurnos(turnosData);
       
       // 2. Carga de mascotas para el selector
-      const mascotasData = await fetchApi('/mascotas'); // Endpoint de mascotas
-      // Mapeamos a MascotaSimple para el selector
+      const mascotasData = await fetchApi('/mascotas');
       setMascotas(mascotasData.map((m: any) => ({ id: m.id, nombre: m.nombre })));
 
     } catch (err) {
@@ -96,7 +91,7 @@ const SectionTurnos: React.FC = () => {
     }).sort((a, b) => new Date(b.fecha_turno).getTime() - new Date(a.fecha_turno).getTime());
   }, [turnos, searchTerm, filtroTipo, filtroEstado]);
 
-  // --- Handlers de Modales ---
+  // Handlers de Modales
   const handleOpenModalNuevo = () => { 
     setItemParaEditar(null); 
     setIsModalOpen(true); 
@@ -110,7 +105,7 @@ const SectionTurnos: React.FC = () => {
     setItemParaEditar(null); 
   };
 
-  // --- Handlers de CRUD ---
+  // Handlers de CRUD
   const handleSave = async (data: CreateTurnoDto) => {
     
     // Mapeo del DTO para enviar a la API
@@ -119,7 +114,6 @@ const SectionTurnos: React.FC = () => {
       tipo: data.tipo, 
       estado: data.estado,
       observaciones: data.observaciones,
-      // CORRECTO: Enviamos la clave foránea simple como número
       mascota_id: Number(data.mascota_id), 
     };
     
@@ -147,7 +141,7 @@ const SectionTurnos: React.FC = () => {
     }
   };
 
-  // --- RENDER ---
+  // RENDER
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold text-[#8F108D]">Gestión de Turnos</h1>
@@ -243,7 +237,6 @@ const SectionTurnos: React.FC = () => {
           onClose={handleCloseModal}
           onSave={handleSave}
           initialData={itemParaEditar}
-          // Pasamos la lista de mascotas al modal
           mascotas={mascotas} 
         />
       )}
@@ -253,21 +246,20 @@ const SectionTurnos: React.FC = () => {
 };
 export default SectionTurnos;
 
-// ----------------------------------------------------------------------------------
+//-
 
-// --- MODAL (TurnoModal) ---
+// MODAL (TurnoModal)
 interface TurnoModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSave: (data: CreateTurnoDto) => void;
   initialData: Turno | null;
-  mascotas: MascotaSimple[]; // Nueva Prop para el selector
+  mascotas: MascotaSimple[]; 
 }
 
 const TurnoModal: React.FC<TurnoModalProps> = ({ isOpen, onClose, onSave, initialData, mascotas }) => {
   
   const [formData, setFormData] = useState({
-    // Usamos encadenamiento opcional para obtener el ID inicial, o cadena vacía si es null
     mascota_id: initialData?.mascota?.id.toString() || '', 
     fecha_turno: initialData ? dateToLocalISOString(new Date(initialData.fecha_turno)) : dateToLocalISOString(new Date()),
     tipo: initialData?.tipo || OPCIONES_TIPO_TURNO[0], 
@@ -295,7 +287,6 @@ const TurnoModal: React.FC<TurnoModalProps> = ({ isOpen, onClose, onSave, initia
         <form onSubmit={handleSubmit} className="space-y-4">
           
           <div className="grid grid-cols-2 gap-4">
-            {/* ✅ CAMPO DE SELECCIÓN DE MASCOTA */}
             <div>
               <label className="label-tailwind">Mascota</label>
               <select 

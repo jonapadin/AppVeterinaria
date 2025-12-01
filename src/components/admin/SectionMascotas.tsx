@@ -1,12 +1,10 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// SectionMascotas.tsx
 import React, { useState, useMemo, useEffect } from "react";
 import { Plus, Search, Edit, Trash2 } from "lucide-react";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { fetchApi } from "../../app/api";
 
-// --- INTERFACES ORIGINALES (COMO LAS RECIBE LA API) ---
+// INTERFACES 
 interface Mascota {
   id: number;
   nombre: string;
@@ -27,7 +25,7 @@ interface Cliente {
   mascotas?: Mascota[];
 }
 
-// --- INTERFACES PARA EL COMPONENTE (Mascota enriquecida) ---
+// INTERFACES PARA EL COMPONENTE 
 interface MascotaConCliente extends Mascota {
   cliente_id: number;
   cliente: Cliente; // Usada solo para el renderizado
@@ -49,16 +47,14 @@ const SectionMascotas: React.FC = () => {
 
   const OPCIONES_ESPECIE = ["Perro", "Gato", "Otro"];
 
-  // 1. Función para cargar datos (Ahora solo carga Clientes y extrae Mascotas)
+  // 1. Función para cargar datos
   const cargarDatos = async () => {
     setLoading(true);
     setError(null);
     try {
-      // ASUMIMOS que /clientes trae el array de mascotas anidado
       const clientesData: Cliente[] = await fetchApi("/cliente");
       setClientes(clientesData);
 
-      // Aplanamos la estructura: Clientes -> Mascotas
       const listadoAplanado: MascotaConCliente[] = clientesData.flatMap(
         (cliente) =>
           cliente.mascotas?.map((mascota) => ({
@@ -78,7 +74,7 @@ const SectionMascotas: React.FC = () => {
     cargarDatos();
   }, []);
 
-  // 2. Filtrado (basado en la lista aplanada y enriquecida)
+  // 2. Filtrado 
   const mascotasFiltradas = useMemo(() => {
     return mascotasConCliente.filter((m) => {
       const searchTermLower = searchTerm.toLowerCase();
@@ -86,7 +82,7 @@ const SectionMascotas: React.FC = () => {
       const clienteNombre = m.cliente?.nombre ?? "";
       const clienteApellido = m.cliente?.apellido ?? "";
 
-      // Convertimos el ID del cliente a string de forma segura
+      // Convertimos el ID del cliente a string
       const clienteIdStr = m.cliente_id?.toString() ?? "";
 
       const searchMatch =
@@ -102,7 +98,7 @@ const SectionMascotas: React.FC = () => {
     });
   }, [mascotasConCliente, searchTerm, filtroEspecie]);
 
-  // --- Handlers de Modales ---
+  // Handlers de Modales
   const handleOpenModalNuevo = () => {
     setItemParaEditar(null);
     setIsModalOpen(true);
@@ -116,24 +112,20 @@ const SectionMascotas: React.FC = () => {
     setItemParaEditar(null);
   };
 
-  // --- Handlers de CRUD ---
+  // Handlers de CRUD
   const handleSave = async (data: CreateMascotaDto) => {
-    // La API de mascotas necesita el cliente_id para crear/actualizar
     const dataToSend = {
-      // La MascotaModal asegura que data.cliente_id es un string de ID válido
       ...data,
       cliente_id: Number(data.cliente_id), // Convertimos a número para el backend
       edad: Number(data.edad),
       peso: parseFloat(data.peso.toString()),
       esterilizado: Boolean(data.esterilizado),
-      // Omitimos el campo 'cliente' ya que no va al backend
       // @ts-ignore
       cliente: undefined,
     };
 
     try {
       if (itemParaEditar) {
-        // Asumimos que PATCH/POST a /mascotas/{id} o /mascotas SI ACEPTA cliente_id
         await fetchApi(`/mascotas/${itemParaEditar.id}`, {
           method: "PATCH",
           body: JSON.stringify(dataToSend),
@@ -162,7 +154,7 @@ const SectionMascotas: React.FC = () => {
     }
   };
 
-  // --- RENDER Y CORRECCIÓN DE HYDRATION ---
+  // RENDER Y CORRECCIÓN DE HYDRATION
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold text-[#8F108D]">Gestión de Mascotas</h1>
@@ -212,7 +204,7 @@ const SectionMascotas: React.FC = () => {
           </div>
         )}
 
-        {/* Tabla de Mascotas - CORRECCIÓN DE HYDRATION: Etiquetas juntas */}
+        {/* Tabla de Mascotas  */}
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead>
@@ -296,7 +288,7 @@ const SectionMascotas: React.FC = () => {
 };
 export default SectionMascotas;
 
-// --- MODAL (MascotaModal) ---
+// MODAL 
 interface MascotaModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -313,7 +305,7 @@ const MascotaModal: React.FC<MascotaModalProps> = ({
   clientesList,
 }) => {
   const [formData, setFormData] = useState({
-    nombre: initialData?.nombre || "", // Cliente_id es requerido para el POST/PATCH de la API, y es un string para el <select>
+    nombre: initialData?.nombre || "", // Cliente_id es requerido para el POST/PATCH de la API
     cliente_id: initialData?.cliente_id?.toString() || "",
     especie: initialData?.especie || "Perro",
     raza: initialData?.raza || "",
@@ -357,7 +349,7 @@ const MascotaModal: React.FC<MascotaModalProps> = ({
           onSubmit={handleSubmit}
           className="space-y-4 max-h-[70vh] overflow-y-auto pr-2"
         >
-          {/* Fila 1: Nombre, Cliente (Ahora un <select>) */}{" "}
+          {/* Fila 1: Nombre */}{" "}
           <div className="grid grid-cols-2 gap-4">
             {" "}
             <div>

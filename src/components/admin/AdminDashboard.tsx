@@ -8,11 +8,10 @@ import SectionVentas from './SectionVentas';
 import SectionChat from './SectionChat'; 
 import SectionInventarioEmpleado from '../../pages/private/Inventary';
 
-// 2. Extender el tipo AdminSection para incluir 'Chat'
 export type AdminSection = 'Clientes' | 'Usuarios' | 'Empleados' | 'Mascotas' | 'Turnos' | 'Ventas' | 'Chat' | 'Inventario'; 
 
 const AdminDashboard: React.FC = () => {
-    // Inicializamos con 'Clientes', pero el tipo ahora incluye 'Chat'
+    // Inicializamos con 'Clientes'
     const [activeSection, setActiveSection] = useState<AdminSection>('Clientes');
 
     const renderSection = () => {

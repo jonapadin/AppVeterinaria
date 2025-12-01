@@ -1,8 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// SectionInventario.tsx
-
 import React, { useState, useMemo, useEffect } from 'react';
 import { Plus, Search, Edit, Trash2 } from 'lucide-react';
 import { Tooltip } from 'react-tooltip';
@@ -11,7 +6,7 @@ import { fetchApi } from '../../app/api';
 
 // 1. Interfaz USO DE INVENTARIO
 interface UsoInventario {
-  id: number; // Asumo que el ID se auto-genera
+  id: number;
   id_producto: number;
   id_empleado: number;
   fecha_uso: string;
@@ -47,17 +42,15 @@ const SectionInventario: React.FC = () => {
   const [itemParaEditar, setItemParaEditar] = useState<UsoInventario | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // --- Carga de Datos (FETCH) ---
+  //  Carga de Datos (FETCH) 
   const cargarLookups = async () => {
     try {
-      // Asumo que tu endpoint de Empleado devuelve al menos {id, nombre, apellido}
       const empleadosData = await fetchApi('/empleado');
       setEmpleadosLookup(empleadosData.map((e: any) => ({ 
         id: e.id, 
         nombre: `${e.nombre} ${e.apellido || ''}` 
       })));
       
-      // Asumo que tu endpoint de Producto devuelve al menos {id, nombre}
       const productosData = await fetchApi('/producto');
       setProductosLookup(productosData.map((p: any) => ({ 
         id: p.id, 
@@ -87,11 +80,11 @@ const SectionInventario: React.FC = () => {
     cargarDatos();
   }, []); 
 
-  // --- Helpers de Lookup ---
+  //  Helpers de Lookup 
   const getProductoNombre = (id: number) => productosLookup.find(p => p.id === id)?.nombre || `(ID Prod: ${id})`;
   const getEmpleadoNombre = (id: number) => empleadosLookup.find(e => e.id === id)?.nombre || `(ID Emp: ${id})`;
 
-  // --- Filtros ---
+  //  Filtros 
   const usosFiltrados = useMemo(() => {
     if (productosLookup.length === 0 || empleadosLookup.length === 0) return [];
     
@@ -106,7 +99,7 @@ const SectionInventario: React.FC = () => {
     }).sort((a, b) => new Date(b.fecha_uso).getTime() - new Date(a.fecha_uso).getTime()); // Ordenar por fecha reciente
   }, [usos, searchTerm, productosLookup, empleadosLookup]);
 
-  // --- Handlers de Modales ---
+  //  Handlers de Modales 
   const handleOpenModalNuevo = () => { 
     setItemParaEditar(null); 
     setIsModalOpen(true); 
@@ -120,7 +113,7 @@ const SectionInventario: React.FC = () => {
     setItemParaEditar(null); 
   };
 
-  // --- Handlers de CRUD ---
+  //  Handlers de CRUD 
   const handleSave = async (data: CreateUsoInventarioDto) => {
     const dataToSend = {
       ...data,
@@ -131,7 +124,6 @@ const SectionInventario: React.FC = () => {
     
     try {
       if (itemParaEditar) {
-        // En un PUT, debes enviar los IDs originales
         await fetchApi(`/inventario/${itemParaEditar.id}`, { 
           method: 'PATCH', 
           body: JSON.stringify(dataToSend) 
@@ -162,7 +154,7 @@ const SectionInventario: React.FC = () => {
     }
   };
 
-  // --- RENDER ---
+  //  RENDER 
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold text-gray-800">Gestión de Consumo de Inventario</h1>
@@ -270,7 +262,7 @@ const SectionInventario: React.FC = () => {
 
 export default SectionInventario;
 
-// --- COMPONENTE MODAL (UsoInventarioModal) ---
+//  COMPONENTE MODAL (UsoInventarioModal) 
 
 interface ModalProps {
   isOpen: boolean;
